@@ -256,7 +256,7 @@ public class Clientes {
 					+ this.getNombres() + "','" + this.getFecha_fallec() + "','" + this.getDni() + "','"
 					+ this.getDomicilio() + "','" + this.getNombre_familiar() + "','" + this.getTelefono() + "','"
 					+ this.getCocheria() + "','" + this.getTipo_fallec() + "','" + this.getEmail() + "','"
-					+ this.getDireccion_familiar() + "','" + this.getUbicacion() + "')");
+					+ this.getDireccion_familiar() + "')");
 
 			rs.close();
 
