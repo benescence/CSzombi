@@ -198,39 +198,39 @@ public class Alta_clientes extends JInternalFrame {
 		
 		JLabel lbl_dato1 = new JLabel("");
 		lbl_dato1.setBounds(448, 260, 72, 14);
-		lbl_dato1.setVisible(false);
+		lbl_dato1.setVisible(true);
 		getContentPane().add(lbl_dato1);
 
 		JLabel lbl_dato2 = new JLabel("");
 		lbl_dato2.setBounds(549, 260, 75, 14);
-		lbl_dato2.setVisible(false);
+		lbl_dato2.setVisible(true);
 		getContentPane().add(lbl_dato2);
 
 		JLabel lbl_dato3 = new JLabel("");
 
 		lbl_dato3.setBounds(448, 308, 72, 14);
-		lbl_dato3.setVisible(false);
+		lbl_dato3.setVisible(true);
 		getContentPane().add(lbl_dato3);
 		
 		JLabel lbl_dato4 = new JLabel("");
 		lbl_dato4.setBounds(549, 308, 96, 14);
-		lbl_dato4.setVisible(false);
+		lbl_dato4.setVisible(true);
 		getContentPane().add(lbl_dato4);
 
 		JLabel lbl_dato5 = new JLabel("");
 		lbl_dato5.setBounds(451, 356, 69, 14);
-		lbl_dato5.setVisible(false);
+		lbl_dato5.setVisible(true);
 		getContentPane().add(lbl_dato5);
 		
 		JLabel lbl_dato6 = new JLabel("");
 		lbl_dato6.setBounds(549, 356, 69, 14);
-		lbl_dato6.setVisible(false);
+		lbl_dato6.setVisible(true);
 		getContentPane().add(lbl_dato6);
 		
 		JCheckBox chckbxBisBoveda = new JCheckBox("Bis");
 		chckbxBisBoveda.setBackground(SystemColor.inactiveCaptionBorder);
 		chckbxBisBoveda.setBounds(633, 328, 52, 23);
-		chckbxBisBoveda.setVisible(false);
+		chckbxBisBoveda.setVisible(true);
 		getContentPane().add(chckbxBisBoveda);
 		
 //		JCheckBox chckbxBisMasizo = new JCheckBox("Bis");
@@ -241,7 +241,7 @@ public class Alta_clientes extends JInternalFrame {
 //		
 
 		JComboBox<String> cmb_sector = new JComboBox<String>();
-		cmb_sector.setVisible(false);
+		cmb_sector.setVisible(true);
 		cmb_sector.addItemListener(new ItemListener() {
 
 			public void itemStateChanged(ItemEvent arg0) {
@@ -265,7 +265,7 @@ public class Alta_clientes extends JInternalFrame {
 		});
 
 		JComboBox<String> cmb_item_sector = new JComboBox<String>();
-		cmb_item_sector.setVisible(false);
+		cmb_item_sector.setVisible(true);
 		cmb_item_sector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -448,28 +448,28 @@ public class Alta_clientes extends JInternalFrame {
 		getContentPane().add(cmb_sector);
 		txt_dato1 = new JTextField();
 		txt_dato1.setBounds(450, 281, 76, 20);
-		txt_dato1.setVisible(false);
+		txt_dato1.setVisible(true);
 		txt_dato1.setColumns(10);
 		
 		getContentPane().add(txt_dato1);
 		
 		JLabel lbl_ubicacion = new JLabel("Ubicaci\u00F3n:");
 		lbl_ubicacion.setBounds(448, 146, 109, 14);
-		lbl_ubicacion.setVisible(false);
+		lbl_ubicacion.setVisible(true);
 		getContentPane().add(lbl_ubicacion);
 		
 		JLabel lblLugar = new JLabel("Lugar:");
 		lblLugar.setBounds(448, 204, 46, 14);
-		lblLugar.setVisible(false);
+		lblLugar.setVisible(true);
 		getContentPane().add(lblLugar);
 		
 		txt_dato2 = new JTextField();
 		txt_dato2.setColumns(10);
 		txt_dato2.setBounds(548, 281, 76, 20);
-		txt_dato2.setVisible(false);
+		txt_dato2.setVisible(true);
 		getContentPane().add(txt_dato2);
 
-		JButton btn_verificar = new JButton("Guardar Ubicacion");
+		JButton btn_verificar = new JButton("Verificar");
 		btn_verificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (cmb_sector.getSelectedIndex()) {
@@ -626,32 +626,32 @@ public class Alta_clientes extends JInternalFrame {
 
 		});
 
-		btn_verificar.setBounds(538, 407, 160, 23);
+		btn_verificar.setBounds(538, 407, 107, 23);
 
 		getContentPane().add(btn_verificar);
 
 		txt_dato3 = new JTextField();
 		txt_dato3.setColumns(10);
 		txt_dato3.setBounds(450, 329, 76, 20);
-		txt_dato3.setVisible(false);
+		txt_dato3.setVisible(true);
 		getContentPane().add(txt_dato3);
 
 		txt_dato4 = new JTextField();
 		txt_dato4.setColumns(10);
 		txt_dato4.setBounds(548, 329, 76, 20);
-		txt_dato4.setVisible(false);
+		txt_dato4.setVisible(true);
 		getContentPane().add(txt_dato4);
 
 		txt_dato5 = new JTextField();
 		txt_dato5.setColumns(10);
 		txt_dato5.setBounds(450, 377, 76, 20);
-		txt_dato5.setVisible(false);
+		txt_dato5.setVisible(true);
 		getContentPane().add(txt_dato5);
 		
 		txt_dato6 = new JTextField();
 		txt_dato6.setColumns(10);
 		txt_dato6.setBounds(548, 377, 76, 20);
-		txt_dato6.setVisible(false);
+		txt_dato6.setVisible(true);
 		getContentPane().add(txt_dato6);
 		
 		Calendar cal = Calendar.getInstance();
