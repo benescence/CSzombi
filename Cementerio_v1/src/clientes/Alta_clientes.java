@@ -241,7 +241,7 @@ public class Alta_clientes extends JInternalFrame {
 //		
 
 		JComboBox<String> cmb_sector = new JComboBox<String>();
-		cmb_sector.setVisible(false);
+		cmb_sector.setVisible(true);
 		cmb_sector.addItemListener(new ItemListener() {
 
 			public void itemStateChanged(ItemEvent arg0) {
@@ -259,13 +259,13 @@ public class Alta_clientes extends JInternalFrame {
 				lbl_dato5.setVisible(false);
 				lbl_dato6.setVisible(false);
 				chckbxBisBoveda.setVisible(false);
- 
+
 			}
 
 		});
 
 		JComboBox<String> cmb_item_sector = new JComboBox<String>();
-		cmb_item_sector.setVisible(false);
+		cmb_item_sector.setVisible(true);
 		cmb_item_sector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -446,21 +446,21 @@ public class Alta_clientes extends JInternalFrame {
 		cmb_sector.insertItemAt("Boveda", 4);
 
 		getContentPane().add(cmb_sector);
+		
 		txt_dato1 = new JTextField();
 		txt_dato1.setBounds(450, 281, 76, 20);
 		txt_dato1.setVisible(false);
 		txt_dato1.setColumns(10);
-		
 		getContentPane().add(txt_dato1);
 		
 		JLabel lbl_ubicacion = new JLabel("Ubicaci\u00F3n:");
 		lbl_ubicacion.setBounds(448, 146, 109, 14);
-		lbl_ubicacion.setVisible(false);
+		lbl_ubicacion.setVisible(true);
 		getContentPane().add(lbl_ubicacion);
 		
 		JLabel lblLugar = new JLabel("Lugar:");
 		lblLugar.setBounds(448, 204, 46, 14);
-		lblLugar.setVisible(false);
+		lblLugar.setVisible(true);
 		getContentPane().add(lblLugar);
 		
 		txt_dato2 = new JTextField();
@@ -469,7 +469,7 @@ public class Alta_clientes extends JInternalFrame {
 		txt_dato2.setVisible(false);
 		getContentPane().add(txt_dato2);
 
-		JButton btn_verificar = new JButton("Verificar");
+		JButton btn_verificar = new JButton("Guardar Ubicacion");
 		btn_verificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (cmb_sector.getSelectedIndex()) {
@@ -626,7 +626,7 @@ public class Alta_clientes extends JInternalFrame {
 
 		});
 
-		btn_verificar.setBounds(538, 407, 107, 23);
+		btn_verificar.setBounds(538, 407, 160, 23);
 
 		getContentPane().add(btn_verificar);
 
