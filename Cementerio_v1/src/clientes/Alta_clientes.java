@@ -469,7 +469,7 @@ public class Alta_clientes extends JInternalFrame {
 		txt_dato2.setVisible(false);
 		getContentPane().add(txt_dato2);
 
-		JButton btn_verificar = new JButton("Verificar");
+		JButton btn_verificar = new JButton("Guardar Ubicacion");
 		btn_verificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (cmb_sector.getSelectedIndex()) {
@@ -626,7 +626,7 @@ public class Alta_clientes extends JInternalFrame {
 
 		});
 
-		btn_verificar.setBounds(538, 407, 107, 23);
+		btn_verificar.setBounds(538, 407, 160, 23);
 
 		getContentPane().add(btn_verificar);
 
