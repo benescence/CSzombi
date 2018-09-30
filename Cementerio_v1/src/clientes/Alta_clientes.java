@@ -446,11 +446,11 @@ public class Alta_clientes extends JInternalFrame {
 		cmb_sector.insertItemAt("Boveda", 4);
 
 		getContentPane().add(cmb_sector);
+		
 		txt_dato1 = new JTextField();
 		txt_dato1.setBounds(450, 281, 76, 20);
 		txt_dato1.setVisible(true);
 		txt_dato1.setColumns(10);
-		
 		getContentPane().add(txt_dato1);
 		
 		JLabel lbl_ubicacion = new JLabel("Ubicaci\u00F3n:");
@@ -469,7 +469,7 @@ public class Alta_clientes extends JInternalFrame {
 		txt_dato2.setVisible(true);
 		getContentPane().add(txt_dato2);
 
-		JButton btn_verificar = new JButton("Verificar");
+		JButton btn_verificar = new JButton("Guardar Ubicacion");
 		btn_verificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (cmb_sector.getSelectedIndex()) {
@@ -637,7 +637,7 @@ public class Alta_clientes extends JInternalFrame {
 
 		});
 
-		btn_verificar.setBounds(538, 407, 107, 23);
+		btn_verificar.setBounds(538, 407, 160, 23);
 
 		getContentPane().add(btn_verificar);
 

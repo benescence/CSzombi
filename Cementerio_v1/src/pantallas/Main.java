@@ -21,6 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import administracion.Precios;
+import administracion.Vencimientos;
 import clientes.Alta_clientes;
 import clientes.Consulta_cliente;
 import clientes.Ubicacion_cliente;
@@ -179,6 +180,16 @@ public class Main extends JFrame {
 		mnAdministracin.add(item_Precios);
 		
 		JMenuItem item_Vencimientos = new JMenuItem("Vencimientos");
+		item_Vencimientos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			    getContentPane().removeAll();
+                getContentPane().repaint();
+                
+				Vencimientos vencimientos = new Vencimientos();
+				vencimientos.setVisible(true);
+				getContentPane().add(vencimientos);
+			}
+		});
 		mnAdministracin.add(item_Vencimientos);
 		
 		JMenu mnAdmin = new JMenu("Usuarios");
