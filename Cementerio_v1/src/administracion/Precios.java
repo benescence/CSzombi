@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class Precios extends JInternalFrame {
 	private JTextField txt_codprecio;
@@ -35,15 +36,23 @@ public class Precios extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public Precios() {
-		setBounds(100, 100, 538, 367);
+		setBorder(null);
+		setBackground(SystemColor.inactiveCaptionBorder);
+		setBounds(0, 0, 538, 367);
 		getContentPane().setLayout(null);
 		
 		JLabel lbl_desc = new JLabel("Descripcion");
+		lbl_desc.setVisible(false);
 		txt_desc = new JTextField();
+		txt_desc.setVisible(false);
 		JLabel lblCodPrecio = new JLabel("Codigo Precio");
+		lblCodPrecio.setVisible(false);
 		txt_codprecio = new JTextField();
+		txt_codprecio.setVisible(false);
 		JLabel lbl_precio = new JLabel("Precio");
+		lbl_precio.setVisible(false);
 		txt_precio = new JTextField();
+		txt_precio.setVisible(false);
 		
 		txt_codprecio.setBounds(148, 101, 154, 20);
 		getContentPane().add(txt_codprecio);
@@ -57,7 +66,8 @@ public class Precios extends JInternalFrame {
 		getContentPane().add(txt_desc);
 		
 		JButton btn_guardar = new JButton("");
-		btn_guardar.setBounds(166, 204, 89, 23);
+		btn_guardar.setBounds(166, 204, 112, 23);
+		btn_guardar.setVisible(false);
 		getContentPane().add(btn_guardar);
 	
 		
@@ -71,6 +81,7 @@ public class Precios extends JInternalFrame {
 				txt_codprecio.setVisible(true);
 				txt_codprecio.setEnabled(true);
 				lbl_desc.setVisible(true);
+				lbl_precio.setVisible(true);
 				lblCodPrecio.setVisible(true);
 				btn_guardar.setText("Guardar");
 				btn_guardar.setVisible(true);
@@ -81,7 +92,7 @@ public class Precios extends JInternalFrame {
 		
 		
 		lblCodPrecio.setBounds(47, 104, 91, 14);
-		lblCodPrecio.setVisible(false);
+		
 		getContentPane().add(lblCodPrecio);
 		
 		JButton btnBuscarPrecio = new JButton("Buscar Precio");
@@ -90,13 +101,15 @@ public class Precios extends JInternalFrame {
 				txt_desc.setVisible(true);
 				txt_desc.setEnabled(false);
 				txt_codprecio.setVisible(true);
-				txt_codprecio.setEnabled(false);
+				txt_codprecio.setEnabled(true);
 				txt_precio.setVisible(true);
 				txt_precio.setEnabled(false);
 				lbl_desc.setVisible(true);
+				lbl_precio.setVisible(true);
 				lblCodPrecio.setVisible(true);
 				
-				btn_guardar.setVisible(false);
+				btn_guardar.setVisible(true);
+				btn_guardar.setText("Buscar");
 				
 			}
 		});
@@ -113,13 +126,14 @@ public class Precios extends JInternalFrame {
 				txt_precio.setVisible(true);
 				txt_precio.setEnabled(true);
 				lbl_desc.setVisible(true);
+				lbl_precio.setVisible(true);
 				lblCodPrecio.setVisible(true);
 				btn_guardar.setText("Actualizar");
-				btn_guardar.setVisible(false);
+				btn_guardar.setVisible(true);
 				
 			}
 		});
-		btnModificarPrecio.setBounds(292, 23, 118, 23);
+		btnModificarPrecio.setBounds(292, 23, 146, 23);
 		getContentPane().add(btnModificarPrecio);
 		
 		
