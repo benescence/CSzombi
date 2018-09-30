@@ -233,12 +233,12 @@ public class Alta_clientes extends JInternalFrame {
 		chckbxBisBoveda.setVisible(true);
 		getContentPane().add(chckbxBisBoveda);
 		
-//		JCheckBox chckbxBisMasizo = new JCheckBox("Bis");
-//		chckbxBisMasizo.setBackground(SystemColor.inactiveCaptionBorder);
-//		chckbxBisMasizo.setBounds(654, 255, 52, 23);
-//		chckbxBisMasizo.setVisible(false);
-//		getContentPane().add(chckbxBisMasizo);
-//		
+		JCheckBox chckbxBisMasizo = new JCheckBox("Bis");
+		chckbxBisMasizo.setBackground(SystemColor.inactiveCaptionBorder);
+		chckbxBisMasizo.setBounds(633, 278, 52, 23);
+		chckbxBisMasizo.setVisible(false);
+		getContentPane().add(chckbxBisMasizo);
+		
 
 		JComboBox<String> cmb_sector = new JComboBox<String>();
 		cmb_sector.setVisible(true);
@@ -474,13 +474,14 @@ public class Alta_clientes extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				switch (cmb_sector.getSelectedIndex()) {
 				case 0:
-					if (cmb_item_sector.getSelectedIndex() == 1) { // seccion 4
+					if (cmb_item_sector.getSelectedIndex() == 1) { // indigentes
 
 						Clientes cliente = new Clientes();
-						String adulto = txt_dato1.getText();
-						String angelito = txt_dato2.getText();
-						String inhumacion= txt_dato3.getText();
-						boolean ok = cliente.verificarAdultoSeccionC4(adulto, angelito, inhumacion);
+						String seccion = txt_dato1.getText();
+						String macizo = txt_dato2.getText();
+						String sepultura= txt_dato3.getText();
+						String inhumacion= txt_dato4.getText();
+						boolean ok = cliente.verificarAdultoSeccionC4(seccion, macizo,sepultura,  inhumacion);
 						if (ok == true)
 							btn_guardar.setEnabled(true);
 							else
@@ -497,11 +498,13 @@ public class Alta_clientes extends JInternalFrame {
 						Clientes sepultura = new Clientes();
 						String seccion = txt_dato1.getText();
 						String masizo = txt_dato2.getText();
+						String bismacizo = txt_dato6.getText();
 						String lote = txt_dato3.getText();
 						String unidad = txt_dato4.getText();
+						String numero = txt_dato2.getText();  //mal
 						String bis = txt_dato5.getText();
 						
-						boolean ok = sepultura.verificarSepultura(seccion, masizo, lote, unidad,bis);
+						boolean ok = sepultura.verificarSepultura(seccion, masizo, lote, unidad,numero,bis,bismacizo);
 						if (ok == true)
 							btn_guardar.setEnabled(true);
 							else
@@ -517,7 +520,7 @@ public class Alta_clientes extends JInternalFrame {
 						Clientes palmerasA = new Clientes();
 						String nicho_a = txt_dato1.getText();
 						String fila_a = txt_dato2.getText();
-						boolean ok = palmerasA.verificarPalmerasA(nicho_a,fila_a);
+						boolean ok = palmerasA.verificarNewpalmerasA(nicho_a,fila_a);
 						if (ok == true)
 							btn_guardar.setEnabled(true);
 							else
@@ -577,13 +580,14 @@ public class Alta_clientes extends JInternalFrame {
 				case 2:
 					
 					Clientes nichera = new Clientes();
+					String Circ = txt_dato1.getText();
 					String seccion = txt_dato1.getText();
 					String macizo = txt_dato2.getText();
-					String par = txt_dato3.getText();
+					String parcela = txt_dato3.getText();
 					String fila = txt_dato4.getText();
 					String unidad = txt_dato5.getText();
 					
-					boolean ok2 = nichera.verificarNichera(seccion, macizo, par,fila, unidad);
+					boolean ok2 = nichera.verificarNichera(Circ,seccion, macizo, parcela,fila, unidad);
 					if (ok2 == true)
 						btn_guardar.setEnabled(true);
 						else
@@ -610,8 +614,15 @@ public class Alta_clientes extends JInternalFrame {
 				case 4:
 
 					Clientes boveda = new Clientes();
-					String unidad_boveda = txt_dato1.getText();					
-					boolean ok4 = boveda.verificarBovedas(unidad_boveda);
+					String Circ_boveda = txt_dato1.getText();	
+					String seccion_boveda = txt_dato1.getText();	
+					String macizo_boveda = txt_dato1.getText();	
+					String parcela_boveda = txt_dato1.getText();	
+					String bis_boveda = txt_dato1.getText();	
+					String unidad_boveda = txt_dato1.getText();	
+					
+					
+					boolean ok4 = boveda.verificarBovedas(Circ_boveda, seccion_boveda, macizo_boveda, parcela_boveda, bis_boveda, unidad_boveda);
 					if (ok4 == true)
 					btn_guardar.setEnabled(true);
 					else

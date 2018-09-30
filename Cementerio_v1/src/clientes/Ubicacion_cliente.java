@@ -429,21 +429,21 @@ public class Ubicacion_cliente extends JInternalFrame {
 				case 1:
 					if (cmb_item_sector.getSelectedIndex() == 0) { // Palmeras A
 
-//						Clientes palmerasA = new Clientes();
+						Clientes palmerasA = new Clientes();
 						cliente = new Clientes();
 						String nicho_a = txt_dato1.getText();
 						String fila_a = txt_dato2.getText();
-//						cliente = verificarPalmerasA(nicho_a,fila_a);
+						palmerasA.verificarNewpalmerasA(nicho_a,fila_a);
 
 					}
 
 					if (cmb_item_sector.getSelectedIndex() == 1) {// Palmeras C
 						
 						cliente = new Clientes();
-//						Clientes palmerasCe = new Clientes();
+						Clientes palmerasCe = new Clientes();
 						String nicho_ce = txt_dato1.getText();
 						String fila_ce = txt_dato2.getText();
-//						palmerasCe.verificarPalmerasCe(nicho_ce,fila_ce);
+						palmerasCe.verificarPalmerasCe(nicho_ce,fila_ce);
 						cliente = buscarClienteenPalmerasCenizas(nicho_ce, fila_ce);
 
 					}
@@ -451,11 +451,11 @@ public class Ubicacion_cliente extends JInternalFrame {
 					if (cmb_item_sector.getSelectedIndex() == 2) { // Palmeras
 																	// ro
 						cliente = new Clientes();
-//						Clientes palmerasRo = new Clientes();
+						Clientes palmerasRo = new Clientes();
 						String nicho_ro = txt_dato1.getText();
 						String fila_ro = txt_dato2.getText();
-//						palmerasRo.verificarPalmerasRo(nicho_ro,fila_ro);
-						//FALTA BUSCAR
+						palmerasRo.verificarPalmerasRo(nicho_ro,fila_ro);
+					
 
 					}
 
@@ -473,12 +473,13 @@ public class Ubicacion_cliente extends JInternalFrame {
 				case 2:
 					
 					Clientes nichera = new Clientes();
+					String Circ = txt_dato1.getText();
 					String seccion = txt_dato1.getText();
 					String macizo = txt_dato2.getText();
 					String par = txt_dato3.getText();
 					String fila = txt_dato4.getText();
 					String unidad = txt_dato5.getText();
-					nichera.verificarNichera(seccion, macizo, par,fila, unidad);
+					nichera.verificarNichera(Circ, seccion, macizo, par,fila, unidad);
 					
 
 					break;
@@ -493,9 +494,15 @@ public class Ubicacion_cliente extends JInternalFrame {
 				case 4:
 
 					Clientes boveda = new Clientes();
-					String unidad_boveda = txt_dato1.getText();					
-					boveda.verificarBovedas(unidad_boveda);
-
+					String Circ_boveda = txt_dato1.getText();	
+					String seccion_boveda = txt_dato1.getText();	
+					String macizo_boveda = txt_dato1.getText();	
+					String parcela_boveda = txt_dato1.getText();	
+					String bis_boveda = txt_dato1.getText();	
+					String unidad_boveda = txt_dato1.getText();	
+					
+					
+					 boveda.verificarBovedas(Circ_boveda, seccion_boveda, macizo_boveda, parcela_boveda, bis_boveda, unidad_boveda);
 					break;
 
 				}

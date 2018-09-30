@@ -318,7 +318,7 @@ public class Clientes {
 
 	}
 
-	public boolean verificarAdultoSeccionC4(String adulto, String angelito, String inhumacion) {
+	public boolean verificarAdultoSeccionC4(String seccion, String macizo, String sepultura, String inhumacion) {
 
 		try {
 
@@ -333,7 +333,7 @@ public class Clientes {
 			java.sql.Statement statement = connection.createStatement();
 
 			ResultSet rs = statement
-					.executeQuery(" call InsertarSepulturaSeccionC4( '" +adulto+ "','"+angelito+"', '"+inhumacion+"')");
+					.executeQuery(" call InsertarNewindigentes( '" +seccion+ "','"+macizo+"', '"+sepultura+"','"+inhumacion+"')");
 
 			rs.close();
 
@@ -350,7 +350,7 @@ public class Clientes {
 
 	}
 
-	public boolean verificarSepultura(String seccion, String masizo, String lote, String unidad, String bis) {
+	public boolean verificarSepultura(String seccion, String macizo,String bismacizo, String lote, String unidad, String numero, String bis) {
 
 		try {
 
@@ -365,7 +365,7 @@ public class Clientes {
 			java.sql.Statement statement = connection.createStatement();
 
 			ResultSet rs = statement.executeQuery(
-					" call insertarNewSepultura( '" + seccion + "','" + lote + "','" + unidad + "','" + bis + "', '"+masizo+"')");
+					" call insertarNewSepultura( '" + seccion + "','" + macizo + "','" + bismacizo + "','" + lote + "','" + unidad + "','" + numero + "', '"+bis+"')");
 
 			rs.close();
 
@@ -382,7 +382,8 @@ public class Clientes {
 
 	}
 
-	public boolean verificarBovedas(String unidad) {
+	public boolean verificarBovedas(String Circ,String seccion,String macizo
+			,String par,String bis, String unidad ) {
 
 		try {
 
@@ -396,7 +397,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" call insertarBovedas ('" + unidad + "')");
+			ResultSet rs = statement.executeQuery(" call insertarBovedas ( '" + Circ + "','" + seccion + "','" + macizo + "','" + par + "','" + bis + "','" + unidad + "')");
 
 			rs.close();
 
@@ -428,7 +429,7 @@ public class Clientes {
 			java.sql.Statement statement = connection.createStatement();
 
 			ResultSet rs = statement
-					.executeQuery(" call insertarCenizario( '" + mueble_cenizas + "','" + nicho_cenizas + "')");
+					.executeQuery(" call insertarNewcenizario( '" + mueble_cenizas + "','" + nicho_cenizas + "')");
 
 			rs.close();
 
@@ -446,7 +447,7 @@ public class Clientes {
 
 	}
 
-	public boolean verificarNichera(String seccion, String macizo, String par, String fila, String unidad) {
+	public boolean verificarNichera(String Circ, String seccion, String macizo, String par, String fila, String unidad) {
 
 		try {
 
@@ -460,7 +461,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" call insertarNichera( '" + seccion + "','" + macizo + "','" + par
+			ResultSet rs = statement.executeQuery(" call insertarNichera( '" + Circ + "','" + seccion + "','" + macizo + "','" + par
 					+ "','" + fila + "','" + unidad + "')");
 
 			rs.close();
@@ -491,7 +492,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery("call insertarPalmeras_S ('" + sepulturaS + "')");
+			ResultSet rs = statement.executeQuery("call insertarNewpalmerassep ('" + sepulturaS + "')");
 
 			rs.close();
 
@@ -522,7 +523,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" call insertarPalmerasRo('" + nicho_ro + "','" + fila_ro + "')");
+			ResultSet rs = statement.executeQuery(" call insertarNewpalmerasro('" + nicho_ro + "','" + fila_ro + "')");
 
 			rs.close();
 
@@ -552,7 +553,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" call insertarPalmerasC('" + nicho_ce + "','" + fila_ce + "')");
+			ResultSet rs = statement.executeQuery(" call insertarNewpalmerasC('" + nicho_ce + "','" + fila_ce + "')");
 
 			rs.close();
 
@@ -569,7 +570,7 @@ public class Clientes {
 
 	}
 
-	public boolean verificarPalmerasA(String nicho_a, String fila_a) {
+	public boolean verificarNewpalmerasA(String nicho_a, String fila_a) {
 
 		try {
 
@@ -583,7 +584,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" call insertarPalmerasA('" + nicho_a + "','" + fila_a + "')");
+			ResultSet rs = statement.executeQuery(" call insertarNewpalmerasA('" + nicho_a + "','" + fila_a + "')");
 
 			rs.close();
 
