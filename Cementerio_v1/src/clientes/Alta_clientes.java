@@ -259,7 +259,7 @@ public class Alta_clientes extends JInternalFrame {
 				lbl_dato5.setVisible(false);
 				lbl_dato6.setVisible(false);
 				chckbxBisBoveda.setVisible(false);
-
+ 
 			}
 
 		});
