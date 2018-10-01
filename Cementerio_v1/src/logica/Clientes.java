@@ -350,7 +350,7 @@ public class Clientes {
 
 	}
 
-	public boolean verificarSepultura(String seccion, String macizo,String bismacizo, String lote, String unidad, String numero, String bis) {
+	public boolean verificarSepultura(String seccion, String macizo, String unidad, String numero, String bis,String bismacizo) {
 
 		try {
 
@@ -365,7 +365,7 @@ public class Clientes {
 			java.sql.Statement statement = connection.createStatement();
 
 			ResultSet rs = statement.executeQuery(
-					" call insertarNewSepultura( '" + seccion + "','" + macizo + "','" + bismacizo + "','" + lote + "','" + unidad + "','" + numero + "', '"+bis+"')");
+					" call insertarNewSepultura( '" + seccion + "','" + macizo + "','" + unidad +"','" + numero + "','" + bis + "', '"+bismacizo+"')");
 
 			rs.close();
 

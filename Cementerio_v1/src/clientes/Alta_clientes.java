@@ -233,9 +233,9 @@ public class Alta_clientes extends JInternalFrame {
 		chckbxBisBoveda.setVisible(true);
 		getContentPane().add(chckbxBisBoveda);
 		
-		JCheckBox chckbxBisMasizo = new JCheckBox("Bis");
+		JCheckBox chckbxBisMasizo = new JCheckBox("maciz bis");
 		chckbxBisMasizo.setBackground(SystemColor.inactiveCaptionBorder);
-		chckbxBisMasizo.setBounds(633, 278, 52, 23);
+		chckbxBisMasizo.setBounds(633, 278, 76, 23);
 		chckbxBisMasizo.setVisible(false);
 		getContentPane().add(chckbxBisMasizo);
 		
@@ -295,16 +295,16 @@ public class Alta_clientes extends JInternalFrame {
 					} else {
 						System.out.println("sepultura"+cmb_item_sector.getSelectedIndex());
 						lbl_dato4.setVisible(true);
-						lbl_dato5.setVisible(true);
+						lbl_dato5.setVisible(false);
 						txt_dato4.setVisible(true);
-						txt_dato5.setVisible(true);
+						txt_dato5.setVisible(false);
 						lbl_dato1.setText("Seccion");
 						lbl_dato2.setText("Macizo");
 						chckbxBisBoveda.setVisible(true);
 						chckbxBisBoveda.setBounds(654, 255, 52, 23);
 						
 						chckbxBisMasizo.setVisible(true);
-						chckbxBisBoveda.setBounds(654, 155, 82, 23);
+						chckbxBisBoveda.setBounds(633, 328, 52, 33);
 						
 						lbl_dato3.setText("Unidad");
 						lbl_dato4.setText("N° de Sepultura");
@@ -501,13 +501,12 @@ public class Alta_clientes extends JInternalFrame {
 						Clientes sepultura = new Clientes();
 						String seccion = txt_dato1.getText();
 						String masizo = txt_dato2.getText();
-						String bismacizo = txt_dato6.getText();
-						String lote = txt_dato3.getText();
-						String unidad = txt_dato4.getText();
-						String numero = txt_dato2.getText();  //mal
-						String bis = txt_dato5.getText();
+						String bismacizo = chckbxBisMasizo.getActionCommand() ;
+						String unidad = txt_dato3.getText();
+						String numero = txt_dato4.getText();  //mal
+						String bis = chckbxBisBoveda.getActionCommand() ;
 						
-						boolean ok = sepultura.verificarSepultura(seccion, masizo, lote, unidad,numero,bis,bismacizo);
+						boolean ok = sepultura.verificarSepultura(seccion, masizo, unidad,numero,bis,bismacizo);
 						if (ok == true)
 							btn_guardar.setEnabled(true);
 							else
