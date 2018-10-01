@@ -469,167 +469,6 @@ public class Alta_clientes extends JInternalFrame {
 		txt_dato2.setVisible(false);
 		getContentPane().add(txt_dato2);
 
-		JButton btn_verificar = new JButton("Guardar Ubicacion");
-		btn_verificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switch (cmb_sector.getSelectedIndex()) {
-				case 0:
-					if (cmb_item_sector.getSelectedIndex() == 1) { // seccion 4
-
-						Clientes cliente = new Clientes();
-						String adulto = txt_dato1.getText();
-						String angelito = txt_dato2.getText();
-						String inhumacion= txt_dato3.getText();
-						boolean ok = cliente.verificarAdultoSeccionC4(adulto, angelito, inhumacion);
-						if (ok == true)
-							btn_guardar.setEnabled(true);
-							else
-								JOptionPane.showMessageDialog(
-										   null,
-										   "Lugar ocupado");
-							
-						
-					}
-
-					if (cmb_item_sector.getSelectedIndex() == 0) {// Sepultura
-
-						
-						Clientes sepultura = new Clientes();
-						String seccion = txt_dato1.getText();
-						String masizo = txt_dato2.getText();
-						String lote = txt_dato3.getText();
-						String unidad = txt_dato4.getText();
-						String bis = txt_dato5.getText();
-						
-						boolean ok = sepultura.verificarSepultura(seccion, masizo, lote, unidad,bis);
-						if (ok == true)
-							btn_guardar.setEnabled(true);
-							else
-								JOptionPane.showMessageDialog(
-										   null,
-										   "Lugar ocupado");
-						
-					}
-					break;
-				case 1:
-					if (cmb_item_sector.getSelectedIndex() == 0) { // Palmeras A
-
-						Clientes palmerasA = new Clientes();
-						String nicho_a = txt_dato1.getText();
-						String fila_a = txt_dato2.getText();
-						boolean ok = palmerasA.verificarPalmerasA(nicho_a,fila_a);
-						if (ok == true)
-							btn_guardar.setEnabled(true);
-							else
-								JOptionPane.showMessageDialog(
-										   null,
-										   "Lugar ocupado");
-
-					}
-
-					if (cmb_item_sector.getSelectedIndex() == 1) {// Palmeras C
-
-						Clientes palmerasCe = new Clientes();
-						String nicho_ce = txt_dato1.getText();
-						String fila_ce = txt_dato2.getText();
-						boolean ok = palmerasCe.verificarPalmerasCe(nicho_ce,fila_ce);
-						if (ok == true)
-							btn_guardar.setEnabled(true);
-							else
-								JOptionPane.showMessageDialog(
-										   null,
-										   "Lugar ocupado");
-
-					}
-
-					if (cmb_item_sector.getSelectedIndex() == 2) { // Palmeras
-																	// ro
-
-						Clientes palmerasRo = new Clientes();
-						String nicho_ro = txt_dato1.getText();
-						String fila_ro = txt_dato2.getText();
-						boolean ok = palmerasRo.verificarPalmerasRo(nicho_ro,fila_ro);
-						if (ok == true)
-							btn_guardar.setEnabled(true);
-							else
-								JOptionPane.showMessageDialog(
-										   null,
-										   "Lugar ocupado");
-						
-
-					}
-
-					if (cmb_item_sector.getSelectedIndex() == 3) {// Palmeras S
-
-						Clientes palmerasS = new Clientes();						
-						String sepulturaS = txt_dato1.getText();
-						boolean ok =palmerasS.verificarPalmerasS(sepulturaS);
-						if (ok == true)
-						btn_guardar.setEnabled(true);
-						else
-							JOptionPane.showMessageDialog(
-									   null,
-									   "Lugar ocupado");
-					}
-
-					break;
-
-				case 2:
-					
-					Clientes nichera = new Clientes();
-					String seccion = txt_dato1.getText();
-					String macizo = txt_dato2.getText();
-					String par = txt_dato3.getText();
-					String fila = txt_dato4.getText();
-					String unidad = txt_dato5.getText();
-					
-					boolean ok2 = nichera.verificarNichera(seccion, macizo, par,fila, unidad);
-					if (ok2 == true)
-						btn_guardar.setEnabled(true);
-						else
-							JOptionPane.showMessageDialog(
-									   null,
-									   "Lugar ocupado");
-
-					break;
-
-				case 3:
-					Clientes cenizario = new Clientes();
-					String mueble = txt_dato1.getText();
-					String nicho = txt_dato2.getText();
-					boolean ok3 = cenizario.verificarCenizario(mueble, nicho);
-					if (ok3 == true)
-						btn_guardar.setEnabled(true);
-						else
-							JOptionPane.showMessageDialog(
-									   null,
-									   "Lugar ocupado");
-					
-					break;
-
-				case 4:
-
-					Clientes boveda = new Clientes();
-					String unidad_boveda = txt_dato1.getText();					
-					boolean ok4 = boveda.verificarBovedas(unidad_boveda);
-					if (ok4 == true)
-					btn_guardar.setEnabled(true);
-					else
-						JOptionPane.showMessageDialog(
-								   null,
-								   "Lugar ocupado");
-					break;
-
-				}
-
-			}
-
-		});
-
-		btn_verificar.setBounds(538, 407, 160, 23);
-
-		getContentPane().add(btn_verificar);
-
 		txt_dato3 = new JTextField();
 		txt_dato3.setColumns(10);
 		txt_dato3.setBounds(450, 329, 76, 20);
@@ -695,14 +534,14 @@ public class Alta_clientes extends JInternalFrame {
 				String currentTime =  date.getYear()+"-"+date.getMonth()+"-"+date.getDate();// sdf.format(date);
 				
 				cliente.setFecha_fallec(currentTime);
-
+				
 				cliente.altaCliente();			
 
 			}
 
 		});
 
-		btn_guardar.setBounds(409, 105, 162, 24);
+		btn_guardar.setBounds(516, 416, 162, 24);
 
 		getContentPane().add(btn_guardar);
 		
@@ -761,6 +600,9 @@ public class Alta_clientes extends JInternalFrame {
 		txt_nombre_familiar.setText(cli.getNombre_familiar());
 		
 		this.repaint();
+		
+	}
+	private void Guardar() {
 		
 	}
 	
