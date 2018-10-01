@@ -303,6 +303,9 @@ public class Alta_clientes extends JInternalFrame {
 						chckbxBisBoveda.setVisible(true);
 						chckbxBisBoveda.setBounds(654, 255, 52, 23);
 						
+						chckbxBisMasizo.setVisible(true);
+						chckbxBisBoveda.setBounds(654, 155, 82, 23);
+						
 						lbl_dato3.setText("Unidad");
 						lbl_dato4.setText("N° de Sepultura");
 						lbl_dato5.setText("Bis");
