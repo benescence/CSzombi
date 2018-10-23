@@ -472,7 +472,7 @@ public class Alta_clientes extends JInternalFrame {
 		txt_dato2.setVisible(true);
 		getContentPane().add(txt_dato2);
 
-		JButton btn_verificar = new JButton("Guardar Ubicacion");
+/*		JButton btn_verificar = new JButton("Guardar Ubicacion");
 		btn_verificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (cmb_sector.getSelectedIndex()) {
@@ -642,7 +642,7 @@ public class Alta_clientes extends JInternalFrame {
 		btn_verificar.setBounds(538, 407, 160, 23);
 
 		getContentPane().add(btn_verificar);
-
+*/
 		txt_dato3 = new JTextField();
 		txt_dato3.setColumns(10);
 		txt_dato3.setBounds(450, 329, 76, 20);
@@ -681,7 +681,7 @@ public class Alta_clientes extends JInternalFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-				Clientes cliente = new Clientes();
+				 Clientes cliente = new Clientes();
 				cliente.setApellidos(txt_apellidos.getText());
 				cliente.setNombres(txt_nombres.getText());
 				
@@ -709,8 +709,176 @@ public class Alta_clientes extends JInternalFrame {
 				
 				cliente.setFecha_fallec(currentTime);
 
-				cliente.altaCliente();			
+				//cliente.altaCliente();			
 
+				switch (cmb_sector.getSelectedIndex()) {
+				case 0:
+					if (cmb_item_sector.getSelectedIndex() == 1) { // indigentes
+
+						Clientes cliente2 = new Clientes();
+						String seccion = txt_dato1.getText();
+						String macizo = txt_dato2.getText();
+						String sepultura= txt_dato3.getText();
+						String inhumacion= txt_dato4.getText();
+						boolean ok = cliente2.verificarIndigentes(seccion, macizo,sepultura,  inhumacion);
+						if (ok == true)
+							btn_guardar.setEnabled(true);
+							else
+								JOptionPane.showMessageDialog(
+										   null,
+										   "Lugar ocupado");
+							
+						
+					}
+
+					if (cmb_item_sector.getSelectedIndex() == 0) {// Sepultura
+
+						
+						Clientes sepultura = new Clientes();
+						String seccion = txt_dato1.getText();
+						String masizo = txt_dato2.getText();
+						String bismacizo = chckbxBisMasizo.getActionCommand() ;
+						String unidad = txt_dato3.getText();
+						String numero = txt_dato4.getText();  //mal
+						String bis = chckbxBisBoveda.getActionCommand() ;
+						
+						boolean ok = sepultura.verificarSepultura(seccion, masizo, unidad,numero,bis,bismacizo);
+						if (ok == true)
+							btn_guardar.setEnabled(true);
+							else
+								JOptionPane.showMessageDialog(
+										   null,
+										   "Lugar ocupado");
+						
+					}
+					break;
+				case 1:
+					if (cmb_item_sector.getSelectedIndex() == 0) { // Palmeras A
+
+						Clientes palmerasA = new Clientes();
+						String nicho_a = txt_dato1.getText();
+						String fila_a = txt_dato2.getText();
+						boolean ok = palmerasA.verificarNewpalmerasA(nicho_a,fila_a);
+						if (ok == true)
+							btn_guardar.setEnabled(true);
+							else
+								JOptionPane.showMessageDialog(
+										   null,
+										   "Lugar ocupado");
+
+					}
+
+					if (cmb_item_sector.getSelectedIndex() == 1) {// Palmeras C
+
+						Clientes palmerasCe = new Clientes();
+						String nicho_ce = txt_dato1.getText();
+						String fila_ce = txt_dato2.getText();
+						boolean ok = palmerasCe.VerificarPalmerasCe(nicho_ce,fila_ce);
+						if (ok == true) {
+							
+							//btn_guardar.setEnabled(true);
+							cliente.altaCliente();
+							System.out.println("se dio de alta");
+							palmerasCe.insertarPalmerasCe(nicho_ce, fila_ce);
+							System.out.println("se cargo?");
+							}
+							else
+								JOptionPane.showMessageDialog(
+										   null,
+										   "Lugar ocupado");
+
+					}
+
+					if (cmb_item_sector.getSelectedIndex() == 2) { // Palmeras
+																	// ro
+
+						Clientes palmerasRo = new Clientes();
+						String nicho_ro = txt_dato1.getText();
+						String fila_ro = txt_dato2.getText();
+						boolean ok = palmerasRo.verificarPalmerasRo(nicho_ro,fila_ro);
+						if (ok == true)
+							btn_guardar.setEnabled(true);
+							else
+								JOptionPane.showMessageDialog(
+										   null,
+										   "Lugar ocupado");
+						
+
+					}
+
+					if (cmb_item_sector.getSelectedIndex() == 3) {// Palmeras S
+
+						Clientes palmerasS = new Clientes();						
+						String sepulturaS = txt_dato1.getText();
+						boolean ok =palmerasS.verificarPalmerasS(sepulturaS);
+						if (ok == true)
+						btn_guardar.setEnabled(true);
+						else
+							JOptionPane.showMessageDialog(
+									   null,
+									   "Lugar ocupado");
+					}
+
+					break;
+
+				case 2:
+					
+					Clientes nichera = new Clientes();
+					String Circ = txt_dato1.getText();
+					String seccion = txt_dato1.getText();
+					String macizo = txt_dato2.getText();
+					String parcela = txt_dato3.getText();
+					String fila = txt_dato4.getText();
+					String unidad = txt_dato5.getText();
+					
+					boolean ok2 = nichera.verificarNichera(Circ,seccion, macizo, parcela,fila, unidad);
+					if (ok2 == true)
+						btn_guardar.setEnabled(true);
+						else
+							JOptionPane.showMessageDialog(
+									   null,
+									   "Lugar ocupado");
+
+					break;
+
+				case 3:
+					Clientes cenizario = new Clientes();
+					String mueble = txt_dato1.getText();
+					String nicho = txt_dato2.getText();
+					boolean ok3 = cenizario.verificarCenizario(mueble, nicho);
+					if (ok3 == true)
+						btn_guardar.setEnabled(true);
+						else
+							JOptionPane.showMessageDialog(
+									   null,
+									   "Lugar ocupado");
+					
+					break;
+
+				case 4:
+
+					Clientes boveda = new Clientes();
+					String Circ_boveda = txt_dato1.getText();	
+					String seccion_boveda = txt_dato1.getText();	
+					String macizo_boveda = txt_dato1.getText();	
+					String parcela_boveda = txt_dato1.getText();	
+					String bis_boveda = txt_dato1.getText();	
+					String unidad_boveda = txt_dato1.getText();	
+					
+					
+					boolean ok4 = boveda.verificarBovedas(Circ_boveda, seccion_boveda, macizo_boveda, parcela_boveda, bis_boveda, unidad_boveda);
+					if (ok4 == true)
+					btn_guardar.setEnabled(true);
+					else
+						JOptionPane.showMessageDialog(
+								   null,
+								   "Lugar ocupado");
+					break;
+
+				}
+				
+				 	
+			
 			}
 
 		});

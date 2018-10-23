@@ -443,7 +443,7 @@ public class Ubicacion_cliente extends JInternalFrame {
 						Clientes palmerasCe = new Clientes();
 						String nicho_ce = txt_dato1.getText();
 						String fila_ce = txt_dato2.getText();
-						palmerasCe.verificarPalmerasCe(nicho_ce,fila_ce);
+						palmerasCe.VerificarPalmerasCe(nicho_ce,fila_ce);
 						cliente = buscarClienteenPalmerasCenizas(nicho_ce, fila_ce);
 
 					}
