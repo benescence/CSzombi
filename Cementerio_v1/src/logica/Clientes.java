@@ -797,7 +797,7 @@ public class Clientes {
 
 	}
 
-	public boolean insertarNichera(String seccion, String macizo, String par, String fila, String unidad) {
+	public boolean insertarNichera(String Circ, String seccion, String macizo, String par, String fila, String unidad) {
 
 		
 		try {
@@ -812,7 +812,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" call insertarNewNichera ('" + seccion + "', '" + macizo + "', '" + par + "', '" + fila + "', '" + unidad + "');");
+			ResultSet rs = statement.executeQuery(" call insertarNewNichera ('" + Circ + "','" + seccion + "', '" + macizo + "', '" + par + "', '" + fila + "', '" + unidad + "');");
 
 			rs.close();
 
@@ -844,7 +844,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" call insertarNewPalmerasRo('" + mueble + "','" + nicho + "')");
+			ResultSet rs = statement.executeQuery(" call insertarNewCenizario('" + mueble + "','" + nicho + "')");
 
 			rs.close();
 
@@ -938,7 +938,7 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" call insertarNewBoveda('" + seccion + "', '" + macizo + "', '" + sepultura + "', '" + inhumacion + "');");
+			ResultSet rs = statement.executeQuery(" call insertarNewIndigente('" + seccion + "', '" + macizo + "', '" + sepultura + "', '" + inhumacion + "');");
 
 			rs.close();
 
@@ -980,7 +980,7 @@ public class Clientes {
 
 			statement = connection.createStatement();
 			//por todos los campos
-			if (!this.getApellidos().equals("") && !this.getNombres().equals("") &&
+			/*if (!this.getApellidos().equals("") && !this.getNombres().equals("") &&
 					!this.getDni().equals("") &&  !this.getDireccion_familiar().equals("")
 						&& !this.getCocheria().equals("") && !this.getTelefono().equals(""))
 			{
@@ -993,20 +993,26 @@ public class Clientes {
 						&& this.getCocheria().equals("") && this.getTelefono().equals(""))
 			{
 				System.out.println("apellido ="+this.getApellidos());
-			query =	" CALL buscarporApellido ('"+ this.getApellidos() + "')";
+			query =	" CALL buscarporApellidoNew ('"+ this.getApellidos() + "')";
 			}
 			//por nombre y apellido
 			if (!this.getApellidos().equals("") && !this.getNombres().equals("") &&
 					this.getDni().equals("") &&  this.getDireccion_familiar().equals("")
 						&& this.getCocheria().equals("") && this.getTelefono().equals(""))
 			{
-			query =	" CALL buscarporApellido ('"+ this.getNombres() + "', '"+ this.getApellidos() + "')";
+			//antes query =	" CALL buscarNewClientes('"+ this.getNombres() + "', '"+ this.getApellidos() + "')";
+				query =	" CALL buscarNewClientes('"+ this.getApellidos() +"' ,'"+ this.getNombres() + "',  '" + this.getDni() + "' , '"
+						+ this.getDireccion_familiar() + "', '"+this.getTelefono()+"')";
+		
 			}
 			//por DNI
 			if (this.getApellidos().equals("") && this.getNombres().equals("") &&
 					!this.getDni().equals("") &&  this.getDireccion_familiar().equals("")
 						&& this.getCocheria().equals("") && this.getTelefono().equals(""))
 			{
+			
+			
+			
 			query =	" CALL buscarporDNI ('"+ this.getDni() + "')";
 			
 			
@@ -1023,7 +1029,11 @@ public class Clientes {
 //			System.out.println ("nombres"+this.getNombres());
 //			System.out.println ("dni" +this.getDni());
 //			System.out.println ("dire fam" +this.getDireccion_familiar());
-			
+ * */
+ 
+			query =	" CALL buscarNewClientes('"+ this.getApellidos() +"' ,'"+ this.getNombres() + "',  '" + this.getDni() + "' , '"
+					+ this.getDireccion_familiar() + "', '"+this.getTelefono()+"')";
+					
 			rs = statement.executeQuery( query);
 			
 			while (rs.next()) {
@@ -1105,9 +1115,10 @@ public class Clientes {
 			java.sql.Statement statement = connection.createStatement();
 
 			ResultSet rs = statement.executeQuery(
-					" SELECT 'unidad_boveda', 'seccion_nichera', 'deposito', 'otrocementerio','osario','nicho_palmeras_ataud','fila_palmeras_ataud','seccion_sepulturas','lote_sepulturas','unidad_sepulturas','bis_sepulturas','palmeras_sepulturas','nicho_palmeras_ro','fila_palmeras_ro','nicho_palmeras_cen','fila_palmeras_cen','macizo_nichera','par_nichera','fila_nichera','unidad_nichera','mueble_cenizas','nicho_cenizas','lote_adulto','lote_angelito','inhumacion' FROM 'Clientes' inner join  'ubicacion' on 'id_ubicacion' =  'ubicacion_id' and  '"
-							+ this.getApellidos() + "' = 'apellido' and '" + this.getNombres() + "' = 'nombres'");
+					" call buscar('" + apellido + "', '" + nombres + "');");
 
+		
+			
 			if (rs.next() == true) {
 
 				cadena = cadena + rs.getString("seccion_nichera") + rs.getString("unidad_boveda")
@@ -1142,7 +1153,7 @@ public class Clientes {
 
 	}
 
-	public String buscarUbicacionporDni(String dni) {
+	/*public String buscarUbicacionporDni(String dni) {
 
 		String cadena = "";
 
@@ -1197,7 +1208,7 @@ public class Clientes {
 		return "error";
 
 	}
-
+*/
 	
 
 }

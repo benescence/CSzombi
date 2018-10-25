@@ -286,7 +286,8 @@ public class Consulta_resultado extends JInternalFrame {
 				modelo.addRow(O);
 				table.setModel(modelo);
 				for (int i=0;i<clientes_row.size();i++){
-				
+					System.out.println(clientes_row);
+				clientes_row.toString();
 				table.setValueAt(clientes_row.get(i).getApellidos(), i, 0);
 				table.setValueAt(clientes_row.get(i).getNombres(), i, 1);
 				table.setValueAt(clientes_row.get(i).getDni(), i, 2);
@@ -296,7 +297,7 @@ public class Consulta_resultado extends JInternalFrame {
 				table.setValueAt(clientes_row.get(i).getTelefono(), i, 6);
 				table.setValueAt(clientes_row.get(i).getEmail(), i, 7);
 				table.setValueAt(clientes_row.get(i).getCocheria(), i, 8);
-//				modelo.addRow(O);
+			modelo.addRow(O);
 			}
 				getContentPane().add(table);
 				

@@ -55,7 +55,7 @@ public class Main extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the frame
 	 */
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -221,6 +221,7 @@ public class Main extends JFrame {
 				Baja_usuario baja_usuario = new Baja_usuario();
 				baja_usuario.setVisible(true);
 				getContentPane().add(baja_usuario);
+				
 				
 				
 			}

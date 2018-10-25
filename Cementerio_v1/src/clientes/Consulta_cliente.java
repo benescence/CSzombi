@@ -158,7 +158,7 @@ public class Consulta_cliente extends JInternalFrame {
 			    }
 			    
 			    if (!txt_dni.getText().equals(null)){
-			    	clientes.buscarUbicacionporDni(txt_dni.getText());
+			    	System.out.println("porque llego aca ?");//clientes.buscarUbicacionporDni(txt_dni.getText());
 			    }
 			    
 			    

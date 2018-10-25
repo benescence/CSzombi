@@ -382,14 +382,18 @@ try {
 
             java.sql.Statement statement = connection.createStatement();
 
-            ResultSet rs = statement.executeQuery(" SELECT `unidad_boveda`, `seccion_nichera`, `deposito`, `otrocementerio`,`osario`,`nicho_palmeras_ataud`,`fila_palmeras_ataud`,`seccion_sepulturas`, `lote_sepulturas`,`unidad_sepulturas`, `bis_sepulturas`,`palmeras_sepulturas`,`nicho_palmeras_ro`, `fila_palmeras_ro`,`nicho_palmeras_cen`,`fila_palmeras_cen`,`macizo_nichera`, `par_nichera`,`fila_nichera`,`unidad_nichera`,`mueble_cenizas`,`nicho_cenizas`,`lote_adulto`,`lote_angelito`,`inhumacion` FROM `Clientes` inner join  `ubicacion` on `id_ubicacion` =  `ubicacion_id` and `dni`= '"+dni+"'");
+           // ResultSet rs = statement.executeQuery(" SELECT `unidad_boveda`, `seccion_nichera`, `deposito`, `otrocementerio`,`osario`,`nicho_palmeras_ataud`,`fila_palmeras_ataud`,`seccion_sepulturas`, `lote_sepulturas`,`unidad_sepulturas`, `bis_sepulturas`,`palmeras_sepulturas`,`nicho_palmeras_ro`, `fila_palmeras_ro`,`nicho_palmeras_cen`,`fila_palmeras_cen`,`macizo_nichera`, `par_nichera`,`fila_nichera`,`unidad_nichera`,`mueble_cenizas`,`nicho_cenizas`,`lote_adulto`,`lote_angelito`,`inhumacion` FROM `Clientes` inner join  `ubicacion` on `id_ubicacion` =  `ubicacion_id` and `dni`= '"+dni+"'");
+            
+            ResultSet rs = statement.executeQuery("call busquedaUbicacionNewporDNI("+dni+")");
             while (rs.next() ) {
             	
             	
            	 		ubicaciones aux = new ubicaciones();
-           	 	    
-           	 		
-           	 		aux.setUnidad_boveda("boveda : "+rs.getString("unidad_boveda"));  
+           	 	   System.out.println( rs.getString(0));
+           	 	   
+           	 	   cadena = rs.getString(0);
+           	 	System.out.println( cadena);
+           	 		/*aux.setUnidad_boveda("boveda : "+rs.getString("unidad_boveda"));  
            	 	    aux.setMueble_cenizas(rs.getString("mueble_cenizas")); 
            	 	    aux.setNicho_cenizas(rs.getString("nicho_cenizas"));
            	 	    aux.setSeccion_nichera(rs.getString("seccion_nichera"));
@@ -413,8 +417,27 @@ try {
             	 	aux.setInhumaciuon(rs.getString("inhumacion"));
             	 	aux.setOtrocementerio(rs.getString("otrocementerio"));
             	 	aux.setOsario(rs.getString("osario"));
-            	 	aux.setDeposito(rs.getString("deposito"));
+            	 	aux.setDeposito(rs.getString("deposito"));*/
            	
+           	 		
+           	 	
+           	 	 /*
+           	 	    aux.setMueble_cenizas(rs.getString("mueble")); 
+           	 	    aux.setNicho_cenizas(rs.getString("nicho"));
+           	 	    aux.setSeccion_nichera(rs.getString("seccion"));
+           	 	    aux.setMacizo_nichera(rs.getString("macizo"));
+           	 	    aux.setPar_nichera(rs.getString("parcela"));
+           	 	    aux.setFila_nichera(rs.getString("fila"));
+           	 	    aux.setUnidad_nichera(rs.getString("unidad"));
+           	 	    aux.setNicho_palmeras_ataud(rs.getString("Circ"));
+           	 	    aux.setFila_palmeras_ataud(rs.getString("inhumacion"));
+           	 	    aux.setPalmeras_Sepulturas(rs.getString("sepultura"));
+           	 	    aux.setSeccion_sepulturas(rs.getString("bis_macizo"));
+            	 	aux.setLote_sepulturas(rs.getString("bis"));
+            	 	aux.setUnidad_pulturas(rs.getString("otrocementerio"));
+            	 	aux.setBis_sepulturas(rs.getString("osario"));
+            	 	aux.setLote_adulto(rs.getString("deposito"));
+   
            	 		
            		 if ( aux.getUnidad_boveda() != null) {
             		
@@ -456,7 +479,9 @@ try {
             		
             		cadena = "Sepultura C4: lote angelito : "+ aux.lote_angelito+ ", inhumacion:  "+ aux.inhumaciuon ;
             		}     
-                       
+                       */
+           	 	   
+           	 	  
             	}
          
              rs.close();
