@@ -308,9 +308,11 @@ public class Consulta_resultado extends JInternalFrame {
 				btn_info = new JButton("Mas Info");
 				btn_info.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						System.out.println("llega aca ");
 						ubicaciones ubi = new ubicaciones();
 						if(!txt_dni.getText().equals(null)){
 							ubicacion = ubi.buscarUbicacionporDni(txt_dni.getText());
+							System.out.println(ubicacion);
 							txt_ubicacion.setVisible(true);
 							lblIdUbicacion.setVisible(true);
 							txt_ubicacion.setText(ubicacion);

@@ -403,24 +403,27 @@ public class Ubicacion_cliente extends JInternalFrame {
 
 						
 						cliente = new Clientes();
-						
+						Clientes Indigente = new Clientes();
 						String seccion = txt_dato1.getText();
-						String lote = txt_dato2.getText();
-						String unidad = txt_dato3.getText();
-						String bis = txt_dato4.getText();
+						String macizo = txt_dato2.getText();
+						String sepultura = txt_dato3.getText();
+						String inhumacion = txt_dato4.getText();
 						
-						cliente =  buscarClienteenSepulturasSeccionC4(seccion, lote, unidad);  // ERROR
+						cliente = Indigente.buscarClienteenSepulturasSeccionC4(seccion, macizo, sepultura,inhumacion);  
 						
 					}
 					if (cmb_item_sector.getSelectedIndex() == 1) { // seccion 4
 						
 						
-						cliente = new Clientes();
-						String adulto = txt_dato1.getText();
-						String angelito = txt_dato2.getText();
-						String inhumacion= txt_dato3.getText();
+						Clientes sepultura = new Clientes();
+						String seccion = txt_dato1.getText();
+						String macizo = txt_dato2.getText();
+						String bis_macizo= txt_dato3.getText();
+						String unidad= txt_dato4.getText();
+						String numero= txt_dato5.getText();						
+						String bis= txt_dato6.getText();
 //						cliente.verificarSepulturaSeccionC4(adulto, angelito, inhumacion);
-						cliente = buscarClienteenSepulturasSeccionC4(adulto, angelito, inhumacion);
+						cliente =sepultura.buscarClienteenSepultura(seccion,macizo,bis_macizo,unidad,numero,bis);
 						
 						
 					}
@@ -433,28 +436,28 @@ public class Ubicacion_cliente extends JInternalFrame {
 						cliente = new Clientes();
 						String nicho_a = txt_dato1.getText();
 						String fila_a = txt_dato2.getText();
-						palmerasA.verificarNewpalmerasA(nicho_a,fila_a);
+						cliente = palmerasA.BuscarPalmerasaA(nicho_a,fila_a);
 
 					}
 
 					if (cmb_item_sector.getSelectedIndex() == 1) {// Palmeras C
 						
-						cliente = new Clientes();
+						
 						Clientes palmerasCe = new Clientes();
 						String nicho_ce = txt_dato1.getText();
 						String fila_ce = txt_dato2.getText();
 						palmerasCe.VerificarPalmerasCe(nicho_ce,fila_ce);
-						cliente = buscarClienteenPalmerasCenizas(nicho_ce, fila_ce);
+						cliente = palmerasCe.buscarClienteenPalmerasCenizas(nicho_ce, fila_ce);
 
 					}
 
 					if (cmb_item_sector.getSelectedIndex() == 2) { // Palmeras
 																	// ro
-						cliente = new Clientes();
+						//cliente = new Clientes();
 						Clientes palmerasRo = new Clientes();
 						String nicho_ro = txt_dato1.getText();
 						String fila_ro = txt_dato2.getText();
-						palmerasRo.verificarPalmerasRo(nicho_ro,fila_ro);
+						cliente = palmerasRo.buscarPalmerasRo(nicho_ro,fila_ro);
 					
 
 					}
@@ -463,7 +466,8 @@ public class Ubicacion_cliente extends JInternalFrame {
 
 						Clientes palmerasS = new Clientes();						
 						String sepulturaS = txt_dato1.getText();
-						palmerasS.verificarPalmerasS(sepulturaS);
+						System.out.println("llego aca");
+						cliente= palmerasS.BuscarPorUbicacion(sepulturaS);
 						
 
 					}
@@ -474,12 +478,12 @@ public class Ubicacion_cliente extends JInternalFrame {
 					
 					Clientes nichera = new Clientes();
 					String Circ = txt_dato1.getText();
-					String seccion = txt_dato1.getText();
-					String macizo = txt_dato2.getText();
-					String par = txt_dato3.getText();
-					String fila = txt_dato4.getText();
-					String unidad = txt_dato5.getText();
-					nichera.verificarNichera(Circ, seccion, macizo, par,fila, unidad);
+					String seccion = txt_dato2.getText();
+					String macizo = txt_dato3.getText();
+					String par = txt_dato4.getText();
+					String fila = txt_dato5.getText();
+					String unidad = txt_dato6.getText();
+					cliente = nichera.buscarNicheraporUbi(Circ, seccion, macizo, par,fila, unidad);
 					
 
 					break;
@@ -488,21 +492,21 @@ public class Ubicacion_cliente extends JInternalFrame {
 					Clientes cenizario = new Clientes();
 					String mueble = txt_dato1.getText();
 					String nicho = txt_dato2.getText();
-					cenizario.verificarCenizario(mueble, nicho);
+					cliente = cenizario.buscarCenizarioporUbi(mueble, nicho);
 					break;
 
 				case 4:
 
 					Clientes boveda = new Clientes();
 					String Circ_boveda = txt_dato1.getText();	
-					String seccion_boveda = txt_dato1.getText();	
-					String macizo_boveda = txt_dato1.getText();	
-					String parcela_boveda = txt_dato1.getText();	
-					String bis_boveda = txt_dato1.getText();	
-					String unidad_boveda = txt_dato1.getText();	
+					String seccion_boveda = txt_dato2.getText();	
+					String macizo_boveda = txt_dato3.getText();	
+					String parcela_boveda = txt_dato4.getText();	
+					String bis_boveda = txt_dato6.getText();	//cambiar bis
+					String unidad_boveda = txt_dato5.getText();	
 					
 					
-					 boveda.verificarBovedas(Circ_boveda, seccion_boveda, macizo_boveda, parcela_boveda, bis_boveda, unidad_boveda);
+					cliente = boveda.buscarBovedasporUbi(Circ_boveda, seccion_boveda, macizo_boveda, parcela_boveda, bis_boveda, unidad_boveda);
 					break;
 
 				}
@@ -561,53 +565,7 @@ public class Ubicacion_cliente extends JInternalFrame {
 	}
 	
 
-public Clientes buscarClienteenSepulturasSeccionC4(String campo1,String campo2, String campo3){
 
-Clientes aux = new Clientes();
-try {
-  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
-  String username = "u147800277_ben";
-  String password = "Tiburones";
- 
-  Connection connection = DriverManager.getConnection(url, username, password);
-  
-  java.sql.Statement statement = connection.createStatement();
-
-  ResultSet rs = statement.executeQuery(" CALL  buscarSepulturaSeccionC4 ( '"+campo1+"'  ,  '"+campo2+"',  '"+campo3+"')");
-
- 
-  if (!rs.equals(null)){
-  	 if (rs.next()==true  ) {
-
-  		 System.out.println(rs.getString("fecha_fallecimiento"));
-  		 aux.setApellidos(rs.getString("apellido"));
-  		 System.out.println(rs.getString("apellido"));
-  		 aux.setNombres(rs.getString("nombres"));
-  		 aux.setDni(rs.getString("dni"));
-  		 aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
-  		 aux.setDireccion_familiar(rs.getString("direccion"));
-  		 aux.setNombre_familiar(rs.getString("nombre_familiar"));
-  		 aux.setTelefono(rs.getString("telefono_familiar"));
-		 
-			
-			} 
-  }
-  
-  rs.close();
-  
-  statement.close();
-  
-  connection.close();
-  
-	
-} catch (SQLException ex) {
-	
-  System.out.println(ex);
-	
-}
-return aux; 
-
-}
 
 
 

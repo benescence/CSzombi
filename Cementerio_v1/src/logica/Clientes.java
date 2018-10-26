@@ -53,19 +53,20 @@ public class Clientes {
 
 	public Clientes() {
 
-		apellidos = null;
+		this.apellidos = null;
 
-		nombres = null;
+		this.nombres = null;
 
 		// fecha_fallec= (Date) new java.util.Date();
 
-		dni = "";
+		this.dni = null;
 
-		domicilio = "";
+		this.domicilio = null;
 
 		direccion_familiar = "";
 
 		cocheria = null;
+		this.telefono=null;
 
 		tipo_fallec = 0;
 
@@ -1031,11 +1032,11 @@ public class Clientes {
 //			System.out.println ("dire fam" +this.getDireccion_familiar());
  * */
  
-			query =	" CALL buscarNewClientes('"+ this.getApellidos() +"' ,'"+ this.getNombres() + "',  '" + this.getDni() + "' , '"
-					+ this.getDireccion_familiar() + "', '"+this.getTelefono()+"')";
-					
+			query =	" CALL buscarNewClientes('"+ this.apellidos +"' ,'"+ this.nombres + "',  '" + this.dni + "' , '"
+					+ this.direccion_familiar + "', '"+this.telefono+"')";
+			query= query.replaceAll("''", "null");
 			rs = statement.executeQuery( query);
-			
+			System.out.println(query);
 			while (rs.next()) {
 
 //				System.out.println("RS SIZE" + rs.getFetchSize());
@@ -1071,6 +1072,7 @@ public class Clientes {
 				aux.setEmail(rs.getString("cocheria"));
 
 				client.add(aux);
+				
 
 			}
 
@@ -1153,6 +1155,580 @@ public class Clientes {
 
 	}
 
+	public Clientes BuscarPorUbicacion(String sepulturaS) {
+		ResultSet rs = null;
+
+		Clientes client = new Clientes();
+
+		String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+		String username = "u147800277_ben";
+
+		String password = "Tiburones";
+
+		Connection connection = null;
+
+		java.sql.Statement statement = null;
+		String query ="";
+		try {
+
+			connection = DriverManager.getConnection(url, username, password);
+
+			statement = connection.createStatement();
+			query =	" CALL buscarClientesPalmerasS('"+ sepulturaS+"')";
+					
+			rs = statement.executeQuery( query);
+			
+			while (rs.next()) {
+
+
+				this.setApellidos(rs.getString("apellido"));
+
+				this.setNombres(rs.getString("nombres"));
+
+				this.setDni(rs.getString("dni"));
+
+				Date ff = rs.getDate("fecha_fallecimiento");
+
+				java.text.SimpleDateFormat sdf =
+
+						new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+				String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+				this.setFecha_fallec(currentTime);
+
+				this.setDireccion_familiar(rs.getString("direccion"));
+
+				this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+				this.setTelefono(rs.getString("telefono_familiar"));
+
+				this.setEmail(rs.getString("email_familiar"));
+
+				this.setEmail(rs.getString("cocheria"));
+
+
+			}
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+
+		}
+
+
+
+		return this;
+
+	}
+			
+	public Clientes buscarClienteenSepulturasSeccionC4(String campo1,String campo2, String campo3, String campo4){
+
+		Clientes aux = new Clientes();
+		try {
+		  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+		  String username = "u147800277_ben";
+		  String password = "Tiburones";
+		 
+		  Connection connection = DriverManager.getConnection(url, username, password);
+		  
+		  java.sql.Statement statement = connection.createStatement();
+
+		  ResultSet rs = statement.executeQuery(" CALL  buscarClienteIndigentesporUbi ( '"+campo1+"'  ,  '"+campo2+"'  ,  '"+campo3+"','"+campo4+"')");
+
+		  while (rs.next()) {
+
+
+				this.setApellidos(rs.getString("apellido"));
+
+				this.setNombres(rs.getString("nombres"));
+
+				this.setDni(rs.getString("dni"));
+
+				Date ff = rs.getDate("fecha_fallecimiento");
+
+				java.text.SimpleDateFormat sdf =
+
+						new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+				String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+				this.setFecha_fallec(currentTime);
+
+				this.setDireccion_familiar(rs.getString("direccion"));
+
+				this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+				this.setTelefono(rs.getString("telefono_familiar"));
+
+				this.setEmail(rs.getString("email_familiar"));
+
+				this.setEmail(rs.getString("cocheria"));
+
+
+			}
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+
+		}
+
+
+
+		return this;
+
+	}
+
+	public Clientes buscarClienteenSepultura(String seccion, String macizo, String bis_macizo, String unidad,
+			String numero, String bis) {
+		
+		Clientes aux = new Clientes();
+		try {
+		  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+		  String username = "u147800277_ben";
+		  String password = "Tiburones";
+		 
+		  Connection connection = DriverManager.getConnection(url, username, password);
+		  
+		  java.sql.Statement statement = connection.createStatement();
+
+		  ResultSet rs = statement.executeQuery(" CALL  buscarClienteIndigentesporUbi ( '"+seccion+"'  ,  '"+macizo+"'  ,  '"+bis_macizo+"'  ,  '"+unidad+"','"+numero+"'  ,  '"+bis+"')");
+
+		  while (rs.next()) {
+
+
+				this.setApellidos(rs.getString("apellido"));
+
+				this.setNombres(rs.getString("nombres"));
+
+				this.setDni(rs.getString("dni"));
+
+				Date ff = rs.getDate("fecha_fallecimiento");
+
+				java.text.SimpleDateFormat sdf =
+
+						new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+				String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+				this.setFecha_fallec(currentTime);
+
+				this.setDireccion_familiar(rs.getString("direccion"));
+
+				this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+				this.setTelefono(rs.getString("telefono_familiar"));
+
+				this.setEmail(rs.getString("email_familiar"));
+
+				this.setEmail(rs.getString("cocheria"));
+
+
+			}
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+
+		}
+
+
+
+		return this;
+
+	}
+
+	public Clientes BuscarPalmerasaA(String nicho_a, String fila_a) {
+		
+		try {
+		  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+		  String username = "u147800277_ben";
+		  String password = "Tiburones";
+		 
+		  Connection connection = DriverManager.getConnection(url, username, password);
+		  
+		  java.sql.Statement statement = connection.createStatement();
+
+		  ResultSet rs = statement.executeQuery(" CALL  buscarPalmerasAporUbi( '"+nicho_a+"'  ,  '"+fila_a+"')");
+
+		  while (rs.next()) {
+
+
+				this.setApellidos(rs.getString("apellido"));
+
+				this.setNombres(rs.getString("nombres"));
+
+				this.setDni(rs.getString("dni"));
+
+				Date ff = rs.getDate("fecha_fallecimiento");
+
+				java.text.SimpleDateFormat sdf =
+
+						new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+				String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+				this.setFecha_fallec(currentTime);
+
+				this.setDireccion_familiar(rs.getString("direccion"));
+
+				this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+				this.setTelefono(rs.getString("telefono_familiar"));
+
+				this.setEmail(rs.getString("email_familiar"));
+
+				this.setEmail(rs.getString("cocheria"));
+
+
+			}
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+
+		}
+
+
+
+		return this;
+
+	}
+
+	public Clientes buscarClienteenPalmerasCenizas(String nicho_ce, String fila_ce) {
+		try {
+			  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+			  String username = "u147800277_ben";
+			  String password = "Tiburones";
+			 
+			  Connection connection = DriverManager.getConnection(url, username, password);
+			  
+			  java.sql.Statement statement = connection.createStatement();
+
+			  ResultSet rs = statement.executeQuery(" CALL  buscarPalmerasCporUbi( '"+nicho_ce+"'  ,  '"+fila_ce+"')");
+
+			  while (rs.next()) {
+
+
+					this.setApellidos(rs.getString("apellido"));
+
+					this.setNombres(rs.getString("nombres"));
+
+					this.setDni(rs.getString("dni"));
+
+					Date ff = rs.getDate("fecha_fallecimiento");
+
+					java.text.SimpleDateFormat sdf =
+
+							new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+					String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+					this.setFecha_fallec(currentTime);
+
+					this.setDireccion_familiar(rs.getString("direccion"));
+
+					this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+					this.setTelefono(rs.getString("telefono_familiar"));
+
+					this.setEmail(rs.getString("email_familiar"));
+
+					this.setEmail(rs.getString("cocheria"));
+
+
+				}
+
+				rs.close();
+
+				statement.close();
+
+				connection.close();
+
+			} catch (SQLException ex) {
+
+				System.out.println(ex);
+
+			}
+
+
+
+			return this;
+	}
+
+	public Clientes buscarPalmerasRo(String nicho_ro, String fila_ro) {
+		try {
+			  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+			  String username = "u147800277_ben";
+			  String password = "Tiburones";
+			 
+			  Connection connection = DriverManager.getConnection(url, username, password);
+			  
+			  java.sql.Statement statement = connection.createStatement();
+
+			  ResultSet rs = statement.executeQuery(" CALL  buscarPalmerasRoporUbi( '"+nicho_ro+"'  ,  '"+fila_ro+"')");
+
+			  while (rs.next()) {
+
+
+					this.setApellidos(rs.getString("apellido"));
+
+					this.setNombres(rs.getString("nombres"));
+
+					this.setDni(rs.getString("dni"));
+
+					Date ff = rs.getDate("fecha_fallecimiento");
+
+					java.text.SimpleDateFormat sdf =
+
+							new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+					String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+					this.setFecha_fallec(currentTime);
+
+					this.setDireccion_familiar(rs.getString("direccion"));
+
+					this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+					this.setTelefono(rs.getString("telefono_familiar"));
+
+					this.setEmail(rs.getString("email_familiar"));
+
+					this.setEmail(rs.getString("cocheria"));
+
+
+				}
+
+				rs.close();
+
+				statement.close();
+
+				connection.close();
+
+			} catch (SQLException ex) {
+
+				System.out.println(ex);
+
+			}
+
+
+
+			return this;
+	}
+
+	public Clientes buscarNicheraporUbi(String circ, String seccion, String macizo, String par, String fila,
+			String unidad) {
+		try {
+			  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+			  String username = "u147800277_ben";
+			  String password = "Tiburones";
+			 
+			  Connection connection = DriverManager.getConnection(url, username, password);
+			  
+			  java.sql.Statement statement = connection.createStatement();
+
+			  ResultSet rs = statement.executeQuery(" CALL  buscarNicheraporUbi( '" + circ + "','" + seccion + "','" + macizo + "','" + par + "','"  + fila + "','" + unidad + "')");
+
+			  while (rs.next()) {
+
+
+					this.setApellidos(rs.getString("apellido"));
+
+					this.setNombres(rs.getString("nombres"));
+
+					this.setDni(rs.getString("dni"));
+
+					Date ff = rs.getDate("fecha_fallecimiento");
+
+					java.text.SimpleDateFormat sdf =
+
+							new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+					String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+					this.setFecha_fallec(currentTime);
+
+					this.setDireccion_familiar(rs.getString("direccion"));
+
+					this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+					this.setTelefono(rs.getString("telefono_familiar"));
+
+					this.setEmail(rs.getString("email_familiar"));
+
+					this.setEmail(rs.getString("cocheria"));
+
+
+				}
+
+				rs.close();
+
+				statement.close();
+
+				connection.close();
+
+			} catch (SQLException ex) {
+
+				System.out.println(ex);
+
+			}
+
+
+
+			return this;
+		
+	}
+
+	public Clientes buscarCenizarioporUbi(String mueble, String nicho) {
+		try {
+			  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+			  String username = "u147800277_ben";
+			  String password = "Tiburones";
+			 
+			  Connection connection = DriverManager.getConnection(url, username, password);
+			  
+			  java.sql.Statement statement = connection.createStatement();
+
+			  ResultSet rs = statement.executeQuery(" CALL  buscarCenizarioporUbi( '" + mueble +"','" + nicho + "')");
+
+			  while (rs.next()) {
+
+
+					this.setApellidos(rs.getString("apellido"));
+
+					this.setNombres(rs.getString("nombres"));
+
+					this.setDni(rs.getString("dni"));
+
+					Date ff = rs.getDate("fecha_fallecimiento");
+
+					java.text.SimpleDateFormat sdf =
+
+							new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+					String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+					this.setFecha_fallec(currentTime);
+
+					this.setDireccion_familiar(rs.getString("direccion"));
+
+					this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+					this.setTelefono(rs.getString("telefono_familiar"));
+
+					this.setEmail(rs.getString("email_familiar"));
+
+					this.setEmail(rs.getString("cocheria"));
+
+
+				}
+
+				rs.close();
+
+				statement.close();
+
+				connection.close();
+
+			} catch (SQLException ex) {
+
+				System.out.println(ex);
+
+			}
+
+
+
+			return this;
+	}
+
+	public Clientes buscarBovedasporUbi(String circ_boveda, String seccion_boveda, String macizo_boveda,
+			String parcela_boveda, String bis_boveda, String unidad_boveda) {
+		try {
+			  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+			  String username = "u147800277_ben";
+			  String password = "Tiburones";
+			 
+			  Connection connection = DriverManager.getConnection(url, username, password);
+			  
+			  java.sql.Statement statement = connection.createStatement();
+
+			  ResultSet rs = statement.executeQuery(" CALL  buscarBovedaporUbi( '" + circ_boveda + "','" + seccion_boveda + "','" + macizo_boveda + "','" + parcela_boveda + "','" + bis_boveda + "','" + unidad_boveda + "')");
+
+			  while (rs.next()) {
+
+
+					this.setApellidos(rs.getString("apellido"));
+
+					this.setNombres(rs.getString("nombres"));
+
+					this.setDni(rs.getString("dni"));
+
+					Date ff = rs.getDate("fecha_fallecimiento");
+
+					java.text.SimpleDateFormat sdf =
+
+							new java.text.SimpleDateFormat("yyyy-MM-dd");
+
+					String currentTime = ff.getYear() + "-" + ff.getMonth() + "-" + ff.getDate();// sdf.format(date);
+
+					this.setFecha_fallec(currentTime);
+
+					this.setDireccion_familiar(rs.getString("direccion"));
+
+					this.setNombre_familiar(rs.getString("nombre_familiar"));
+
+					this.setTelefono(rs.getString("telefono_familiar"));
+
+					this.setEmail(rs.getString("email_familiar"));
+
+					this.setEmail(rs.getString("cocheria"));
+
+
+				}
+
+				rs.close();
+
+				statement.close();
+
+				connection.close();
+
+			} catch (SQLException ex) {
+
+				System.out.println(ex);
+
+			}
+
+
+
+			return this;
+	}
+}
 	/*public String buscarUbicacionporDni(String dni) {
 
 		String cadena = "";
@@ -1211,4 +1787,3 @@ public class Clientes {
 */
 	
 
-}

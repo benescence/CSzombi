@@ -386,12 +386,13 @@ try {
             
             ResultSet rs = statement.executeQuery("call busquedaUbicacionNewporDNI("+dni+")");
             while (rs.next() ) {
-            	
-            	
+            	System.out.println(rs.getInt(1));
+            	rs.getInt(1);
+           
            	 		ubicaciones aux = new ubicaciones();
-           	 	   System.out.println( rs.getString(0));
+           	 	  
            	 	   
-           	 	   cadena = rs.getString(0);
+           	 	   //cadena = rs.getInt(1);
            	 	System.out.println( cadena);
            	 		/*aux.setUnidad_boveda("boveda : "+rs.getString("unidad_boveda"));  
            	 	    aux.setMueble_cenizas(rs.getString("mueble_cenizas")); 

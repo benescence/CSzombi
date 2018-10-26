@@ -722,8 +722,8 @@ public class Alta_clientes extends JInternalFrame {
 					String seccion_boveda = txt_dato2.getText();	
 					String macizo_boveda = txt_dato3.getText();	
 					String parcela_boveda = txt_dato4.getText();	
-					String bis_boveda = txt_dato5.getText();	
-					String unidad_boveda = txt_dato6.getText();	
+					String bis_boveda = txt_dato6.getText();	//bis, cambiar
+					String unidad_boveda = txt_dato5.getText();	
 					
 					
 					boolean ok4 = boveda.verificarBovedas(Circ_boveda, seccion_boveda, macizo_boveda, parcela_boveda, bis_boveda, unidad_boveda);

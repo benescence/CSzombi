@@ -127,7 +127,7 @@ public class Consulta_cliente extends JInternalFrame {
 				Clientes clientes = new Clientes();
 			    clientes = cargar_cliente_buscar();
 			    
-			    if (!txt_apellido.getText().equals(null) && !txt_nombre.getText().equals(null)){
+			    if (!txt_apellido.getText().equals(null) && !txt_nombre.getText().equals(null) || !txt_dni.getText().equals(null)|| !txt_telefono.getText().equals(null)){
 				ArrayList<Clientes> clientes_row =  new ArrayList<Clientes>();
 				clientes_row = clientes.buscarCliente();
 				
