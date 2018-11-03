@@ -98,7 +98,7 @@ public class Resultados_clientes extends JDialog {
 		table.setValueAt(clientes_row.get(i).getDni(), i, 2);
 		table.setValueAt(clientes_row.get(i).getDomicilio(),i, 3);
 		table.setValueAt(clientes_row.get(i).getFecha_fallec(),i, 4);
-		table.setValueAt(clientes_row.get(i).getDireccion_familiar(), i, 5);
+		table.setValueAt(clientes_row.get(i).getDni_ocupante(), i, 5);
 		table.setValueAt(clientes_row.get(i).getTelefono(), i, 6);
 		table.setValueAt(clientes_row.get(i).getEmail(), i, 7);
 		table.setValueAt(clientes_row.get(i).getCocheria(), i, 8);

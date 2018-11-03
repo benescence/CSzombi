@@ -13,6 +13,7 @@ import java.awt.SystemColor;
 import java.util.ArrayList;
 import java.util.Calendar;
 import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 import logica.Clientes;
 
@@ -21,6 +22,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
@@ -30,11 +33,8 @@ public class Consulta_cliente extends JInternalFrame {
 	private JTextField txt_nombre;
 	private JTextField txt_dni;
 	private JTextField txt_domicilio;
-	private JTextField txt_domfamiliar;
-	private JTextField txt_email;
-	private JTextField txt_cocheria;
 	private JTextField txt_telefono;
-
+	private JDateChooser date;
 	/**
 	 * Launch the application.
 	 */
@@ -58,18 +58,25 @@ public class Consulta_cliente extends JInternalFrame {
 		
 		setMaximizable(true);
 		
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	
+		
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setBorder(null);
 		setBounds(0, 0, 900, 600);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Apellido");
-		lblNewLabel.setBounds(36, 24, 132, 14);
+		lblNewLabel.setBounds(54, 24, 132, 14);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblContrasea = new JLabel("DNI");
-		lblContrasea.setBounds(36, 82, 132, 14);
+		lblContrasea.setBounds(54, 82, 132, 14);
 		getContentPane().add(lblContrasea);
+		
+		date= new JDateChooser();
+		date.setBounds(203,171, 96, 23);
+		getContentPane().add(date);
 		
 		txt_apellido = new JTextField();
 		txt_apellido.setBounds(178, 21, 203, 20);
@@ -94,31 +101,10 @@ public class Consulta_cliente extends JInternalFrame {
 		txt_domicilio.setBounds(178, 107, 203, 20);
 		getContentPane().add(txt_domicilio);
 		
-		txt_domfamiliar = new JTextField();
-		txt_domfamiliar.setColumns(10);
-		txt_domfamiliar.setBounds(178, 135, 203, 20);
-		getContentPane().add(txt_domfamiliar);
-		
-		txt_email = new JTextField();
-		txt_email.setColumns(10);
-		txt_email.setBounds(178, 165, 203, 20);
-		getContentPane().add(txt_email);
-		
 		txt_telefono = new JTextField();
 		txt_telefono.setColumns(10);
-		txt_telefono.setBounds(178, 196, 203, 20);
+		txt_telefono.setBounds(178, 138, 203, 20);
 		getContentPane().add(txt_telefono);
-		
-		JLabel lblNivelDePermisos = new JLabel("Tipo de fallecimiento");
-		lblNivelDePermisos.setBounds(391, 24, 132, 14);
-		getContentPane().add(lblNivelDePermisos);
-		
-		JComboBox<String> cmb_tipo_fall = new JComboBox<String>();
-		cmb_tipo_fall.setBounds(515, 21, 165, 20);
-		cmb_tipo_fall.insertItemAt("Traumatico", 0);
-		cmb_tipo_fall.insertItemAt("No traumatico", 1);
-		
-		getContentPane().add(cmb_tipo_fall);
 		
 		JButton btn_buscar = new JButton("Buscar");
 		btn_buscar.addActionListener(new ActionListener() {
@@ -126,8 +112,13 @@ public class Consulta_cliente extends JInternalFrame {
 				
 				Clientes clientes = new Clientes();
 			    clientes = cargar_cliente_buscar();
+			    if (date.getDate() != null) {
+			    	String fecha_fallecimiento = df.format(date.getDate());
+			    }
+			    else {}
+			    	String fecha_fallecimiento="";
 			    
-			    if (!txt_apellido.getText().equals(null) && !txt_nombre.getText().equals(null) || !txt_dni.getText().equals(null)|| !txt_telefono.getText().equals(null)){
+			    if (!txt_apellido.getText().equals(null) &&  !txt_nombre.getText().equals(null) && !txt_dni.getText().equals(null) && !fecha_fallecimiento.equals(null) & !txt_telefono.getText().equals(null) && !txt_domicilio.getText().equals(null)){
 				ArrayList<Clientes> clientes_row =  new ArrayList<Clientes>();
 				clientes_row = clientes.buscarCliente();
 				
@@ -170,66 +161,59 @@ public class Consulta_cliente extends JInternalFrame {
 		btn_buscar.setBounds(407, 168, 119, 33);
 		getContentPane().add(btn_buscar);
 		
-		JLabel lblDomicilio = new JLabel("Domicilio");
-		lblDomicilio.setBounds(36, 110, 132, 14);
-		getContentPane().add(lblDomicilio);
-		
-		JLabel lblDomicilioFamiliar = new JLabel("Domicilio Familiar");
-		lblDomicilioFamiliar.setBounds(36, 138, 132, 14);
+		JLabel lblDomicilioFamiliar = new JLabel("dni ocupante");
+		lblDomicilioFamiliar.setBounds(54, 110, 132, 14);
 		getContentPane().add(lblDomicilioFamiliar);
 		
-		JLabel lblEmailFamiliar = new JLabel("E-mail familiar");
-		lblEmailFamiliar.setBounds(36, 168, 132, 14);
-		getContentPane().add(lblEmailFamiliar);
 		
-		JLabel lblCocheria = new JLabel("Cocheria");
-		lblCocheria.setBounds(393, 52, 76, 14);
-		getContentPane().add(lblCocheria);
-		
-		txt_cocheria = new JTextField();
-		txt_cocheria.setColumns(10);
-		txt_cocheria.setBounds(479, 49, 203, 20);
-		getContentPane().add(txt_cocheria);
-		
-		JLabel lblFechaFallecimiento = new JLabel("Fecha Fallecimiento");
-		lblFechaFallecimiento.setBounds(36, 233, 132, 14);
-		getContentPane().add(lblFechaFallecimiento);
 		setTitle("Consulta Clientes");
+		
+		/*JLabel lblFechaFallecimiento = new JLabel("Fecha Fallecimiento");
+		lblFechaFallecimiento.setBounds(54, 233, 111, 14);
+		getContentPane().add(lblFechaFallecimiento);
+		
 		Calendar cal = Calendar.getInstance();
 		java.util.Date date=new java.util.Date();
 		cal.setTime(date);
 		JCalendar jc = new JCalendar();
 		jc.setCalendar(cal);
 		jc.setBounds(178,233,200,130);
-		getContentPane().add(jc);
+		getContentPane().add(jc);*/
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(36, 52, 132, 14);
+		lblNombre.setBounds(54, 49, 132, 14);
 		getContentPane().add(lblNombre);
 		
 		JLabel lblTelefonoFamilliar = new JLabel("Telefono familliar");
-		lblTelefonoFamilliar.setBounds(36, 199, 132, 14);
+		lblTelefonoFamilliar.setBounds(54, 138, 132, 14);
 		getContentPane().add(lblTelefonoFamilliar);
 		
 		JButton btnLimpiarCampos = new JButton("Borrar Campos");
 		btnLimpiarCampos.setBounds(536, 168, 141, 33);
 		getContentPane().add(btnLimpiarCampos);
-		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txt_apellido, txt_nombre, txt_dni, txt_domicilio, txt_domfamiliar, txt_email, txt_telefono, cmb_tipo_fall, txt_cocheria, btn_buscar, btnLimpiarCampos}));
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txt_apellido, txt_nombre, txt_dni, txt_domicilio, txt_domfamiliar, txt_email, txt_telefono, cmb_tipo_fall, txt_cocheria}));
+		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txt_apellido, txt_nombre, txt_dni, txt_domicilio, txt_telefono, btn_buscar, btnLimpiarCampos}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txt_apellido, txt_nombre, txt_dni, txt_domicilio, txt_telefono}));
 		
 	}
 	private Clientes cargar_cliente_buscar() {
 				
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		
 		Clientes cli = new Clientes();
 		cli.setApellidos(txt_apellido.getText());
 		cli.setNombres(txt_nombre.getText());
 		cli.setDni(txt_dni.getText());
 		cli.setDomicilio(txt_domicilio.getText());
-		cli.setDireccion_familiar(txt_domfamiliar.getText());
-		cli.setEmail(txt_email.getText());
-		cli.setCocheria(txt_cocheria.getText());
 		cli.setTelefono(txt_telefono.getText());
+		if(date.getDate() !=null) {
+			cli.setFecha_fallec(df.format(date.getDate()));
+		}
 		
+		//String a = df.format(date.getDate());
+		System.out.println(date.getDate());
+		
+		
+		//System.out.println(a + "fechaaa");
 		return cli;
 		
 	}
@@ -267,7 +251,7 @@ public class Consulta_cliente extends JInternalFrame {
 
 					aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-					aux.setDireccion_familiar(rs.getString("direccion"));
+					aux.setDni_ocupante(rs.getString("direccion"));
 
 					aux.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -325,7 +309,7 @@ public class Consulta_cliente extends JInternalFrame {
 
 					aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-					aux.setDireccion_familiar(rs.getString("direccion"));
+					aux.setDni_ocupante(rs.getString("direccion"));
 
 					aux.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -384,7 +368,7 @@ public class Consulta_cliente extends JInternalFrame {
 
 					aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-					aux.setDireccion_familiar(rs.getString("direccion"));
+					aux.setDni_ocupante(rs.getString("direccion"));
 
 					aux.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -443,7 +427,7 @@ public class Consulta_cliente extends JInternalFrame {
 
 					aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-					aux.setDireccion_familiar(rs.getString("direccion"));
+					aux.setDni_ocupante(rs.getString("direccion"));
 
 					aux.setNombre_familiar(rs.getString("nombre_familiar"));
 

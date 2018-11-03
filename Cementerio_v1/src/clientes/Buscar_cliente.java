@@ -33,40 +33,30 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 	Clientes clientes = new Clientes();
 	Clientes result = new Clientes();
 	private JScrollPane scrollPane;
-	
+	boolean ok=true;
 	private Alta_clientes father;
 	private JTextField txt_dni;
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			buscar_cliente dialog = new buscar_cliente();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * Create the dialog.
-	 */
 	
-	 Buscar_cliente(Alta_clientes father ){
+
+	 /*Buscar_cliente(Alta_clientes father ){
 		 this.father = father;
-	 }
+	 }*/
+
 	/**
 	 * @wbp.parser.constructor
 	 */
 	public Buscar_cliente( Alta_clientes father, boolean modal) {
+		
+		
+		modal=ok;
 		
 		setBounds(100, 100, 641, 433);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		JButton okButton = new JButton("OK");
+		okButton.setVisible(false);
 		{
 			txt_apellido = new JTextField();
 			txt_apellido.setBounds(87, 24, 190, 20);
@@ -98,6 +88,7 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 					row = table.getSelectedRow();
 					System.out.println(row);
 					
+					
 					result.setApellidos(clientes_row.get(row).getApellidos());
 					result.setNombres(clientes_row.get(row).getNombres());
 					result.setDni(clientes_row.get(row).getDni());
@@ -109,6 +100,8 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 				}
 			});
 			contentPanel.add(table);
+			
+			
 			
 			scrollPane = new JScrollPane(table);
 			scrollPane.setBounds(10, 125, 605, 208);
@@ -124,16 +117,18 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 				    
 				    if (!txt_apellido.getText().equals("") && !txt_nombres.getText().equals("") && !txt_dni.getText().equals("")){
 				    	clientes_row =  new ArrayList<Clientes>();
-				    	clientes_row = clientes.buscarCliente();
+				    	clientes_row.addAll(clientes.buscarCliente());
+				    	System.out.println(clientes_row.size()+ "tamaño lista");
 				    	
 				    	if (clientes_row.size()!=0 ){
-
+				    		okButton.setVisible(true);
 							 DefaultTableModel modelo = new DefaultTableModel();
+							 
 							 modelo =  (new DefaultTableModel(
 									 null, new String [] {
 											 "Apellido", "Nombre",
-											 "DNI",  "Domicilio", "Fecha", 
-											 "Domiclio Familiar", "Telefono", 
+											 "DNI",  "dni ocupante", "Fecha", 
+											 "domicilio", "Telefono", 
 											 "Email","Cocheria"}){
 											 Class[] types = new Class [] {
 											 java.lang.String.class,
@@ -155,9 +150,9 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 							table.setValueAt(clientes_row.get(i).getApellidos(), i, 0);
 							table.setValueAt(clientes_row.get(i).getNombres(), i, 1);
 							table.setValueAt(clientes_row.get(i).getDni(), i, 2);
-							table.setValueAt(clientes_row.get(i).getDomicilio(),i, 3);
+							table.setValueAt(clientes_row.get(i).getDni_ocupante(),i, 3);
 							table.setValueAt(clientes_row.get(i).getFecha_fallec(),i, 4);
-							table.setValueAt(clientes_row.get(i).getDireccion_familiar(), i, 5);
+							table.setValueAt(clientes_row.get(i).getDomicilio(), i, 5);
 							table.setValueAt(clientes_row.get(i).getTelefono(), i, 6);
 							table.setValueAt(clientes_row.get(i).getEmail(), i, 7);
 							table.setValueAt(clientes_row.get(i).getCocheria(), i, 8);
@@ -170,7 +165,7 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 								   null,
 								   "No hay criterio de busquedas");
 				    }
-				    System.out.println("encontro "+clientes_row.get(0).getNombres());
+				    System.out.println("encontro "+clientes_row.get(0).getDni_ocupante());
 				}
 			});
 			contentPanel.add(btnNewButton);
@@ -184,8 +179,8 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 		txt_dni.setColumns(10);
 		contentPanel.add(txt_dni);
 		
-		JLabel lblDni = new JLabel("DNI");
-		lblDni.setBounds(10, 87, 46, 14);
+		JLabel lblDni = new JLabel("DNI cliente");
+		lblDni.setBounds(10, 87, 67, 14);
 		contentPanel.add(lblDni);
 		
 		
@@ -194,11 +189,26 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						dispose();
+						
+					}
+				});
+				
+				
+				//JButton okButton = new JButton("OK");
+				//okButton.setVisible(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						row = table.getSelectedRow();
 						if (row != -1){
+							
+							System.out.println("llego aca");
 						result.setApellidos(clientes_row.get(row).getApellidos());
 						result.setNombres(clientes_row.get(row).getNombres());
 						result.setDni(clientes_row.get(row).getDni());
@@ -206,9 +216,11 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 						result.setNombre_familiar(clientes_row.get(row).getNombre_familiar());
 						result.setEmail(clientes_row.get(row).getEmail());
 						result.setTelefono(clientes_row.get(row).getTelefono());
+						result.setDni_ocupante(clientes_row.get(row).getDni_ocupante());
 						father.setClient(result);
 						
 						setVisible(false);
+						table.repaint();
 						dispose();
 						}else{
 							JOptionPane.showMessageDialog(
@@ -223,13 +235,18 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				/*JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				buttonPane.add(cancelButton);*/
 			}
 		}
-	}
+	
 		
+	
+
+		}
+
+
 		public Clientes cargarClientes(String nombre, String apellido, String dni,String tel){
 			Clientes clientes = new Clientes();
 			clientes.setApellidos(apellido);
@@ -237,6 +254,7 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 			clientes.setDni(dni);
 			clientes.setTelefono(tel);
 			return clientes;
+			
 		}
 		
 		public void showCliente(){
@@ -252,7 +270,7 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			
 			row = table.getSelectedRow();
 			
 			result.setApellidos(clientes_row.get(row).getApellidos());
@@ -274,7 +292,7 @@ public class Buscar_cliente extends JDialog implements ActionListener {
 			cli.setNombres(txt_nombres.getText());
 			cli.setDni(txt_dni.getText());
 			cli.setTelefono("");
-			cli.setDireccion_familiar("");
+			cli.setDni_ocupante("");
 			cli.setDomicilio("");
 			cli.setCocheria("");
 			cli.setTelefono("");

@@ -39,17 +39,20 @@ public class Clientes {
 
 	String nombre_familiar;
 
-	String fecha_fallec;
+	String fecha_fallecimiento;
 
 	int tipo_fallec;
 
 	String cocheria;
 
-	String direccion_familiar;
+	String dni_ocupante;
 
 	int ubicacion;
 
 	int id_cuenta;
+
+	
+	
 
 	public Clientes() {
 
@@ -57,13 +60,12 @@ public class Clientes {
 
 		this.nombres = null;
 
-		// fecha_fallec= (Date) new java.util.Date();
-
+		 this.fecha_fallecimiento ="0000/00/00";
 		this.dni = null;
 
 		this.domicilio = null;
 
-		direccion_familiar = "";
+		dni_ocupante = "";
 
 		cocheria = null;
 		this.telefono=null;
@@ -92,15 +94,15 @@ public class Clientes {
 
 	}
 
-	public String getDireccion_familiar() {
+	public String getDni_ocupante() {
 
-		return direccion_familiar;
+		return dni_ocupante;
 
 	}
 
-	public void setDireccion_familiar(String direccion_familiar) {
+	public void setDni_ocupante(String dni_ocupante) {
 
-		this.direccion_familiar = direccion_familiar;
+		this.dni_ocupante = dni_ocupante;
 
 	}
 
@@ -191,13 +193,13 @@ public class Clientes {
 
 	public String getFecha_fallec() {
 
-		return fecha_fallec;
+		return fecha_fallecimiento;
 
 	}
 
 	public void setFecha_fallec(String date) {
 
-		this.fecha_fallec = date;
+		this.fecha_fallecimiento = date;
 
 	}
 
@@ -238,7 +240,7 @@ public class Clientes {
 	}
 
 	public void altaCliente() {
-
+      String query="";
 		try {
 
 			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
@@ -252,12 +254,14 @@ public class Clientes {
 			java.sql.Statement statement = connection.createStatement();
 
 			setUbicacion(ubicar());
-
-			ResultSet rs = statement.executeQuery("CALL AltaCliente ('" + this.getApellidos() + "','"
+			query="CALL AltaCliente ('" + this.getApellidos() + "','"
 					+ this.getNombres() + "','" + this.getFecha_fallec() + "','" + this.getDni() + "','"
 					+ this.getDomicilio() + "','" + this.getNombre_familiar() + "','" + this.getTelefono() + "','"
 					+ this.getCocheria() + "','" + this.getTipo_fallec() + "','" + this.getEmail() + "','"
-					+ this.getDireccion_familiar() + "')");
+					+ this.getDni_ocupante() + "')";
+			query= query.replaceAll("''", "null");
+			
+			ResultSet rs = statement.executeQuery(query);
 
 			rs.close();
 
@@ -318,7 +322,44 @@ public class Clientes {
 		return var;
 
 	}
+	public void modificarCliente() {
+		try {
 
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+
+			setUbicacion(ubicar());
+
+			ResultSet rs = statement.executeQuery("CALL ModifCliente ('" + this.getApellidos() + "','"
+					+ this.getNombres() + "','" + this.getFecha_fallec() + "','" + this.getDni() + "','"
+					+ this.getDomicilio() + "','" + this.getNombre_familiar() + "','" + this.getTelefono() + "','"
+					+ this.getCocheria() + "','" + this.getTipo_fallec() + "','" + this.getEmail()  + "')");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+			JOptionPane.showMessageDialog(
+					   null,
+					   "Se ha Modificado con exito");
+
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+
+		}
+
+	}
+
+	
 	public boolean verificarIndigentes(String seccion, String macizo, String sepultura, String inhumacion) {
 
 		
@@ -334,15 +375,23 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewIndigentes ('" +seccion+ "','"+macizo+"', '"+sepultura+"','"+inhumacion+"')");
+			ResultSet rs = statement.executeQuery(" call verificarNewIndigentes ('" +seccion+ "','"+macizo+"', '"+sepultura+"','"+inhumacion+"')");
 
 
-			if (rs.next()) {
+			while (rs.next()) {
+				
+				
+				String sep= rs.getString("sepultura");
+				String mac= rs.getString("macizo");
+				String inu= rs.getString("inhumacion");
+				String sec= rs.getString("seccion");
+				
+				if(sep.equals(sepultura) && mac.equals(macizo) && inu.equals(inhumacion) && sec.equals(seccion) ) {
+					
+					return true;
 
-				//var = rs.getInt(1);
-				return true;
+				}
 			}
-			
 			rs.close();
 
 			statement.close();
@@ -373,13 +422,24 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewSepultura ('" + seccion + "','" + macizo + "','" + bismacizo +"','" + unidad + "','" + numero + "', '"+ bis +"')");
+			ResultSet rs = statement.executeQuery("call verificarNewSepultura ('" + seccion + "','" + macizo + "','" + bismacizo +"','" + unidad + "','" + numero + "', '"+ bis +"')");
 
 
-			if (rs.next()) {
+			while (rs.next()) {
+				
+				
+				String sec= rs.getString("seccion");
+				String mac= rs.getString("macizo");
+				String bisa= rs.getString("bis");
+				String bism= rs.getString("bis_macizo");
+				String uni= rs.getString("unidad");
+				String num= rs.getString("numero");
+				
+				if(sec.equals(seccion) && mac.equals(macizo) && uni.equals(unidad) && bisa.equals(bis) && num.equals(numero) && bism.equals(bismacizo)) {
+					
+					return true;
 
-				//var = rs.getInt(1);
-				return true;
+				}
 			}
 			
 			rs.close();
@@ -414,14 +474,26 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewBoveda ('" + Circ + "','" + seccion + "','" + macizo + "','" + par + "','" + bis + "','" + unidad + "')");
+			ResultSet rs = statement.executeQuery(" call verificarNewBoveda ('" + Circ + "','" + seccion + "','" + macizo + "','" + par + "','" + bis + "','" + unidad + "')");
 
 
-			if (rs.next()) {
+			while (rs.next()) {
+				
+				
+				String sec= rs.getString("seccion");
+				String mac= rs.getString("macizo");
+				String bisa= rs.getString("bis");
+				String circ= rs.getString("Circ");
+				String uni= rs.getString("unidad");
+				String parc= rs.getString("parcela");
+				
+				if(sec.equals(seccion) && mac.equals(macizo) && uni.equals(unidad) && bisa.equals(bis) && parc.equals(par) && circ.equals(Circ)) {
+					
+					return true;
 
-				//var = rs.getInt(1);
-				return true;
+				}
 			}
+			
 			
 			rs.close();
 
@@ -454,14 +526,22 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewCenizario ('" + mueble_cenizas + "', '" + nicho_cenizas + "');");
+			ResultSet rs = statement.executeQuery(" call verificarNewCenizario ('" + mueble_cenizas + "', '" + nicho_cenizas + "');");
 
+				while (rs.next()) {
+				
+				
+				
+				String mue= rs.getString("mueble");
+				String nich= rs.getString("nicho");
+				
+				if(mue.equals(mueble_cenizas) && nich.equals(nicho_cenizas)) {
+					
+					return true;
 
-			if (rs.next()) {
-
-				//var = rs.getInt(1);
-				return true;
+				}
 			}
+			
 			
 			rs.close();
 
@@ -494,13 +574,24 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewNichera ('" + Circ + "','" + seccion + "','" + macizo + "','" + par + "','"  + fila + "','" + unidad + "')");
+			ResultSet rs = statement.executeQuery(" call verificarNewNichera ('" + Circ + "','" + seccion + "','" + macizo + "','" + par + "','"  + fila + "','" + unidad + "')");
 
 
-			if (rs.next()) {
+			while (rs.next()) {
+				
+				
+				String sec= rs.getString("seccion");
+				String mac= rs.getString("macizo");
+				String circ= rs.getString("Circ");
+				String uni= rs.getString("unidad");
+				String parc= rs.getString("parcela");
+				String fil= rs.getString("fila");
+				
+				if(sec.equals(seccion) && mac.equals(macizo) && uni.equals(unidad) && fil.equals(fila) && parc.equals(par) && circ.equals(Circ)) {
+					
+					return true;
 
-				//var = rs.getInt(1);
-				return true;
+				}
 			}
 			
 			rs.close();
@@ -535,15 +626,22 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewPalmerasSep ('" + sepulturaS + "');");
+			ResultSet rs = statement.executeQuery(" call verificarPalmerasS('" + sepulturaS + "');");
 
 
-			if (rs.next()) {
-
-				//var = rs.getInt(1);
-				return true;
-			}
+			while (rs.next()) {
+				
 			
+				String sep= rs.getString("sepultura");
+				System.out.println(sepulturaS + sep+ "mismo?");
+				if(sepulturaS.equals(sep)) {
+					System.out.println(sepulturaS + sep+ "si msmo ");
+					return true;
+
+				}
+					
+
+			}
 			rs.close();
 
 			statement.close();
@@ -555,6 +653,7 @@ public class Clientes {
 			System.out.println(ex);
 			
 		}
+		System.out.println(sepulturaS + "no msmo ");
 		return false;
 		
 	}
@@ -573,15 +672,23 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewPalmerasRo ('" + nicho_ro + "', '" + fila_ro + "');");
+			ResultSet rs = statement.executeQuery(" call verificarNewPalmerasRo ('" + nicho_ro + "', '" + fila_ro + "');");
 
 
-			if (rs.next()) {
+			while (rs.next()) {
+				
 
-				//var = rs.getInt(1);
-				return true;
+				String fil= rs.getString("fila");
+				String nich= rs.getString("nicho");
+				
+				if(fil.equals(fila_ro) && nich.equals(nicho_ro)) {
+					
+					return true;
+
+				}
+					
+
 			}
-			
 			rs.close();
 
 			statement.close();
@@ -628,7 +735,34 @@ public class Clientes {
 		}
 
 	}
+	public void insertarPalmerasCeRE(String dni2, String nicho_ce, String fila_ce) {
+		try {
 
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+
+			ResultSet rs = statement.executeQuery(" call insertarNewPalmerasCRE('" + dni2 + "','" + nicho_ce + "','" + fila_ce + "')");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+		
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+		
+		}
+		
+	}
 	public boolean verificarNewpalmerasA(String nicho_a, String fila_a) {
 
 		try {
@@ -643,15 +777,23 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewPalmerasA ('" + nicho_a + "', '" + fila_a + "');");
+			ResultSet rs = statement.executeQuery(" call verificarNewPalmerasA ('" + nicho_a + "', '" + fila_a + "');");
 
 
-			if (rs.next()) {
+			while (rs.next()) {
+				
 
-				//var = rs.getInt(1);
-				return true;
+				String fil= rs.getString("fila");
+				String nich= rs.getString("nicho");
+				
+				if(fil.equals(fila_a) && nich.equals(nicho_a)) {
+					
+					return true;
+
+				}
+					
+
 			}
-			
 			rs.close();
 
 			statement.close();
@@ -697,6 +839,36 @@ public class Clientes {
 		
 	}
 
+	public void insertarPalmerasARE(String dni2, String nicho_a, String fila_a) {
+		try {
+
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+
+			ResultSet rs = statement.executeQuery(" call insertarNewPalmerasARE('" + dni2 + "','" + nicho_a + "','" + fila_a + "')");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+			
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+			
+		}
+		
+	}
+
+	
 	public boolean VerificarPalmerasCe(String nicho_ce, String fila_ce) {
 
 		try {
@@ -711,13 +883,22 @@ public class Clientes {
 
 			java.sql.Statement statement = connection.createStatement();
 
-			ResultSet rs = statement.executeQuery(" select verificarNewPalmerasC ('" + nicho_ce + "', '" + fila_ce + "');");
+			ResultSet rs = statement.executeQuery(" call verificarNewPalmerasC ('" + nicho_ce + "', '" + fila_ce + "');");
 
 
-			if (rs.next()) {
+			while (rs.next()) {
+				
 
-				//var = rs.getInt(1);
-				return true;
+				String fil= rs.getString("fila");
+				String nich= rs.getString("nicho");
+				
+				if(fil.equals(fila_ce) && nich.equals(nicho_ce)) {
+					
+					return true;
+
+				}
+					
+
 			}
 			
 			rs.close();
@@ -765,7 +946,35 @@ public class Clientes {
 		}
 
 	}
+	public void insertarPalmerasRoRE(String dni2, String nicho_ro, String fila_ro) {
+		try {
 
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+
+			ResultSet rs = statement.executeQuery(" call insertarNewPalmerasRoRE('" + dni2 + "','" + nicho_ro + "','" + fila_ro + "')");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+			
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+			
+
+		}
+		
+	}
 	public boolean insertarPalmeras_S(String palmerasS) {
 
 
@@ -780,8 +989,8 @@ public class Clientes {
 			Connection connection = DriverManager.getConnection(url, username, password);
 
 			java.sql.Statement statement = connection.createStatement();
-
-			ResultSet rs = statement.executeQuery(" call insertarNewPalmerasSep('"  + palmerasS + "')");
+                  System.out.println(dni);
+			ResultSet rs = statement.executeQuery(" call insertarNewPalmerasSep('" + palmerasS + "')");
 
 			rs.close();
 
@@ -798,7 +1007,37 @@ public class Clientes {
 
 	}
 
-	public boolean insertarNichera(String Circ, String seccion, String macizo, String par, String fila, String unidad) {
+	public void insertarPalmeras_Srep(String dni2, String sepulturaS) {
+
+		try {
+
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+                  System.out.println(dni2);
+			ResultSet rs = statement.executeQuery(" call insertarPalmerasSepREP('" + dni2 + "','" + sepulturaS + "')");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+			
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+			
+
+		}
+	}
+	
+	public boolean insertarNichera(String dni,String Circ, String seccion, String macizo, String par, String fila, String unidad) {
 
 		
 		try {
@@ -831,6 +1070,34 @@ public class Clientes {
 	}
 		
 
+	public void insertarNicheraRE(String dni2, String circ, String seccion, String macizo, String parcela, String fila,
+			String unidad) {try {
+
+				String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+				String username = "u147800277_ben";
+
+				String password = "Tiburones";
+
+				Connection connection = DriverManager.getConnection(url, username, password);
+
+				java.sql.Statement statement = connection.createStatement();
+
+				ResultSet rs = statement.executeQuery(" call insertarNewNicheraRE ('" + dni2 + "','" + circ + "','" + seccion + "', '" + macizo + "', '" + parcela + "', '" + fila + "', '" + unidad + "');");
+
+				rs.close();
+
+				statement.close();
+
+				connection.close();
+				
+			} catch (SQLException ex) {
+
+				System.out.println(ex);
+			
+			}
+	}
+	
 	public boolean InsertarCenizario(String mueble, String nicho) {
 
 		try {
@@ -861,6 +1128,40 @@ public class Clientes {
 		}
 
 	}
+	
+	public void InsertarCenizarioRE(String dni3, String mueble, String nicho) {
+		try {
+
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+
+			ResultSet rs = statement.executeQuery(" call insertarNewCenizarioRE('" + dni3 + "','" + mueble + "','" + nicho + "')");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+			
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(
+					   null,
+					   "ya existe este dni para esta ubicacion ");
+
+			System.out.println(ex);
+			
+
+		}
+		
+	}
+	
 	public boolean insertarBovedas(String  Circ, String seccion, String macizo, String parcela, String bis, String unidad) {
 
 		try {
@@ -892,6 +1193,37 @@ public class Clientes {
 
 	}
 
+	public boolean insertarBovedasRE(String dni4, String  Circ, String seccion, String macizo, String parcela, String bis, String unidad) {
+
+		try {
+
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+
+			ResultSet rs = statement.executeQuery(" call insertarNewBovedaRE('" + dni4 + "','" + Circ + "', '" + seccion+ "', '" + macizo + "', '" + parcela + "', '" + bis + "', '" + unidad + "');");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+			return true;
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+			return false;
+
+		}
+
+	}
+	
 	public boolean  insertarSepultura(String seccion,String macizo,String bis_macizo,String unidad,String numero,String bis) {
 
 		try {
@@ -921,6 +1253,36 @@ public class Clientes {
 
 		}
 
+	}
+	public void insertarSepulturaREP(String dni2, String seccion, String macizo, String bismacizo, String unidad,
+			String numero, String bis) {
+		try {
+
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+
+			ResultSet rs = statement.executeQuery(" call insertarNewSepulturaREP('" + dni2 + "', '" + seccion + "', '" + macizo + "', '" + bismacizo + "', '" + unidad + "', '" + numero + "', '" + bis + "');");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+			
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+			
+
+		}
+		
 	}
 
 
@@ -956,7 +1318,37 @@ public class Clientes {
 
 	}
 
-		
+	public void insertarIndigentesREP(String dni,String seccion, String macizo, String sepultura, String inhumacion) {
+		// TODO Auto-generated method stub
+		try {
+
+			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+
+			String username = "u147800277_ben";
+
+			String password = "Tiburones";
+
+			Connection connection = DriverManager.getConnection(url, username, password);
+
+			java.sql.Statement statement = connection.createStatement();
+
+			ResultSet rs = statement.executeQuery(" call insertarNewIndigenteREP('"+ dni + "', '"  + seccion + "', '" + macizo + "', '" + sepultura + "', '" + inhumacion + "');");
+
+			rs.close();
+
+			statement.close();
+
+			connection.close();
+			
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+			
+
+		}
+
+	}
+	
 		
 
 	public ArrayList<Clientes> buscarCliente() {
@@ -980,68 +1372,17 @@ public class Clientes {
 			connection = DriverManager.getConnection(url, username, password);
 
 			statement = connection.createStatement();
-			//por todos los campos
-			/*if (!this.getApellidos().equals("") && !this.getNombres().equals("") &&
-					!this.getDni().equals("") &&  !this.getDireccion_familiar().equals("")
-						&& !this.getCocheria().equals("") && !this.getTelefono().equals(""))
-			{
-			query =	" CALL buscarClientes ('"+ this.getApellidos() + "', '"+ this.getNombres() + "' , '" + this.getDni() + "' , '"
-							+ this.getDireccion_familiar() + "', '" + this.getCocheria() + "', '"+this.getTelefono()+"')";
-			}
-			//por apellido
-			if (!this.getApellidos().equals("") && this.getNombres().equals("") &&
-					this.getDni().equals("") &&  this.getDireccion_familiar().equals("")
-						&& this.getCocheria().equals("") && this.getTelefono().equals(""))
-			{
-				System.out.println("apellido ="+this.getApellidos());
-			query =	" CALL buscarporApellidoNew ('"+ this.getApellidos() + "')";
-			}
-			//por nombre y apellido
-			if (!this.getApellidos().equals("") && !this.getNombres().equals("") &&
-					this.getDni().equals("") &&  this.getDireccion_familiar().equals("")
-						&& this.getCocheria().equals("") && this.getTelefono().equals(""))
-			{
-			//antes query =	" CALL buscarNewClientes('"+ this.getNombres() + "', '"+ this.getApellidos() + "')";
-				query =	" CALL buscarNewClientes('"+ this.getApellidos() +"' ,'"+ this.getNombres() + "',  '" + this.getDni() + "' , '"
-						+ this.getDireccion_familiar() + "', '"+this.getTelefono()+"')";
-		
-			}
-			//por DNI
-			if (this.getApellidos().equals("") && this.getNombres().equals("") &&
-					!this.getDni().equals("") &&  this.getDireccion_familiar().equals("")
-						&& this.getCocheria().equals("") && this.getTelefono().equals(""))
-			{
+
+			System.out.println(this.fecha_fallecimiento);
 			
-			
-			
-			query =	" CALL buscarporDNI ('"+ this.getDni() + "')";
-			
-			
-			}
-			//por cocheria
-			if (this.getApellidos().equals("") && !this.getNombres().equals("") &&
-					this.getDni().equals("") &&  this.getDireccion_familiar().equals("")
-						&& !this.getCocheria().equals("") && this.getTelefono().equals(""))
-			{
-			query =	" CALL buscarporCocheria ('"+ this.getCocheria() + "')";
-			}
-			
-//			System.out.println ("apellido"+this.getApellidos());
-//			System.out.println ("nombres"+this.getNombres());
-//			System.out.println ("dni" +this.getDni());
-//			System.out.println ("dire fam" +this.getDireccion_familiar());
- * */
- 
 			query =	" CALL buscarNewClientes('"+ this.apellidos +"' ,'"+ this.nombres + "',  '" + this.dni + "' , '"
-					+ this.direccion_familiar + "', '"+this.telefono+"')";
+					+ this.dni_ocupante + "', '"+this.telefono+"', '"+this.fecha_fallecimiento+"')";
 			query= query.replaceAll("''", "null");
 			rs = statement.executeQuery( query);
 			System.out.println(query);
 			while (rs.next()) {
 
-//				System.out.println("RS SIZE" + rs.getFetchSize());
 
-				// En el auxiliar cliente le seteo los datos.
 
 				Clientes aux = new Clientes();
 
@@ -1061,7 +1402,7 @@ public class Clientes {
 
 				aux.setFecha_fallec(currentTime);
 
-				aux.setDireccion_familiar(rs.getString("direccion"));
+				aux.setDni_ocupante(rs.getString("dni_ocupante"));
 
 				aux.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1085,14 +1426,6 @@ public class Clientes {
 		} catch (SQLException ex) {
 
 			System.out.println(ex);
-
-		}
-
-		for (int i = 0; i < client.size(); i++) {
-
-//			System.out.print("apellido" + client.get(i).getApellidos());
-
-//			System.out.println(" dni " + client.get(i).getDni());
 
 		}
 
@@ -1198,7 +1531,7 @@ public class Clientes {
 
 				this.setFecha_fallec(currentTime);
 
-				this.setDireccion_familiar(rs.getString("direccion"));
+				this.setDni_ocupante(rs.getString("direccion"));
 
 				this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1262,7 +1595,7 @@ public class Clientes {
 
 				this.setFecha_fallec(currentTime);
 
-				this.setDireccion_familiar(rs.getString("direccion"));
+				this.setDni_ocupante(rs.getString("direccion"));
 
 				this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1327,7 +1660,7 @@ public class Clientes {
 
 				this.setFecha_fallec(currentTime);
 
-				this.setDireccion_familiar(rs.getString("direccion"));
+				this.setDni_ocupante(rs.getString("direccion"));
 
 				this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1390,7 +1723,7 @@ public class Clientes {
 
 				this.setFecha_fallec(currentTime);
 
-				this.setDireccion_familiar(rs.getString("direccion"));
+				this.setDni_ocupante(rs.getString("direccion"));
 
 				this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1452,7 +1785,7 @@ public class Clientes {
 
 					this.setFecha_fallec(currentTime);
 
-					this.setDireccion_familiar(rs.getString("direccion"));
+					this.setDni_ocupante(rs.getString("direccion"));
 
 					this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1513,7 +1846,7 @@ public class Clientes {
 
 					this.setFecha_fallec(currentTime);
 
-					this.setDireccion_familiar(rs.getString("direccion"));
+					this.setDni_ocupante(rs.getString("direccion"));
 
 					this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1575,7 +1908,7 @@ public class Clientes {
 
 					this.setFecha_fallec(currentTime);
 
-					this.setDireccion_familiar(rs.getString("direccion"));
+					this.setDni_ocupante(rs.getString("direccion"));
 
 					this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1637,7 +1970,7 @@ public class Clientes {
 
 					this.setFecha_fallec(currentTime);
 
-					this.setDireccion_familiar(rs.getString("direccion"));
+					this.setDni_ocupante(rs.getString("direccion"));
 
 					this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1699,7 +2032,7 @@ public class Clientes {
 
 					this.setFecha_fallec(currentTime);
 
-					this.setDireccion_familiar(rs.getString("direccion"));
+					this.setDni_ocupante(rs.getString("direccion"));
 
 					this.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -1728,62 +2061,152 @@ public class Clientes {
 
 			return this;
 	}
-}
-	/*public String buscarUbicacionporDni(String dni) {
 
-		String cadena = "";
-
+	public boolean existeCliente(String dni) {
+		String query ="";
 		try {
+			  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+			  String username = "u147800277_ben";
+			  String password = "Tiburones";
+			 
+			  Connection connection = DriverManager.getConnection(url, username, password);
+			  
+			  java.sql.Statement statement = connection.createStatement();
+			  
+			  query=" CALL  buscarporDni( '"+dni+"')";
+			  System.out.println( dni+ "osso");
+			  query= query.replaceAll("''", "null");
+			  ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				  System.out.println( rs.getString("dni")+ "eeesso");
+				String dni2= rs.getString("dni");
+				
+				if(dni2.equals(dni)) {
+					System.out.println(dni2 + dni+ "osso");
+					return true;
 
-			String url = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+				}
+					
 
-			String username = "u147800277_ben";
+				}
 
-			String password = "Tiburones";
+				rs.close();
 
-			Connection connection = DriverManager.getConnection(url, username, password);
+				statement.close();
 
-			java.sql.Statement statement = connection.createStatement();
+				connection.close();
 
-			ResultSet rs = statement.executeQuery(
-					" SELECT 'unidad_boveda', 'seccion_nichera', 'deposito', 'otrocementerio','osario','nicho_palmeras_ataud','fila_palmeras_ataud','seccion_sepulturas','lote_sepulturas','unidad_sepulturas','bis_sepulturas','palmeras_sepulturas','nicho_palmeras_ro','fila_palmeras_ro','nicho_palmeras_cen','fila_palmeras_cen','macizo_nichera','par_nichera','fila_nichera','unidad_nichera','mueble_cenizas','nicho_cenizas','lote_adulto','lote_angelito','inhumacion' FROM 'Clientes' inner join  'ubicacion' on 'id_ubicacion' =  'ubicacion_id' and  '"
-							+ dni + "' = 'dni'");
+			} catch (SQLException ex) {
 
-			if (rs.next() == true) {
-
-				cadena = cadena + rs.getString("seccion_nichera") + rs.getString("unidad_boveda")
-						+ rs.getString("deposito") + rs.getString("otrocementerio") + rs.getString("osario")
-						+ rs.getString("nicho_palmeras_ataud") + rs.getString("fila_palmeras_ataud")
-						+ rs.getString("seccion_sepulturas") + rs.getString("seccion_sepulturas")
-						+ rs.getString("unidad_sepulturas") + rs.getString("bis_sepulturas")
-						+ rs.getString("palmeras_sepulturas") + rs.getString("nicho_palmeras_ro")
-						+ rs.getString("fila_palmeras_ro") + rs.getString("nicho_palmeras_cen")
-						+ rs.getString("fila_palmeras_cen") + rs.getString("macizo_nichera")
-						+ rs.getString("fila_nichera") + rs.getString("par_nichera") + rs.getString("unidad_nichera")
-						+ rs.getString("mueble_cenizas") + rs.getString("nicho_cenizas") + rs.getString("lote_adulto")
-						+ rs.getString("lote_angelito") + rs.getString("inhumacion");
-
-				System.out.println(cadena);
-
-				return cadena;
+				System.out.println(ex);
 
 			}
 
-			rs.close();
-
-			statement.close();
-
-			connection.close();
-
-		} catch (SQLException ex) {
-
-			System.out.println(ex);
-
-		}
-
-		return "error";
-
-	}
-*/
 	
+		return false;
+	}
+
+	public boolean existeCliente2(String dni) {
+		String query ="";
+		try {
+			  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+			  String username = "u147800277_ben";
+			  String password = "Tiburones";
+			 
+			  Connection connection = DriverManager.getConnection(url, username, password);
+			  
+			  java.sql.Statement statement = connection.createStatement();
+			  
+			  query=" CALL  buscarporDni2( '"+dni+"')";
+			  System.out.println( dni+ "osso");
+			  query= query.replaceAll("''", "null");
+			  ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				  System.out.println( rs.getString("dni")+ "eeesso");
+				String dni2= rs.getString("dni_ocupante");
+				
+				if(dni2.equals(dni)) {
+					System.out.println(dni2 + dni+ "osso");
+					return true;
+
+				}
+					
+
+				}
+
+				rs.close();
+
+				statement.close();
+
+				connection.close();
+
+			} catch (SQLException ex) {
+
+				System.out.println(ex);
+
+			}
+
+	
+		return false;
+	}
+	
+	/*public String colocardni() {
+		
+			String query ="";
+			int acum=1;
+			String num="";
+			try {
+				  String url ="jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen";
+				  String username = "u147800277_ben";
+				  String password = "Tiburones";
+				 
+				  Connection connection = DriverManager.getConnection(url, username, password);
+				  
+				  java.sql.Statement statement = connection.createStatement();
+				  
+				  query=" insert into Acumulador (acum_id,acum) values('"+acum+"')";
+				  System.out.println( acum+ "otttt");
+				  query= query.replaceAll("''", "null");
+				  ResultSet rs = statement.executeQuery(query);
+				while (rs.next()) {
+					 
+					 num= rs.getString("cliente_id");
+					
+				
+						
+					}
+
+					rs.close();
+
+					statement.close();
+
+					connection.close();
+
+				} catch (SQLException ex) {
+
+					System.out.println(ex);
+
+				}
+			return num;
+
+		
+		
+	}*/
+
+
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+}
 

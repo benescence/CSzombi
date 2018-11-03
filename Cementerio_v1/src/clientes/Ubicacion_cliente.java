@@ -129,6 +129,12 @@ public class Ubicacion_cliente extends JInternalFrame {
 		lbl_dato6.setVisible(false);
 		getContentPane().add(lbl_dato6);
 		
+
+		JCheckBox chckbxNewCheckBox = new JCheckBox("bis macizo");
+		chckbxNewCheckBox.setBounds(203, 149, 97, 23);
+		getContentPane().add(chckbxNewCheckBox);
+		chckbxNewCheckBox.setVisible(false);
+		
 		JCheckBox chckbxBisBoveda = new JCheckBox("Bis");
 		chckbxBisBoveda.setBackground(SystemColor.inactiveCaptionBorder);
 		chckbxBisBoveda.setBounds(203, 101, 52, 23);
@@ -231,6 +237,9 @@ public class Ubicacion_cliente extends JInternalFrame {
 						lbl_dato4.setText("N° de Sepultura");
 						lbl_dato5.setText("Bis");
 
+						chckbxNewCheckBox.setVisible(true);
+						chckbxNewCheckBox.setText("bis_macizo");
+						
 					}
 
 					break;
@@ -418,13 +427,22 @@ public class Ubicacion_cliente extends JInternalFrame {
 						Clientes sepultura = new Clientes();
 						String seccion = txt_dato1.getText();
 						String macizo = txt_dato2.getText();
-						String bis_macizo= txt_dato3.getText();
-						String unidad= txt_dato4.getText();
-						String numero= txt_dato5.getText();						
-						String bis= txt_dato6.getText();
-//						cliente.verificarSepulturaSeccionC4(adulto, angelito, inhumacion);
-						cliente =sepultura.buscarClienteenSepultura(seccion,macizo,bis_macizo,unidad,numero,bis);
 						
+						boolean bismacizoi = chckbxNewCheckBox.isSelected() ;
+						String unidad = txt_dato3.getText();
+						String numero = txt_dato4.getText();  //mal
+						boolean bisi = chckbxBisBoveda.isSelected();
+						String dni = cliente.getDni();
+						String bis="";
+						String bismacizo="";
+						if(bisi == true)
+							bis = "1";
+						else
+							bis = "0";
+						if(bismacizoi == true)
+							bismacizo = "1";
+						else
+							bismacizo = "0";
 						
 					}
 					
@@ -496,17 +514,23 @@ public class Ubicacion_cliente extends JInternalFrame {
 					break;
 
 				case 4:
-
 					Clientes boveda = new Clientes();
 					String Circ_boveda = txt_dato1.getText();	
 					String seccion_boveda = txt_dato2.getText();	
 					String macizo_boveda = txt_dato3.getText();	
 					String parcela_boveda = txt_dato4.getText();	
-					String bis_boveda = txt_dato6.getText();	//cambiar bis
+					boolean bisi = chckbxBisBoveda.isSelected();
 					String unidad_boveda = txt_dato5.getText();	
 					
+					String bis="";
+					if(bisi == true)
+						bis = "1";
+					else
+						bis = "0";
 					
-					cliente = boveda.buscarBovedasporUbi(Circ_boveda, seccion_boveda, macizo_boveda, parcela_boveda, bis_boveda, unidad_boveda);
+			
+					
+					cliente = boveda.buscarBovedasporUbi(Circ_boveda, seccion_boveda, macizo_boveda, parcela_boveda, bis, unidad_boveda);
 					break;
 
 				}
@@ -521,7 +545,7 @@ public class Ubicacion_cliente extends JInternalFrame {
 				table.setValueAt(cliente.getDni(), i, 2);
 				table.setValueAt(cliente.getDomicilio(),i, 3);
 				table.setValueAt(cliente.getFecha_fallec(),i, 4);
-				table.setValueAt(cliente.getDireccion_familiar(), i, 5);
+				table.setValueAt(cliente.getDni_ocupante(), i, 5);
 				table.setValueAt(cliente.getTelefono(), i, 6);
 				table.setValueAt(cliente.getEmail(), i, 7);
 				table.setValueAt(cliente.getCocheria(), i, 8);
@@ -559,6 +583,7 @@ public class Ubicacion_cliente extends JInternalFrame {
 		txt_dato6.setBounds(121, 198, 76, 20);
 		txt_dato6.setVisible(false);
 		getContentPane().add(txt_dato6);
+		
 		
 
 	
@@ -603,7 +628,7 @@ public Clientes buscarClienteenNichera(String campo1, String campo2, String camp
 
 				aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-				aux.setDireccion_familiar(rs.getString("direccion"));
+				aux.setDni_ocupante(rs.getString("direccion"));
 
 				aux.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -661,7 +686,7 @@ public Clientes buscarClienteenBoveda(String campo1) {
 
 				aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-				aux.setDireccion_familiar(rs.getString("direccion"));
+				aux.setDni_ocupante(rs.getString("direccion"));
 
 				aux.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -719,7 +744,7 @@ public Clientes buscarClienteenCenizario(String campo1, String campo2) {
 
 				aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-				aux.setDireccion_familiar(rs.getString("direccion"));
+				aux.setDni_ocupante(rs.getString("direccion"));
 
 				aux.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -777,7 +802,7 @@ public Clientes buscarClienteenPalmerasAtaud(String campo1, String campo2) {
 
 				aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-				aux.setDireccion_familiar(rs.getString("direccion"));
+				aux.setDni_ocupante(rs.getString("direccion"));
 
 				aux.setNombre_familiar(rs.getString("nombre_familiar"));
 
@@ -835,7 +860,7 @@ public Clientes buscarClienteenPalmerasCenizas(String campo1, String campo2) {
 
 				aux.setFecha_fallec(rs.getString("fecha_fallecimiento"));
 
-				aux.setDireccion_familiar(rs.getString("direccion"));
+				aux.setDni_ocupante(rs.getString("direccion"));
 
 				aux.setNombre_familiar(rs.getString("nombre_familiar"));
 

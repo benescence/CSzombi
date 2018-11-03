@@ -4,17 +4,22 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
+
+import logica.LogicaPrecios;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
+@SuppressWarnings("serial")
 public class Precios extends JInternalFrame {
 	private JTextField txt_codprecio;
 	private JTextField txt_desc;
 	private JTextField txt_precio;
+
 
 	/**
 	 * Launch the application.
@@ -36,6 +41,9 @@ public class Precios extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public Precios() {
+		
+	
+		
 		setBorder(null);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setBounds(0, 0, 538, 367);
@@ -66,14 +74,79 @@ public class Precios extends JInternalFrame {
 		getContentPane().add(txt_desc);
 		
 		JButton btn_guardar = new JButton("");
+		//btn_guardar.setAction(action);
+		btn_guardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (btn_guardar.getText().equals("Actualizar")) {
+					int codigo = Integer.parseInt(txt_codprecio.getText());
+					float precioDouble = Float.parseFloat(txt_precio.getText());
+					LogicaPrecios precio = new LogicaPrecios();
+					precio.setCodigo(codigo);
+					precio.setPrecio(precioDouble);
+					precio.setDescripcion(txt_desc.getText());
+					precio.ModificarCodigo();
+			
+				}
+				else if (btn_guardar.getText().equals("Buscar")) {
+					
+			
+					
+					LogicaPrecios precios= new LogicaPrecios();
+				    precios = cargar_precio();
+				    
+				    if (!txt_codprecio.getText().equals(null) || !txt_desc.getText().equals(null)){
+					ArrayList<LogicaPrecios> precios_row =  new ArrayList<LogicaPrecios>();
+					precios_row = precios.BuscarCodigo();
+					
+					if (precios_row.size()>0){					
+
+						getContentPane().removeAll();
+						getContentPane().repaint();
+
+						Resultado_precios rp = new Resultado_precios(precios_row);
+						rp.setVisible(true);
+						getContentPane().add(rp);
+						getContentPane().repaint();
+						
+						
+						
+					
+					}else{
+						JOptionPane.showMessageDialog(
+								   null,
+								   "No se han encontrado datos");
+					}
+					
+				    }
+
+				    
+				    
+				}
+		
+					
+				else{
+				int codigo = Integer.parseInt(txt_codprecio.getText());
+				float precioDouble = Float.parseFloat(txt_precio.getText());
+				LogicaPrecios precio = new LogicaPrecios();
+				precio.setCodigo(codigo);
+				precio.setPrecio(precioDouble);
+				precio.setDescripcion(txt_desc.getText());
+				precio.crearCodigo();
+			}}
+		});
+		
 		btn_guardar.setBounds(166, 204, 112, 23);
 		btn_guardar.setVisible(false);
 		getContentPane().add(btn_guardar);
-	
 		
+	
 		JButton btn_alta = new JButton("Nuevo Precio");
 		btn_alta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			
+				
 				txt_desc.setVisible(true);
 				txt_desc.setEnabled(true);
 				txt_precio.setVisible(true);
@@ -85,6 +158,9 @@ public class Precios extends JInternalFrame {
 				lblCodPrecio.setVisible(true);
 				btn_guardar.setText("Guardar");
 				btn_guardar.setVisible(true);
+				
+			
+				
 			}
 		});
 		btn_alta.setBounds(32, 23, 118, 23);
@@ -99,7 +175,7 @@ public class Precios extends JInternalFrame {
 		btnBuscarPrecio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txt_desc.setVisible(true);
-				txt_desc.setEnabled(false);
+				txt_desc.setEnabled(true);
 				txt_codprecio.setVisible(true);
 				txt_codprecio.setEnabled(true);
 				txt_precio.setVisible(true);
@@ -131,6 +207,8 @@ public class Precios extends JInternalFrame {
 				btn_guardar.setText("Actualizar");
 				btn_guardar.setVisible(true);
 				
+				
+				
 			}
 		});
 		btnModificarPrecio.setBounds(292, 23, 146, 23);
@@ -149,4 +227,23 @@ public class Precios extends JInternalFrame {
 		
 
 	}
+
+	private LogicaPrecios cargar_precio() {
+		
+		
+		if(!txt_codprecio.getText().equals("")) {
+		
+		LogicaPrecios cli = new LogicaPrecios();
+		int codigo = Integer.parseInt(txt_codprecio.getText());
+		cli.setCodigo(codigo);
+		cli.setDescripcion(txt_desc.getText());
+		
+		return cli;
+	}
+	else {
+		LogicaPrecios cli = new LogicaPrecios();
+		cli.setDescripcion(txt_desc.getText());
+		return cli;
+	}
+}
 }

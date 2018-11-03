@@ -1,6 +1,7 @@
 package clientes;
 
 import java.awt.EventQueue;
+import java.awt.Rectangle;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -95,9 +96,9 @@ public class Consulta_resultado extends JInternalFrame {
 		txt_name.setColumns(10);
 		getContentPane().add(txt_name);
 		
-		JLabel lbl_tipofallec = new JLabel("Tipo de fallecimiento");
+		JLabel lbl_tipofallec = new JLabel("T F");
 		lbl_tipofallec.setVisible(false);
-		lbl_tipofallec.setBounds(391, 24, 132, 14);
+		lbl_tipofallec.setBounds(391, 24, 69, 14);
 		getContentPane().add(lbl_tipofallec);
 		
 		JLabel lblDomicilio = new JLabel("Domicilio");
@@ -117,7 +118,7 @@ public class Consulta_resultado extends JInternalFrame {
 
 		getContentPane().add(txt_dom);
 		
-		JLabel lblDomicilioFamiliar = new JLabel("Domicilio Familiar");
+		JLabel lblDomicilioFamiliar = new JLabel("Dni ocupante");
 		lblDomicilioFamiliar.setBounds(36, 138, 132, 14);
 		getContentPane().add(lblDomicilioFamiliar);
 		
@@ -138,12 +139,12 @@ public class Consulta_resultado extends JInternalFrame {
 		getContentPane().add(txt_email);
 		
 		JLabel lblCocheria = new JLabel("Cocheria");
-		lblCocheria.setBounds(391, 82, 76, 14);
+		lblCocheria.setBounds(391, 52, 76, 14);
 		lblCocheria.setVisible(false);
 		getContentPane().add(lblCocheria);
 		
 		txt_cocheria = new JTextField();
-		txt_cocheria.setBounds(477, 79, 208, 20);
+		txt_cocheria.setBounds(446, 49, 208, 20);
 		txt_cocheria.setEditable(false);
 		txt_cocheria.setColumns(10);
 		txt_cocheria.setVisible(false);
@@ -157,17 +158,20 @@ public class Consulta_resultado extends JInternalFrame {
 		
 		
 		JLabel lblIdUbicacion = new JLabel("Ubicacion");
-		lblIdUbicacion.setBounds(391, 52, 91, 14);
+		lblIdUbicacion.setBounds(new Rectangle(391, 82, 91, 14));
 		lblIdUbicacion.setVisible(false);
-		getContentPane().add(lblIdUbicacion);
+		
+		getContentPane().add(lblIdUbicacion, null);
 		
 		txt_ubicacion = new JTextField();
-		txt_ubicacion.setBounds(477, 49, 273, 20);
+		txt_ubicacion.setBounds(new Rectangle(446, 79, 444, 45));
 		txt_ubicacion.setEditable(false);
-		txt_ubicacion.setColumns(10);
+		txt_ubicacion.setHorizontalAlignment(JTextField.LEFT);
+		//txt_ubicacion.setColumns(10);
 		txt_ubicacion.setVisible(false);
+		
 //		txt_ubicacion.setText(row_cliente.getUbicacion()); // ver porque no
-		getContentPane().add(txt_ubicacion);
+		getContentPane().add(txt_ubicacion,null);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(36, 52, 132, 14);
@@ -195,7 +199,7 @@ public class Consulta_resultado extends JInternalFrame {
 		txt_tipoFall.setEditable(false);
 		txt_tipoFall.setColumns(10);
 		txt_tipoFall.setVisible(false);
-		txt_tipoFall.setBounds(524, 21, 156, 20);
+		txt_tipoFall.setBounds(446, 21, 162, 20);
 
 		getContentPane().add(txt_tipoFall);
 		
@@ -238,7 +242,7 @@ public class Consulta_resultado extends JInternalFrame {
 				txt_name.setText(clientes_row.get(row).getNombres());
 				txt_dni.setText(clientes_row.get(row).getDni());
 				txt_dom.setText(clientes_row.get(row).getDomicilio());
-				txt_domfamiliar.setText(clientes_row.get(row).getDireccion_familiar());
+				txt_domfamiliar.setText(clientes_row.get(row).getDni_ocupante());
 				txt_email.setText(clientes_row.get(row).getEmail());
 				txt_cocheria.setText(clientes_row.get(row).getCocheria());
 				
@@ -293,7 +297,7 @@ public class Consulta_resultado extends JInternalFrame {
 				table.setValueAt(clientes_row.get(i).getDni(), i, 2);
 				table.setValueAt(clientes_row.get(i).getDomicilio(),i, 3);
 				table.setValueAt(clientes_row.get(i).getFecha_fallec(),i, 4);
-				table.setValueAt(clientes_row.get(i).getDireccion_familiar(), i, 5);
+				table.setValueAt(clientes_row.get(i).getDni_ocupante(), i, 5);
 				table.setValueAt(clientes_row.get(i).getTelefono(), i, 6);
 				table.setValueAt(clientes_row.get(i).getEmail(), i, 7);
 				table.setValueAt(clientes_row.get(i).getCocheria(), i, 8);
@@ -312,6 +316,7 @@ public class Consulta_resultado extends JInternalFrame {
 						ubicaciones ubi = new ubicaciones();
 						if(!txt_dni.getText().equals(null)){
 							ubicacion = ubi.buscarUbicacionporDni(txt_dni.getText());
+							System.out.println("venimos por ac+à");
 							System.out.println(ubicacion);
 							txt_ubicacion.setVisible(true);
 							lblIdUbicacion.setVisible(true);

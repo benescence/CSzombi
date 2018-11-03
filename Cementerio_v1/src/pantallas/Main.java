@@ -1,7 +1,5 @@
 package pantallas;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,14 +10,7 @@ import javax.swing.JMenuItem;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyVetoException;
-
 import javax.swing.JMenu;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-
 import administracion.Precios;
 import administracion.Vencimientos;
 import clientes.Alta_clientes;
@@ -33,8 +24,7 @@ import usuarios.Baja_usuario;
 import usuarios.Buscar_usuarios;
 import usuarios.Modif_usuario;
 
-import javax.swing.JComboBox;
-
+@SuppressWarnings("serial")
 public class Main extends JFrame {
 
 	/**

@@ -36,16 +36,29 @@ public class Login extends JDialog {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			
-			try {
+			/*try {
 				 for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				        if ("Nimbus".equals(info.getName())) {
+				        if ("Motif".equals(info.getName())) {
 				            UIManager.setLookAndFeel(info.getClassName());
 				            break;
 				        }
 				    }
 				} catch(Exception e) {
 				  System.out.println("Error setting native LAF: " + e);
+				}*/
+			try{
+				  
+				  dialog.setDefaultLookAndFeelDecorated(true);
+				  JDialog.setDefaultLookAndFeelDecorated(true);
+				  //UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+				  //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+				  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+				  //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
 				}
+				catch (Exception e)
+				 {
+				  e.printStackTrace();
+				 }
 			
 		} catch (Exception e) {
 			e.printStackTrace();
