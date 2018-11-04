@@ -3,7 +3,7 @@ package com.revivir.cementerio.negocios;
 import java.sql.Date;
 
 import com.revivir.cementerio.persistencia.Factory;
-import com.revivir.cementerio.persistencia.Obciso;
+import com.revivir.cementerio.persistencia.entidades.Obciso;
 import com.revivir.cementerio.persistencia.interfaces.ObcisoOBD;
 
 public class Recepcion {
