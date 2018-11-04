@@ -18,6 +18,8 @@ import java.awt.SystemColor;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import com.revivir.cementerio.negocios.Recepcion;
 import com.toedter.calendar.JCalendar;
 
 import logica.Clientes;
@@ -28,7 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ItemListener;
-
+import java.sql.Date;
 import java.awt.event.ItemEvent;
 import javax.swing.JCheckBox;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
@@ -54,6 +56,8 @@ public class Alta_clientes extends JInternalFrame {
 	private JTextField txt_dato5;
 	private JTextField txt_dato6;
 	private JTextField txt_nombre_familiar;
+	private JComboBox cmb_tipo_fall;
+	private Calendar cal;
 	
 	Clientes resultado = new Clientes();
 
@@ -135,7 +139,7 @@ public class Alta_clientes extends JInternalFrame {
 		lblNivelDePermisos.setBounds(409, 24, 132, 14);
 		getContentPane().add(lblNivelDePermisos);
 
-		JComboBox cmb_tipo_fall = new JComboBox();
+		cmb_tipo_fall = new JComboBox();
 		cmb_tipo_fall.setBounds(533, 21, 165, 20);
 		cmb_tipo_fall.insertItemAt("Traumatico", 0);
 		cmb_tipo_fall.insertItemAt("No traumatico", 1);
@@ -509,7 +513,7 @@ public class Alta_clientes extends JInternalFrame {
 		txt_dato6.setVisible(true);
 		getContentPane().add(txt_dato6);
 		
-		Calendar cal = Calendar.getInstance();
+		cal = Calendar.getInstance();
 		cal.set(Calendar.ERA, GregorianCalendar.AD);
 		java.util.Date date = new java.util.Date();
 		cal.setTime(date);
@@ -639,6 +643,7 @@ public class Alta_clientes extends JInternalFrame {
 		btn_guardar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				guardiarObciso();
 
 				
 				
@@ -1640,4 +1645,24 @@ public class Alta_clientes extends JInternalFrame {
 		this.repaint();
 		
 	}
+
+
+	public void guardiarObciso() {
+		String nombre = txt_nombres.getText();
+		String apellido = "Apellido harcodeado";
+		String cocheria = txt_cocheria.getText();
+		String dni = txt_dni.getText();
+		Integer tipoFallecimiento = cmb_tipo_fall.getSelectedIndex(); 
+		Date fechaFallecimiento = new Date(cal.getTime().getTime()); 		
+
+		Recepcion.guardarObciso(tipoFallecimiento, dni, nombre, apellido, cocheria, fechaFallecimiento);
+		
+	}
+
+
+
+
+
+
+
 }
