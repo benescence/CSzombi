@@ -7,7 +7,7 @@ import com.revivir.cementerio.persistencia.mysql.ClienteOBDMySQL;
 import com.revivir.cementerio.persistencia.mysql.ObcisoClienteOBDMySQL;
 import com.revivir.cementerio.persistencia.mysql.ObcisoOBDMySQL;
 
-public class Factory {
+public class FactoryOBD {
 	
 	public static ObcisoOBD crearObcisoOBD() {
 		return new ObcisoOBDMySQL();
