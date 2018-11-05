@@ -1,0 +1,94 @@
+-- ESQUEMAS CLIENTES
+CREATE TABLE `Clientes` (
+  `Num_cliente` int(11) NOT NULL,
+  `apellido` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `nombres` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `fecha_fallecimiento` date NOT NULL,
+  `dni` int(11) NOT NULL,
+  `direccion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombre_familiar` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `telefono_familiar` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cocheria` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tipo_fallecimiento` tinyint(1) DEFAULT NULL COMMENT '1 si no es traumatico, 0 si es',
+  `email_familiar` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dni_ocupante` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+-- ESQUEMAS CODIGOS
+CREATE TABLE `codigos` (
+  `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `descripcion` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `importe` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+-- ESQUEMAS CUENTA
+CREATE TABLE `cuenta` (
+  `id_cuenta` int(11) NOT NULL,
+  `monto` int(11) NOT NULL,
+  `dni_cliente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ESQUEMAS LOGIN
+CREATE TABLE `login` (
+  `u_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `u_pass` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `u_tipo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+-- ESQUEMAS UBICACIONES POR CLIENTES
+CREATE TABLE `ubicacionesPorCliente` (
+  `id_cliente` int(11) NOT NULL,
+  `dni` int(11) NOT NULL,
+  `id_ubicacion` int(11) NOT NULL,
+  `deposito` tinyint(1) DEFAULT NULL,
+  `otrocementerio` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `osario` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nicho` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fila` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `seccion` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `macizo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `unidad` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bis` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bis_macizo` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `numero` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sepultura` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parcela` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mueble` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `inhumacion` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Circ` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dni_ocupante` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+-- ESQUEMAS UBICACION MAESTRO
+CREATE TABLE `ubic_maestro` (
+  `id_ubicacion` int(11) NOT NULL,
+  `descripcion` varchar(200) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `ubic_maestro` (`id_ubicacion`, `descripcion`) VALUES
+(1, 'nichera '),
+(2, 'palmeras_a'),
+(3, 'palmeras_c'),
+(4, 'palmeras_ro'),
+(5, 'palmeras_S'),
+(6, 'boveda'),
+(7, 'sepultura'),
+(8, 'indigente'),
+(9, 'cenizario'),
+(10, 'osario'),
+(11, 'otroCementerio'),
+(12, 'deposito1'),
+(13, 'deposito3'),
+(14, 'deposito2');
+
+-- ESQUEMAS VENCIMIENTOS
+CREATE TABLE `vencimientos` (
+  `id_vencimientos` int(11) NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+

@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.revivir.cementerio.vista.ControladorCargaCliente;
+import com.revivir.cementerio.vista.VentanaCargaClientes;
+import com.revivir.cementerio.vista.util.PanelVertical;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenu;
@@ -82,6 +86,31 @@ public class Main extends JFrame {
 			}
 		});
 		mnClientes.add(mntmNewMenuItem);
+		
+		
+		
+		
+		
+		// *************************************************************************
+		JMenuItem itemPrueba = new JMenuItem("PRUEBA Alta");
+		itemPrueba.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				getContentPane().removeAll();
+                getContentPane().repaint();
+
+                ControladorCargaCliente controlador = new ControladorCargaCliente();
+                PanelVertical panel = new PanelVertical();
+                panel.add(controlador.getVentana());
+                //getContentPane().add(panel);
+				setContentPane(panel);
+			}
+		});
+		mnClientes.add(itemPrueba);
+		//****************************************************************************  
+		
+		
+		
+		
 		
 		JMenuItem mntmConsultaClientes = new JMenuItem("Consulta de Clientes");
 		mntmConsultaClientes.addActionListener(new ActionListener() {
