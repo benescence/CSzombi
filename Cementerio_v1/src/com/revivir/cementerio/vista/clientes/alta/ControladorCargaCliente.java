@@ -1,17 +1,20 @@
-package com.revivir.cementerio.vista;
+package com.revivir.cementerio.vista.clientes.alta;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JInternalFrame;
+
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.mysql.ClienteOBDMySQL;
+import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.seleccion.ClienteSeleccionable;
 import com.revivir.cementerio.vista.seleccion.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.seleccion.VentanaSeleccionCliente;
 import pantallas.Main;
 
-public class ControladorCargaCliente implements ActionListener, ClienteSeleccionable{
+public class ControladorCargaCliente implements ActionListener, ClienteSeleccionable, ControladorInterno{
 	private VentanaCargaClientes ventana;
 	private Cliente cliente = null;
 
@@ -73,7 +76,14 @@ public class ControladorCargaCliente implements ActionListener, ClienteSeleccion
 		ventana.mostrar();
 	}
 
-	public VentanaCargaClientes getVentana() {
+	public JInternalFrame getVentana() {
 		return ventana;
 	}
-}
+
+	@Override
+	public void finalizar() {
+		ventana.dispose();
+		ventana = null;
+	}
+
+	}

@@ -1,20 +1,21 @@
 package pantallas;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.revivir.cementerio.vista.ControladorCargaCliente;
-import com.revivir.cementerio.vista.VentanaCargaClientes;
+import com.revivir.cementerio.vista.ControladorInterno;
+import com.revivir.cementerio.vista.clientes.alta.ControladorCargaCliente;
+import com.revivir.cementerio.vista.clientes.busqueda.cliente.ControladorConsultaCliente;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JMenu;
 import administracion.Precios;
 import administracion.Vencimientos;
 import clientes.Alta_clientes;
@@ -30,6 +31,7 @@ import usuarios.Modif_usuario;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame {
+	private ControladorInterno controladorInterno = null;
 
 	/**
 	 * Launch the application.
@@ -54,24 +56,22 @@ public class Main extends JFrame {
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Sistema de Consultas - Cementerio ");
-		setBounds(0, 0, 1024, 721);
-		getContentPane().setLayout(null);
+		setBounds(0, 0, 1000, 700);
 		getContentPane().setLayout(null);
 		
 		Bienvenido bienvenido = new Bienvenido();
 		bienvenido.setLocation(10, 11);
 		getContentPane().add(bienvenido);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.addMouseListener(new MouseAdapter() {
+		JMenuBar menuBarra = new JMenuBar();
+		menuBarra.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			}
+			public void mouseClicked(MouseEvent arg0) {}
 		});
-		setJMenuBar(menuBar);
+		setJMenuBar(menuBarra);
 		
 		JMenu mnClientes = new JMenu("Clientes");
-		menuBar.add(mnClientes);
+		menuBarra.add(mnClientes);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Alta Clientes");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
@@ -86,30 +86,6 @@ public class Main extends JFrame {
 			}
 		});
 		mnClientes.add(mntmNewMenuItem);
-		
-		
-		
-		
-		
-		// *************************************************************************
-		JMenuItem itemPrueba = new JMenuItem("PRUEBA Alta");
-		itemPrueba.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				getContentPane().removeAll();
-                getContentPane().repaint();
-
-                ControladorCargaCliente controlador = new ControladorCargaCliente();
-                PanelVertical panel = new PanelVertical();
-                panel.add(controlador.getVentana());
-                //getContentPane().add(panel);
-				setContentPane(panel);
-			}
-		});
-		mnClientes.add(itemPrueba);
-		//****************************************************************************  
-		
-		
-		
 		
 		
 		JMenuItem mntmConsultaClientes = new JMenuItem("Consulta de Clientes");
@@ -139,7 +115,7 @@ public class Main extends JFrame {
 		mnClientes.add(mntmConsultaUbicacion);
 		
 		JMenu mnReportes = new JMenu("Reportes");
-		menuBar.add(mnReportes);
+		menuBarra.add(mnReportes);
 		
 		JMenuItem item_Movimientos = new JMenuItem("Movimientos");
 		item_Movimientos.addActionListener(new ActionListener() {
@@ -183,7 +159,7 @@ public class Main extends JFrame {
 		mnReportes.add(mntmLugares);
 		
 		JMenu mnAdministracin = new JMenu("Administraci\u00F3n");
-		menuBar.add(mnAdministracin);
+		menuBarra.add(mnAdministracin);
 		
 		JMenuItem item_Precios = new JMenuItem("Precios");
 		item_Precios.addActionListener(new ActionListener() {
@@ -212,7 +188,7 @@ public class Main extends JFrame {
 		mnAdministracin.add(item_Vencimientos);
 		
 		JMenu mnAdmin = new JMenu("Usuarios");
-		menuBar.add(mnAdmin);
+		menuBarra.add(mnAdmin);
 		
 		JMenuItem mntmAlta = new JMenuItem("Alta Usuario");
 		mntmAlta.addActionListener(new ActionListener() {
@@ -273,6 +249,50 @@ public class Main extends JFrame {
 		});
 		mnAdmin.add(mntmModificaciones);
 		
-	
+		//************************* MODULOS NUEVOS
+		JMenu menuClientes2 = new JMenu("Clientes 2");
+		menuBarra.add(menuClientes2);
+
+		JMenuItem itemAltaCliente = new JMenuItem("Alta de clientes");
+		menuClientes2.add(itemAltaCliente);
+		itemAltaCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarAltaCliente();
+			}
+		});
+
+		JMenuItem itemConsultaCliente = new JMenuItem("Consulta de clientes");
+		menuClientes2.add(itemConsultaCliente);
+		itemConsultaCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarConsultaCliente();
+			}
+		});
+		
 	}
+	
+	
+	private void mostrarConsultaCliente() {
+		cerrarAnterior();        
+        controladorInterno = new ControladorConsultaCliente();
+        PanelVertical panel = new PanelVertical();
+        panel.add(controladorInterno.getVentana());
+		setContentPane(panel);
+	}
+
+	private void cerrarAnterior() {
+		if (controladorInterno != null)
+			controladorInterno.finalizar();
+		getContentPane().removeAll();
+		getContentPane().repaint();
+	}
+	
+	private void mostrarAltaCliente() {
+		cerrarAnterior();        
+        controladorInterno = new ControladorCargaCliente();
+        PanelVertical panel = new PanelVertical();
+        panel.add(controladorInterno.getVentana());
+		setContentPane(panel);
+	}
+
 }

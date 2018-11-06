@@ -12,5 +12,7 @@ public interface ClienteOBD {
 	public void delete(Cliente cliente);
 
 	public List<Cliente> select();
+	
+	public List<Cliente> selectByNombreApellidoDNI(String nombre, String apellido, String DNI);
 
 }

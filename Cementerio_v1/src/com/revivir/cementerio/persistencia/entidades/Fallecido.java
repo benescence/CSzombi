@@ -2,14 +2,18 @@ package com.revivir.cementerio.persistencia.entidades;
 
 import java.sql.Date;
 
-public class Obciso {
-	private Integer ID, tipoFallecimiento;
+import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
+
+public class Fallecido {
+	private Integer ID, cliente;
 	private String dni, apellido, nombre, cocheria;
 	private Date fechaFallecimiento;
+	private TipoFallecimiento tipoFallecimiento;
 	
-	public Obciso(Integer ID, Integer tipoFallecimiento, String dni, String apellido, String nombre, String cocheria,
+	public Fallecido(Integer ID, Integer cliente, TipoFallecimiento tipoFallecimiento, String dni, String apellido, String nombre, String cocheria,
 			Date fechaFallecimiento) {
 		this.ID = ID;
+		this.cliente = cliente;
 		this.tipoFallecimiento = tipoFallecimiento;
 		this.dni = dni;
 		this.apellido = apellido;
@@ -25,12 +29,20 @@ public class Obciso {
 	public void setID(Integer ID) {
 		this.ID = ID;
 	}
+	
+	public Integer getCliente() {
+		return cliente;
+	}
 
-	public Integer getTipoFallecimiento() {
+	public void setCliente(Integer cliente) {
+		this.cliente = cliente;
+	}
+
+	public TipoFallecimiento getTipoFallecimiento() {
 		return tipoFallecimiento;
 	}
 
-	public void setTipoFallecimiento(Integer tipoFallecimiento) {
+	public void setTipoFallecimiento(TipoFallecimiento tipoFallecimiento) {
 		this.tipoFallecimiento = tipoFallecimiento;
 	}
 

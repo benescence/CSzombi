@@ -1655,7 +1655,7 @@ public class Alta_clientes extends JInternalFrame {
 		Integer tipoFallecimiento = cmb_tipo_fall.getSelectedIndex(); 
 		Date fechaFallecimiento = new Date(cal.getTime().getTime()); 		
 
-		Recepcion.guardarObciso(tipoFallecimiento, dni, nombre, apellido, cocheria, fechaFallecimiento);
+		//Recepcion.guardarObciso(tipoFallecimiento, dni, nombre, apellido, cocheria, fechaFallecimiento);
 		
 	}
 

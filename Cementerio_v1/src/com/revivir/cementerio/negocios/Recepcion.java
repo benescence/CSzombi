@@ -3,17 +3,20 @@ package com.revivir.cementerio.negocios;
 import java.sql.Date;
 
 import com.revivir.cementerio.persistencia.FactoryOBD;
-import com.revivir.cementerio.persistencia.entidades.Obciso;
-import com.revivir.cementerio.persistencia.interfaces.ObcisoOBD;
+import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
 public class Recepcion {
 	
-	public static void guardarObciso(Integer tipoFallecimiento, String dni, String nombre,
+	public static void guardarObciso(TipoFallecimiento tipo, Integer cliente, String dni, String nombre,
 			String apellido, String cocheria, Date fechaFallecimiento) {
 		
-		Obciso obciso = new Obciso(-1, tipoFallecimiento, dni, apellido, nombre, cocheria, fechaFallecimiento);
-		ObcisoOBD obd = FactoryOBD.crearObcisoOBD();
+		Fallecido obciso = new Fallecido(-1, cliente,tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
+		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
 		obd.insert(obciso);
 	}
+	
+	
 
 }

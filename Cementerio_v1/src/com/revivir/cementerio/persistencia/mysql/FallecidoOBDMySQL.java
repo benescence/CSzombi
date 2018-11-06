@@ -7,53 +7,56 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.OBD;
-import com.revivir.cementerio.persistencia.entidades.Obciso;
-import com.revivir.cementerio.persistencia.interfaces.ObcisoOBD;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
-public class ObcisoOBDMySQL extends OBD implements ObcisoOBD{
-	private final String campos = "DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria";
-	private final String tabla = "rev_obcisos";
+public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
+	private final String campos = "cliente, DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria";
+	private final String tabla = "rev_fallecidos";
 	
 	@Override
-	public void insert(Obciso obciso) {
-		String valores = "'"+obciso.getDni()+"'"
+	public void insert(Fallecido obciso) {
+		String valores = obciso.getCliente() 
+				+", '"+obciso.getDni()+"'"
 				+", '"+obciso.getApellido()+"'"
 				+", '"+obciso.getNombre()+"'"
 				+", '"+obciso.getFechaFallecimiento()+"'"
-				+", "+obciso.getTipoFallecimiento()
+				+", "+Definido.tipoFallecimiento(obciso.getTipoFallecimiento())
 				+", '"+obciso.getCocheria()+"'";
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}
 
 	@Override
-	public void update(Obciso obciso) {
+	public void update(Fallecido obciso) {
 		String condicion = "ID = "+obciso.getID();
-		String valores = "DNI = '"+obciso.getDni()+"'"
+		String valores = "cliente = "+obciso.getCliente() 
+				+", DNI = '"+obciso.getDni()+"'"
 				+", apellido = '"+obciso.getApellido()+"'"
 				+", nombre = '"+obciso.getNombre()+"'"
 				+", fecha_fallecimiento = '"+obciso.getFechaFallecimiento()+"'"
-				+", tipo_fallecimiento = "+obciso.getTipoFallecimiento()
+				+", tipo_fallecimiento = "+Definido.tipoFallecimiento(obciso.getTipoFallecimiento())
 				+", cocheria = '"+obciso.getCocheria()+"'";
 		String consulta = "update "+tabla+" set "+valores+"  where ("+condicion+");";
 		ejecutarSQL(consulta);
 	}
 
 	@Override
-	public void delete(Obciso obciso) {
+	public void delete(Fallecido obciso) {
 		String condicion = "ID = "+obciso.getID();
 		String consulta = "delete from "+tabla+" where ("+condicion+");";
 		ejecutarSQL(consulta);
 	}
 
 	@Override
-	public List<Obciso> select() {
+	public List<Fallecido> select() {
 		return selectByCondicion("true");
 	}
 
-	private List<Obciso> selectByCondicion(String condicion) {
-		List<Obciso> ret = new ArrayList<Obciso>();
+	private List<Fallecido> selectByCondicion(String condicion) {
+		List<Fallecido> ret = new ArrayList<Fallecido>();
 		String comandoSQL = "select ID, "+campos+" from "+tabla+" where ("+condicion+");";  
 		
 		try { 
@@ -63,9 +66,10 @@ public class ObcisoOBDMySQL extends OBD implements ObcisoOBD{
 			ResultSet resultados = sentencia.executeQuery(comandoSQL);			
 
 			while (resultados.next()) {
-				ret.add(new Obciso(
+				ret.add(new Fallecido(
 						resultados.getInt("ID"),
-						resultados.getInt("tipo_fallecimiento"),
+						resultados.getInt("cliente"),
+						Definido.tipoFallecimiento(resultados.getInt("tipo_fallecimiento")),
 						resultados.getString("DNI"),
 						resultados.getString("apellido"),
 						resultados.getString("nombre"),
