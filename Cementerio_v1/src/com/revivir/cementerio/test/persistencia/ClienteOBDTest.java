@@ -1,4 +1,4 @@
-package com.revivir.cementerio.test;
+package com.revivir.cementerio.test.persistencia;
 
 import java.util.List;
 

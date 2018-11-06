@@ -1,3 +1,46 @@
+-- NUEVA BASE DE DATOS
+
+-- ESQUEMA TIPO DE FALLECIMIENTO
+CREATE TABLE rev_tipo_fallecimiento (
+	ID TINYINT(1),
+	descripcion VARCHAR(20) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+-- ESQUEMA CLIENTES
+CREATE TABLE rev_clientes (
+	ID INT(10) AUTO_INCREMENT,
+	DNI VARCHAR(11) NULL,
+	apellido VARCHAR(50) NOT NULL,
+	nombre VARCHAR(100) NOT NULL,
+	telefono VARCHAR(20) NULL,
+	email VARCHAR(200) NULL,
+	PRIMARY KEY (ID)
+);
+
+
+-- ESQUEMAS FALLECIDOS
+CREATE TABLE rev_fallecidos (
+  ID INT(10) AUTO_INCREMENT,
+  cliente INT(10) NOT NULL,
+  DNI VARCHAR(11) NULL,
+  apellido VARCHAR(50) NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  fecha_fallecimiento DATE NOT NULL,
+  tipo_fallecimiento TINYINT(1) NOT NULL,
+  cocheria VARCHAR(20) NULL,
+  PRIMARY KEY (ID)
+);
+
+
+INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES(1, "TRAUMATICO");
+INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES(2, "NO TRAUMATICO");
+
+
+
+
+
+
 -- ESQUEMAS CLIENTES
 CREATE TABLE `Clientes` (
   `Num_cliente` int(11) NOT NULL,

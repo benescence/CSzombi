@@ -14,6 +14,7 @@ import javax.swing.JMenuItem;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.clientes.alta.ControladorCargaCliente;
 import com.revivir.cementerio.vista.clientes.busqueda.cliente.ControladorConsultaCliente;
+import com.revivir.cementerio.vista.clientes.busqueda.fallecido.ControladorConsultaFallecidos;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
 import administracion.Precios;
@@ -268,6 +269,14 @@ public class Main extends JFrame {
 				mostrarConsultaCliente();
 			}
 		});
+
+		JMenuItem itemConsultaFallecidos = new JMenuItem("Consulta de fallecidos");
+		menuClientes2.add(itemConsultaFallecidos);
+		itemConsultaFallecidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarConsultaFallecidos();
+			}
+		});
 		
 	}
 	
@@ -275,6 +284,14 @@ public class Main extends JFrame {
 	private void mostrarConsultaCliente() {
 		cerrarAnterior();        
         controladorInterno = new ControladorConsultaCliente();
+        PanelVertical panel = new PanelVertical();
+        panel.add(controladorInterno.getVentana());
+		setContentPane(panel);
+	}
+	
+	private void mostrarConsultaFallecidos() {
+		cerrarAnterior();        
+        controladorInterno = new ControladorConsultaFallecidos();
         PanelVertical panel = new PanelVertical();
         panel.add(controladorInterno.getVentana());
 		setContentPane(panel);

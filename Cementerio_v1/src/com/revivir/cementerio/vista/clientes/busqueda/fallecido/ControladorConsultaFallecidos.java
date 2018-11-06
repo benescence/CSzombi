@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.clientes.busqueda.cliente;
+package com.revivir.cementerio.vista.clientes.busqueda.fallecido;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,18 +7,17 @@ import java.util.List;
 import javax.swing.JInternalFrame;
 
 import com.revivir.cementerio.negocios.Busqueda;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorConsultaCliente implements ActionListener, ControladorInterno{
-	private VentanaConsultaCliente ventana;
+public class ControladorConsultaFallecidos implements ActionListener, ControladorInterno{
+	private VentanaConsultaFallecidos ventana;
 	
-	public ControladorConsultaCliente() {
-		ventana = new VentanaConsultaCliente();
+	public ControladorConsultaFallecidos() {
+		ventana = new VentanaConsultaFallecidos();
 		ventana.botonBuscar().addActionListener(this);
 		ventana.botonLimpiar().addActionListener(this);
-		//ventana.mostrar();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -38,12 +37,12 @@ public class ControladorConsultaCliente implements ActionListener, ControladorIn
 	}
 
 	private void buscar() {
-		String DNI = (ventana.getDNI().getText().equals("") ? null : ventana.getDNI().getText());
-		String nombres = (ventana.getNombre().getText().equals("") ? null : ventana.getNombre().getText());
-		String apellido = (ventana.getApellido().getText().equals("") ? null : ventana.getApellido().getText());
-		List<Cliente> clientes = Busqueda.clientes(DNI, nombres, apellido);
-		ventana.getTabla().recargar(clientes);
-		if (clientes.size() == 0)
+		String DNI = ventana.getDNI().getText();
+		String nombres = ventana.getNombre().getText();
+		String apellido = ventana.getApellido().getText();
+		List<Fallecido> lista = Busqueda.fallecidos(DNI, nombres, apellido);
+		ventana.getTabla().recargar(lista);
+		if (lista.size() == 0)
 			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
 	}
 
