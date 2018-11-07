@@ -12,7 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import com.revivir.cementerio.vista.ControladorInterno;
-import com.revivir.cementerio.vista.clientes.alta.ControladorCargaCliente;
+import com.revivir.cementerio.vista.clientes.alta.ControladorAltaServicio;
 import com.revivir.cementerio.vista.clientes.busqueda.cliente.ControladorConsultaCliente;
 import com.revivir.cementerio.vista.clientes.busqueda.fallecido.ControladorConsultaFallecidos;
 import com.revivir.cementerio.vista.util.PanelVertical;
@@ -306,7 +306,7 @@ public class Main extends JFrame {
 	
 	private void mostrarAltaCliente() {
 		cerrarAnterior();        
-        controladorInterno = new ControladorCargaCliente();
+        controladorInterno = new ControladorAltaServicio();
         PanelVertical panel = new PanelVertical();
         panel.add(controladorInterno.getVentana());
 		setContentPane(panel);

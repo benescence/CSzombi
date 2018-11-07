@@ -14,12 +14,12 @@ import com.revivir.cementerio.vista.seleccion.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.seleccion.VentanaSeleccionCliente;
 import pantallas.Main;
 
-public class ControladorCargaCliente implements ActionListener, ClienteSeleccionable, ControladorInterno{
-	private VentanaCargaClientes ventana;
+public class ControladorAltaServicio implements ActionListener, ClienteSeleccionable, ControladorInterno{
+	private VentanaAltaServicio ventana;
 	private Cliente cliente = null;
 
-	public ControladorCargaCliente() {
-		ventana = new VentanaCargaClientes();
+	public ControladorAltaServicio() {
+		ventana = new VentanaAltaServicio();
 		ventana.botonExistente().addActionListener(this);
 		ventana.botonLimpiar().addActionListener(this);
 		ventana.setVisible(true);
