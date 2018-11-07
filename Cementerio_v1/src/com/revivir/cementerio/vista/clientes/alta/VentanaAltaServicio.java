@@ -22,7 +22,7 @@ import com.toedter.calendar.JDateChooser;
 
 public class VentanaAltaServicio extends VentanaInterna {
 	private static final long serialVersionUID = 1L;
-	private JButton btnExistente, btnLimpiarCliente, btnConfirmar, btnLimpiarDodo;
+	private JButton btnExistente, btnLimpiarCliente, btnConfirmar, btnLimpiarTodo;
 
 	// DATOS CLIENTE
 	private JTextField inDNI, inApellido, inNombre, inTelefono, inEmail;
@@ -48,10 +48,10 @@ public class VentanaAltaServicio extends VentanaInterna {
 		panelPrincipal.add(crearPanelUbicacion());
 		
 		btnConfirmar = new JButton("Confirmar alta de servicio");
-		btnLimpiarDodo = new JButton("Limpiar todos los campos");
+		btnLimpiarTodo = new JButton("Limpiar todos los campos");
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.add(btnConfirmar);
-		panelBotones.add(btnLimpiarDodo);
+		panelBotones.add(btnLimpiarTodo);
 		panelPrincipal.add(panelBotones);
 	}
 
@@ -238,6 +238,13 @@ public class VentanaAltaServicio extends VentanaInterna {
 			}
 		});
 
+		// DEPENDEINDO DEL SUB SECTOR ESCOGIDO ALGUNOS CAMPOS SE INHABILITAN
+		inSubSector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				habilitarCampos();
+			}
+		});
+
 		inSeccion = new JTextField();
 		inMacizo = new JTextField();
 		inUnidad = new JTextField();
@@ -346,6 +353,18 @@ public class VentanaAltaServicio extends VentanaInterna {
 		return ret;
 	}
 	
+	private void habilitarCampos() {
+		SubSector subSector = (SubSector) inSubSector.getSelectedItem();
+		if (subSector == SubSector.INDIGENTES) {
+			inCheckMacizo.setEnabled(false);
+			inCheckBis.setEnabled(false);
+			inCheckBis.setVisible(false);
+		}
+		
+
+		
+	}
+
 	private void recargarSubSectores() {
 		inSubSector.removeAllItems();
 		Sector sector = (Sector) inSector.getSelectedItem();
@@ -373,12 +392,104 @@ public class VentanaAltaServicio extends VentanaInterna {
 		return inEmail;
 	}
 
+	public JTextField getInDNIFallecido() {
+		return inDNIFallecido;
+	}
+
+	public JTextField getInApellidoFallecido() {
+		return inApellidoFallecido;
+	}
+
+	public JTextField getInNombreFallecido() {
+		return inNombreFallecido;
+	}
+
+	public JTextField getInCocheria() {
+		return inCocheria;
+	}
+
+	public JDateChooser getInFechaFallecimiento() {
+		return inFechaFallecimiento;
+	}
+
+	public JComboBox<TipoFallecimiento> getInTipoFallecimiento() {
+		return inTipoFallecimiento;
+	}
+
+	public JTextField getInSeccion() {
+		return inSeccion;
+	}
+
+	public JTextField getInMacizo() {
+		return inMacizo;
+	}
+
+	public JTextField getInUnidad() {
+		return inUnidad;
+	}
+
+	public JTextField getInNumeroSepultura() {
+		return inNumeroSepultura;
+	}
+
+	public JTextField getInSepultura() {
+		return inSepultura;
+	}
+
+	public JTextField getInInhumacion() {
+		return inInhumacion;
+	}
+
+	public JTextField getInNicho() {
+		return inNicho;
+	}
+
+	public JTextField getInFila() {
+		return inFila;
+	}
+
+	public JTextField getInCirc() {
+		return inCirc;
+	}
+
+	public JTextField getInParcela() {
+		return inParcela;
+	}
+
+	public JTextField getInMueble() {
+		return inMueble;
+	}
+
+	public JCheckBox getInCheckMacizo() {
+		return inCheckMacizo;
+	}
+
+	public JCheckBox getInCheckBis() {
+		return inCheckBis;
+	}
+
+	public JComboBox<Sector> getInSector() {
+		return inSector;
+	}
+
+	public JComboBox<SubSector> getInSubSector() {
+		return inSubSector;
+	}
+
 	public JButton botonExistente() {
 		return btnExistente;
 	}
 
-	public JButton botonLimpiar() {
+	public JButton botonLimpiarCliente() {
 		return btnLimpiarCliente;
 	}
-	
+
+	public JButton botonLimpiarTodo() {
+		return btnLimpiarTodo;
+	}
+
+	public JButton botonConfirmar() {
+		return btnConfirmar;
+	}
+		
 }

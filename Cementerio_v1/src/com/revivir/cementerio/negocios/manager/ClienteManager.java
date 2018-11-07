@@ -13,6 +13,13 @@ public class ClienteManager {
 		return obd.select();
 	}
 	
+	public static void guardarCliente(String DNI, String nombres, String apellido, String telefono, String email) {
+		
+	}
 	
+	public static Cliente traerPorDNI(String DNI) {
+		
+		return null;
+	}
 
 }
