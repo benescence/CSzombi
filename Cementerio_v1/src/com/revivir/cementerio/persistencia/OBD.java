@@ -6,6 +6,13 @@ import java.sql.Statement;
 
 public class OBD {
 	protected final String driver = "com.mysql.jdbc.Driver";
+	
+	// DESARROLLO
+	//protected final String cadenaConexion = "jdbc:mysql://localhost:3306/revivir"; 
+	//protected String usuarioBD = "root"; 
+	//protected String passwordBD = "root";
+	
+	// PRODUCCION
 	protected final String cadenaConexion = "jdbc:mysql://sql143.main-hosting.eu:3306/u147800277_cemen"; 
 	protected String usuarioBD = "u147800277_ben";
 	protected String passwordBD = "Tiburones";

@@ -241,7 +241,7 @@ public class VentanaAltaServicio extends VentanaInterna {
 		// DEPENDEINDO DEL SUB SECTOR ESCOGIDO ALGUNOS CAMPOS SE INHABILITAN
 		inSubSector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				habilitarCampos();
+				seleccionarSubSector();
 			}
 		});
 
@@ -353,18 +353,79 @@ public class VentanaAltaServicio extends VentanaInterna {
 		return ret;
 	}
 	
-	private void habilitarCampos() {
+	private void seleccionarSubSector() {
 		SubSector subSector = (SubSector) inSubSector.getSelectedItem();
-		if (subSector == SubSector.INDIGENTES) {
-			inCheckMacizo.setEnabled(false);
-			inCheckBis.setEnabled(false);
-			inCheckBis.setVisible(false);
+		
+		if (subSector == SubSector.SEPULTURAS) {
+			habilitarCamposUbicacion(false);
+			inSeccion.setEnabled(true);
+			inMacizo.setEnabled(true);
+			inUnidad.setEnabled(true);
+			inNumeroSepultura.setEnabled(true);
+			inCheckMacizo.setEnabled(true);
+			inCheckBis.setEnabled(true);
+
+		} else if (subSector == SubSector.INDIGENTES) {
+			habilitarCamposUbicacion(false);
+			inSeccion.setEnabled(true);
+			inMacizo.setEnabled(true);
+			inSepultura.setEnabled(true);
+			inInhumacion.setEnabled(true);
+
+		} else if (subSector == SubSector.PALMERAS_ATAUD
+				|| subSector == SubSector.PALMERAS_CENIZAS
+				|| subSector == SubSector.PALMERAS_RESTOS) {
+			
+			habilitarCamposUbicacion(false);
+			inNicho.setEnabled(true);
+			inFila.setEnabled(true);
+			
+		} else if (subSector == SubSector.PALMERAS_SEPULTURAS) {
+			habilitarCamposUbicacion(false);
+			inSepultura.setEnabled(true);
+			
+		} else if (subSector == SubSector.NICHERA) {
+			habilitarCamposUbicacion(false);
+			inCirc.setEnabled(true);
+			inSeccion.setEnabled(true);
+			inMacizo.setEnabled(true);
+			inParcela.setEnabled(true);
+			inFila.setEnabled(true);
+			inUnidad.setEnabled(true);
+
+		} else if (subSector == SubSector.CENIZARIO) {
+			habilitarCamposUbicacion(false);
+			inMueble.setEnabled(true);
+			inNicho.setEnabled(true);
+		
+		} else if (subSector == SubSector.BOVEDA) {
+			habilitarCamposUbicacion(false);
+			inCirc.setEnabled(true);
+			inSeccion.setEnabled(true);
+			inMacizo.setEnabled(true);
+			inParcela.setEnabled(true);
+			inUnidad.setEnabled(true);
+			inCheckBis.setEnabled(true);
 		}
 		
-
-		
 	}
-
+	
+	private void habilitarCamposUbicacion(boolean habilitado) {
+		inSeccion.setEnabled(habilitado);
+		inMacizo.setEnabled(habilitado);
+		inUnidad.setEnabled(habilitado);
+		inNumeroSepultura.setEnabled(habilitado);
+		inSepultura.setEnabled(habilitado);
+		inInhumacion.setEnabled(habilitado);
+		inNicho.setEnabled(habilitado);
+		inFila.setEnabled(habilitado);
+		inCirc.setEnabled(habilitado);
+		inParcela.setEnabled(habilitado);
+		inMueble.setEnabled(habilitado);
+		inCheckMacizo.setEnabled(habilitado);
+		inCheckBis.setEnabled(habilitado);
+	}
+	
 	private void recargarSubSectores() {
 		inSubSector.removeAllItems();
 		Sector sector = (Sector) inSector.getSelectedItem();
@@ -372,6 +433,11 @@ public class VentanaAltaServicio extends VentanaInterna {
 			inSubSector.addItem(elemento);
 	}
 
+	
+	
+	
+	
+	//************************************* SOLO GETTERS A PARTIR DE ESTE PUNTO *********************************************
 	public JTextField getDNI() {
 		return inDNI;
 	}
