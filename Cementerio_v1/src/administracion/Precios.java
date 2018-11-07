@@ -1,6 +1,4 @@
-package administracion;
-
-import java.awt.EventQueue;
+package src.administracion;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;

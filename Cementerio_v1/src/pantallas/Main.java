@@ -1,4 +1,4 @@
-package pantallas;
+package src.pantallas;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
