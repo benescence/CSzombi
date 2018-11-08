@@ -15,6 +15,7 @@ import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.seleccion.ClienteSeleccionable;
 import com.revivir.cementerio.vista.seleccion.ControladorSeleccionCliente;
+import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorAltaServicio implements ActionListener, ClienteSeleccionable, ControladorInterno{
 	private VentanaAltaServicio ventana;
@@ -57,7 +58,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		}
 		
 		// GUARDAR LA UBICACION
-		SubSector subsector = null;
+		SubSector subsector = (SubSector) ventana.getInSubSector().getSelectedItem();
 		Integer deposito = null;
 		String otroCementerio = null;
 		String osario = null;
@@ -66,7 +67,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String seccion = null;
 		String macizo= null;
 		String unidad = null;
-		String bis = null;
+		String bis = "a";
 		String bis_macizo = null;
 		String numero= null;
 		String sepultura = null;
@@ -80,14 +81,17 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		
 		// GUARDO AL FALLECIDO
 		Integer ubicacion = 1;
-		TipoFallecimiento tipo = null;
+		TipoFallecimiento tipo = (TipoFallecimiento) ventana.getInTipoFallecimiento().getSelectedItem();
 		String dni = null;
 		String apellido= null;
 		String nombre= null;
 		String cocheria= null;
-		Date fechaFallecimiento = null;
+		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
 		FallecidoManager.guardarFallecido(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
 		
+		// FINALIZO EL GUARDADO
+		Popup.mostrar("El servicio se ha guardado exitosamente");
+		limpiarTodo();
 	}
 
 	private void limpiarTodo() {
