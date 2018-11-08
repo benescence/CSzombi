@@ -2,17 +2,10 @@
 create database revivir;
 use revivir;
 
--- ESQUEMA TIPO DE FALLECIMIENTO
-CREATE TABLE rev_tipo_fallecimiento (
-	ID TINYINT(1),
-	descripcion VARCHAR(20) NOT NULL,
-	PRIMARY KEY (ID)
-);
-
 -- ESQUEMA CLIENTES
 CREATE TABLE rev_clientes (
 	ID INT(10) AUTO_INCREMENT,
-	DNI VARCHAR(11) NULL,
+	DNI VARCHAR(10) NULL,
 	apellido VARCHAR(50) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
 	telefono VARCHAR(20) NULL,
@@ -20,49 +13,12 @@ CREATE TABLE rev_clientes (
 	PRIMARY KEY (ID)
 );
 
-
--- ESQUEMAS FALLECIDOS
-CREATE TABLE rev_fallecidos (
-  ID INT(10) AUTO_INCREMENT,
-  cliente INT(10) NOT NULL,
-  DNI VARCHAR(11) NULL,
-  apellido VARCHAR(50) NOT NULL,
-  nombre VARCHAR(100) NOT NULL,
-  fecha_fallecimiento DATE NOT NULL,
-  tipo_fallecimiento TINYINT(1) NOT NULL,
-  cocheria VARCHAR(20) NULL,
-  PRIMARY KEY (ID)
-);
-
-
-INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES(1, "TRAUMATICO");
-INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES(2, "NO TRAUMATICO");
-
--- ESQUEMAS UBICACION BASE
-CREATE TABLE rev_ubicaciones_base (
-	ID INT(10) AUTO_INCREMENT,
+-- ESQUEMA TIPO DE FALLECIMIENTO
+CREATE TABLE rev_tipo_fallecimiento (
+	ID INT(1),
 	descripcion VARCHAR(20) NOT NULL,
-    PRIMARY KEY (ID)
+	PRIMARY KEY (ID)
 );
-
-INSERT INTO rev_ubicaciones_base (ID, descripcion) VALUES
-(1, 'nichera '),
-(2, 'palmeras_a'),
-(3, 'palmeras_c'),
-(4, 'palmeras_ro'),
-(5, 'palmeras_S'),
-(6, 'boveda'),
-(7, 'sepultura'),
-(8, 'indigente'),
-(9, 'cenizario'),
-(10, 'osario'),
-(11, 'otroCementerio'),
-(12, 'deposito1'),
-(13, 'deposito3'),
-(14, 'deposito2');
-
-
-
 
 -- ESQUEMAS SECTOR
 CREATE TABLE rev_sector (
@@ -71,43 +27,20 @@ CREATE TABLE rev_sector (
     PRIMARY KEY (ID)
 );
 
-INSERT INTO rev_sector (ID, descripcion) VALUES
-(1, 'Sepulturas'),
-(2, 'Palmeras'),
-(3, 'Nichera'),
-(4, 'Cenizario'),
-(5, 'Boveda');
-
-
-
--- ESQUEMAS UBICACION BASE
+-- ESQUEMAS SUB SECTOR
 CREATE TABLE rev_sub_sector (
 	ID INT(10) NOT NULL,
 	sector INT(10) NOT NULL,
     descripcion VARCHAR(20) NOT NULL,
-    PRIMARY KEY (ID)
+    PRIMARY KEY (ID),
+	FOREIGN KEY (sector) REFERENCES rev_sector(ID)
 );
 
-INSERT INTO rev_sub_sector (ID, sector, descripcion) VALUES
-(1, 1, 'Sepulturas'),
-(2, 1, 'Indigentes'),
-
-(3, 2, 'Palmeras ataud'),
-(4, 2, 'Palmeras cenizas'),
-(5, 2, 'Palmeras restos'),
-(6, 2, 'Palmeras sepultura'),
-
-(7, 3, 'Nichera'),
-(8, 4, 'Cenizario'),
-(9, 5, 'Boveda');
-
-
-
--- ESQUEMAS UBICACIONES POR CLIENTES
+-- ESQUEMAS UBICACIONES
 CREATE TABLE rev_ubicaciones (
 	ID INT(10) AUTO_INCREMENT,
-	base INT(11) NOT NULL,
-	deposito TINYINT(1) DEFAULT NULL,
+	subsector INT(10) NOT NULL,
+	deposito INT(1) NULL,
 	otro_cementerio VARCHAR(11) NULL,
 	osario VARCHAR(11) NULL,
 	nicho VARCHAR(11) NULL,
@@ -122,107 +55,48 @@ CREATE TABLE rev_ubicaciones (
 	parcela VARCHAR(11) NULL,
 	mueble VARCHAR(11) NULL,
 	inhumacion VARCHAR(20) NULL,
-	Circ VARCHAR(10) NULL,
-	PRIMARY KEY (ID)
+	circ VARCHAR(10) NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (subsector) REFERENCES rev_sub_sector(ID)
 );
 
+-- ESQUEMAS FALLECIDOS
+CREATE TABLE rev_fallecidos (
+	ID INT(10) AUTO_INCREMENT,
+	cliente INT(10) NOT NULL,
+	ubicacion INT(10) NOT NULL,
+	DNI VARCHAR(11) NULL,
+	apellido VARCHAR(50) NOT NULL,
+	nombre VARCHAR(100) NOT NULL,
+	fecha_fallecimiento DATE NOT NULL,
+	tipo_fallecimiento INT(1) NOT NULL,
+	cocheria VARCHAR(20) NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (cliente) REFERENCES rev_clientes(ID),
+	FOREIGN KEY (ubicacion) REFERENCES rev_ubicaciones(ID),
+	FOREIGN KEY (tipo_fallecimiento) REFERENCES rev_tipo_fallecimiento(ID),
+);
 
+-- INSERT TIPOS DE FALLECIMIENTO
+INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES(1, "TRAUMATICO");
+INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES(2, "NO TRAUMATICO");
 
+-- INSERT SECTORES
+INSERT INTO rev_sector (ID, descripcion) VALUES
+(1, 'SEPULTURAS'),
+(2, 'PALMERAS'),
+(3, 'NICHERA'),
+(4, 'CENIZARIO'),
+(5, 'BOVEDA');
 
-
-
-
--- ESQUEMAS CLIENTES
-CREATE TABLE `Clientes` (
-  `Num_cliente` int(11) NOT NULL,
-  `apellido` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `nombres` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `fecha_fallecimiento` date NOT NULL,
-  `dni` int(11) NOT NULL,
-  `direccion` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nombre_familiar` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `telefono_familiar` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cocheria` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tipo_fallecimiento` tinyint(1) DEFAULT NULL COMMENT '1 si no es traumatico, 0 si es',
-  `email_familiar` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dni_ocupante` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
--- ESQUEMAS CODIGOS
-CREATE TABLE `codigos` (
-  `id` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `importe` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
--- ESQUEMAS CUENTA
-CREATE TABLE `cuenta` (
-  `id_cuenta` int(11) NOT NULL,
-  `monto` int(11) NOT NULL,
-  `dni_cliente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ESQUEMAS LOGIN
-CREATE TABLE `login` (
-  `u_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `u_pass` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `u_tipo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
--- ESQUEMAS UBICACIONES POR CLIENTES
-CREATE TABLE `ubicacionesPorCliente` (
-  `id_cliente` int(11) NOT NULL,
-  `dni` int(11) NOT NULL,
-  `id_ubicacion` int(11) NOT NULL,
-  `deposito` tinyint(1) DEFAULT NULL,
-  `otrocementerio` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `osario` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nicho` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fila` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `seccion` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `macizo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unidad` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `bis` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `bis_macizo` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `numero` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `sepultura` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `parcela` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `mueble` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `inhumacion` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Circ` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dni_ocupante` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
--- ESQUEMAS UBICACION MAESTRO
-CREATE TABLE `ubic_maestro` (
-  `id_ubicacion` int(11) NOT NULL,
-  `descripcion` varchar(200) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `ubic_maestro` (`id_ubicacion`, `descripcion`) VALUES
-(1, 'nichera '),
-(2, 'palmeras_a'),
-(3, 'palmeras_c'),
-(4, 'palmeras_ro'),
-(5, 'palmeras_S'),
-(6, 'boveda'),
-(7, 'sepultura'),
-(8, 'indigente'),
-(9, 'cenizario'),
-(10, 'osario'),
-(11, 'otroCementerio'),
-(12, 'deposito1'),
-(13, 'deposito3'),
-(14, 'deposito2');
-
--- ESQUEMAS VENCIMIENTOS
-CREATE TABLE `vencimientos` (
-  `id_vencimientos` int(11) NOT NULL,
-  `fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
+-- INSERT SUB SECTORES
+INSERT INTO rev_sub_sector (ID, sector, descripcion) VALUES
+(1, 1, 'SEPULTURAS'),
+(2, 1, 'INDIGENTES'),
+(3, 2, 'PALMERAS ATAUD'),
+(4, 2, 'PALMERAS CENIZAS'),
+(5, 2, 'PALMERAS RESTOS'),
+(6, 2, 'PALMERAS SEPULTURA'),
+(7, 3, 'NICHERA'),
+(8, 4, 'CENIZARIO'),
+(9, 5, 'BOVEDA');
