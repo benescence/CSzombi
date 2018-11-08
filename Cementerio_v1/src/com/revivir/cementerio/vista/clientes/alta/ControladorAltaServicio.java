@@ -2,10 +2,15 @@ package com.revivir.cementerio.vista.clientes.alta;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.JInternalFrame;
 
+import com.revivir.cementerio.negocios.Localizador;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
+import com.revivir.cementerio.negocios.manager.FallecidoManager;
+import com.revivir.cementerio.persistencia.definidos.SubSector;
+import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.seleccion.ClienteSeleccionable;
@@ -51,8 +56,37 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 			cliente = ClienteManager.traerPorDNI(DNI);
 		}
 		
+		// GUARDAR LA UBICACION
+		SubSector subsector = null;
+		Integer deposito = null;
+		String otroCementerio = null;
+		String osario = null;
+		String nicho = null;
+		String fila = null;
+		String seccion = null;
+		String macizo= null;
+		String unidad = null;
+		String bis = null;
+		String bis_macizo = null;
+		String numero= null;
+		String sepultura = null;
+		String parcela= null;
+		String mueble= null;
+		String inhumacion = null;
+		String circ = null;
 		
-		// TODO Auto-generated method stub
+		Localizador.guardarUbicacion(subsector, deposito, otroCementerio, osario, nicho, fila, seccion,
+				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
+		
+		// GUARDO AL FALLECIDO
+		Integer ubicacion = 1;
+		TipoFallecimiento tipo = null;
+		String dni = null;
+		String apellido= null;
+		String nombre= null;
+		String cocheria= null;
+		Date fechaFallecimiento = null;
+		FallecidoManager.guardarFallecido(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
 		
 	}
 

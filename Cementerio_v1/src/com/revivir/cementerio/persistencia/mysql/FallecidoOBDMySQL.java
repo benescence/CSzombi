@@ -13,12 +13,13 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
 public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
-	private final String campos = "cliente, DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria";
+	private final String campos = "cliente, ubicacion, DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria";
 	private final String tabla = "rev_fallecidos";
 	
 	@Override
 	public void insert(Fallecido obciso) {
-		String valores = obciso.getCliente() 
+		String valores = obciso.getCliente()
+				+", "+obciso.getUbicacion()
 				+", '"+obciso.getDni()+"'"
 				+", '"+obciso.getApellido()+"'"
 				+", '"+obciso.getNombre()+"'"
@@ -78,6 +79,7 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 				ret.add(new Fallecido(
 						resultados.getInt("ID"),
 						resultados.getInt("cliente"),
+						resultados.getInt("ubicacion"),
 						Definido.tipoFallecimiento(resultados.getInt("tipo_fallecimiento")),
 						resultados.getString("DNI"),
 						resultados.getString("apellido"),

@@ -226,25 +226,6 @@ public class VentanaAltaServicio extends VentanaInterna {
 		lblCheckMacizo.setPreferredSize(largoLabel);
 		lblCheckBis.setPreferredSize(largoLabel);
 		
-		inSubSector = new JComboBox<>();
-		inSector = new JComboBox<>();
-		for (Sector sector : Localizador.traerSectores())
-			inSector.addItem(sector);
-		
-		// EL SUB SECTOR DEPENDE DEL SECTOR ESCOGIDO
-		inSector.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				recargarSubSectores();
-			}
-		});
-
-		// DEPENDEINDO DEL SUB SECTOR ESCOGIDO ALGUNOS CAMPOS SE INHABILITAN
-		inSubSector.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				seleccionarSubSector();
-			}
-		});
-
 		inSeccion = new JTextField();
 		inMacizo = new JTextField();
 		inUnidad = new JTextField();
@@ -258,6 +239,22 @@ public class VentanaAltaServicio extends VentanaInterna {
 		inMueble = new JTextField();
 		inCheckBis = new JCheckBox("Bis");
 		inCheckMacizo = new JCheckBox("Macizo");
+		
+		inSector = new JComboBox<>();
+		inSubSector = new JComboBox<>();
+
+		for (Sector sector : Localizador.traerSectores())
+			inSector.addItem(sector);
+		
+		// EL SUB SECTOR DEPENDE DEL SECTOR ESCOGIDO
+		inSector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				recargarSubSectores();
+			}
+		});
+
+		inSector.setSelectedIndex(0);
+
 		
 		Dimension largoEntrada = new Dimension(Short.MAX_VALUE, 25);
 		inSector.setMaximumSize(largoEntrada);
@@ -273,6 +270,16 @@ public class VentanaAltaServicio extends VentanaInterna {
 		inCirc.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
 		inParcela.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
 		inMueble.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
+		
+
+		// DEPENDEINDO DEL SUB SECTOR ESCOGIDO ALGUNOS CAMPOS SE INHABILITAN
+		inSubSector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				seleccionarSubSector();
+			}
+		});
+		inSubSector.setSelectedIndex(0);
+		
 		
 		// ORGANIZACION DE PANELES
 		PanelHorizontal panelSector = new PanelHorizontal();
