@@ -17,7 +17,7 @@ import com.revivir.cementerio.vista.seleccion.ClienteSeleccionable;
 import com.revivir.cementerio.vista.seleccion.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorAltaServicio implements ActionListener, ClienteSeleccionable, ControladorInterno{
+public class ControladorAltaServicio implements ActionListener, ClienteSeleccionable, ControladorInterno {
 	private VentanaAltaServicio ventana;
 	private Cliente cliente = null;
 
@@ -32,7 +32,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == ventana.botonExistente())
-			seleccionarCliente();
+			clienteExistente();
 	
 		else if (e.getSource() == ventana.botonLimpiarCliente())
 			limpiarCliente();
@@ -45,55 +45,52 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 	}
 	
 	private void confirmar() {
-
+		
+		// SI LOS INPUTS NO SON VALIDOS MUESTRO MENSAJE Y NO HAGO LA CARGA DE NADA
+		if (!(validarCliente() && validarFallecido() && validarUbicacion()))
+			return;
+		
 		// GUARDO AL CLIENTE
 		if (cliente == null) {
-			if (validarCliente()) {
-				String DNI = ventana.getDNI().getText();
-				String nombres = ventana.getNombre().getText();
-				String apellidos  = ventana.getApellido().getText();
-				String telefono = ventana.getTelefono().getText();
-				String email = ventana.getEmail().getText();
-				ClienteManager.guardarCliente(DNI, nombres, apellidos, telefono, email);
-				cliente = ClienteManager.traerPorDNI(DNI);
-			
-			} else {
-				return;
-			}
+			String DNI = ventana.getDNI().getText();
+			String nombres = ventana.getNombre().getText();
+			String apellidos  = ventana.getApellido().getText();
+			String telefono = ventana.getTelefono().getText();
+			String email = ventana.getEmail().getText();
+			ClienteManager.guardarCliente(DNI, nombres, apellidos, telefono, email);
+			cliente = ClienteManager.traerPorDNI(DNI);
 		}
-		
 		
 		// GUARDAR LA UBICACION
 		SubSector subsector = (SubSector) ventana.getInSubSector().getSelectedItem();
 		Integer deposito = null;
 		String otroCementerio = null;
 		String osario = null;
-		String nicho = null;
-		String fila = null;
-		String seccion = null;
-		String macizo= null;
-		String unidad = null;
-		String bis = "a";
+		String bis = "N"; // cambiar tipo de dato en la BD
 		String bis_macizo = null;
-		String numero= null;
-		String sepultura = null;
-		String parcela= null;
-		String mueble= null;
-		String inhumacion = null;
-		String circ = null;
-		
+		String nicho = (ventana.getInNicho().isEnabled() ? ventana.getInNicho().getText() : null);
+		String fila = (ventana.getInFila().isEnabled() ? ventana.getInFila().getText() : null);
+		String seccion = (ventana.getInSeccion().isEnabled() ? ventana.getInFila().getText() : null);
+		String macizo= (ventana.getInMacizo().isEnabled() ? ventana.getInMacizo().getText() : null);
+		String unidad = (ventana.getInUnidad().isEnabled() ? ventana.getInUnidad().getText() : null);
+		String numero= (ventana.getInNumeroSepultura().isEnabled() ? ventana.getInNumeroSepultura().getText() : null);
+		String sepultura = (ventana.getInSepultura().isEnabled() ? ventana.getInSepultura().getText() : null);
+		String parcela= (ventana.getInParcela().isEnabled() ? ventana.getInParcela().getText() : null);
+		String mueble= (ventana.getInMueble().isEnabled() ? ventana.getInMueble().getText() : null);
+		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
+		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
+
 		Localizador.guardarUbicacion(subsector, deposito, otroCementerio, osario, nicho, fila, seccion,
 				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
 		
 		// GUARDO AL FALLECIDO
-		Integer ubicacion = 1;
+		Integer ubicacion = Localizador.traerUltimaUbicacionGuardada();
 		TipoFallecimiento tipo = (TipoFallecimiento) ventana.getInTipoFallecimiento().getSelectedItem();
-		String dni = null;
-		String apellido= null;
-		String nombre= null;
-		String cocheria= null;
+		String dni = (!ventana.getInDNIFallecido().getText().equals("") ? ventana.getInDNIFallecido().getText() : null);
+		String apellido= ventana.getInApellidoFallecido().getText();;
+		String nombre= ventana.getInNombreFallecido().getText();;
+		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
-		//System.out.println(cliente);
 		FallecidoManager.guardarFallecido(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
 		
 		// FINALIZO EL GUARDADO
@@ -107,6 +104,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		ventana.getInApellidoFallecido().setText("");
 		ventana.getInDNIFallecido().setText("");
 		ventana.getInCirc().setText("");
+		ventana.getInParcela().setText("");
 		ventana.getInFila().setText("");
 		ventana.getInUnidad().setText("");
 		ventana.getInNicho().setText("");
@@ -115,7 +113,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		ventana.getInCheckMacizo().setSelected(false);
 	}
 
-	private void seleccionarCliente() {
+	private void clienteExistente() {
 		ventana.deshabilitar();
 		new ControladorSeleccionCliente(this);
 	}
@@ -151,8 +149,65 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		ventana.getEmail().setEnabled(false);
 	}
 
+	public boolean validarUbicacion() {
+		String nicho = ventana.getInNicho().getText();
+		String fila = ventana.getInFila().getText();
+		String seccion = ventana.getInSeccion().getText();
+		String macizo= ventana.getInMacizo().getText();
+		String unidad = ventana.getInUnidad().getText();
+		String numero= ventana.getInNumeroSepultura().getText();
+		String sepultura = ventana.getInSepultura().getText();
+		String parcela= ventana.getInParcela().getText();
+		String mueble= ventana.getInMueble().getText();
+		String inhumacion = ventana.getInInhumacion().getText();
+		String circ = ventana.getInCirc().getText();
+
+		String mensaje = "";
+		if (ventana.getInNicho().isEnabled() && nicho.equals(""))
+			mensaje += "\n    -El NICHO de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInFila().isEnabled() && fila.equals(""))
+			mensaje += "\n    -La FILA de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInSeccion().isEnabled() && seccion.equals(""))
+			mensaje += "\n    -El SECCION de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInMacizo().isEnabled() && macizo.equals("") )
+			mensaje += "\n    -El MACIZO de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInUnidad().isEnabled() && unidad.equals("") )
+			mensaje += "\n    -La UNIDAD de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInNumeroSepultura().isEnabled() && numero.equals("") )
+			mensaje += "\n    -El N° DE SEPULTURA de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInSepultura().isEnabled() && sepultura.equals("") )
+			mensaje += "\n    -La SEPULTURA de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInParcela().isEnabled() && parcela.equals("") )
+			mensaje += "\n    -La PARCELA de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInMueble().isEnabled() && mueble.equals("") )
+			mensaje += "\n    -El MUEBLE de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInInhumacion().isEnabled() && inhumacion.equals("") )
+			mensaje += "\n    -La INHUMACION de la ubicacion no puede estar vacio.";
+		
+		if (ventana.getInCirc().isEnabled() && circ.equals("") )
+			mensaje += "\n    -El CIRC de la ubicacion no puede estar vacio.";
+		
+		if (!mensaje.equals("")) {
+			Popup.mostrar("Se encontraron los siguientes errores en el formulario para fallecido:"+mensaje);
+			return false;
+		}
+		
+		return true;
+	}
 	
 	public boolean validarCliente() {
+		if (cliente != null)
+			return true;
+		
 		String DNI = ventana.getDNI().getText();
 		String nombres = ventana.getNombre().getText();
 		String apellidos  = ventana.getApellido().getText();
@@ -160,20 +215,20 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String email = ventana.getEmail().getText();
 		
 		String mensaje = "";
-		if (DNI == null || DNI.equals(""))
-			mensaje += "\nEl DNI del cliente no pueda estar vacio.";
+		if (DNI.equals(""))
+			mensaje += "\n    -El DNI del cliente no puede estar vacio.";
 		
-		if (nombres == null || nombres.equals(""))
-			mensaje += "\nEl nombre del cliente no pueda estar vacio.";
+		if (nombres.equals(""))
+			mensaje += "\n    -El NOMBRE del cliente no pueda estar vacio.";
 		
-		if (apellidos == null || apellidos.equals(""))
-			mensaje += "\nEl apellido del cliente no pueda estar vacio.";
+		if (apellidos.equals(""))
+			mensaje += "\n    -El APELLIDO del cliente no puede estar vacio.";
 		
-		if (telefono == null || telefono.equals(""))
-			mensaje += "\nEl telefono del cliente no pueda estar vacio.";
+		if (telefono.equals(""))
+			mensaje += "\n    -El TELEFONO del cliente no puede estar vacio.";
 		
-		if (email == null || email.equals(""))
-			mensaje += "\nEl email del cliente no pueda estar vacio.";
+		if (email.equals(""))
+			mensaje += "\n    -El E-MAIL del cliente no puede estar vacio.";
 		
 		if (!mensaje.equals("")) {
 			Popup.mostrar("Se encontraron los siguientes errores en el formulario para cliente:"+mensaje);
@@ -183,6 +238,32 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		return true;
 	}
 	
+	public boolean validarFallecido() {
+		//String DNIFallecido = ventana.getInDNIFallecido().getText();
+		String nombresFallecido = ventana.getInNombreFallecido().getText();
+		String apellidosFallecido = ventana.getInApellidoFallecido().getText();
+		//String cocheriaFallecido = ventana.getInCocheria().getText();
+		
+		String mensaje = "";
+		//if (DNIFallecido.equals(""))
+		//	mensaje += "\n    -El DNI del fallecido no puede estar vacio.";
+		
+		if (nombresFallecido.equals(""))
+			mensaje += "\n    -El NOMBRE del fallecido no puede estar vacio.";
+		
+		if (apellidosFallecido.equals(""))
+			mensaje += "\n    -El APELLIDO del fallecido no puede estar vacio.";
+		
+		//if (cocheriaFallecido.equals(""))
+		//	mensaje += "\n    -La COCHERIA del fallecido no puede vacio.";
+		
+		if (!mensaje.equals("")) {
+			Popup.mostrar("Se encontraron los siguientes errores en el formulario para fallecido:"+mensaje);
+			return false;
+		}
+		
+		return true;
+	}
 	
 	@Override
 	public void mostrar() {

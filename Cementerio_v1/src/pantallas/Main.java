@@ -251,7 +251,7 @@ public class Main extends JFrame {
 		mnAdmin.add(mntmModificaciones);
 		
 		//************************* MODULOS NUEVOS
-		JMenu menuClientes2 = new JMenu("Clientes 2");
+		JMenu menuClientes2 = new JMenu("Clientes Beta");
 		menuBarra.add(menuClientes2);
 
 		JMenuItem itemAltaCliente = new JMenuItem("Alta de clientes");

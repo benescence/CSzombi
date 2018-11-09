@@ -58,4 +58,10 @@ public class Localizador {
 		obd.insert(ubicacion);
 	}
 	
+	public static Integer traerUltimaUbicacionGuardada() {
+		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
+		return obd.selectLastID();
+	}
+	
+	
 }

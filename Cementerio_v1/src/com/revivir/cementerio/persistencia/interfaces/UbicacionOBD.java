@@ -9,4 +9,6 @@ public interface UbicacionOBD {
 	
 	public List<Ubicacion> select();
 	
+	public Integer selectLastID();
+	
 }

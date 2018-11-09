@@ -2,6 +2,7 @@ package com.revivir.cementerio.persistencia;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class OBD {
@@ -33,4 +34,30 @@ public class OBD {
 		}
 	}
 
+	
+	public Integer selectLastID(String tabla) {
+		String sql = "select ID from "+tabla+" order by ID desc limit 1";
+		Integer ret = null;
+		try { 
+			Class.forName(driver); 
+			Connection conexion = DriverManager.getConnection(cadenaConexion, usuarioBD, passwordBD); 
+			Statement sentencia = conexion.createStatement ();
+			ResultSet resultados = sentencia.executeQuery(sql);			
+	
+			if (resultados.next())
+				ret = resultados.getInt("ID");
+				
+			resultados.close();
+			sentencia.close();
+			conexion.close();
+			
+		}catch(Exception e) {
+			System.out.println(sql);
+			e.printStackTrace();
+		}
+			
+		return ret;
+	}
+
+	
 }

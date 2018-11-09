@@ -89,5 +89,10 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 			
 		return ret;
 	}
+
+	@Override
+	public Integer selectLastID() {
+		return selectLastID(tabla);
+	}
 	
 }
