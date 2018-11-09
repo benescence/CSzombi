@@ -48,14 +48,20 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 
 		// GUARDO AL CLIENTE
 		if (cliente == null) {
-			String DNI = ventana.getDNI().getText();
-			String nombres = ventana.getNombre().getText();
-			String apellidos  = ventana.getApellido().getText();
-			String telefono = ventana.getTelefono().getText();
-			String email = ventana.getEmail().getText();
-			ClienteManager.guardarCliente(DNI, nombres, apellidos, telefono, email);
-			cliente = ClienteManager.traerPorDNI(DNI);
+			if (validarCliente()) {
+				String DNI = ventana.getDNI().getText();
+				String nombres = ventana.getNombre().getText();
+				String apellidos  = ventana.getApellido().getText();
+				String telefono = ventana.getTelefono().getText();
+				String email = ventana.getEmail().getText();
+				ClienteManager.guardarCliente(DNI, nombres, apellidos, telefono, email);
+				cliente = ClienteManager.traerPorDNI(DNI);
+			
+			} else {
+				return;
+			}
 		}
+		
 		
 		// GUARDAR LA UBICACION
 		SubSector subsector = (SubSector) ventana.getInSubSector().getSelectedItem();
@@ -87,6 +93,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String nombre= null;
 		String cocheria= null;
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
+		//System.out.println(cliente);
 		FallecidoManager.guardarFallecido(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
 		
 		// FINALIZO EL GUARDADO
@@ -144,6 +151,39 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		ventana.getEmail().setEnabled(false);
 	}
 
+	
+	public boolean validarCliente() {
+		String DNI = ventana.getDNI().getText();
+		String nombres = ventana.getNombre().getText();
+		String apellidos  = ventana.getApellido().getText();
+		String telefono = ventana.getTelefono().getText();
+		String email = ventana.getEmail().getText();
+		
+		String mensaje = "";
+		if (DNI == null || DNI.equals(""))
+			mensaje += "\nEl DNI del cliente no pueda estar vacio.";
+		
+		if (nombres == null || nombres.equals(""))
+			mensaje += "\nEl nombre del cliente no pueda estar vacio.";
+		
+		if (apellidos == null || apellidos.equals(""))
+			mensaje += "\nEl apellido del cliente no pueda estar vacio.";
+		
+		if (telefono == null || telefono.equals(""))
+			mensaje += "\nEl telefono del cliente no pueda estar vacio.";
+		
+		if (email == null || email.equals(""))
+			mensaje += "\nEl email del cliente no pueda estar vacio.";
+		
+		if (!mensaje.equals("")) {
+			Popup.mostrar("Se encontraron los siguientes errores en el formulario para cliente:"+mensaje);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	
 	@Override
 	public void mostrar() {
 		ventana.mostrar();

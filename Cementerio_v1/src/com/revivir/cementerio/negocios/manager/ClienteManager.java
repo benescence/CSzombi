@@ -14,12 +14,14 @@ public class ClienteManager {
 	}
 	
 	public static void guardarCliente(String DNI, String nombres, String apellido, String telefono, String email) {
-		
+		Cliente cliente = new Cliente(-1, DNI, apellido, nombres, telefono, email);
+		ClienteOBD obd = FactoryOBD.crearClienteOBD();
+		obd.insert(cliente);
 	}
 	
 	public static Cliente traerPorDNI(String DNI) {
-		
-		return null;
+		ClienteOBD obd = FactoryOBD.crearClienteOBD();		
+		return obd.selectByDNI(DNI);
 	}
 
 }

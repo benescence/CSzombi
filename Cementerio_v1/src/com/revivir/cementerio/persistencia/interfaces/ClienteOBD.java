@@ -15,4 +15,6 @@ public interface ClienteOBD {
 	
 	public List<Cliente> selectByNombreApellidoDNI(String nombre, String apellido, String DNI);
 
+	public Cliente selectByDNI(String DNI);
+
 }
