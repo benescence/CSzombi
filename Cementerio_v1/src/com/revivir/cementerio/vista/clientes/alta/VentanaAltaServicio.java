@@ -85,7 +85,7 @@ public class VentanaAltaServicio extends VentanaInterna {
 		inEmail.setMaximumSize(largoEntrada);
 		
 		// BOTONES
-		btnExistente = new JButton("Cargar cliente existente");
+		btnExistente = new JButton("Seleccionar cliente existente");
 		btnLimpiarCliente = new JButton("Limpiar campos");
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.add(btnExistente);

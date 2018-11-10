@@ -2,6 +2,8 @@ package com.revivir.cementerio.vista.seleccion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import com.revivir.cementerio.persistencia.entidades.Cliente;
@@ -17,6 +19,13 @@ public class ControladorSeleccionCliente implements ActionListener{
 		ventana.botonCancelar().addActionListener(this);
 		ventana.botonSeleccionar().addActionListener(this);
 		ventana.mostrar();
+		ventana.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				cancelar();
+			}
+		});
+
 	}
 
 	public void actionPerformed(ActionEvent e) {

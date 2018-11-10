@@ -71,8 +71,55 @@ public class Main extends JFrame {
 		});
 		setJMenuBar(menuBarra);
 		
+		
+		
+		
+		//************************* MODULOS NUEVOS
+		JMenu menuClientes2 = new JMenu("Clientes");
+		menuBarra.add(menuClientes2);
+
+		JMenuItem itemAltaCliente = new JMenuItem("Alta de clientes");
+		menuClientes2.add(itemAltaCliente);
+		itemAltaCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarAltaCliente();
+			}
+		});
+
+		JMenuItem itemConsultaCliente = new JMenuItem("Consulta de clientes");
+		menuClientes2.add(itemConsultaCliente);
+		itemConsultaCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarConsultaCliente();
+			}
+		});
+
+		JMenuItem itemConsultaFallecidos = new JMenuItem("Consulta de fallecidos");
+		menuClientes2.add(itemConsultaFallecidos);
+		itemConsultaFallecidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarConsultaFallecidos();
+			}
+		});
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		JMenu mnClientes = new JMenu("Clientes");
-		menuBarra.add(mnClientes);
+		//menuBarra.add(mnClientes);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Alta Clientes");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
@@ -250,33 +297,6 @@ public class Main extends JFrame {
 		});
 		mnAdmin.add(mntmModificaciones);
 		
-		//************************* MODULOS NUEVOS
-		JMenu menuClientes2 = new JMenu("Clientes Beta");
-		menuBarra.add(menuClientes2);
-
-		JMenuItem itemAltaCliente = new JMenuItem("Alta de clientes");
-		menuClientes2.add(itemAltaCliente);
-		itemAltaCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mostrarAltaCliente();
-			}
-		});
-
-		JMenuItem itemConsultaCliente = new JMenuItem("Consulta de clientes");
-		menuClientes2.add(itemConsultaCliente);
-		itemConsultaCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mostrarConsultaCliente();
-			}
-		});
-
-		JMenuItem itemConsultaFallecidos = new JMenuItem("Consulta de fallecidos");
-		menuClientes2.add(itemConsultaFallecidos);
-		itemConsultaFallecidos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mostrarConsultaFallecidos();
-			}
-		});
 		
 	}
 	

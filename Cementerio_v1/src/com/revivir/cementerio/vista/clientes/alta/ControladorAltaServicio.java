@@ -66,8 +66,12 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		Integer deposito = null;
 		String otroCementerio = null;
 		String osario = null;
-		String bis = "N"; // cambiar tipo de dato en la BD
+		String bis = null;
+		if (ventana.getInCheckBis().isEnabled()) 
+			bis = (ventana.getInCheckBis().isSelected())?"S":"N";
 		String bis_macizo = null;
+		if (ventana.getInCheckMacizo().isEnabled()) 
+			bis = (ventana.getInCheckMacizo().isSelected())?"S":"N";
 		String nicho = (ventana.getInNicho().isEnabled() ? ventana.getInNicho().getText() : null);
 		String fila = (ventana.getInFila().isEnabled() ? ventana.getInFila().getText() : null);
 		String seccion = (ventana.getInSeccion().isEnabled() ? ventana.getInFila().getText() : null);
@@ -104,11 +108,16 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		ventana.getInApellidoFallecido().setText("");
 		ventana.getInDNIFallecido().setText("");
 		ventana.getInCirc().setText("");
+		ventana.getInCocheria().setText("");
+		ventana.getInMacizo().setText("");
+		ventana.getInNumeroSepultura().setText("");
 		ventana.getInParcela().setText("");
 		ventana.getInFila().setText("");
 		ventana.getInUnidad().setText("");
 		ventana.getInNicho().setText("");
 		ventana.getInSeccion().setText("");
+		ventana.getInSepultura().setText("");
+		ventana.getInMueble().setText("");
 		ventana.getInCheckBis().setSelected(false);
 		ventana.getInCheckMacizo().setSelected(false);
 	}

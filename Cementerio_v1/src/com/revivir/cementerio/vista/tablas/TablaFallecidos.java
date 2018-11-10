@@ -7,10 +7,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.vista.util.Formato;
 
 public class TablaFallecidos extends JTable{
 	private static final long serialVersionUID = 1L;
-	private String[] columnas = { "DNI", "Nombre", "Apellido", "Fecha de fallecimiento", "Tipo de fallecimiento", "Cocheria"};
+	private String[] columnas = { "DNI", "Nombre", "Apellido", "Fecha de fallecimiento", "Tipo de fallecimiento", "Cocheria", "Ubicacion"};
 	private DefaultTableModel modelo;
 	private List<Fallecido> fallecidos;
 
@@ -33,7 +34,8 @@ public class TablaFallecidos extends JTable{
 					elemento.getApellido(),
 					elemento.getFechaFallecimiento(),
 					elemento.getTipoFallecimiento(),
-					elemento.getCocheria()
+					elemento.getCocheria(),
+					Formato.ubicacion(elemento)
 			};
 			modelo.addRow(fila);
 		}
