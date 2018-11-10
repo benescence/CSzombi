@@ -59,6 +59,8 @@ public class Main extends JFrame {
 		setTitle("Sistema de Consultas - Cementerio ");
 		setBounds(0, 0, 1000, 700);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
+		
 		
 		Bienvenido bienvenido = new Bienvenido();
 		bienvenido.setLocation(10, 11);

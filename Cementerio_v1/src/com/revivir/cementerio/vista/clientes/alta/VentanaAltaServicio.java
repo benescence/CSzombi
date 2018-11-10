@@ -9,6 +9,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import com.revivir.cementerio.negocios.Almanaque;
 import com.revivir.cementerio.negocios.Localizador;
@@ -19,10 +20,13 @@ import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.VentanaInterna;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Rectangle;
+import javax.swing.JSeparator;
 
 public class VentanaAltaServicio extends VentanaInterna {
 	private static final long serialVersionUID = 1L;
 	private JButton btnExistente, btnLimpiarCliente, btnConfirmar, btnLimpiarTodo;
+	private Dimension largoLabel = new Dimension(150, 25), largoEntrada = new Dimension(400, 25);
 
 	// DATOS CLIENTE
 	private JTextField inDNI, inApellido, inNombre, inTelefono, inEmail;
@@ -41,24 +45,30 @@ public class VentanaAltaServicio extends VentanaInterna {
 	
 	public VentanaAltaServicio() {
 		super("Alta de servicio", 450, 300);
-		PanelVertical panelPrincipal = new PanelVertical();
-		setContentPane(panelPrincipal);		
-		panelPrincipal.add(crearPanelCliente());
-		panelPrincipal.add(crearPanelFallecido());
-		panelPrincipal.add(crearPanelUbicacion());
+		setNormalBounds(new Rectangle(100, 100, 600, 500));
 		
+		// BOTONES
 		btnConfirmar = new JButton("Confirmar alta de servicio");
 		btnLimpiarTodo = new JButton("Limpiar todos los campos");
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.add(btnConfirmar);
 		panelBotones.add(btnLimpiarTodo);
+		
+		// PANELES
+		PanelVertical panelPrincipal = new PanelVertical();
+		panelPrincipal.setBorder(new EmptyBorder(10, 10, 10, 10));
+		setContentPane(panelPrincipal);
+		
+		PanelHorizontal panel1 = new PanelHorizontal();
+		panel1.add(crearPanelCliente());
+		panel1.add(crearPanelFallecido());
+		panelPrincipal.add(panel1);
+		panelPrincipal.add(new JSeparator());
+		panelPrincipal.add(crearPanelUbicacion());
 		panelPrincipal.add(panelBotones);
 	}
 
 	private PanelVertical crearPanelCliente() {
-		Dimension largoEntrada = new Dimension(Short.MAX_VALUE, 25);
-		Dimension largoLabel = new Dimension(100, 25);
-
 		// ENTRADAS
 		JLabel lblDNI = new JLabel("DNI");
 		JLabel lblApellidos = new JLabel("Apellidos");
@@ -66,12 +76,26 @@ public class VentanaAltaServicio extends VentanaInterna {
 		JLabel lblTelefono = new JLabel("Telefono");
 		JLabel lblEmail = new JLabel("E-Mail");
 
+		lblDNI.setMinimumSize(largoLabel);
 		lblDNI.setPreferredSize(largoLabel);
+		lblDNI.setMaximumSize(largoLabel);
+		
+		lblApellidos.setMinimumSize(largoLabel);
 		lblApellidos.setPreferredSize(largoLabel);
+		lblApellidos.setMaximumSize(largoLabel);
+		
+		lblNombres.setMinimumSize(largoLabel);
 		lblNombres.setPreferredSize(largoLabel);
+		lblNombres.setMaximumSize(largoLabel);
+		
+		lblTelefono.setMinimumSize(largoLabel);
 		lblTelefono.setPreferredSize(largoLabel);
+		lblTelefono.setMaximumSize(largoLabel);
+		
+		lblEmail.setMinimumSize(largoLabel);
 		lblEmail.setPreferredSize(largoLabel);
-
+		lblEmail.setMaximumSize(largoLabel);
+				
 		inDNI = new JTextField();
 		inApellido = new JTextField();
 		inNombre = new JTextField();
@@ -88,6 +112,7 @@ public class VentanaAltaServicio extends VentanaInterna {
 		btnExistente = new JButton("Seleccionar cliente existente");
 		btnLimpiarCliente = new JButton("Limpiar campos");
 		PanelHorizontal panelBotones = new PanelHorizontal();
+		panelBotones.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panelBotones.add(btnExistente);
 		panelBotones.add(btnLimpiarCliente);
 		
@@ -113,10 +138,11 @@ public class VentanaAltaServicio extends VentanaInterna {
 		panelEmail.add(inEmail);
 		
 		PanelVertical ret = new PanelVertical();
-		ret.setName("Datos del cliente");
-		ret.add(panelDNI);
+		ret.setBorder(new EmptyBorder(10, 10, 10, 30));
+		ret.add(new JLabel("Datos del cliente"));
 		ret.add(panelApellido);
 		ret.add(panelNombre);
+		ret.add(panelDNI);
 		ret.add(panelTelefono);
 		ret.add(panelEmail);
 		ret.add(panelBotones);
@@ -131,7 +157,30 @@ public class VentanaAltaServicio extends VentanaInterna {
 		JLabel lblFecha = new JLabel("Fecha de fallecimiento");
 		JLabel lblTipo = new JLabel("Tipo de fallecimiento");
 
-		Dimension largoLabel = new Dimension(100, 25);
+		lblDNI.setMinimumSize(largoLabel);
+		lblDNI.setPreferredSize(largoLabel);
+		lblDNI.setMaximumSize(largoLabel);
+		
+		lblApellidos.setMinimumSize(largoLabel);
+		lblApellidos.setPreferredSize(largoLabel);
+		lblApellidos.setMaximumSize(largoLabel);
+		
+		lblNombres.setMinimumSize(largoLabel);
+		lblNombres.setPreferredSize(largoLabel);
+		lblNombres.setMaximumSize(largoLabel);
+		
+		lblCocheria.setMinimumSize(largoLabel);
+		lblCocheria.setPreferredSize(largoLabel);
+		lblCocheria.setMaximumSize(largoLabel);
+		
+		lblFecha.setMinimumSize(largoLabel);
+		lblFecha.setPreferredSize(largoLabel);
+		lblFecha.setMaximumSize(largoLabel);
+		
+		lblTipo.setMinimumSize(largoLabel);
+		lblTipo.setPreferredSize(largoLabel);
+		lblTipo.setMaximumSize(largoLabel);
+		
 		lblDNI.setPreferredSize(largoLabel);
 		lblApellidos.setPreferredSize(largoLabel);
 		lblNombres.setPreferredSize(largoLabel);
@@ -148,13 +197,13 @@ public class VentanaAltaServicio extends VentanaInterna {
 		for (TipoFallecimiento tipoFallecimiento : TipoFallecimiento.values())
 			inTipoFallecimiento.addItem(tipoFallecimiento);
 		
-		Dimension largoEntrada = new Dimension(Short.MAX_VALUE, 25);
+		
 		inDNIFallecido.setMaximumSize(largoEntrada);
 		inApellidoFallecido.setMaximumSize(largoEntrada);
 		inNombreFallecido.setMaximumSize(largoEntrada);
 		inCocheria.setMaximumSize(largoEntrada);
 		inTipoFallecimiento.setMaximumSize(largoEntrada);
-		inFechaFallecimiento.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
+		inFechaFallecimiento.setMaximumSize(largoEntrada);
 		
 		// ORGANIZACION DE PANELES
 		PanelHorizontal panelDNI = new PanelHorizontal();
@@ -182,10 +231,11 @@ public class VentanaAltaServicio extends VentanaInterna {
 		panelTipo.add(inTipoFallecimiento);
 		
 		PanelVertical ret = new PanelVertical();
-		ret.setName("Datos del difunto");
-		ret.add(panelDNI);
+		ret.setBorder(new EmptyBorder(10, 30, 10, 10));
+		ret.add(new JLabel("Datos del difunto"));
 		ret.add(panelApellido);
 		ret.add(panelNombre);
+		ret.add(panelDNI);
 		ret.add(panelCocheria);
 		ret.add(panelTipo);
 		ret.add(panelFecha);
