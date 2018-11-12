@@ -220,8 +220,8 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String DNI = ventana.getDNI().getText();
 		String nombres = ventana.getNombre().getText();
 		String apellidos  = ventana.getApellido().getText();
-		String telefono = ventana.getTelefono().getText();
-		String email = ventana.getEmail().getText();
+		//String telefono = ventana.getTelefono().getText();
+		//String email = ventana.getEmail().getText();
 		
 		String mensaje = "";
 		if (DNI.equals(""))
