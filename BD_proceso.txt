@@ -13,6 +13,13 @@ CREATE TABLE rev_clientes (
 	PRIMARY KEY (ID)
 );
 
+-- ESQUEMA ROLES
+CREATE TABLE rev_roles (
+	ID INT(1),
+	descripcion VARCHAR(20) NULL,
+	PRIMARY KEY (ID)
+);
+
 -- ESQUEMA TIPO DE FALLECIMIENTO
 CREATE TABLE rev_tipo_fallecimiento (
 	ID INT(1),
@@ -77,9 +84,51 @@ CREATE TABLE rev_fallecidos (
 	FOREIGN KEY (tipo_fallecimiento) REFERENCES rev_tipo_fallecimiento(ID),
 );
 
+-- ESQUEMAS CODIGOS
+CREATE TABLE rev_codigos (
+	ID INT(10) AUTO_INCREMENT,
+	descripcion VARCHAR(50) NULL,
+	observaciones VARCHAR(50) NULL,
+	importe INT(10) NOT NULL,
+	PRIMARY KEY (ID)
+);
+
+-- ESQUEMAS USUARIOS
+CREATE TABLE rev_usuarios (
+	ID INT(10) AUTO_INCREMENT,
+	usuario VARCHAR(50) NOT NULL,
+	password VARCHAR(50) NOT NULL,
+	rol INT(1) NOT NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (rol) REFERENCES rev_roles(ID)
+);
+
+-- ESQUEMAS PAGOS
+CREATE TABLE rev_pagos (
+	ID INT(10) AUTO_INCREMENT,
+	cliente INT(10) NOT NULL,
+	fallecido INT(10) NOT NULL,
+	codigo INT(10) NOT NULL,
+	importe INT(10) NOT NULL,
+	fecha DATE NOT NULL,
+	observaciones VARCHAR(100) NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (cliente) REFERENCES rev_clientes(ID),
+	FOREIGN KEY (fallecido) REFERENCES rev_fallecidos(ID),
+	FOREIGN KEY (codigo) REFERENCES rev_codigos(ID)
+);
+
+
+
 -- INSERT TIPOS DE FALLECIMIENTO
-INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES(1, "TRAUMATICO");
-INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES(2, "NO TRAUMATICO");
+INSERT INTO rev_tipo_fallecimiento (ID, descripcion) VALUES
+(1, "TRAUMATICO"),
+(2, "NO TRAUMATICO");
+
+-- INSERT  ROLES
+INSERT INTO rev_roles (ID, descripcion) VALUES
+(1, "SUPERVISOR"),
+(2, "ADMINISTRATIVO");
 
 -- INSERT SECTORES
 INSERT INTO rev_sector (ID, descripcion) VALUES
@@ -87,7 +136,8 @@ INSERT INTO rev_sector (ID, descripcion) VALUES
 (2, 'PALMERAS'),
 (3, 'NICHERA'),
 (4, 'CENIZARIO'),
-(5, 'BOVEDA');
+(5, 'BOVEDA'),
+(6, 'DEPOSITO');
 
 -- INSERT SUB SECTORES
 INSERT INTO rev_sub_sector (ID, sector, descripcion) VALUES
@@ -99,4 +149,7 @@ INSERT INTO rev_sub_sector (ID, sector, descripcion) VALUES
 (6, 2, 'PALMERAS SEPULTURA'),
 (7, 3, 'NICHERA'),
 (8, 4, 'CENIZARIO'),
-(9, 5, 'BOVEDA');
+(9, 5, 'BOVEDA'),
+(10, 6, 'DEPOSITO 1'),
+(11, 6, 'DEPOSITO 2'),
+(12, 6, 'DEPOSITO 3');

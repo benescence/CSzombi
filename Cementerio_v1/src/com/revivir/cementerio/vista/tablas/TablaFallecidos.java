@@ -11,7 +11,7 @@ import com.revivir.cementerio.vista.util.Formato;
 
 public class TablaFallecidos extends JTable{
 	private static final long serialVersionUID = 1L;
-	private String[] columnas = { "DNI", "Nombre", "Apellido", "Fecha de fallecimiento", "Tipo de fallecimiento", "Cocheria", "Ubicacion"};
+	private String[] columnas = { "DNI", "Nombre", "Apellido", "Fecha de\nfallecimiento", "Tipo de fallecimiento", "Cocheria", "Ubicacion"};
 	private DefaultTableModel modelo;
 	private List<Fallecido> fallecidos;
 
@@ -39,6 +39,15 @@ public class TablaFallecidos extends JTable{
 			};
 			modelo.addRow(fila);
 		}
+		
+		// tamaños preferenciales
+		getColumn("DNI").setPreferredWidth(30);
+		getColumn("Nombre").setPreferredWidth(100);
+		getColumn("Apellido").setPreferredWidth(100);
+		//getColumn("Fecha de fallecimiento").setPreferredWidth(30);
+		getColumn("Tipo de fallecimiento").setPreferredWidth(50);
+		getColumn("Cocheria").setPreferredWidth(80);
+		getColumn("Ubicacion").setPreferredWidth(250);
 	}
 	
 	public List<Fallecido> obtenerSeleccion() {

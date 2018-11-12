@@ -233,12 +233,12 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		if (apellidos.equals(""))
 			mensaje += "\n    -El APELLIDO del cliente no puede estar vacio.";
 		
-		if (telefono.equals(""))
+/*		if (telefono.equals(""))
 			mensaje += "\n    -El TELEFONO del cliente no puede estar vacio.";
 		
 		if (email.equals(""))
 			mensaje += "\n    -El E-MAIL del cliente no puede estar vacio.";
-		
+	*/	
 		if (!mensaje.equals("")) {
 			Popup.mostrar("Se encontraron los siguientes errores en el formulario para cliente:"+mensaje);
 			return false;
