@@ -284,9 +284,10 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 	}
 
 	@Override
-	public void finalizar() {
+	public boolean finalizar() {
 		ventana.dispose();
 		ventana = null;
+		return true;
 	}
 
 }

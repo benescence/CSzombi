@@ -48,9 +48,10 @@ public class ControladorConsultaCliente implements ActionListener, ControladorIn
 	}
 
 	@Override
-	public void finalizar() {
+	public boolean finalizar() {
 		ventana.dispose();
 		ventana = null;
+		return true;
 	}
 
 	@Override

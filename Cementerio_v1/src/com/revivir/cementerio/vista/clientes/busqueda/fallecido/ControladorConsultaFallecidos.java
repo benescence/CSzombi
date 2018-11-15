@@ -47,9 +47,10 @@ public class ControladorConsultaFallecidos implements ActionListener, Controlado
 	}
 
 	@Override
-	public void finalizar() {
+	public boolean finalizar() {
 		ventana.dispose();
 		ventana = null;
+		return true;
 	}
 
 	@Override

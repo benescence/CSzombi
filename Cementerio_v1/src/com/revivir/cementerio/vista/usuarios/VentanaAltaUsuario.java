@@ -81,4 +81,24 @@ public class VentanaAltaUsuario extends VentanaInterna {
 		panelPrincipal.add(btnAceptar);
 	}
 
+	
+	public JTextField getUsuario() {
+		return inUsuario;
+	}
+
+	
+	public JTextField getPassword() {
+		return inPassword;
+	}
+
+	
+	public JComboBox<String> getPermisos() {
+		return inPermisos;
+	}
+
+	
+	public JButton botonAceptar() {
+		return btnAceptar;
+	}
+	
 }
