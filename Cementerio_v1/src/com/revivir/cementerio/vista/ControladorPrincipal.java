@@ -3,7 +3,7 @@ package com.revivir.cementerio.vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.revivir.cementerio.vista.usuarios.ControladorAltaUsuario;
+import com.revivir.cementerio.vista.usuarios.alta.ControladorAltaUsuario;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
 public class ControladorPrincipal implements ActionListener {
@@ -17,7 +17,7 @@ public class ControladorPrincipal implements ActionListener {
 		ventana.getMenu1opcion3().addActionListener(this);
 		ventana.getMenu2opcion1().addActionListener(this);
 		ventana.getMenu2opcion2().addActionListener(this);
-		ventana.getMenu3opcion1().addActionListener(this);
+		ventana.itemUsuariosAlta().addActionListener(this);
 		
 	}
 
@@ -39,7 +39,7 @@ public class ControladorPrincipal implements ActionListener {
 		else if (e.getSource() == ventana.getMenu2opcion2())
 			System.out.println("Presionando menu 2 opcion 2");
 		
-		else if (e.getSource() == ventana.getMenu3opcion1())
+		else if (e.getSource() == ventana.itemUsuariosAlta())
 			mostrarIniciarSesion();
 	}
 
