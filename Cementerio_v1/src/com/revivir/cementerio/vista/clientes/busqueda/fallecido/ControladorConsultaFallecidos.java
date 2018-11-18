@@ -1,7 +1,5 @@
 package com.revivir.cementerio.vista.clientes.busqueda.fallecido;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
@@ -11,25 +9,15 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorConsultaFallecidos implements ActionListener, ControladorInterno{
+public class ControladorConsultaFallecidos implements ControladorInterno{
 	private VentanaConsultaFallecidos ventana;
 	
 	public ControladorConsultaFallecidos() {
 		ventana = new VentanaConsultaFallecidos();
-		ventana.botonBuscar().addActionListener(this);
-		ventana.botonLimpiar().addActionListener(this);
+		ventana.botonBuscar().addActionListener(e -> buscar());
+		ventana.botonLimpiar().addActionListener(e -> limpiar());
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		// BOTON BUSCAR
-		if (e.getSource() == ventana.botonBuscar())
-			buscar();
-	
-		// BOTON LIMPIAR CAMPOS
-		else if (e.getSource() == ventana.botonLimpiar())
-			limpiar();
-	}
-	
 	private void limpiar() {
 		ventana.getDNI().setText("");
 		ventana.getNombre().setText("");
@@ -40,11 +28,18 @@ public class ControladorConsultaFallecidos implements ActionListener, Controlado
 		String DNI = ventana.getDNI().getText();
 		String nombres = ventana.getNombre().getText();
 		String apellido = ventana.getApellido().getText();
+	
+		if (DNI.equals("") && nombres.equals("") && apellido.equals("")) {
+			Popup.mostrar("Debe ingresar al menos un criterio de búsqueda.\n    -Nombres\n    -Apellido\n    -DNI");
+			return;
+		}
+	
 		List<Fallecido> lista = Busqueda.fallecidos(DNI, nombres, apellido);
 		ventana.getTabla().recargar(lista);
 		if (lista.size() == 0)
 			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
 	}
+	
 
 	@Override
 	public boolean finalizar() {
