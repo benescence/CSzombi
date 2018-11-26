@@ -1,5 +1,6 @@
 package com.revivir.cementerio.persistencia;
 
+import com.revivir.cementerio.persistencia.definidos.Roles;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 
@@ -72,5 +73,21 @@ public class Definido {
 			
 		return ret;
 	}
+	public static Integer roles(Roles tipo) {
+		Integer ret = null;
+		if (tipo == Roles.Administrativo)
+			ret = 1;
+		else if (tipo == Roles.Supervisor)
+			ret = 2;
+		return ret;
+	}
 
+	public static Roles roles(Integer tipo) {
+		Roles ret = null;
+		if (tipo == 1)
+			ret = Roles.Administrativo;
+		else if (tipo == 2)
+			ret = Roles.Supervisor;
+		return ret;
+	}
 }
