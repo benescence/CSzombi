@@ -37,13 +37,13 @@ public class UsuarioOBDTest {
 	}
 		
 	public static void main(String[] args) {
-		Usuario usuario = new Usuario(-1, "Carlos1992", "123", Rol.SUPERVISOR);
-		insertTest(usuario);
-		selectTest();
-		usuario.setPassword("456");
+		Usuario usuario = new Usuario(-1, "Carlos1991", "12344", Rol.ADMINISTRATIVO);
 		
-//		updateTest(usuario);
-//		deleteTest(usuario);
+		updateTest(usuario);
+		selectTest();
+		
+	
+
 		// Estaria bueno tener un select test tambien 
 	}
 

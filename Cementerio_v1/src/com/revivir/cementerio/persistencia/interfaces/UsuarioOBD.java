@@ -13,5 +13,7 @@ public interface UsuarioOBD {
 	public void delete(Usuario usuario);
 	
 	public List<Usuario> select();
+
+	List<Usuario> selectByRol(String rol);
 	
 }
