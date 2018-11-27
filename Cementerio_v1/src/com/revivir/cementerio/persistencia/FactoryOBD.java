@@ -22,7 +22,9 @@ public class FactoryOBD {
 	public static UbicacionOBD crearUbicacionOBD() {
 		return new UbicacionOBDMySQL();
 	}
+	
 	public static UsuarioOBD crearUsuarioOBD() {
 		return new UsuarioOBDMYSQL();
 	}
+	
 }

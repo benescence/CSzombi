@@ -1,63 +1,49 @@
 package com.revivir.cementerio.persistencia.entidades;
 
-import com.revivir.cementerio.persistencia.definidos.Roles;
-
+import com.revivir.cementerio.persistencia.definidos.Rol;
 
 public class Usuario {
-		private Integer ID;
-		private String  usuario, contraseña;
-		private Roles roles;
+	private Integer ID;
+	private String  usuario, password;
+	private Rol rol;
 
-		
-		public Usuario(Integer ID, Roles roles, String usuario, String contraseña) {
-			this.ID = ID;
-			this.usuario = usuario;
-			this.contraseña = contraseña;
-			this.roles =roles;
-			
-		}
+	public Usuario(Integer iD, String usuario, String password, Rol rol) {
+		this.ID = iD;
+		this.usuario = usuario;
+		this.password = password;
+		this.rol = rol;
+	}
 
+	public Integer getID() {
+		return ID;
+	}
 
-		public Integer getID() {
-			return ID;
-		}
+	public void setID(Integer iD) {
+		this.ID = iD;
+	}
 
+	public String getUsuario() {
+		return usuario;
+	}
 
-		public void setID(Integer iD) {
-			this.ID = iD;
-		}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
 
+	public String getPassword() {
+		return password;
+	}
 
-		public String getUsuario() {
-			return usuario;
-		}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
+	public Rol getRol() {
+		return rol;
+	}
 
-		public void setUsuario(String usuario) {
-			this.usuario = usuario;
-		}
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 
-
-		public String getContraseña() {
-			return contraseña;
-		}
-
-
-		public void setContraseña(String contraseña) {
-			this.contraseña = contraseña;
-		}
-
-
-		public Roles getRoles() {
-			return roles;
-		}
-
-
-		public void setRoles(Roles roles) {
-			this.roles = roles;
-		}
-
-		
-		
-	
 }

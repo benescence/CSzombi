@@ -1,8 +1,8 @@
 package com.revivir.cementerio.persistencia.definidos;
 
-public enum Roles {
+public enum Rol {
 
-	Administrativo,
-	Supervisor
+	ADMINISTRATIVO,
+	SUPERVISOR
 	
 }
