@@ -226,6 +226,9 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String mensaje = "";
 		if (DNI.equals(""))
 			mensaje += "\n    -El DNI del cliente no puede estar vacio.";
+		else if (ClienteManager.traerPorDNI(DNI) != null) {
+			mensaje += "\n    -Ya existe un cliente con el DNI "+DNI+".";
+		}
 		
 		if (nombres.equals(""))
 			mensaje += "\n    -El NOMBRE del cliente no pueda estar vacio.";
@@ -248,14 +251,14 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 	}
 	
 	public boolean validarFallecido() {
-		//String DNIFallecido = ventana.getInDNIFallecido().getText();
+		String DNIFallecido = ventana.getInDNIFallecido().getText();
 		String nombresFallecido = ventana.getInNombreFallecido().getText();
 		String apellidosFallecido = ventana.getInApellidoFallecido().getText();
 		//String cocheriaFallecido = ventana.getInCocheria().getText();
 		
 		String mensaje = "";
-		//if (DNIFallecido.equals(""))
-		//	mensaje += "\n    -El DNI del fallecido no puede estar vacio.";
+		if (!DNIFallecido.equals("") && FallecidoManager.traerPorDNI(DNIFallecido)!= null)
+			mensaje += "\n    -Ya existe un fallecido con el DNI "+DNIFallecido+".";
 		
 		if (nombresFallecido.equals(""))
 			mensaje += "\n    -El NOMBRE del fallecido no puede estar vacio.";

@@ -19,5 +19,10 @@ public class FallecidoManager {
 		obd.insert(fallecido);
 		
 	}
+	
+	public static Fallecido traerPorDNI(String DNI) {
+		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
+		return obd.selectByDNI(DNI);
+	}
 
 }

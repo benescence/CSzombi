@@ -100,5 +100,14 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 			
 		return ret;
 	}
+
+	@Override
+	public Fallecido selectByDNI(String DNI) {
+		String condicion = "DNI = '"+DNI+"'";
+		List<Fallecido> lista = selectByCondicion(condicion);
+		if (lista.isEmpty())
+			return null;
+		return lista.get(0);
+	}
 	
 }

@@ -76,7 +76,6 @@ public class VentanaAltaServicio extends VentanaInterna {
 		JLabel lblTelefono = new JLabel("Telefono");
 		JLabel lblEmail = new JLabel("E-Mail");
 
-		lblEmail.setEnabled(false);
 		lblDNI.setMinimumSize(largoLabel);
 		lblDNI.setPreferredSize(largoLabel);
 		lblDNI.setMaximumSize(largoLabel);
