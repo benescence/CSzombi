@@ -3,7 +3,7 @@ package com.revivir.cementerio.vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.revivir.cementerio.vista.usuarios.alta.ControladorAltaUsuario;
+import com.revivir.cementerio.vista.usuarios.alta.ControladorUsuarioAM;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
 public class ControladorPrincipal implements ActionListener {
@@ -45,7 +45,7 @@ public class ControladorPrincipal implements ActionListener {
 
 	private void mostrarIniciarSesion() {
 		System.out.println("metodo");
-		mostrarVentana(new ControladorAltaUsuario());
+		//mostrarVentana(new ControladorUsuarioAM());
 	}
 
 	private void mostrarVentana(ControladorInterno controlador) {

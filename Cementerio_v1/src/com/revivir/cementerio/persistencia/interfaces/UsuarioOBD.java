@@ -2,6 +2,7 @@ package com.revivir.cementerio.persistencia.interfaces;
 
 import java.util.List;
 
+import com.revivir.cementerio.persistencia.definidos.Rol;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 
 public interface UsuarioOBD {
@@ -12,8 +13,10 @@ public interface UsuarioOBD {
 	
 	public void delete(Usuario usuario);
 	
+	public Usuario selectByUsuario(String usuario);
+
 	public List<Usuario> select();
 
-	List<Usuario> selectByRol(String rol);
+	public List<Usuario> selectByRol(Rol rol);
 	
 }

@@ -15,6 +15,7 @@ import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.clientes.alta.ControladorAltaServicio;
 import com.revivir.cementerio.vista.clientes.busqueda.cliente.ControladorConsultaCliente;
 import com.revivir.cementerio.vista.clientes.busqueda.fallecido.ControladorConsultaFallecidos;
+import com.revivir.cementerio.vista.usuarios.ControladorUsuarios;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
 import administracion.Precios;
@@ -34,9 +35,6 @@ import usuarios.Modif_usuario;
 public class Main extends JFrame {
 	private ControladorInterno controladorInterno = null;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,9 +49,6 @@ public class Main extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame
-	 */
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Sistema de Consultas - Cementerio ");
@@ -239,7 +234,7 @@ public class Main extends JFrame {
 		
 		JMenu mnAdmin = new JMenu("Usuarios");
 		menuBarra.add(mnAdmin);
-		
+
 		JMenuItem mntmAlta = new JMenuItem("Alta Usuario");
 		mntmAlta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -255,6 +250,18 @@ public class Main extends JFrame {
 			}
 		});
 		mnAdmin.add(mntmAlta);
+
+		
+		
+		JMenuItem usuarioConsultar = new JMenuItem("Consultar usuarios");
+		usuarioConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mostrarConsultaUsuarios();
+//                getContentPane().removeAll();
+  //              getContentPane().repaint();
+    		}
+		});
+		mnAdmin.add(usuarioConsultar);
 		
 		JMenuItem mntmBajas = new JMenuItem("Baja Usuario");
 		mntmBajas.addActionListener(new ActionListener() {
@@ -302,10 +309,18 @@ public class Main extends JFrame {
 		
 	}
 	
-	
+
 	private void mostrarConsultaCliente() {
 		cerrarAnterior();        
         controladorInterno = new ControladorConsultaCliente();
+        PanelVertical panel = new PanelVertical();
+        panel.add(controladorInterno.getVentana());
+		setContentPane(panel);
+	}
+
+	private void mostrarConsultaUsuarios() {
+		cerrarAnterior();        
+        controladorInterno = new ControladorUsuarios(this);
         PanelVertical panel = new PanelVertical();
         panel.add(controladorInterno.getVentana());
 		setContentPane(panel);

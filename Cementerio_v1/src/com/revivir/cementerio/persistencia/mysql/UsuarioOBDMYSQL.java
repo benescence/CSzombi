@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.OBD;
-import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.definidos.Rol;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 import com.revivir.cementerio.persistencia.interfaces.UsuarioOBD;
 
@@ -49,13 +49,10 @@ public class UsuarioOBDMYSQL extends OBD implements UsuarioOBD{
 	}
 
 	@Override
-	public List<Usuario> selectByRol(String rol) {
-		String condicion = "";
-		condicion += "rol = " +(rol != null ? "'"+rol+"'" : "rol");
-	
+	public List<Usuario> selectByRol(Rol rol) {
+		String condicion = "rol = "+Definido.rol(rol);
 		return selectByCondicion(condicion);
 	}
-	
 	
 	private List<Usuario> selectByCondicion(String condicion) {
 		List<Usuario> ret = new ArrayList<Usuario>();
@@ -73,7 +70,6 @@ public class UsuarioOBDMYSQL extends OBD implements UsuarioOBD{
 						resultados.getString("usuario"),
 						resultados.getString("password"),
 						Definido.rol(resultados.getInt("rol"))
-						
 						));
 			}
 			
@@ -90,5 +86,13 @@ public class UsuarioOBDMYSQL extends OBD implements UsuarioOBD{
 	}
 
 	
+	@Override
+	public Usuario selectByUsuario(String usuario) {
+		String condicion = "usuario = '"+usuario+"'";
+		List<Usuario> ret = selectByCondicion(condicion);
+		if (ret.isEmpty())
+			return null;
+		return ret.get(0);
+	}
 
 }
