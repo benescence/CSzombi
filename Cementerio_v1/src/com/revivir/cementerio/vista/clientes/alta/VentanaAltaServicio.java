@@ -202,7 +202,7 @@ public class VentanaAltaServicio extends VentanaInterna {
 		inTipoFallecimiento = new JComboBox<TipoFallecimiento>();
 		for (TipoFallecimiento tipoFallecimiento : TipoFallecimiento.values())
 			inTipoFallecimiento.addItem(tipoFallecimiento);
-		
+		inTipoFallecimiento.setSelectedItem(TipoFallecimiento.NO_TRAUMATICO);
 		
 		inDNIFallecido.setMaximumSize(largoEntrada);
 		inApellidoFallecido.setMaximumSize(largoEntrada);
