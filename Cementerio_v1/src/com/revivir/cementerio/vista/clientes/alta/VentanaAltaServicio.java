@@ -50,6 +50,9 @@ public class VentanaAltaServicio extends VentanaInterna {
 		// BOTONES
 		btnConfirmar = new JButton("Confirmar alta de servicio");
 		btnLimpiarTodo = new JButton("Limpiar todos los campos");
+		btnConfirmar.setFocusable(false);
+		btnLimpiarTodo.setFocusable(false);
+		
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.add(btnConfirmar);
 		panelBotones.add(btnLimpiarTodo);
@@ -111,6 +114,9 @@ public class VentanaAltaServicio extends VentanaInterna {
 		// BOTONES
 		btnExistente = new JButton("Seleccionar cliente existente");
 		btnLimpiarCliente = new JButton("Limpiar campos");
+		btnExistente.setFocusable(false);
+		btnLimpiarCliente.setFocusable(false);
+		
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panelBotones.add(btnExistente);
