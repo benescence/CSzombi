@@ -20,6 +20,10 @@ public class Sesion {
 		usuario = usuarioBD;
 	}
 	
+	public static void cerrarSesion() {
+		usuario = null;
+	}
+	
 	public static Usuario getUsuario() {
 		return usuario;
 	}

@@ -11,10 +11,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.revivir.cementerio.negocios.Sesion;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.clientes.alta.ControladorAltaServicio;
 import com.revivir.cementerio.vista.clientes.busqueda.cliente.ControladorConsultaCliente;
 import com.revivir.cementerio.vista.clientes.busqueda.fallecido.ControladorConsultaFallecidos;
+import com.revivir.cementerio.vista.login.ControladorIniciarSesion;
 import com.revivir.cementerio.vista.usuarios.ControladorUsuarios;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
@@ -254,15 +256,23 @@ public class Main extends JFrame {
 
 		
 		
-		JMenuItem usuarioConsultar = new JMenuItem("Consultar usuarios");
-		usuarioConsultar.addActionListener(new ActionListener() {
+		JMenuItem usuariosConsultar = new JMenuItem("Consultar usuarios");
+		usuariosConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarConsultaUsuarios();
-//                getContentPane().removeAll();
-  //              getContentPane().repaint();
     		}
 		});
-		mnAdmin.add(usuarioConsultar);
+		mnAdmin.add(usuariosConsultar);
+
+		
+		
+		JMenuItem usuariosCerrarSesion = new JMenuItem("Cerrar sesion");
+		usuariosCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cerrarSesion();
+    		}
+		});
+		mnAdmin.add(usuariosCerrarSesion);
 		
 		JMenuItem mntmBajas = new JMenuItem("Baja Usuario");
 		mntmBajas.addActionListener(new ActionListener() {
@@ -310,6 +320,12 @@ public class Main extends JFrame {
 		
 	}
 	
+
+	public void cerrarSesion() {
+		Sesion.cerrarSesion();
+		new ControladorIniciarSesion();
+		dispose();
+	}
 
 	private void mostrarConsultaCliente() {
 		cerrarAnterior();        
