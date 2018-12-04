@@ -50,6 +50,7 @@ public class Main extends JFrame {
 	}
 
 	public Main() {
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Sistema de Consultas - Cementerio ");
 		setBounds(0, 0, 1000, 700);

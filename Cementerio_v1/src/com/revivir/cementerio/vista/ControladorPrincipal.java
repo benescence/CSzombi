@@ -3,9 +3,6 @@ package com.revivir.cementerio.vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.revivir.cementerio.vista.usuarios.alta.ControladorUsuarioAM;
-import com.revivir.cementerio.vista.util.PanelVertical;
-
 public class ControladorPrincipal implements ActionListener {
 	VentanaPrincipal ventana;
 	ControladorInterno controladorInterno;
@@ -48,7 +45,7 @@ public class ControladorPrincipal implements ActionListener {
 		//mostrarVentana(new ControladorUsuarioAM());
 	}
 
-	private void mostrarVentana(ControladorInterno controlador) {
+	/*private void mostrarVentana(ControladorInterno controlador) {
 		if (controladorInterno == null || controladorInterno.finalizar()) {
 			ventana.getContentPane().removeAll();
 			ventana.getContentPane().repaint();
@@ -59,6 +56,6 @@ public class ControladorPrincipal implements ActionListener {
 			ventana.setContentPane(panel);
 			System.out.println("Clickeo");
 		}
-	}
+	}*/
 	
 }
