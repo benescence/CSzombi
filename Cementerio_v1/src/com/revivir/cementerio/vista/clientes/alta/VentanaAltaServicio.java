@@ -1,6 +1,7 @@
 package com.revivir.cementerio.vista.clientes.alta;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -16,28 +18,26 @@ import com.revivir.cementerio.negocios.Localizador;
 import com.revivir.cementerio.persistencia.definidos.Sector;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
+import com.revivir.cementerio.vista.util.EntradaTexto;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.VentanaInterna;
 import com.toedter.calendar.JDateChooser;
-import java.awt.Rectangle;
-import javax.swing.JSeparator;
 
 public class VentanaAltaServicio extends VentanaInterna {
 	private static final long serialVersionUID = 1L;
 	private JButton btnExistente, btnLimpiarCliente, btnConfirmar, btnLimpiarTodo;
-	private Dimension largoLabel = new Dimension(150, 25), largoEntrada = new Dimension(400, 25);
-
-	// DATOS CLIENTE
-	private JTextField inDNI, inApellido, inNombre, inTelefono, inEmail;
 	
-	 // DATOS DEL DIFUNTO
-	private JTextField inDNIFallecido, inApellidoFallecido, inNombreFallecido, inCocheria;
+	// DATOS CLIENTE
+	private EntradaTexto inDNI, inApellido, inNombre, inTelefono, inEmail;
+	
+	// DATOS DEL DIFUNTO
+	private EntradaTexto inDNIFallecido, inApellidoFallecido, inNombreFallecido, inCocheria;
 	private JDateChooser inFechaFallecimiento;
 	private JComboBox<TipoFallecimiento> inTipoFallecimiento;
 	
 	// DATOS DE UBICACION
-	private JTextField inSeccion, inMacizo, inUnidad, inNumeroSepultura, inSepultura, inInhumacion,
+	private EntradaTexto inSeccion, inMacizo, inUnidad, inNumeroSepultura, inSepultura, inInhumacion,
 	inNicho, inFila, inCirc, inParcela, inMueble;
 	private JCheckBox inCheckMacizo, inCheckBis;
 	private JComboBox<Sector> inSector;
@@ -69,116 +69,51 @@ public class VentanaAltaServicio extends VentanaInterna {
 		panelPrincipal.add(new JSeparator());
 		panelPrincipal.add(crearPanelUbicacion());
 		panelPrincipal.add(panelBotones);
+		pack();
 	}
 
 	private PanelVertical crearPanelCliente() {
-		// ENTRADAS
-		JLabel lblDNI = new JLabel("DNI");
-		JLabel lblApellidos = new JLabel("Apellidos");
-		JLabel lblNombres = new JLabel("Nombres");
-		JLabel lblTelefono = new JLabel("Telefono");
-		JLabel lblEmail = new JLabel("E-Mail");
+		Dimension largoLabel = new Dimension(100, 25);
+		Dimension largoTextfield = new Dimension(300, 25);
 
-		lblDNI.setMinimumSize(largoLabel);
-		lblDNI.setPreferredSize(largoLabel);
-		lblDNI.setMaximumSize(largoLabel);
+		inNombre = new EntradaTexto("Nombres", largoLabel, largoTextfield);
+		inApellido = new EntradaTexto("Apellidos", largoLabel, largoTextfield);
+		inDNI = new EntradaTexto("DNI", largoLabel, largoTextfield);
+		inTelefono = new EntradaTexto("Telefono", largoLabel, largoTextfield);
+		inEmail = new EntradaTexto("E-Mail", largoLabel, largoTextfield);
 		
-		lblApellidos.setMinimumSize(largoLabel);
-		lblApellidos.setPreferredSize(largoLabel);
-		lblApellidos.setMaximumSize(largoLabel);
-		
-		lblNombres.setMinimumSize(largoLabel);
-		lblNombres.setPreferredSize(largoLabel);
-		lblNombres.setMaximumSize(largoLabel);
-		
-		lblTelefono.setMinimumSize(largoLabel);
-		lblTelefono.setPreferredSize(largoLabel);
-		lblTelefono.setMaximumSize(largoLabel);
-		
-		lblEmail.setMinimumSize(largoLabel);
-		lblEmail.setPreferredSize(largoLabel);
-		lblEmail.setMaximumSize(largoLabel);
-				
-		inDNI = new JTextField();
-		inApellido = new JTextField();
-		inNombre = new JTextField();
-		inTelefono = new JTextField();
-		inEmail = new JTextField();
-		
-		inDNI.setMaximumSize(largoEntrada);
-		inApellido.setMaximumSize(largoEntrada);
-		inNombre.setMaximumSize(largoEntrada);
-		inTelefono.setMaximumSize(largoEntrada);
-		inEmail.setMaximumSize(largoEntrada);
-		
-		// BOTONES
-		btnExistente = new JButton("Seleccionar cliente existente");
+		btnExistente = new JButton("Seleccionar cliente");
 		btnLimpiarCliente = new JButton("Limpiar campos");
 		btnExistente.setFocusable(false);
 		btnLimpiarCliente.setFocusable(false);
-		
 		PanelHorizontal panelBotones = new PanelHorizontal();
-		panelBotones.setBorder(new EmptyBorder(10, 10, 10, 10));
+		panelBotones.setBorder(new EmptyBorder(10, 0, 0, 0));
 		panelBotones.add(btnExistente);
 		panelBotones.add(btnLimpiarCliente);
 		
-		// ORGANIZACION DE PANELES
-		PanelHorizontal panelDNI = new PanelHorizontal();
-		panelDNI.add(lblDNI);
-		panelDNI.add(inDNI);
-
-		PanelHorizontal panelApellido = new PanelHorizontal();
-		panelApellido.add(lblApellidos);
-		panelApellido.add(inApellido);
-
-		PanelHorizontal panelNombre = new PanelHorizontal();
-		panelNombre.add(lblNombres);
-		panelNombre.add(inNombre);
-
-		PanelHorizontal panelTelefono = new PanelHorizontal();
-		panelTelefono.add(lblTelefono);
-		panelTelefono.add(inTelefono);
-
-		PanelHorizontal panelEmail = new PanelHorizontal();
-		panelEmail.add(lblEmail);
-		panelEmail.add(inEmail);
-		
-		PanelVertical ret = new PanelVertical();
-		ret.setBorder(new EmptyBorder(10, 10, 10, 30));
-		ret.add(new JLabel("Datos del cliente"));
-		ret.add(panelApellido);
-		ret.add(panelNombre);
-		ret.add(panelDNI);
-		ret.add(panelTelefono);
-		ret.add(panelEmail);
-		ret.add(panelBotones);
-		return ret;
+		PanelVertical panelCliente = new PanelVertical();
+		panelCliente.add(new JLabel("Datos del cliente"));
+		panelCliente.add(inApellido);
+		panelCliente.add(inNombre);
+		panelCliente.add(inDNI);
+		panelCliente.add(inTelefono);
+		panelCliente.add(inEmail);
+		panelCliente.add(panelBotones);
+		return panelCliente;
 	}
 	
 	private PanelVertical crearPanelFallecido() {
-		JLabel lblDNI = new JLabel("DNI");
-		JLabel lblApellidos = new JLabel("Apellidos");
-		JLabel lblNombres = new JLabel("Nombres");
-		JLabel lblCocheria = new JLabel("Cocheria");
+		Dimension largoLabel = new Dimension(100, 25);
+		Dimension largoTextfield = new Dimension(300, 25);
+
+		inNombreFallecido = new EntradaTexto("Nombres", largoLabel, largoTextfield);
+		inApellidoFallecido = new EntradaTexto("Apellidos", largoLabel, largoTextfield);
+		inDNIFallecido = new EntradaTexto("DNI", largoLabel, largoTextfield);
+		inCocheria = new EntradaTexto("Cocheria", largoLabel, largoTextfield);
+		
 		JLabel lblFecha = new JLabel("Fecha de fallecimiento");
 		JLabel lblTipo = new JLabel("Tipo de fallecimiento");
 
-		lblDNI.setMinimumSize(largoLabel);
-		lblDNI.setPreferredSize(largoLabel);
-		lblDNI.setMaximumSize(largoLabel);
-		
-		lblApellidos.setMinimumSize(largoLabel);
-		lblApellidos.setPreferredSize(largoLabel);
-		lblApellidos.setMaximumSize(largoLabel);
-		
-		lblNombres.setMinimumSize(largoLabel);
-		lblNombres.setPreferredSize(largoLabel);
-		lblNombres.setMaximumSize(largoLabel);
-		
-		lblCocheria.setMinimumSize(largoLabel);
-		lblCocheria.setPreferredSize(largoLabel);
-		lblCocheria.setMaximumSize(largoLabel);
-		
 		lblFecha.setMinimumSize(largoLabel);
 		lblFecha.setPreferredSize(largoLabel);
 		lblFecha.setMaximumSize(largoLabel);
@@ -187,47 +122,16 @@ public class VentanaAltaServicio extends VentanaInterna {
 		lblTipo.setPreferredSize(largoLabel);
 		lblTipo.setMaximumSize(largoLabel);
 		
-		lblDNI.setPreferredSize(largoLabel);
-		lblApellidos.setPreferredSize(largoLabel);
-		lblNombres.setPreferredSize(largoLabel);
-		lblCocheria.setPreferredSize(largoLabel);
-		lblFecha.setPreferredSize(largoLabel);
-		lblTipo.setPreferredSize(largoLabel);
-		
-		inDNIFallecido = new JTextField();
-		inApellidoFallecido = new JTextField();
-		inNombreFallecido = new JTextField();
-		inCocheria = new JTextField();
 		inFechaFallecimiento = new JDateChooser(Almanaque.hoy());
 		inTipoFallecimiento = new JComboBox<TipoFallecimiento>();
 		for (TipoFallecimiento tipoFallecimiento : TipoFallecimiento.values())
 			inTipoFallecimiento.addItem(tipoFallecimiento);
 		inTipoFallecimiento.setSelectedItem(TipoFallecimiento.NO_TRAUMATICO);
 		
-		inDNIFallecido.setMaximumSize(largoEntrada);
-		inApellidoFallecido.setMaximumSize(largoEntrada);
-		inNombreFallecido.setMaximumSize(largoEntrada);
-		inCocheria.setMaximumSize(largoEntrada);
-		inTipoFallecimiento.setMaximumSize(largoEntrada);
-		inFechaFallecimiento.setMaximumSize(largoEntrada);
+		inTipoFallecimiento.setMaximumSize(largoTextfield);
+		inFechaFallecimiento.setMaximumSize(largoTextfield);
 		
 		// ORGANIZACION DE PANELES
-		PanelHorizontal panelDNI = new PanelHorizontal();
-		panelDNI.add(lblDNI);
-		panelDNI.add(inDNIFallecido);
-
-		PanelHorizontal panelApellido = new PanelHorizontal();
-		panelApellido.add(lblApellidos);
-		panelApellido.add(inApellidoFallecido);
-
-		PanelHorizontal panelNombre = new PanelHorizontal();
-		panelNombre.add(lblNombres);
-		panelNombre.add(inNombreFallecido);
-
-		PanelHorizontal panelCocheria = new PanelHorizontal();
-		panelCocheria.add(lblCocheria);
-		panelCocheria.add(inCocheria);
-
 		PanelHorizontal panelFecha = new PanelHorizontal();
 		panelFecha.add(lblFecha);
 		panelFecha.add(inFechaFallecimiento);
@@ -236,63 +140,50 @@ public class VentanaAltaServicio extends VentanaInterna {
 		panelTipo.add(lblTipo);
 		panelTipo.add(inTipoFallecimiento);
 		
-		PanelVertical ret = new PanelVertical();
-		ret.setBorder(new EmptyBorder(10, 30, 10, 10));
-		ret.add(new JLabel("Datos del difunto"));
-		ret.add(panelApellido);
-		ret.add(panelNombre);
-		ret.add(panelDNI);
-		ret.add(panelCocheria);
-		ret.add(panelTipo);
-		ret.add(panelFecha);
-		return ret;
+		PanelVertical panelFallecido = new PanelVertical();
+		panelFallecido.setBorder(new EmptyBorder(10, 30, 10, 10));
+		panelFallecido.add(new JLabel("Datos del difunto"));
+		panelFallecido.add(inApellidoFallecido);
+		panelFallecido.add(inNombreFallecido);
+		panelFallecido.add(inDNIFallecido);
+		panelFallecido.add(inCocheria);
+		panelFallecido.add(panelTipo);
+		panelFallecido.add(panelFecha);
+		return panelFallecido;
 	}
 	
 	private PanelHorizontal crearPanelUbicacion() {
+		Dimension largoLabel = new Dimension(100, 25);
+		Dimension largoTextfield = new Dimension(300, 25);
+
+		inSeccion = new EntradaTexto("Seccion", largoLabel, largoTextfield);
+		inMacizo = new EntradaTexto("Macizo", largoLabel, largoTextfield);
+		inUnidad = new EntradaTexto("Unidad", largoLabel, largoTextfield);
+		inNumeroSepultura = new EntradaTexto("N° Sepultura", largoLabel, largoTextfield);
+		inSepultura = new EntradaTexto("Sepultura", largoLabel, largoTextfield);
+		inInhumacion = new EntradaTexto("Inhumacion", largoLabel, largoTextfield);
+		inNicho = new EntradaTexto("Nicho", largoLabel, largoTextfield);
+		inFila = new EntradaTexto("Fila", largoLabel, largoTextfield);
+		inCirc = new EntradaTexto("Circ", largoLabel, largoTextfield);
+		inParcela = new EntradaTexto("Parcela", largoLabel, largoTextfield);
+		inMueble = new EntradaTexto("Mueble", largoLabel, largoTextfield);
+				
 		JLabel lblSector = new JLabel("Sector");
 		JLabel lblSubSector = new JLabel("Sub sector");
-		JLabel lblSeccion = new JLabel("Seccion");
-		JLabel lblMacizo = new JLabel("Macizo");
-		JLabel lblUnidad = new JLabel("Unidad");
-		JLabel lblNumSepultura = new JLabel("N° Sepultura");
-		JLabel lblSepultura = new JLabel("Sepultura");
-		JLabel lblInhumacion = new JLabel("Inhumacion");
-		JLabel lblNicho = new JLabel("Nicho");
-		JLabel lblFila = new JLabel("Fila");
-		JLabel lblCirc = new JLabel("Circ");
-		JLabel lblParcela = new JLabel("Parcela");
-		JLabel lblMueble = new JLabel("Mueble");
 		JLabel lblCheckMacizo = new JLabel("Check Macizo");
 		JLabel lblCheckBis = new JLabel("Check Bis");
 
-		Dimension largoLabel = new Dimension(100, 25);
+		lblSector.setMinimumSize(largoLabel);
 		lblSector.setPreferredSize(largoLabel);
+		lblSector.setMaximumSize(largoLabel);
+
+		lblSubSector.setMinimumSize(largoLabel);
 		lblSubSector.setPreferredSize(largoLabel);
-		lblSeccion.setPreferredSize(largoLabel);
-		lblMacizo.setPreferredSize(largoLabel);
-		lblUnidad.setPreferredSize(largoLabel);
-		lblNumSepultura.setPreferredSize(largoLabel);
-		lblSepultura.setPreferredSize(largoLabel);
-		lblInhumacion.setPreferredSize(largoLabel);
-		lblNicho.setPreferredSize(largoLabel);
-		lblFila.setPreferredSize(largoLabel);
-		lblCirc.setPreferredSize(largoLabel);
-		lblParcela.setPreferredSize(largoLabel);
-		lblMueble.setPreferredSize(largoLabel);
+		lblSubSector.setMaximumSize(largoLabel);
+		
 		lblCheckMacizo.setPreferredSize(largoLabel);
 		lblCheckBis.setPreferredSize(largoLabel);
 		
-		inSeccion = new JTextField();
-		inMacizo = new JTextField();
-		inUnidad = new JTextField();
-		inNumeroSepultura = new JTextField();
-		inSepultura = new JTextField();
-		inInhumacion = new JTextField();
-		inNicho = new JTextField();
-		inFila = new JTextField();
-		inCirc = new JTextField();
-		inParcela = new JTextField();
-		inMueble = new JTextField();
 		inCheckBis = new JCheckBox("Bis");
 		inCheckMacizo = new JCheckBox("Macizo");
 		
@@ -311,22 +202,8 @@ public class VentanaAltaServicio extends VentanaInterna {
 
 		inSector.setSelectedIndex(0);
 
-		
-		Dimension largoEntrada = new Dimension(Short.MAX_VALUE, 25);
-		inSector.setMaximumSize(largoEntrada);
-		inSubSector.setMaximumSize(largoEntrada);
-		inSeccion.setMaximumSize(largoEntrada);
-		inMacizo.setMaximumSize(largoEntrada);
-		inUnidad.setMaximumSize(largoEntrada);
-		inNumeroSepultura.setMaximumSize(largoEntrada);
-		inSepultura.setMaximumSize(largoEntrada);
-		inInhumacion.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
-		inNicho.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
-		inFila.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
-		inCirc.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
-		inParcela.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
-		inMueble.setMaximumSize(new Dimension(Short.MAX_VALUE, 25));
-		
+		inSector.setMaximumSize(largoTextfield);
+		inSubSector.setMaximumSize(largoTextfield);
 
 		// DEPENDEINDO DEL SUB SECTOR ESCOGIDO ALGUNOS CAMPOS SE INHABILITAN
 		inSubSector.addActionListener(new ActionListener() {
@@ -345,67 +222,23 @@ public class VentanaAltaServicio extends VentanaInterna {
 		PanelHorizontal panelSubSector = new PanelHorizontal();
 		panelSubSector.add(lblSubSector);
 		panelSubSector.add(inSubSector);
-		
-		PanelHorizontal panelSeccion = new PanelHorizontal();
-		panelSeccion.add(lblSeccion);
-		panelSeccion.add(inSeccion);
-
-		PanelHorizontal panelMacizo = new PanelHorizontal();
-		panelMacizo.add(lblMacizo);
-		panelMacizo.add(inMacizo);
-
-		PanelHorizontal panelUnidad = new PanelHorizontal();
-		panelUnidad.add(lblUnidad);
-		panelUnidad.add(inUnidad);
-
-		PanelHorizontal panelNumSepultura = new PanelHorizontal();
-		panelNumSepultura.add(lblNumSepultura);
-		panelNumSepultura.add(inNumeroSepultura);
-
-		PanelHorizontal panelSepultura = new PanelHorizontal();
-		panelSepultura.add(lblSepultura);
-		panelSepultura.add(inSepultura);
-		
-		PanelHorizontal panelInhumacion = new PanelHorizontal();
-		panelInhumacion.add(lblInhumacion);
-		panelInhumacion.add(inInhumacion);
-
-		PanelHorizontal panelNicho = new PanelHorizontal();
-		panelNicho.add(lblNicho);
-		panelNicho.add(inNicho);
-
-		PanelHorizontal panelFila = new PanelHorizontal();
-		panelFila.add(lblFila);
-		panelFila.add(inFila);
-
-		PanelHorizontal panelCirc = new PanelHorizontal();
-		panelCirc.add(lblCirc);
-		panelCirc.add(inCirc);
-
-		PanelHorizontal panelParcela = new PanelHorizontal();
-		panelParcela.add(lblParcela);
-		panelParcela.add(inParcela);
-		
-		PanelHorizontal panelMueble = new PanelHorizontal();
-		panelMueble.add(lblMueble);
-		panelMueble.add(inMueble);
-		
+				
 		PanelVertical ret1 = new PanelVertical();
 		ret1.add(panelSector);
-		ret1.add(panelSeccion);
-		ret1.add(panelMacizo);
-		ret1.add(panelUnidad);
-		ret1.add(panelNumSepultura);
-		ret1.add(panelSepultura);
-		ret1.add(panelInhumacion);
+		ret1.add(inSeccion);
+		ret1.add(inMacizo);
+		ret1.add(inUnidad);
+		ret1.add(inNumeroSepultura);
+		ret1.add(inSepultura);
+		ret1.add(inInhumacion);
 		
 		PanelVertical ret2 = new PanelVertical();
 		ret2.add(panelSubSector);
-		ret2.add(panelNicho);
-		ret2.add(panelFila);
-		ret2.add(panelCirc);
-		ret2.add(panelParcela);
-		ret2.add(panelMueble);
+		ret2.add(inNicho);
+		ret2.add(inFila);
+		ret2.add(inCirc);
+		ret2.add(inParcela);
+		ret2.add(inMueble);
 		ret2.add(inCheckBis);
 		ret2.add(inCheckMacizo);
 		
@@ -502,39 +335,39 @@ public class VentanaAltaServicio extends VentanaInterna {
 	
 	//************************************* SOLO GETTERS A PARTIR DE ESTE PUNTO *********************************************
 	public JTextField getDNI() {
-		return inDNI;
+		return inDNI.getTextField();
 	}
 
 	public JTextField getApellido() {
-		return inApellido;
+		return inApellido.getTextField();
 	}
 
 	public JTextField getNombre() {
-		return inNombre;
+		return inNombre.getTextField();
 	}
 
 	public JTextField getTelefono() {
-		return inTelefono;
+		return inTelefono.getTextField();
 	}
 
 	public JTextField getEmail() {
-		return inEmail;
+		return inEmail.getTextField();
 	}
 
 	public JTextField getInDNIFallecido() {
-		return inDNIFallecido;
+		return inDNIFallecido.getTextField();
 	}
 
 	public JTextField getInApellidoFallecido() {
-		return inApellidoFallecido;
+		return inApellidoFallecido.getTextField();
 	}
 
 	public JTextField getInNombreFallecido() {
-		return inNombreFallecido;
+		return inNombreFallecido.getTextField();
 	}
 
 	public JTextField getInCocheria() {
-		return inCocheria;
+		return inCocheria.getTextField();
 	}
 
 	public JDateChooser getInFechaFallecimiento() {
@@ -546,47 +379,47 @@ public class VentanaAltaServicio extends VentanaInterna {
 	}
 
 	public JTextField getInSeccion() {
-		return inSeccion;
+		return inSeccion.getTextField();
 	}
 
 	public JTextField getInMacizo() {
-		return inMacizo;
+		return inMacizo.getTextField();
 	}
 
 	public JTextField getInUnidad() {
-		return inUnidad;
+		return inUnidad.getTextField();
 	}
 
 	public JTextField getInNumeroSepultura() {
-		return inNumeroSepultura;
+		return inNumeroSepultura.getTextField();
 	}
 
 	public JTextField getInSepultura() {
-		return inSepultura;
+		return inSepultura.getTextField();
 	}
 
 	public JTextField getInInhumacion() {
-		return inInhumacion;
+		return inInhumacion.getTextField();
 	}
 
 	public JTextField getInNicho() {
-		return inNicho;
+		return inNicho.getTextField();
 	}
 
 	public JTextField getInFila() {
-		return inFila;
+		return inFila.getTextField();
 	}
 
 	public JTextField getInCirc() {
-		return inCirc;
+		return inCirc.getTextField();
 	}
 
 	public JTextField getInParcela() {
-		return inParcela;
+		return inParcela.getTextField();
 	}
 
 	public JTextField getInMueble() {
-		return inMueble;
+		return inMueble.getTextField();
 	}
 
 	public JCheckBox getInCheckMacizo() {

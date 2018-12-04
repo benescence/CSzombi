@@ -10,6 +10,8 @@ import com.revivir.cementerio.vista.login.ControladorIniciarSesion;
 public class MainLogin {
 
 	public static void main(String[] args) {
+		
+		
 		try {
 			Properties props = new Properties();
 			props.put("logoString", "Revivir");
@@ -21,6 +23,7 @@ public class MainLogin {
 		}
 		
 		new ControladorIniciarSesion();
+		//new Main();
 	}
 
 }
