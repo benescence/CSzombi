@@ -7,9 +7,10 @@ import javax.swing.JTextField;
 public class EntradaTexto extends PanelHorizontal {
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
+	private JLabel label;
 	
 	public EntradaTexto(String texto, Dimension largoLabel, Dimension largoTextfield) {
-		JLabel label = new JLabel(texto);
+		label = new JLabel(texto);
 		label.setMaximumSize(largoLabel);
 		label.setMinimumSize(largoLabel);
 		label.setPreferredSize(largoLabel);
@@ -20,6 +21,16 @@ public class EntradaTexto extends PanelHorizontal {
 		textField.setMinimumSize(largoTextfield);
 		textField.setPreferredSize(largoTextfield);
 		add(textField);
+	}
+	
+	public void bloquear() {
+		label.setEnabled(false);
+		textField.setEnabled(false);
+	}
+
+	public void desbloquear() {
+		label.setEnabled(true);
+		textField.setEnabled(true);
 	}
 	
 	public JTextField getTextField() {

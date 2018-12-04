@@ -283,7 +283,8 @@ public class VentanaAltaServicio extends VentanaInterna {
 		} else if (subSector == SubSector.NICHERA) {
 			habilitarCamposUbicacion(false);
 			inCirc.setEnabled(true);
-			inSeccion.setEnabled(true);
+			//inSeccion.bloquear();
+			inSeccion.setVisible(false);
 			inMacizo.setEnabled(true);
 			inParcela.setEnabled(true);
 			inFila.setEnabled(true);
