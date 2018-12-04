@@ -1,6 +1,10 @@
 package com.revivir.cementerio.vista.util;
 
+import java.util.List;
+
 import com.revivir.cementerio.negocios.Localizador;
+import com.revivir.cementerio.negocios.manager.FallecidoManager;
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 
@@ -27,6 +31,41 @@ public class Formato {
 	public static String ubicacion(Fallecido fallecido) {
 		Ubicacion ubicacion = Localizador.traerUbicacionDeFallecido(fallecido);
 		return ubicacion(ubicacion);
+	}
+	
+	public static String fallecidos(Cliente cliente) {
+		List<Fallecido> fallecidos = FallecidoManager.traerPorCliente(cliente);
+		String ret = "<html>";
+
+		for (Fallecido fallecido : fallecidos) {
+			String nombre = fallecido.getApellido()+", "+fallecido.getNombre();
+			if (fallecido != fallecidos.get(0))
+				nombre = "<br>" + nombre;
+			ret += nombre;
+		}
+		
+		return ret += "</html>";
+	}
+
+	public static Integer contarRenglones(String texto) {
+		Integer cantidad = 1;
+		
+		for (int i = 0; i < texto.length()-3; i++)
+			if (texto.charAt(i) == '<' && texto.charAt(i+1) == 'b' && texto.charAt(i+2) == 'r' && texto.charAt(i+3) == '>')
+				cantidad++;
+		
+		return cantidad;
+	}
+	
+	public static Integer calcularAlturaDeCelda(Object[] fila) {
+		int renglonesMaximo = 0;
+		for (Object objecto : fila) {
+			int renglones = Formato.contarRenglones((String)objecto);
+			if (renglones>renglonesMaximo)
+				renglonesMaximo = renglones;
+		}
+		
+		return renglonesMaximo*20;
 	}
 
 }

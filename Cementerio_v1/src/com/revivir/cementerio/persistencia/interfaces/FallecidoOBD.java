@@ -1,6 +1,8 @@
 package com.revivir.cementerio.persistencia.interfaces;
 
 import java.util.List;
+
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 
 public interface FallecidoOBD {
@@ -12,6 +14,8 @@ public interface FallecidoOBD {
 	public void delete(Fallecido obciso);
 
 	public List<Fallecido> select();
+
+	public List<Fallecido> selectByCliente(Cliente cliente);
 
 	public Fallecido selectByDNI(String DNI);
 

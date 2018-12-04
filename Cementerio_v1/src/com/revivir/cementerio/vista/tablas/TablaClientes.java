@@ -5,10 +5,11 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.vista.util.Formato;
 
 public class TablaClientes extends JTable{
 	private static final long serialVersionUID = 1L;
-	private String[] columnas = { "DNI", "Nombre", "Apellido", "Telefono", "E-Mail"};
+	private String[] columnas = { "DNI", "Nombre", "Apellido", "Telefono", "E-Mail", "Difuntos asociados"};
 	private DefaultTableModel modelo;
 	private List<Cliente> clientes;
 
@@ -30,9 +31,15 @@ public class TablaClientes extends JTable{
 					cliente.getNombre(),
 					cliente.getApellido(),
 					cliente.getTelefono(),
-					cliente.getEmail()
+					cliente.getEmail(),
+					Formato.fallecidos(cliente)
 			};
 			modelo.addRow(fila);
+			
+			// seteo la altura de la celda
+			int registro = modelo.getRowCount() - 1;
+			int altura = Formato.calcularAlturaDeCelda(fila);
+			setRowHeight(registro, altura);
 		}
 	}
 	
