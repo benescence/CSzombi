@@ -4,18 +4,24 @@ import javax.swing.JScrollPane;
 
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.vista.tablas.TablaClientes;
+import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Ventana;
+
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 
 public class VentanaSeleccionCliente extends Ventana {
 	private static final long serialVersionUID = 1L;
 	private TablaClientes tabla;
-	private JButton btnSeleccionar, btnCancelar;
+	private Boton btnSeleccionar, btnCancelar;
 	
 	public VentanaSeleccionCliente() {
 		super("Seleccionar cliente", 500, 500);
+		Dimension dimBoton = new Dimension(100, 25);
+		
 		
 		// TABLA
 		tabla = new TablaClientes(ClienteManager.traerTodo());
@@ -23,8 +29,8 @@ public class VentanaSeleccionCliente extends Ventana {
 		panelTabla.setViewportView(tabla);
 		
 		// BOTONES
-		btnSeleccionar = new JButton("Seleccionar");
-		btnCancelar = new JButton("Cancelar");
+		btnSeleccionar = new Boton("Seleccionar", dimBoton);
+		btnCancelar = new Boton("Cancelar", dimBoton);
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.add(btnSeleccionar);
 		panelBotones.add(btnCancelar);

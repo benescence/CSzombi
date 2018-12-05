@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.revivir.cementerio.persistencia.definidos.Rol;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
+import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.EntradaTexto;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
@@ -20,16 +21,16 @@ public class VentanaUsuarioAM extends Ventana {
 	private static final long serialVersionUID = 1L;
 	private EntradaTexto inUsuario, inPassword;
 	private JComboBox<Rol> inPermisos;
-	private JButton btnAceptar, btnCancelar;
+	private Boton btnAceptar, btnCancelar;
 	private Usuario usuario = null;
 
 	public VentanaUsuarioAM() {
-		super("Alta de usuarios", 500, 500);
+		super("Alta de usuario", 500, 500);
 		cargarcomponentes();
 	}
 	
 	public VentanaUsuarioAM(Usuario usuario) {
-		super("Alta de usuarios", 500, 500);
+		super("Modificación de usuario", 500, 500);
 		cargarcomponentes();
 		this.usuario = usuario;
 		inUsuario.getTextField().setText(usuario.getUsuario());
@@ -38,9 +39,9 @@ public class VentanaUsuarioAM extends Ventana {
 	}
 	
 	public void cargarcomponentes() {
-		// ENTRADAS
 		Dimension largoLabel = new Dimension(150, 25);
 		Dimension largoEntrada = new Dimension(300, 25);
+		Dimension dimBoton = new Dimension(100, 25);
 		
 		inUsuario = new EntradaTexto("Usuario", largoLabel, largoEntrada);
 		inPassword = new EntradaTexto("Password", largoLabel, largoEntrada);
@@ -61,9 +62,8 @@ public class VentanaUsuarioAM extends Ventana {
 		panelPermisos.add(lblPermisos);
 		panelPermisos.add(inPermisos);
 		
-		// BOTONES
-		btnAceptar = new JButton("Aceptar");
-		btnCancelar = new JButton("Cancelar");
+		btnAceptar = new Boton("Aceptar", dimBoton);
+		btnCancelar = new Boton("Cancelar", dimBoton);
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.add(btnAceptar);
 		panelBotones.add(btnCancelar);
