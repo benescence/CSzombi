@@ -11,7 +11,7 @@ import com.revivir.cementerio.vista.util.Formato;
 
 public class TablaFallecidos extends JTable{
 	private static final long serialVersionUID = 1L;
-	private String[] columnas = { "DNI", "Nombre", "Apellido", "Fecha de\nfallecimiento", "Tipo de fallecimiento", "Cocheria", "Ubicacion"};
+	private String[] columnas = { "DNI", "Nombre", "Apellido", /*"Fecha de\nfallecimiento", "Tipo de fallecimiento", "Cocheria", */"Ubicacion"};
 	private DefaultTableModel modelo;
 	private List<Fallecido> fallecidos;
 
@@ -32,9 +32,9 @@ public class TablaFallecidos extends JTable{
 					elemento.getDni(),
 					elemento.getNombre(),
 					elemento.getApellido(),
-					elemento.getFechaFallecimiento(),
-					elemento.getTipoFallecimiento(),
-					elemento.getCocheria(),
+					//elemento.getFechaFallecimiento(),
+					//elemento.getTipoFallecimiento(),
+					//elemento.getCocheria(),
 					Formato.ubicacion(elemento)
 			};
 			modelo.addRow(fila);
@@ -43,11 +43,11 @@ public class TablaFallecidos extends JTable{
 		// tamaños preferenciales
 		getColumn("DNI").setPreferredWidth(30);
 		getColumn("Nombre").setPreferredWidth(100);
-		getColumn("Apellido").setPreferredWidth(100);
-		//getColumn("Fecha de fallecimiento").setPreferredWidth(30);
-		getColumn("Tipo de fallecimiento").setPreferredWidth(50);
-		getColumn("Cocheria").setPreferredWidth(80);
-		getColumn("Ubicacion").setPreferredWidth(250);
+		getColumn("Apellido").setPreferredWidth(80);
+		//getColumn("Fecha de fallecimiento").setPreferredWidth(25);
+		//getColumn("Tipo de fallecimiento").setPreferredWidth(25);
+		//getColumn("Cocheria").setPreferredWidth(60);
+		getColumn("Ubicacion").setPreferredWidth(350);
 	}
 	
 	public List<Fallecido> obtenerSeleccion() {

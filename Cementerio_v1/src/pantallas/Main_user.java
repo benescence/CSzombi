@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.revivir.cementerio.persistencia.entidades.Precio;
+import com.revivir.cementerio.vista.precio.VentanaPrecio;
+
 import administracion.Precios;
 import clientes.Alta_clientes;
 import clientes.Consulta_cliente;
@@ -171,12 +174,17 @@ public class Main_user extends JFrame {
 		   		    getContentPane().removeAll();
 	                getContentPane().repaint();
 	                
-					Precios precios = new Precios();
-					precios.setVisible(true);
-					getContentPane().add(precios);
+					VentanaPrecio VentanaPrecios = new VentanaPrecio();
+					VentanaPrecios.setVisible(true);
+					getContentPane().add(VentanaPrecios);
 			}
 		});
 		mnAdministracin.add(item_Precios);
+		
+		
+		
+		
+		
 		
 		JMenuItem item_Vencimientos = new JMenuItem("Vencimientos");
 		mnAdministracin.add(item_Vencimientos);
