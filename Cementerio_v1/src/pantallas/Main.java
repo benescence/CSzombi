@@ -16,7 +16,7 @@ import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.clientes.alta.ControladorAltaServicio;
 import com.revivir.cementerio.vista.clientes.busqueda.cliente.ControladorConsultaCliente;
 import com.revivir.cementerio.vista.clientes.busqueda.fallecido.ControladorConsultaFallecidos;
-import com.revivir.cementerio.vista.login.ControladorIniciarSesion;
+import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
 import com.revivir.cementerio.vista.usuarios.ControladorUsuarios;
 import com.revivir.cementerio.vista.util.PanelVertical;
 

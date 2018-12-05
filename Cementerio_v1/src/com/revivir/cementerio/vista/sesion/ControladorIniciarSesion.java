@@ -1,5 +1,7 @@
-package com.revivir.cementerio.vista.login;
+package com.revivir.cementerio.vista.sesion;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -21,6 +23,19 @@ public class ControladorIniciarSesion {
 			public void windowClosing(WindowEvent e) {
 				cancelar();
 			}
+		});
+		ventana.botonAceptar().addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				aceptar();
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {}
 		});
 	}
 

@@ -9,30 +9,25 @@ public class EntradaTexto extends PanelHorizontal {
 	private JTextField textField;
 	private JLabel label;
 	
-	public EntradaTexto(String texto, Dimension largoLabel, Dimension largoTextfield) {
+	public EntradaTexto(String texto, Dimension dimLabel, Dimension dimTextfield) {
 		label = new JLabel(texto);
-		label.setMaximumSize(largoLabel);
-		label.setMinimumSize(largoLabel);
-		label.setPreferredSize(largoLabel);
+		label.setMaximumSize(dimLabel);
+		label.setMinimumSize(dimLabel);
+		label.setPreferredSize(dimLabel);
 		add(label);
 		
 		textField = new JTextField();
-		textField.setMaximumSize(largoTextfield);
-		textField.setMinimumSize(largoTextfield);
-		textField.setPreferredSize(largoTextfield);
+		textField.setMaximumSize(dimTextfield);
+		textField.setMinimumSize(dimTextfield);
+		textField.setPreferredSize(dimTextfield);
 		add(textField);
 	}
 	
-	public void bloquear() {
-		label.setEnabled(false);
-		textField.setEnabled(false);
+	public void bloquear(boolean bloquear) {
+		label.setEnabled(bloquear);
+		textField.setEnabled(bloquear);
 	}
 
-	public void desbloquear() {
-		label.setEnabled(true);
-		textField.setEnabled(true);
-	}
-	
 	public JTextField getTextField() {
 		return textField;
 	}
