@@ -18,8 +18,7 @@ public class FallecidoManager {
 				nombre, cocheria, fechaFallecimiento);
 		
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
-		obd.insert(fallecido);
-		
+		obd.insert(fallecido);	
 	}
 	
 	public static Fallecido traerPorDNI(String DNI) {
