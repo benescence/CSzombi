@@ -22,7 +22,7 @@ public class MainLogin {
 	}
 	
 	public static void main(String[] args) {
-		configurarApariencia();
+		//configurarApariencia();
 		new ControladorIniciarSesion();
 	}
 

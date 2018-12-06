@@ -103,7 +103,7 @@ public class VentanaAltaServicio extends VentanaInterna {
 	}
 	
 	private PanelVertical crearPanelFallecido() {
-		Dimension largoLabel = new Dimension(100, 25);
+		Dimension largoLabel = new Dimension(150, 25);
 		Dimension largoTextfield = new Dimension(300, 25);
 
 		inNombreFallecido = new EntradaTexto("Nombres", largoLabel, largoTextfield);
@@ -153,39 +153,43 @@ public class VentanaAltaServicio extends VentanaInterna {
 	}
 	
 	private PanelHorizontal crearPanelUbicacion() {
-		Dimension largoLabel = new Dimension(100, 25);
+		Dimension largoLabel1 = new Dimension(100, 25);
+		Dimension largoLabel2 = new Dimension(150, 25);
 		Dimension largoTextfield = new Dimension(300, 25);
 
-		inSeccion = new EntradaTexto("Seccion", largoLabel, largoTextfield);
-		inMacizo = new EntradaTexto("Macizo", largoLabel, largoTextfield);
-		inUnidad = new EntradaTexto("Unidad", largoLabel, largoTextfield);
-		inNumeroSepultura = new EntradaTexto("N° Sepultura", largoLabel, largoTextfield);
-		inSepultura = new EntradaTexto("Sepultura", largoLabel, largoTextfield);
-		inInhumacion = new EntradaTexto("Inhumacion", largoLabel, largoTextfield);
-		inNicho = new EntradaTexto("Nicho", largoLabel, largoTextfield);
-		inFila = new EntradaTexto("Fila", largoLabel, largoTextfield);
-		inCirc = new EntradaTexto("Circ", largoLabel, largoTextfield);
-		inParcela = new EntradaTexto("Parcela", largoLabel, largoTextfield);
-		inMueble = new EntradaTexto("Mueble", largoLabel, largoTextfield);
+		inSeccion = new EntradaTexto("Seccion", largoLabel1, largoTextfield);
+		inMacizo = new EntradaTexto("Macizo", largoLabel1, largoTextfield);
+		inUnidad = new EntradaTexto("Unidad", largoLabel1, largoTextfield);
+		inNumeroSepultura = new EntradaTexto("N° Sepultura", largoLabel1, largoTextfield);
+		inSepultura = new EntradaTexto("Sepultura", largoLabel1, largoTextfield);
+		inInhumacion = new EntradaTexto("Inhumacion", largoLabel1, largoTextfield);
+		inNicho = new EntradaTexto("Nicho", largoLabel2, largoTextfield);
+		inFila = new EntradaTexto("Fila", largoLabel2, largoTextfield);
+		inCirc = new EntradaTexto("Circ", largoLabel2, largoTextfield);
+		inParcela = new EntradaTexto("Parcela", largoLabel2, largoTextfield);
+		inMueble = new EntradaTexto("Mueble", largoLabel2, largoTextfield);
 				
 		JLabel lblSector = new JLabel("Sector");
 		JLabel lblSubSector = new JLabel("Sub sector");
 		JLabel lblCheckMacizo = new JLabel("Check Macizo");
 		JLabel lblCheckBis = new JLabel("Check Bis");
 
-		lblSector.setMinimumSize(largoLabel);
-		lblSector.setPreferredSize(largoLabel);
-		lblSector.setMaximumSize(largoLabel);
+		lblSector.setMinimumSize(largoLabel1);
+		lblSector.setPreferredSize(largoLabel1);
+		lblSector.setMaximumSize(largoLabel1);
 
-		lblSubSector.setMinimumSize(largoLabel);
-		lblSubSector.setPreferredSize(largoLabel);
-		lblSubSector.setMaximumSize(largoLabel);
+		lblSubSector.setMinimumSize(largoLabel2);
+		lblSubSector.setPreferredSize(largoLabel2);
+		lblSubSector.setMaximumSize(largoLabel2);
 		
-		lblCheckMacizo.setPreferredSize(largoLabel);
-		lblCheckBis.setPreferredSize(largoLabel);
+		lblCheckMacizo.setPreferredSize(largoLabel2);
+		lblCheckBis.setPreferredSize(largoLabel2);
 		
 		inCheckBis = new JCheckBox("Bis");
 		inCheckMacizo = new JCheckBox("Macizo");
+		PanelHorizontal panelCheck = new PanelHorizontal();
+		panelCheck.add(inCheckBis);
+		panelCheck.add(inCheckMacizo);
 		
 		inSector = new JComboBox<>();
 		inSubSector = new JComboBox<>();
@@ -224,6 +228,7 @@ public class VentanaAltaServicio extends VentanaInterna {
 		panelSubSector.add(inSubSector);
 				
 		PanelVertical ret1 = new PanelVertical();
+		ret1.setBorder(new EmptyBorder(10, 0, 0, 0));
 		ret1.add(panelSector);
 		ret1.add(inSeccion);
 		ret1.add(inMacizo);
@@ -233,14 +238,16 @@ public class VentanaAltaServicio extends VentanaInterna {
 		ret1.add(inInhumacion);
 		
 		PanelVertical ret2 = new PanelVertical();
+		ret2.setBorder(new EmptyBorder(10, 30, 10, 10));
 		ret2.add(panelSubSector);
 		ret2.add(inNicho);
 		ret2.add(inFila);
 		ret2.add(inCirc);
 		ret2.add(inParcela);
 		ret2.add(inMueble);
-		ret2.add(inCheckBis);
-		ret2.add(inCheckMacizo);
+		//ret2.add(inCheckBis);
+		//ret2.add(inCheckMacizo);
+		ret2.add(panelCheck);
 		
 		PanelHorizontal ret = new PanelHorizontal();
 		ret.setName("Ubicacion del difunto");
@@ -251,74 +258,67 @@ public class VentanaAltaServicio extends VentanaInterna {
 	
 	private void seleccionarSubSector() {
 		SubSector subSector = (SubSector) inSubSector.getSelectedItem();
+		habilitarCamposUbicacion(false);
 		
 		if (subSector == SubSector.SEPULTURAS) {
-			habilitarCamposUbicacion(false);
-			inSeccion.setEnabled(true);
-			inMacizo.setEnabled(true);
-			inUnidad.setEnabled(true);
-			inNumeroSepultura.setEnabled(true);
+			inSeccion.bloquear(true);
+			inMacizo.bloquear(true);
+			inUnidad.bloquear(true);
+			inNumeroSepultura.bloquear(true);
 			inCheckMacizo.setEnabled(true);
 			inCheckBis.setEnabled(true);
 
 		} else if (subSector == SubSector.INDIGENTES) {
-			habilitarCamposUbicacion(false);
-			inSeccion.setEnabled(true);
-			inMacizo.setEnabled(true);
-			inSepultura.setEnabled(true);
-			inInhumacion.setEnabled(true);
+			inSeccion.bloquear(true);
+			inMacizo.bloquear(true);
+			inSepultura.bloquear(true);
+			inInhumacion.bloquear(true);
 
 		} else if (subSector == SubSector.PALMERAS_ATAUD
 				|| subSector == SubSector.PALMERAS_CENIZAS
 				|| subSector == SubSector.PALMERAS_RESTOS) {
 			
-			habilitarCamposUbicacion(false);
-			inNicho.setEnabled(true);
-			inFila.setEnabled(true);
+			inNicho.bloquear(true);
+			inFila.bloquear(true);
 			
 		} else if (subSector == SubSector.PALMERAS_SEPULTURAS) {
-			habilitarCamposUbicacion(false);
-			inSepultura.setEnabled(true);
+			inSepultura.bloquear(true);
 			
 		} else if (subSector == SubSector.NICHERA) {
-			habilitarCamposUbicacion(false);
-			inCirc.setEnabled(true);
-			//inSeccion.bloquear();
-			inSeccion.setVisible(false);
-			inMacizo.setEnabled(true);
-			inParcela.setEnabled(true);
-			inFila.setEnabled(true);
-			inUnidad.setEnabled(true);
+			inCirc.bloquear(true);
+			inSeccion.bloquear(false);
+			inMacizo.bloquear(true);
+			inParcela.bloquear(true);
+			inFila.bloquear(true);
+			inUnidad.bloquear(true);
 
 		} else if (subSector == SubSector.CENIZARIO) {
-			habilitarCamposUbicacion(false);
-			inMueble.setEnabled(true);
-			inNicho.setEnabled(true);
+			inMueble.bloquear(true);
+			inNicho.bloquear(true);
 		
 		} else if (subSector == SubSector.BOVEDA) {
-			habilitarCamposUbicacion(false);
-			inCirc.setEnabled(true);
-			inSeccion.setEnabled(true);
-			inMacizo.setEnabled(true);
-			inParcela.setEnabled(true);
-			inUnidad.setEnabled(true);
+			inCirc.bloquear(true);
+			inSeccion.bloquear(true);
+			inMacizo.bloquear(true);
+			inParcela.bloquear(true);
+			inUnidad.bloquear(true);
 			inCheckBis.setEnabled(true);
 		}
 		
 	}
 	
 	private void habilitarCamposUbicacion(boolean habilitado) {
-		inSeccion.setEnabled(habilitado);
-		inMacizo.setEnabled(habilitado);
-		inUnidad.setEnabled(habilitado);
-		inNumeroSepultura.setEnabled(habilitado);
-		inSepultura.setEnabled(habilitado);
-		inInhumacion.setEnabled(habilitado);
-		inNicho.setEnabled(habilitado);
-		inFila.setEnabled(habilitado);
-		inCirc.setEnabled(habilitado);
-		inParcela.setEnabled(habilitado);
-		inMueble.setEnabled(habilitado);
+		inSeccion.bloquear(habilitado);
+		inMacizo.bloquear(habilitado);
+		inUnidad.bloquear(habilitado);
+		inNumeroSepultura.bloquear(habilitado);
+		inSepultura.bloquear(habilitado);
+		inInhumacion.bloquear(habilitado);
+		inNicho.bloquear(habilitado);
+		inFila.bloquear(habilitado);
+		inCirc.bloquear(habilitado);
+		inParcela.bloquear(habilitado);
+		inMueble.bloquear(habilitado);
 		inCheckMacizo.setEnabled(habilitado);
 		inCheckBis.setEnabled(habilitado);
 	}
