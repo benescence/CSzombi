@@ -46,7 +46,7 @@ public class ControladorPrecio implements ActionListener, ControladorInterno{
 	}
 
 	private void modificar() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub.
 		
 	}
 
