@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import javax.swing.UIManager;
 
-//import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
+//import com.jtattoo.plaf.acryl.AcrylLookAndFeel;//1
 import com.revivir.cementerio.vista.login.ControladorIniciarSesion;
 
 public class MainLogin {
