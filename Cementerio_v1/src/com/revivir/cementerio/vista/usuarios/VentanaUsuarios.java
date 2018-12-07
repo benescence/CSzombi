@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 import com.revivir.cementerio.vista.tablas.TablaUsuarios;
+import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.EntradaTexto;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
@@ -19,23 +20,24 @@ import com.revivir.cementerio.vista.util.VentanaInterna;
 public class VentanaUsuarios extends VentanaInterna {
 	private static final long serialVersionUID = 1L;
 	private EntradaTexto inUsuario;
-	private JButton btnAgregar, btnModificar, btnEliminar, btnBuscar, btnLimpiar;
+	private Boton btnAgregar, btnModificar, btnEliminar, btnBuscar, btnLimpiar;
 	private TablaUsuarios tabla;
 	
 	public VentanaUsuarios() {
 		super("Usuarios del sistema", 500, 500);
 		
-		// ENTRADAS
 		Dimension largoLabel = new Dimension(200, 30);
 		Dimension largoTextfield = new Dimension(200, 30);
+		Dimension dimBoton = new Dimension(100, 25);
+		
 		inUsuario = new EntradaTexto("Usuario", largoLabel, largoTextfield);
 		
-		// BOTONES
-		btnAgregar = new JButton("Agregar");
-		btnModificar = new JButton("Modificar");
-		btnEliminar = new JButton("Eliminar");
-		btnBuscar = new JButton("Buscar");
-		btnLimpiar = new JButton("Limpiar");
+		btnAgregar = new Boton("Agregar", dimBoton);
+		btnModificar = new Boton("Modificar", dimBoton);
+		btnEliminar = new Boton("Eliminar", dimBoton);
+		btnBuscar = new Boton("Buscar", dimBoton);
+		btnLimpiar = new Boton("Limpiar", dimBoton);
+		
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.add(btnAgregar);
 		panelBotones.add(btnModificar);
@@ -43,12 +45,10 @@ public class VentanaUsuarios extends VentanaInterna {
 		panelBotones.add(btnBuscar);
 		panelBotones.add(btnLimpiar);
 		
-		// TABLA
 		List<Usuario> usuarios = new ArrayList<>();
 		tabla = new TablaUsuarios(usuarios);
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		
-		// PANELES
 		PanelVertical panelPrincipal = new PanelVertical();
 		panelPrincipal.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(panelPrincipal);
