@@ -12,6 +12,7 @@ import com.revivir.cementerio.persistencia.entidades.Precio;
 import com.revivir.cementerio.persistencia.interfaces.PrecioOBD;
 
 public class PrecioOBDMySQL extends OBD implements PrecioOBD{
+	// TODO falta cambiar los campos aca arriba
 	private final String campos = "DNI, apellido, nombre, telefono, email";
 	private final String tabla = "rev_clientes";
 	
@@ -25,6 +26,7 @@ public class PrecioOBDMySQL extends OBD implements PrecioOBD{
 		ejecutarSQL(sql);		
 	}
 
+	// TODO fijate que las cadenas van entre comillas simples pero los enteros no
 	@Override
 	public void update(Precio precio) {
 		String condicion = "ID = "+precio.getID();

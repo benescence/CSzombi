@@ -1,8 +1,7 @@
 package com.revivir.cementerio.persistencia.entidades;
 
 public class Precio {
-	
-	private Integer ID,codigo;
+	private Integer ID, codigo;
 	private String observaciones, descripcion;
 	private Double  monto;
 
