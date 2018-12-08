@@ -16,6 +16,7 @@ import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.clientes.alta.ControladorAltaServicio;
 import com.revivir.cementerio.vista.clientes.busqueda.cliente.ControladorConsultaCliente;
 import com.revivir.cementerio.vista.clientes.busqueda.fallecido.ControladorConsultaFallecidos;
+import com.revivir.cementerio.vista.precio.ControladorPrecio;
 import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
 import com.revivir.cementerio.vista.usuarios.ControladorUsuarios;
 import com.revivir.cementerio.vista.util.PanelVertical;
@@ -102,9 +103,17 @@ public class Main extends JFrame {
 			}
 		});
 
+		JMenu mnAdministracin = new JMenu("Administraci\u00F3n");
+		menuBarra.add(mnAdministracin);
 		
 		
-		
+		JMenuItem itemAltaCargo = new JMenuItem("Alta_Cargo");
+		mnAdministracin.add(itemAltaCargo);
+		itemAltaCargo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarVentanaPrecio();
+			}
+		});
 		
 		
 		
@@ -206,10 +215,9 @@ public class Main extends JFrame {
 		});
 		mnReportes.add(mntmLugares);
 		
-		JMenu mnAdministracin = new JMenu("Administraci\u00F3n");
-		menuBarra.add(mnAdministracin);
 		
-		JMenuItem item_Precios = new JMenuItem("Precios");
+		
+		/*JMenuItem item_Precios = new JMenuItem("Precios");
 		item_Precios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		   		    getContentPane().removeAll();
@@ -219,8 +227,8 @@ public class Main extends JFrame {
 					precios.setVisible(true);
 					getContentPane().add(precios);
 			}
-		});
-		mnAdministracin.add(item_Precios);
+		});*/
+		//mnAdministracin.add(item_Precios);
 		
 		JMenuItem item_Vencimientos = new JMenuItem("Vencimientos");
 		item_Vencimientos.addActionListener(new ActionListener() {
@@ -365,5 +373,13 @@ public class Main extends JFrame {
         panel.add(controladorInterno.getVentana());
 		setContentPane(panel);
 	}
+	private void mostrarVentanaPrecio() {
+		cerrarAnterior();        
+        controladorInterno = new ControladorPrecio();
+        PanelVertical panel = new PanelVertical();
+        panel.add(controladorInterno.getVentana());
+		setContentPane(panel);
+	}
 
+	
 }
