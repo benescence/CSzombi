@@ -12,22 +12,25 @@ package com.revivir.cementerio.vista.precio;
 	import com.revivir.cementerio.persistencia.entidades.Precio;
 	import com.revivir.cementerio.vista.util.PanelHorizontal;
 	import com.revivir.cementerio.vista.util.PanelVertical;
+import com.revivir.cementerio.vista.util.Ventana;
 
 	
-	public class VentanaABMcargo extends JFrame {
+	public class VentanaAMcargo extends Ventana {
 		private static final long serialVersionUID = 1L;
 		private JButton btnAceptar, btnCancelar;
 		private JTextField inCodigo, inDescripcion, inMonto, inObservacion;
 		private Precio precio = null;
 		
 		// Constructor para un nuevo alumno
-		public VentanaABMcargo() {
+		public VentanaAMcargo() {
+			super ("ingresar cargo", 500,500);
 			setTitle("Ingresar Cargo");
 			cargarComponentes();
 		}
 		
 		// Constructor para editar un alumno
-		public VentanaABMcargo(Precio precio) {
+		public VentanaAMcargo(Precio precio) {
+			super ("ingresar cargo", 500,500);
 			setTitle("Editar alumno");
 			cargarComponentes();
 			this.precio = precio;

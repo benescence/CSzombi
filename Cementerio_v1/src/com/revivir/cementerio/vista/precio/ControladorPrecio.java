@@ -3,6 +3,7 @@ package com.revivir.cementerio.vista.precio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
@@ -14,23 +15,25 @@ import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.persistencia.entidades.Precio;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.util.Popup;
-import com.sun.glass.events.WindowEvent;
+
+
+import pantallas.Main;
 
 public class ControladorPrecio implements ActionListener, ControladorInterno{
 	private VentanaPrecio ventana;
-	private VentanaABMcargo ventanaAM;
+	private VentanaAMcargo ventanaAM;
+	private Main invocador;
 	
-	public ControladorPrecio() {
+	
+	public ControladorPrecio(Main invocador) {
 		ventana = new VentanaPrecio();
-		ventanaAM = new VentanaABMcargo();
+		
 		ventana.botonBuscar().addActionListener(this);
 		ventana.botonLimpiar().addActionListener(this);
 		ventana.botonEliminar().addActionListener(this);
 		ventana.botonAgregar().addActionListener(this);
 		ventana.botonModificar().addActionListener(this);
-		ventanaAM.botonAceptar().addActionListener(this);
-		ventanaAM.botonCancelar().addActionListener(this);
-	
+		this.invocador = invocador;
 		
 		//ventana.mostrar();
 	}
@@ -62,8 +65,18 @@ public class ControladorPrecio implements ActionListener, ControladorInterno{
 	}
 
 	private void agregar() {
-		// TODO Auto-generated method stub
-		
+		ventanaAM = new VentanaAMcargo();
+		ventanaAM.botonAceptar().addActionListener(e -> aceptarAM());
+		ventanaAM.botonCancelar().addActionListener(s -> cancelarAM());
+
+		ventanaAM.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				cancelarAM();
+			}
+		});
+	
+		//controlador.getVentana().setEnabled(false);
+		invocador.setEnabled(false);
 	}
 
 	private void limpiar() {
@@ -80,19 +93,7 @@ public class ControladorPrecio implements ActionListener, ControladorInterno{
 			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
 	}
 
-	private void abrirVentanaAM() {
-		ventanaAM = new VentanaABMcargo();
-		ventanaAM.botonAceptar().addActionListener(s -> aceptarAM());
-		//ventanaAM.botonCancelar().addActionListener(s -> cancelarAM());
-
-		ventanaAM.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				//cancelarAM();
-			}
-		});
-		ventanaAM.setVisible(true);
-		//controlador.getVentana().setEnabled(false);
-	}
+	
 	
 private void aceptarAM() {
 		
@@ -148,7 +149,7 @@ private void aceptarAM() {
 			int altura = Formato.calcularAlturaDeCelda(fila);
 			ventanaABM.getTablaAlumnos().setRowHeight(registro, altura);
 		}
-}
+}*/
 
 	private void cancelarAM() {
 		int confirm = JOptionPane.showOptionDialog(null, "¿¡Esta seguro de salir sin guardar!?", "Confirmacion",
@@ -157,10 +158,12 @@ private void aceptarAM() {
 			//Concurrencia.desbloquear(ventanaAM.getAlumno());
 			ventanaAM.dispose();
 			ventanaAM = null;
-			controlador.getVentana().setEnabled(true);
-			controlador.getVentana().toFront();
+			//controlador.getVentana().setEnabled(true);
+			//controlador.getVentana().toFront();
+			invocador.setEnabled(true);
+			invocador.toFront();
 		}
-	}*/
+	}
 	
 	private boolean validarCampos() {
 		

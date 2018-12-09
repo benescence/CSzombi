@@ -375,7 +375,7 @@ public class Main extends JFrame {
 	}
 	private void mostrarVentanaPrecio() {
 		cerrarAnterior();        
-        controladorInterno = new ControladorPrecio();
+        controladorInterno = new ControladorPrecio(this);
         PanelVertical panel = new PanelVertical();
         panel.add(controladorInterno.getVentana());
 		setContentPane(panel);
