@@ -2,25 +2,36 @@ package com.revivir.cementerio.vista.precio;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 import com.revivir.cementerio.negocios.Busqueda;
+import com.revivir.cementerio.negocios.Validador;
+import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.persistencia.entidades.Precio;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.util.Popup;
+import com.sun.glass.events.WindowEvent;
 
 public class ControladorPrecio implements ActionListener, ControladorInterno{
 	private VentanaPrecio ventana;
+	private VentanaABMcargo ventanaAM;
 	
 	public ControladorPrecio() {
 		ventana = new VentanaPrecio();
+		ventanaAM = new VentanaABMcargo();
 		ventana.botonBuscar().addActionListener(this);
 		ventana.botonLimpiar().addActionListener(this);
 		ventana.botonEliminar().addActionListener(this);
 		ventana.botonAgregar().addActionListener(this);
 		ventana.botonModificar().addActionListener(this);
+		ventanaAM.botonAceptar().addActionListener(this);
+		ventanaAM.botonCancelar().addActionListener(this);
+	
+		
 		//ventana.mostrar();
 	}
 
@@ -69,6 +80,127 @@ public class ControladorPrecio implements ActionListener, ControladorInterno{
 			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
 	}
 
+	private void abrirVentanaAM() {
+		ventanaAM = new VentanaABMcargo();
+		ventanaAM.botonAceptar().addActionListener(s -> aceptarAM());
+		//ventanaAM.botonCancelar().addActionListener(s -> cancelarAM());
+
+		ventanaAM.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				//cancelarAM();
+			}
+		});
+		ventanaAM.setVisible(true);
+		//controlador.getVentana().setEnabled(false);
+	}
+	
+private void aceptarAM() {
+		
+		if (validarCampos()) {
+			Precio precio = ventanaAM.getPrecio();
+			String Descripcion = ventanaAM.getInDescripcion().getText();
+			int codigo = Integer.valueOf(ventanaAM.getInCodigo().getText());
+			Double Monto = Double.valueOf(ventanaAM.getInMonto().getText());
+			String Observacion= ventanaAM.getInObservacion().getText();
+		
+
+			// Crear un nuevo alumno
+			if (precio == null) {
+			
+				CargoManager.crearCargo(codigo, Descripcion, Monto, Observacion);
+
+			// Editar un alumno existente
+			} else {
+				precio.setCodigo(codigo);;
+				precio.setDescripcion(Descripcion);;
+				precio.setMonto(Monto);;
+				precio.setObservaciones(Observacion);;
+			
+				CargoManager.modificar(precio);
+			}
+
+			//llenarTabla();
+			ventanaAM.dispose();
+			ventanaAM = null;
+			//controlador.getVentana().setEnabled(true);
+			//controlador.getVentana().toFront();
+		}
+	}
+
+	/*private void llenarTabla() {
+		ventanaAM.getMo  getModeloAlumnos().setRowCount(0);
+		ventanaAM.getModeloAlumnos().setColumnCount(0);
+		ventanaAM.getModeloAlumnos().setColumnIdentifiers(ventanaABM.getNombreColumnas());
+
+		alumnos = AlumnoManager.traerAlumnos();
+		for (Alumno alumno : alumnos) {
+			Object[] fila = {
+					alumno.getApellido(),
+					alumno.getNombre(),
+					alumno.getDNI(),
+					alumno.getEmail(),
+					alumno.getTelefono()
+					};
+			ventanaABM.getModeloAlumnos().addRow(fila);
+
+			// seteo la altura de la celda
+			int registro = ventanaABM.getModeloAlumnos().getRowCount() - 1;
+			int altura = Formato.calcularAlturaDeCelda(fila);
+			ventanaABM.getTablaAlumnos().setRowHeight(registro, altura);
+		}
+}
+
+	private void cancelarAM() {
+		int confirm = JOptionPane.showOptionDialog(null, "¿¡Esta seguro de salir sin guardar!?", "Confirmacion",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (confirm == 0) {
+			//Concurrencia.desbloquear(ventanaAM.getAlumno());
+			ventanaAM.dispose();
+			ventanaAM = null;
+			controlador.getVentana().setEnabled(true);
+			controlador.getVentana().toFront();
+		}
+	}*/
+	
+	private boolean validarCampos() {
+		
+		String codigo = ventanaAM.getInCodigo().getText();
+		String descripcion = ventanaAM.getInDescripcion().getText();
+		String monto = ventanaAM.getInMonto().getText();
+		
+
+
+		boolean isOk = true;
+		String mensaje = "Se encontraron los siguientes errores:\n";
+
+		if (descripcion == null) {
+			isOk = false;
+			mensaje += "    -Por favor ingrese el APELLIDO.\n";
+
+		}
+
+		if (codigo == null) {
+			isOk = false;
+			mensaje += "    -Por favor ingrese el CODIGO.\n";
+
+		} else if (!Validador.validarCodigo(codigo)) {
+			isOk = false;
+			mensaje += "    -El Codigo solo puede consistir de numeros.\n";
+		} 
+		if (monto == null) {
+			isOk = false;
+			mensaje += "    -Por favor ingrese el MONTO.\n";
+			
+		}else if (!Validador.validarCodigo(monto)) {
+			isOk = false;
+			mensaje += "    -El Monto solo puede consistir de numeros.\n";
+		} 
+		if (isOk == false)
+			JOptionPane.showMessageDialog(null, mensaje);
+
+		return isOk;
+		}
+	
 	@Override
 	public boolean finalizar() {
 		ventana.dispose();

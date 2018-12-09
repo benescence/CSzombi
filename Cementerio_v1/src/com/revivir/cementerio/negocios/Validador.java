@@ -66,5 +66,10 @@ public class Validador {
 		System.out.println(formatoNumeroLetraEspacio("45 XCarlós Ñ ñ"));
 		
 	}
+
+	public static boolean validarCodigo(String codigo) {
+		
+	return (formatoNumero(codigo));
+	}
 			
 }
