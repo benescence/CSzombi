@@ -7,7 +7,7 @@ import com.revivir.cementerio.persistencia.entidades.Precio;
 
 public interface PrecioOBD {
 	
-public void insert(Precio precio);
+	public void insert(Precio precio);
 	
 	public void update(Precio precio);
 	

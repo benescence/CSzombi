@@ -24,8 +24,8 @@ public class ClienteOBDTest {
 	}
 	
 	public static void main(String[] args) {
-		//Cliente cliente = new Cliente(-1, "2", "Ramirez", "Cyntia", "44655", "email@com");
-		//insertTest(cliente);
+		Cliente cliente = new Cliente(-1, "2", "Ramirez", "Cyntia", "44655", "email@com");
+		insertTest(cliente);
 		selectTest();
 	}
 

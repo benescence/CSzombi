@@ -52,10 +52,25 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 
 	@Override
 	public List<Cliente> selectByNombreApellidoDNI(String nombre, String apellido, String DNI) {
+		if (nombre == null && apellido == null && DNI == null )
+			return selectByCondicion("true");
+		
 		String condicion = "";
-		condicion += "nombre = " +(nombre != null ? "'"+nombre+"'" : "nombre");
-		condicion += " and apellido = " +(apellido != null ? "'"+apellido+"'" : "apellido");
-		condicion += " and DNI = " +(DNI != null ? "'"+DNI+"'" : "DNI");
+		if (nombre != null)
+			condicion += "upper(nombre) like '"+nombre.toUpperCase()+"%'";
+		
+		if (apellido != null) {
+			if (!condicion.equals(""))
+				condicion += " and "; 
+			condicion += "upper(apellido) like '"+apellido.toUpperCase()+"%'";
+		}
+		
+		if (DNI != null) {
+			if (!condicion.equals(""))
+				condicion += " and "; 
+			condicion += "upper(DNI) like '"+DNI.toUpperCase()+"%'";
+		}
+		
 		return selectByCondicion(condicion);
 	}
 
@@ -100,6 +115,5 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 			
 		return ret;
 	}
-
 	
 }

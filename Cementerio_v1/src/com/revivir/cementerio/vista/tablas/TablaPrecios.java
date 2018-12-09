@@ -21,9 +21,7 @@ public class TablaPrecios  extends JTable{
 			recargar(precios);
 		}	
 		
-	
-
-		public void recargar(List<Precio> precios) {
+	public void recargar(List<Precio> precios) {
 			this.precio = precios;
 			modelo.setRowCount(0);
 			modelo.setColumnCount(0);
@@ -47,7 +45,7 @@ public class TablaPrecios  extends JTable{
 
 			for (int indice : indices) {
 				int codigo = convertRowIndexToModel(indice);
-				codigos.add(codigos.get(codigo));
+				codigos.add(codigos.get(codigo)); // aca es get sobre precio no sobre codigos, esto devuelve siempre vacio TODO
 			}
 
 			return codigos;
