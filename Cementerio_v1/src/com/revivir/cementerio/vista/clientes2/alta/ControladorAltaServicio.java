@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.clientes.alta;
+package com.revivir.cementerio.vista.clientes2.alta;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

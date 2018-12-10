@@ -3,6 +3,7 @@ package com.revivir.cementerio.vista;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.revivir.cementerio.vista.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Popup;
@@ -21,14 +22,12 @@ public class ControladorPrincipal {
 		});
 		
 		// Acciones para las opciones de menu
-		ventana.getServicioConsulta().addActionListener(e -> servicioConsulta());
-	}
-
-	private void servicioConsulta() {
-		mostrarVentana(new ControladorServiciosABM(this));
+		//ventana.getClienteConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorClientesABM(this)));
+		ventana.getClienteConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorServiciosABM(this)));
+		ventana.getServicioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorServiciosABM(this)));
 	}
 	
-	private void mostrarVentana(ControladorInterno controlador) {
+	private void colocarVentanaInterna(ControladorInterno controlador) {
 		if (controladorInterno == null || controladorInterno.finalizar()) {
 	        controladorInterno = controlador;
 	        PanelVertical panel = new PanelVertical();

@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.clientes.busqueda.fallecido;
+package com.revivir.cementerio.vista.clientes2.busqueda.fallecido;
 
 import java.util.List;
 
