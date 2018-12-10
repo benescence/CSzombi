@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
+import com.revivir.cementerio.MainPrincipal;
 import com.revivir.cementerio.negocios.Busqueda;
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.manager.CargoManager;
@@ -16,16 +17,13 @@ import com.revivir.cementerio.persistencia.entidades.Precio;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.util.Popup;
 
-
-import pantallas.Main;
-
 public class ControladorPrecio implements ActionListener, ControladorInterno{
 	private VentanaPrecio ventana;
 	private VentanaAMcargo ventanaAM;
-	private Main invocador;
+	private MainPrincipal invocador;
 	
 	
-	public ControladorPrecio(Main invocador) {
+	public ControladorPrecio(MainPrincipal invocador) {
 		ventana = new VentanaPrecio();
 		
 		ventana.botonBuscar().addActionListener(this);

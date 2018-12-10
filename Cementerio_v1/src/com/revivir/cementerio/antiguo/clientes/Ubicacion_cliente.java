@@ -1,4 +1,4 @@
-package clientes;
+package com.revivir.cementerio.antiguo.clientes;
 
 import java.awt.EventQueue;
 
@@ -22,9 +22,9 @@ import java.awt.SystemColor;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import com.toedter.calendar.JCalendar;
 
-import logica.Clientes;
+import com.revivir.cementerio.antiguo.logica.Clientes;
+import com.toedter.calendar.JCalendar;
 
 import java.awt.event.ActionListener;
 

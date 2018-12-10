@@ -1,4 +1,4 @@
-package pantallas;
+package com.revivir.cementerio;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -11,6 +11,18 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.revivir.cementerio.antiguo.administracion.Vencimientos;
+import com.revivir.cementerio.antiguo.clientes.Alta_clientes;
+import com.revivir.cementerio.antiguo.clientes.Consulta_cliente;
+import com.revivir.cementerio.antiguo.clientes.Ubicacion_cliente;
+import com.revivir.cementerio.antiguo.consultas.Buscar_lugares;
+import com.revivir.cementerio.antiguo.consultas.Movimientos_dia;
+import com.revivir.cementerio.antiguo.consultas.Reporte_clientes;
+import com.revivir.cementerio.antiguo.pantallas.Bienvenido;
+import com.revivir.cementerio.antiguo.usuarios.Alta_usuario;
+import com.revivir.cementerio.antiguo.usuarios.Baja_usuario;
+import com.revivir.cementerio.antiguo.usuarios.Buscar_usuarios;
+import com.revivir.cementerio.antiguo.usuarios.Modif_usuario;
 import com.revivir.cementerio.negocios.Sesion;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.clientes.alta.ControladorAltaServicio;
@@ -21,28 +33,15 @@ import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
 import com.revivir.cementerio.vista.usuarios.ControladorUsuarios;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
-import administracion.Precios;
-import administracion.Vencimientos;
-import clientes.Alta_clientes;
-import clientes.Consulta_cliente;
-import clientes.Ubicacion_cliente;
-import consultas.Buscar_lugares;
-import consultas.Movimientos_dia;
-import consultas.Reporte_clientes;
-import usuarios.Alta_usuario;
-import usuarios.Baja_usuario;
-import usuarios.Buscar_usuarios;
-import usuarios.Modif_usuario;
-
 @SuppressWarnings("serial")
-public class Main extends JFrame {
+public class MainPrincipal extends JFrame {
 	private ControladorInterno controladorInterno = null;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main frame = new Main();
+					MainPrincipal frame = new MainPrincipal();
 					frame.setVisible(true);
 
 				} catch (Exception e) {
@@ -52,7 +51,7 @@ public class Main extends JFrame {
 		});
 	}
 
-	public Main() {
+	public MainPrincipal() {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Sistema de Consultas - Cementerio ");

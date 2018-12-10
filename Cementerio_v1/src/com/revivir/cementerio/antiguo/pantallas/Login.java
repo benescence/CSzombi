@@ -1,4 +1,4 @@
-package pantallas;
+package com.revivir.cementerio.antiguo.pantallas;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
@@ -9,7 +9,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import logica.Users;
+import com.revivir.cementerio.MainPrincipal;
+import com.revivir.cementerio.antiguo.logica.Users;
 
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
@@ -114,7 +115,7 @@ public class Login extends JDialog {
 							txt_password.setText("");
 						}else{
 							lbl_error.setText("Bienvenido");
-							Main main = new Main();
+							MainPrincipal main = new MainPrincipal();
 							main.setVisible(true);
 							
 						}

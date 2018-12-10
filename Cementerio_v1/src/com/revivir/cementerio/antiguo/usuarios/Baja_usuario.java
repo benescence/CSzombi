@@ -1,12 +1,12 @@
-package usuarios;
+package com.revivir.cementerio.antiguo.usuarios;
 
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
 
-import db.Busquedas;
-import logica.Users;
+import com.revivir.cementerio.antiguo.db.Busquedas;
+import com.revivir.cementerio.antiguo.logica.Users;
 
 import javax.swing.JButton;
 import javax.swing.JTable;

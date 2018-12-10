@@ -1,4 +1,4 @@
-package usuarios;
+package com.revivir.cementerio.antiguo.usuarios;
 
 import java.awt.EventQueue;
 
@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 
-import logica.Users;
+import com.revivir.cementerio.antiguo.logica.Users;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;

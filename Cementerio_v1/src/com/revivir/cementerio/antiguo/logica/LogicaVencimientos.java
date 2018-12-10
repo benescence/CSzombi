@@ -1,4 +1,4 @@
-package logica;
+package com.revivir.cementerio.antiguo.logica;
 
 
 

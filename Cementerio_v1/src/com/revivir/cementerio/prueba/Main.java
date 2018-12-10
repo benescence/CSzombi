@@ -1,4 +1,4 @@
-package com.revivir.cementerio;
+package com.revivir.cementerio.prueba;
 
 import com.revivir.cementerio.vista.ControladorPrincipal;
 

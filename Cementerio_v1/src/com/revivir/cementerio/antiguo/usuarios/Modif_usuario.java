@@ -1,4 +1,4 @@
-package usuarios;
+package com.revivir.cementerio.antiguo.usuarios;
 
 import java.awt.EventQueue;
 

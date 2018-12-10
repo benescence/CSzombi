@@ -1,4 +1,4 @@
-package administracion;
+package com.revivir.cementerio.antiguo.administracion;
 
 import java.awt.EventQueue;
 
@@ -7,7 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import logica.LogicaPrecios;
+import com.revivir.cementerio.antiguo.logica.LogicaPrecios;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

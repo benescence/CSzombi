@@ -1,4 +1,4 @@
-package clientes;
+package com.revivir.cementerio.antiguo.clientes;
 
 import java.awt.EventQueue;
 import java.awt.Rectangle;
@@ -18,10 +18,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.awt.Color;
-import com.toedter.calendar.JCalendar;
 
-import logica.Clientes;
-import logica.ubicaciones;
+import com.revivir.cementerio.antiguo.logica.Clientes;
+import com.revivir.cementerio.antiguo.logica.ubicaciones;
+import com.revivir.cementerio.antiguo.org.eclipse.wb.swing.FocusTraversalOnArray;
+import com.toedter.calendar.JCalendar;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,7 +30,6 @@ import javax.swing.JTable;
 import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 
 public class Consulta_resultado extends JInternalFrame {

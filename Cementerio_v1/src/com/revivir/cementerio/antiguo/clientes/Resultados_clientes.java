@@ -1,4 +1,4 @@
-package clientes;
+package com.revivir.cementerio.antiguo.clientes;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import logica.Clientes;
+import com.revivir.cementerio.antiguo.logica.Clientes;
 
 import javax.swing.JTable;
 import java.awt.event.ActionListener;

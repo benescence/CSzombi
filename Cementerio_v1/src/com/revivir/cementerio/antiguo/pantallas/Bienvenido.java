@@ -1,4 +1,4 @@
-package pantallas;
+package com.revivir.cementerio.antiguo.pantallas;
 
 import java.awt.EventQueue;
 

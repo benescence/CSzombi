@@ -1,4 +1,4 @@
-package consultas;
+package com.revivir.cementerio.antiguo.consultas;
 
 import java.awt.EventQueue;
 

@@ -1,4 +1,4 @@
-package pantallas;
+package com.revivir.cementerio.antiguo.pantallas;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -20,20 +20,19 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import com.revivir.cementerio.antiguo.administracion.Precios;
+import com.revivir.cementerio.antiguo.clientes.Alta_clientes;
+import com.revivir.cementerio.antiguo.clientes.Consulta_cliente;
+import com.revivir.cementerio.antiguo.clientes.Ubicacion_cliente;
+import com.revivir.cementerio.antiguo.consultas.Buscar_lugares;
+import com.revivir.cementerio.antiguo.consultas.Movimientos_dia;
+import com.revivir.cementerio.antiguo.consultas.Reporte_clientes;
+import com.revivir.cementerio.antiguo.usuarios.Alta_usuario;
+import com.revivir.cementerio.antiguo.usuarios.Baja_usuario;
+import com.revivir.cementerio.antiguo.usuarios.Buscar_usuarios;
+import com.revivir.cementerio.antiguo.usuarios.Modif_usuario;
 import com.revivir.cementerio.persistencia.entidades.Precio;
 import com.revivir.cementerio.vista.precio.VentanaPrecio;
-
-import administracion.Precios;
-import clientes.Alta_clientes;
-import clientes.Consulta_cliente;
-import clientes.Ubicacion_cliente;
-import consultas.Buscar_lugares;
-import consultas.Movimientos_dia;
-import consultas.Reporte_clientes;
-import usuarios.Alta_usuario;
-import usuarios.Baja_usuario;
-import usuarios.Buscar_usuarios;
-import usuarios.Modif_usuario;
 
 import javax.swing.JComboBox;
 

@@ -1,12 +1,12 @@
-package administracion;
+package com.revivir.cementerio.antiguo.administracion;
 
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import com.toedter.calendar.JDateChooser;
 
-import logica.LogicaVencimientos;
+import com.revivir.cementerio.antiguo.logica.LogicaVencimientos;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;

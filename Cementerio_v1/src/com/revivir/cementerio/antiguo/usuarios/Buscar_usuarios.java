@@ -1,4 +1,4 @@
-package usuarios;
+package com.revivir.cementerio.antiguo.usuarios;
 
 import java.awt.EventQueue;
 
@@ -9,9 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import db.Busquedas;
-
-import logica.Users;
+import com.revivir.cementerio.antiguo.db.Busquedas;
+import com.revivir.cementerio.antiguo.logica.Users;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;

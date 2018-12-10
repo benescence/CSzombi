@@ -5,19 +5,18 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
+import com.revivir.cementerio.MainPrincipal;
 import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.usuarios.alta.ControladorUsuarioAM;
 import com.revivir.cementerio.vista.util.Popup;
 
-import pantallas.Main;
-
 public class ControladorUsuarios implements ControladorInterno {
 	private VentanaUsuarios ventana;
-	private Main invocador;
+	private MainPrincipal invocador;
 	
-	public ControladorUsuarios(Main invocador) {
+	public ControladorUsuarios(MainPrincipal invocador) {
 		this.invocador = invocador;
 		ventana = new VentanaUsuarios();
 		ventana.botonAgregar().addActionListener(e -> agregar());

@@ -1,4 +1,4 @@
-package administracion;
+package com.revivir.cementerio.antiguo.administracion;
 
 import java.awt.EventQueue;
 
@@ -11,13 +11,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.util.ArrayList;
-import logica.LogicaPrecios;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import com.revivir.cementerio.antiguo.logica.LogicaPrecios;
+import com.revivir.cementerio.antiguo.org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import java.awt.Component;
 
 @SuppressWarnings("serial")

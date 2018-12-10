@@ -1,9 +1,11 @@
-package db;
+package com.revivir.cementerio.antiguo.db;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import logica.Users;
+
+import com.revivir.cementerio.antiguo.logica.Users;
+
 import java.sql.ResultSet;
 
 public class Busquedas  {

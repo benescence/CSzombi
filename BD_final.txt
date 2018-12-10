@@ -82,49 +82,77 @@ CREATE TABLE rev_fallecidos (
 	FOREIGN KEY (ubicacion) REFERENCES rev_ubicaciones(ID)
 );
 
+-- ESQUEMAS MOVIMIENTOS
+CREATE TABLE rev_movimientos (
+	ID INT(10) AUTO_INCREMENT,
+	fallecido int(10) not null,
+	antigua_ubicacion VARCHAR(50) not NULL,
+	causa_traslado VARCHAR(50) not NULL,
+	observaciones VARCHAR(50) NULL,
+	FOREIGN KEY (fallecido) REFERENCES rev_fallecidos(ID),
+	PRIMARY KEY (ID)
+);
 
-
-
-
-
--- ESQUEMA CLIENTES
+	-- ESQUEMA CLIENTES
 CREATE TABLE rev_clientes (
 	ID INT(10) AUTO_INCREMENT,
-	DNI VARCHAR(10) NULL,
-	apellido VARCHAR(50) NOT NULL,
 	nombre VARCHAR(100) NOT NULL,
+	apellido VARCHAR(50) NOT NULL,
+	DNI VARCHAR(10) NULL,
 	telefono VARCHAR(20) NULL,
 	email VARCHAR(200) NULL,
 	PRIMARY KEY (ID)
 );
 
-
-
-
--- ESQUEMAS CODIGOS
-CREATE TABLE rev_codigos (
+-- ESQUEMAS RESPONSABLES
+CREATE TABLE rev_responsables (
 	ID INT(10) AUTO_INCREMENT,
-	descripcion VARCHAR(50) NULL,
-	observaciones VARCHAR(50) NULL,
+	cliente INT(10) NOT NULL,
+	fallecido INT(10) NOT NULL,
+	observaciones VARCHAR(100) NULL,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (cliente) REFERENCES rev_clientes(ID),
+	FOREIGN KEY (fallecido) REFERENCES rev_fallecidos(ID)
+);
+
+-- ESQUEMAS SERVICIOS
+CREATE TABLE rev_servicios (
+	ID INT(10) AUTO_INCREMENT,
+	codigo VARCHAR(50) NULL,
+	nombre VARCHAR(30) NULL,
+	descripcion VARCHAR(100) NULL,
 	importe INT(10) NOT NULL,
+	historico boolean not null,
 	PRIMARY KEY (ID)
 );
 
+-- ESQUEMAS CARGOS
+CREATE TABLE rev_cargos (
+	ID INT(10) AUTO_INCREMENT,
+	fallecido INT(10) NOT NULL,
+	servicio INT(10) NOT NULL,
+	observaciones VARCHAR(100) NULL,
+	pagado boolean not null,
+	PRIMARY KEY (ID),
+	FOREIGN KEY (servicio) REFERENCES rev_servicios(ID),
+	FOREIGN KEY (fallecido) REFERENCES rev_fallecidos(ID)
+);
 
 -- ESQUEMAS PAGOS
 CREATE TABLE rev_pagos (
 	ID INT(10) AUTO_INCREMENT,
+	cargo INT(10) NOT NULL,
 	cliente INT(10) NOT NULL,
-	fallecido INT(10) NOT NULL,
-	codigo INT(10) NOT NULL,
 	importe INT(10) NOT NULL,
-	fecha DATE NOT NULL,
 	observaciones VARCHAR(100) NULL,
+	fecha DATE NOT NULL,
 	PRIMARY KEY (ID),
 	FOREIGN KEY (cliente) REFERENCES rev_clientes(ID),
-	FOREIGN KEY (fallecido) REFERENCES rev_fallecidos(ID),
-	FOREIGN KEY (codigo) REFERENCES rev_codigos(ID)
+	FOREIGN KEY (cargo) REFERENCES rev_cargos(ID)
 );
+
+
+
 
 
 
@@ -148,7 +176,7 @@ INSERT INTO rev_sector (ID, descripcion) VALUES
 (6, 'DEPOSITO');
 
 -- INSERT SUB SECTORES
-INSERT INTO rev_sub_sector (ID, sector, descripcion) VALUES
+INSERT INTO rev_subsector (ID, sector, descripcion) VALUES
 (1, 1, 'SEPULTURAS'),
 (2, 1, 'INDIGENTES'),
 (3, 2, 'PALMERAS ATAUD'),

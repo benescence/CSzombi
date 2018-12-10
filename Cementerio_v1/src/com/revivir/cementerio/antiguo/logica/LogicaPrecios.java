@@ -1,4 +1,4 @@
-package logica;
+package com.revivir.cementerio.antiguo.logica;
 
 import java.sql.Connection;
 import java.sql.Date;

@@ -1,4 +1,4 @@
-package clientes;
+package com.revivir.cementerio.antiguo.clientes;
 
 import java.awt.EventQueue;
 import java.awt.Frame;
@@ -12,10 +12,11 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import com.revivir.cementerio.antiguo.logica.Clientes;
+import com.revivir.cementerio.antiguo.org.eclipse.wb.swing.FocusTraversalOnArray;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
-
-import logica.Clientes;
 
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -25,7 +26,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 
 public class Consulta_cliente extends JInternalFrame {
