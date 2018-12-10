@@ -10,9 +10,6 @@ import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 
 import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
 
-
-
-
 public class MainLogin {
 
 	public static void configurarApariencia() {

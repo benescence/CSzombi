@@ -17,6 +17,7 @@ public class VentanaPrincipal extends Ventana {
 	JMenuItem vinculoVincular, vinculoConsultarCliente, vinculoConsultarFallecido;
 	JMenuItem cobranzaAltaCargo, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
 	JMenuItem movimientoTrasladar, movimientoConsultar; 
+	private JMenuItem servicioAlta, servicioConsulta;
 	
 	public VentanaPrincipal() {
 		super("Ventana principal", 1000, 700);
@@ -68,7 +69,22 @@ public class VentanaPrincipal extends Ventana {
 		menuMovimientos.add(movimientoConsultar = new JMenuItem("Consultar movimientos"));
 		barra.add(menuMovimientos);
 		
+		JMenu menuSevicio = new JMenu("Servicios");
+		menuSevicio.add(servicioAlta = new JMenuItem("Alta de servicio"));
+		menuSevicio.add(servicioConsulta = new JMenuItem("Consultar servicios"));
+		barra.add(menuSevicio);
+		
 		return barra;
+	}
+
+	
+	public JMenuItem getServicioAlta() {
+		return servicioAlta;
+	}
+	
+
+	public JMenuItem getServicioConsulta() {
+		return servicioConsulta;
 	}
 
 }
