@@ -32,7 +32,7 @@ public class TablaClientes extends JTable{
 					cliente.getApellido(),
 					cliente.getTelefono(),
 					cliente.getEmail(),
-					Formato.fallecidos(cliente)
+					//Formato.fallecidos(cliente)
 			};
 			modelo.addRow(fila);
 			

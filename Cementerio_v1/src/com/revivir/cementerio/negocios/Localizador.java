@@ -1,6 +1,7 @@
 package com.revivir.cementerio.negocios;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.revivir.cementerio.persistencia.FactoryOBD;
@@ -49,11 +50,11 @@ public class Localizador {
 	public static void guardarUbicacion(SubSector subsector,Integer deposito, String otroCementerio,
 			String osario, String nicho, String fila, String seccion, String macizo, String unidad,
 			String bis, String bis_macizo, String numero, String sepultura, String parcela,
-			String mueble, String inhumacion, String circ) {
+			String mueble, String inhumacion, String circ, Date vencimiento) {
 		
-		Ubicacion ubicacion = new Ubicacion(-1, subsector, deposito, otroCementerio,
+		Ubicacion ubicacion = new Ubicacion(-1, subsector, otroCementerio,
 				osario, nicho, fila, seccion, macizo, unidad, bis, bis_macizo, numero,
-				sepultura, parcela, mueble, inhumacion, circ);
+				sepultura, parcela, mueble, inhumacion, circ, vencimiento);
 		
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
 		obd.insert(ubicacion);

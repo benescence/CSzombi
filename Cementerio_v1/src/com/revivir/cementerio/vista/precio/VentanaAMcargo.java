@@ -18,7 +18,7 @@ import com.revivir.cementerio.vista.util.Ventana;
 	public class VentanaAMcargo extends Ventana {
 		private static final long serialVersionUID = 1L;
 		private JButton btnAceptar, btnCancelar;
-		private JTextField inCodigo, inDescripcion, inMonto, inObservacion;
+		private JTextField inCodigo, inDescripcion, inMonto, inNombre;
 		private Precio precio = null;
 		
 		// Constructor para un nuevo alumno
@@ -37,7 +37,7 @@ import com.revivir.cementerio.vista.util.Ventana;
 			inCodigo.setText(String.valueOf(precio.getCodigo()));
 			inDescripcion.setText(precio.getDescripcion());
 			inMonto.setText(String.valueOf(precio.getMonto()));
-			inObservacion.setText(precio.getObservaciones());
+			inNombre.setText(precio.getNombre());
 			
 		}
 		
@@ -52,42 +52,42 @@ import com.revivir.cementerio.vista.util.Ventana;
 			JLabel lblCodigo = new JLabel("Codigo: ");
 			JLabel lblDescripcion = new JLabel("Descripcion: ");
 			JLabel lblMonto = new JLabel("Monto: ");
-			JLabel lblObservacion = new JLabel("Observacion: ");
+			JLabel lblNombre = new JLabel("Nombre: ");
 			
 			
 			EmptyBorder bordeEtiqueta = new EmptyBorder(5, 0, 5, 50);
 			lblCodigo.setBorder(bordeEtiqueta);
 			lblDescripcion.setBorder(bordeEtiqueta);
 			lblMonto.setBorder(bordeEtiqueta);
-		    lblObservacion.setBorder(bordeEtiqueta);
+		    lblNombre.setBorder(bordeEtiqueta);
 		
 			
 			PanelVertical panelEtiquetas = new PanelVertical();
 			panelEtiquetas.add(lblCodigo);
 			panelEtiquetas.add(lblDescripcion);
 			panelEtiquetas.add(lblMonto);
-			panelEtiquetas.add(lblObservacion);
+			panelEtiquetas.add(lblNombre);
 		
 
 			// AGREGO LAS ENTRADAS
 			inCodigo = new JTextField();
 			inDescripcion = new JTextField();
 			inMonto = new JTextField();
-			inObservacion = new JTextField();
+			inNombre = new JTextField();
 			
 
 			Dimension largoEntrada = new Dimension(Short.MAX_VALUE, 25);
 			inCodigo.setMaximumSize(largoEntrada);
 			inDescripcion.setMaximumSize(largoEntrada);
 			inMonto.setMaximumSize(largoEntrada);
-			inObservacion.setMaximumSize(largoEntrada);
+			inNombre.setMaximumSize(largoEntrada);
 			
 			
 			PanelVertical panelEntradas = new PanelVertical();
 			panelEntradas.add(inCodigo);
 			panelEntradas.add(inDescripcion);
 			panelEntradas.add(inMonto);
-			panelEntradas.add(inObservacion);
+			panelEntradas.add(inNombre);
 		
 			
 			// AGREGO LOS BOTONES
@@ -147,12 +147,12 @@ import com.revivir.cementerio.vista.util.Ventana;
 			this.inMonto = inMonto;
 		}
 
-		public JTextField getInObservacion() {
-			return inObservacion;
+		public JTextField getInNombre() {
+			return inNombre;
 		}
 
-		public void setInObservacion(JTextField inObservacion) {
-			this.inObservacion = inObservacion;
+		public void setInNombre(JTextField inNombre) {
+			this.inNombre = inNombre;
 		}
 
 		public Precio getPrecio() {

@@ -25,7 +25,7 @@ public class UbicacionOBDTest {
 	}
 	
 	public static void main(String[] args) {
-		Ubicacion ubicacion = new Ubicacion(-1, Definido.subsector(1), 2, "", null, null, "1", null, null, null, "1", null, null, null, null, null, null, null);
+		Ubicacion ubicacion = new Ubicacion(-1, Definido.subsector(1),null , null, null, "2", null, null, null, "1", null, null, null, null, null, null, null, null);
 		insertTest(ubicacion);
 		selectTest();
 	}

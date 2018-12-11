@@ -33,7 +33,7 @@ public class Formato {
 		return ubicacion(ubicacion);
 	}
 	
-	public static String fallecidos(Cliente cliente) {
+	/*public static String fallecidos(Cliente cliente) {
 		List<Fallecido> fallecidos = FallecidoManager.traerPorCliente(cliente);
 		String ret = "<html>";
 
@@ -46,7 +46,7 @@ public class Formato {
 		
 		return ret += "</html>";
 	}
-
+*/
 	public static Integer contarRenglones(String texto) {
 		Integer cantidad = 1;
 		

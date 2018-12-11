@@ -2,14 +2,14 @@ package com.revivir.cementerio.persistencia.entidades;
 
 public class Precio {
 	private Integer ID, codigo;
-	private String observaciones, descripcion;
+	private String nombre, descripcion;
 	private Double  monto;
 
-	public Precio(Integer ID, Integer codigo, String descripcion, Double monto, String observaciones) {
+	public Precio(Integer ID, Integer codigo, String descripcion, Double monto, String nombre) {
 		this.ID = ID;
 		this.codigo = codigo;
 		this.descripcion = descripcion;
-		this.observaciones = observaciones;
+		this.nombre = nombre;
 		this.monto = monto;
 	}
 
@@ -29,12 +29,12 @@ public class Precio {
 		this.codigo = codigo;
 	}
 
-	public String getObservaciones() {
-		return observaciones;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getDescripcion() {

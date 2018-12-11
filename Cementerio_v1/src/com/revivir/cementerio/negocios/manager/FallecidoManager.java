@@ -14,7 +14,7 @@ public class FallecidoManager {
 	public static void guardar(Integer cliente, Integer ubicacion, TipoFallecimiento tipo,
 			String dni, String apellido, String nombre, String cocheria, Date fechaFallecimiento) {
 		
-		Fallecido fallecido = new Fallecido(-1, cliente, ubicacion,tipo, dni, apellido,
+		Fallecido fallecido = new Fallecido(-1, ubicacion,tipo, dni, apellido,
 				nombre, cocheria, fechaFallecimiento);
 		
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
@@ -34,9 +34,6 @@ public class FallecidoManager {
 		return obd.selectByDNI(DNI);
 	}
 	
-	public static List<Fallecido> traerPorCliente(Cliente cliente) {
-		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
-		return obd.selectByCliente(cliente);
-	}
+
 
 }

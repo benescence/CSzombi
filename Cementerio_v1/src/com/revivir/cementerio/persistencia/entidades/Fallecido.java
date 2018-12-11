@@ -5,15 +5,14 @@ import java.sql.Date;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 
 public class Fallecido {
-	private Integer ID, cliente, ubicacion;
+	private Integer ID,  ubicacion;
 	private String dni, apellido, nombre, cocheria;
 	private Date fechaFallecimiento;
 	private TipoFallecimiento tipoFallecimiento;
 	
-	public Fallecido(Integer ID, Integer cliente, Integer ubicacion, TipoFallecimiento tipoFallecimiento, String dni, String apellido, String nombre, String cocheria,
+	public Fallecido(Integer ID, Integer ubicacion, TipoFallecimiento tipoFallecimiento, String dni, String apellido, String nombre, String cocheria,
 			Date fechaFallecimiento) {
 		this.ID = ID;
-		this.cliente = cliente;
 		this.ubicacion = ubicacion;
 		this.tipoFallecimiento = tipoFallecimiento;
 		this.dni = dni;
@@ -29,14 +28,6 @@ public class Fallecido {
 
 	public void setID(Integer ID) {
 		this.ID = ID;
-	}
-	
-	public Integer getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Integer cliente) {
-		this.cliente = cliente;
 	}
 	
 	public Integer getUbicacion() {

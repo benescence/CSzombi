@@ -15,7 +15,6 @@ public interface FallecidoOBD {
 
 	public List<Fallecido> select();
 
-	public List<Fallecido> selectByCliente(Cliente cliente);
 
 	public Fallecido selectByDNI(String DNI);
 

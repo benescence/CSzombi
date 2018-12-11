@@ -45,7 +45,12 @@ public class Definido {
 			ret = 8;
 		else if (subsector == SubSector.BOVEDA)
 			ret = 9;
-		
+		else if (subsector == SubSector.DEPOSITO1)
+			ret = 10;
+		else if (subsector == SubSector.DEPOSITO2)
+			ret =11;
+		else if (subsector == SubSector.DEPOSITO3)
+			ret = 12;
 		return ret;
 	}
 	
@@ -68,9 +73,14 @@ public class Definido {
 			ret = SubSector.NICHERA;
 		else if (subsector == 8)
 			ret = SubSector.CENIZARIO;
-		else if (subsector == 9)
+		else if (subsector == 10)
 			ret = SubSector.BOVEDA;
-			
+		else if (subsector == 11)
+			ret = SubSector.DEPOSITO1;
+		else if (subsector == 9)
+			ret = SubSector.DEPOSITO2;
+		else if (subsector == 12)
+			ret = SubSector.DEPOSITO3;
 		return ret;
 	}
 	
