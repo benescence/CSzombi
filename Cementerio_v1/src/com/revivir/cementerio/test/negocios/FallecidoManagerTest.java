@@ -11,7 +11,7 @@ public class FallecidoManagerTest {
 	public static void guardarFallecidoTest(Integer cliente, Integer ubicacion, TipoFallecimiento tipo,
 			String dni, String apellido, String nombre, String cocheria, Date fechaFallecimiento) {
 		System.out.println("___ Guardar fallecido test");
-		FallecidoManager.guardar(cliente, ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
+		//FallecidoManager.guardar(cliente, ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
 	}
 	
 	public static void main(String[] args) {

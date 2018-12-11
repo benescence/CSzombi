@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.OBD;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
@@ -54,8 +53,6 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 	public List<Fallecido> select() {
 		return selectByCondicion("true");
 	}
-
-	
 
 	@Override
 	public List<Fallecido> selectByNombreApellidoDNI(String nombre, String apellido, String DNI) {
