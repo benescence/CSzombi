@@ -42,4 +42,24 @@ public class VentanaServiciosABM extends VentanaInterna {
 		panelPrincipal.add(panelBotones);
 	}
 
+	
+	public TablaServicios getTabla() {
+		return tabla;
+	}
+	
+
+	public Boton botonAgregar() {
+		return btnAgregar;
+	}
+	
+
+	public Boton botonModificar() {
+		return btnModificar;
+	}
+
+	
+	public Boton botonEliminar() {
+		return btnEliminar;
+	}
+	
 }

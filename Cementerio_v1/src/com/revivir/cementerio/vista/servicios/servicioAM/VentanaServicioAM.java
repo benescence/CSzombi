@@ -2,6 +2,7 @@ package com.revivir.cementerio.vista.servicios.servicioAM;
 
 import java.awt.Dimension;
 
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.revivir.cementerio.vista.util.Boton;
@@ -15,9 +16,10 @@ public class VentanaServicioAM extends Ventana {
 	private EntradaTexto inCodigo, inNombre, inImporte, inDescripcion;
 	private Boton btnAceptar, btnCancelar;
 	
-	public VentanaServicioAM(String titulo, int ancho, int alto) {
+	public VentanaServicioAM() {
 		super("Agregar servicio", 500, 500);
 		iniciarComponentes();
+		setLocationRelativeTo(null);
 	}
 
 	private void iniciarComponentes() {
@@ -47,6 +49,35 @@ public class VentanaServicioAM extends Ventana {
 		panelPrincipal.add(inDescripcion);
 		panelPrincipal.add(panelBotones);
 		pack();
+	}
+
+	
+	public JTextField getCodigo() {
+		return inCodigo.getTextField();
+	}
+	
+
+	public JTextField getNombre() {
+		return inNombre.getTextField();
+	}
+
+	public JTextField getImporte() {
+		return inImporte.getTextField();
+	}
+	
+
+	public JTextField getDescripcion() {
+		return inDescripcion.getTextField();
+	}
+	
+
+	public Boton botonAceptar() {
+		return btnAceptar;
+	}
+	
+
+	public Boton botonCancelar() {
+		return btnCancelar;
 	}
 
 }
