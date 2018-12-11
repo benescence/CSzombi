@@ -15,7 +15,9 @@ public interface PrecioOBD {
 
 	public List<Precio> select();
 	
-	public List<Precio> selectByDescripcion(String Descripcion);
+	public List<Precio> selectByDescripcion(String descripcion);
 
+	public List<Precio> selectByNombre(String nombre);
+	
 	public Precio selectBycodigo(Integer codigo);
 }

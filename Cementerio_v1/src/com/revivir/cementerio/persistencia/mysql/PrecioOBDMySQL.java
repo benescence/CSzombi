@@ -13,15 +13,15 @@ import com.revivir.cementerio.persistencia.interfaces.PrecioOBD;
 
 public class PrecioOBDMySQL extends OBD implements PrecioOBD{
 	// TODO falta cambiar los campos aca arriba
-	private final String campos = "DNI, apellido, nombre, telefono, email";
-	private final String tabla = "rev_clientes";
+	private final String campos = "codigo, nombre, monto,descripcion, historico ";
+	private final String tabla = "rev_servicios";
 	
 	@Override
 	public void insert(Precio precio) {
 		String valores = "'"+precio.getCodigo()+"'"
 				+", '"+precio.getDescripcion()+"'"
 				+", '"+precio.getMonto()+"'"
-				+", '"+precio.getObservaciones()+"'";
+				+", '"+precio.getNombre()+"'";
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}
@@ -33,7 +33,7 @@ public class PrecioOBDMySQL extends OBD implements PrecioOBD{
 		String valores = "codigo = '"+precio.getCodigo()+"'"
 				+", descripcion = '"+precio.getDescripcion()+"'"
 				+", monto = '"+precio.getMonto()+"'"
-				+", observaciones = '"+precio.getObservaciones()+"'";
+				+", nombre = '"+precio.getNombre()+"'";
 		String consulta = "update "+tabla+" set "+valores+"  where ("+condicion+");";
 		ejecutarSQL(consulta);
 	}
@@ -57,6 +57,13 @@ public class PrecioOBDMySQL extends OBD implements PrecioOBD{
 		return selectByCondicion(condicion);
 	}
 
+	@Override
+	public List<Precio> selectByNombre(String nombre) {
+		String condicion = "";
+		condicion += "descripcion = " +(nombre != null ? "'"+nombre+"'" : "nombre");
+		return selectByCondicion(condicion);
+	}
+	
 	@Override
 	public Precio selectBycodigo(Integer codigo) {
 		String condicion = "codigo = " +(codigo != null ? "'"+codigo+"'" : "codigo");
@@ -82,7 +89,7 @@ public class PrecioOBDMySQL extends OBD implements PrecioOBD{
 						resultados.getInt("codigo"),
 						resultados.getString("descripcion"),
 						resultados.getDouble("monto"),
-						resultados.getString("observaciones")
+						resultados.getString("nombre")
 						));
 			}
 

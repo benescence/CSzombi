@@ -83,9 +83,10 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String mueble= (ventana.getInMueble().isEnabled() ? ventana.getInMueble().getText() : null);
 		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
-
+		Date vencimiento= null;
+		
 		Localizador.guardarUbicacion(subsector, deposito, otroCementerio, osario, nicho, fila, seccion,
-				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
+				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ, vencimiento);
 		
 		// GUARDO AL FALLECIDO
 		Integer ubicacion = Localizador.traerUltimaUbicacionGuardada();

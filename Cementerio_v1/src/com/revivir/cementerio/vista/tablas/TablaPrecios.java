@@ -32,7 +32,7 @@ public class TablaPrecios  extends JTable{
 						precio.getCodigo(),
 						precio.getDescripcion(),
 						precio.getMonto(),
-						precio.getObservaciones()
+						precio.getNombre()
 						
 				};
 				modelo.addRow(fila);

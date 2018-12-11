@@ -100,20 +100,20 @@ private void aceptarAM() {
 			String Descripcion = ventanaAM.getInDescripcion().getText();
 			int codigo = Integer.valueOf(ventanaAM.getInCodigo().getText());
 			Double Monto = Double.valueOf(ventanaAM.getInMonto().getText());
-			String Observacion= ventanaAM.getInObservacion().getText();
+			String nombre= ventanaAM.getInNombre().getText();
 		
 
 			// Crear un nuevo alumno
 			if (precio == null) {
 			
-				CargoManager.crearCargo(codigo, Descripcion, Monto, Observacion);
+				CargoManager.crearCargo(codigo, Descripcion, Monto, nombre);
 
 			// Editar un alumno existente
 			} else {
 				precio.setCodigo(codigo);;
 				precio.setDescripcion(Descripcion);;
 				precio.setMonto(Monto);;
-				precio.setObservaciones(Observacion);;
+				precio.setNombre(nombre);;
 			
 				CargoManager.modificar(precio);
 			}

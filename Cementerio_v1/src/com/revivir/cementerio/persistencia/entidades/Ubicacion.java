@@ -1,19 +1,21 @@
 package com.revivir.cementerio.persistencia.entidades;
 
+import java.util.Date;
+
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 
 public class Ubicacion {
 	private Integer id, deposito;
 	private String otroCementerio, osario, nicho, fila, seccion, macizo,
 	unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ;
+	private Date vencimiento;
 	private SubSector subsector;
 	
-	public Ubicacion(Integer id, SubSector subsector, Integer deposito, String otroCementerio, String osario,
+	public Ubicacion(Integer id, SubSector subsector, String otroCementerio, String osario,
 			String nicho, String fila, String seccion, String macizo, String unidad, String bis, String bis_macizo,
-			String numero, String sepultura, String parcela, String mueble, String inhumacion, String circ) {
+			String numero, String sepultura, String parcela, String mueble, String inhumacion, String circ, Date vencimiento) {
 		this.id = id;
 		this.subsector = subsector;
-		this.deposito = deposito;
 		this.otroCementerio = otroCementerio;
 		this.osario = osario;
 		this.nicho = nicho;
@@ -29,6 +31,15 @@ public class Ubicacion {
 		this.mueble = mueble;
 		this.inhumacion = inhumacion;
 		this.circ = circ;
+		this.vencimiento= vencimiento;
+	}
+
+	public Date getVencimiento() {
+		return vencimiento;
+	}
+
+	public void setVencimiento(Date vencimiento) {
+		this.vencimiento = vencimiento;
 	}
 
 	public Integer getId() {
@@ -45,14 +56,6 @@ public class Ubicacion {
 
 	public void setSubsector(SubSector subsector) {
 		this.subsector = subsector;
-	}
-
-	public Integer getDeposito() {
-		return deposito;
-	}
-
-	public void setDeposito(Integer deposito) {
-		this.deposito = deposito;
 	}
 
 	public String getOtroCementerio() {
@@ -174,5 +177,8 @@ public class Ubicacion {
 	public void setCirc(String circ) {
 		this.circ = circ;
 	}
+
 	
+
+
 }

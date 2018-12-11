@@ -14,9 +14,10 @@ import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
 public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
-	private final String campos = "subsector, deposito, otro_cementerio, osario, nicho, fila,"
-			+ "seccion, macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ";
+	private final String campos = "subsector, otro_cementerio, osario, nicho, fila,"
+			+ "seccion, macizo, unidad, bis, bis_macizo, numero_sepultura, sepultura, parcela, mueble, inhumacion, circ, vencimiento";
 	private final String tabla = "rev_ubicaciones";
+	
 	
 	@Override
 	public void insert(Ubicacion ubicacion) {
@@ -35,9 +36,9 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 		String bisMacizo = (ubicacion.getBis_macizo() != null) ? "'"+ubicacion.getBis_macizo()+"'" : null;
 		String numero = (ubicacion.getNumero() != null) ? "'"+ubicacion.getNumero()+"'" : null;
 		String sepultura = (ubicacion.getSepultura() != null) ? "'"+ubicacion.getSepultura()+"'" : null;
+		String vencimiento = (ubicacion.getVencimiento() != null) ? "'"+ubicacion.getVencimiento()+"'" : null;
 		
 		String valores = Definido.subsector(ubicacion.getSubsector())
-				+", "+ubicacion.getDeposito()
 				+", "+otroCementerio
 				+", "+osario
 				+", "+nicho
@@ -52,7 +53,8 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 				+", "+parcela
 				+", "+mueble
 				+", "+inhumacion
-				+", "+circ;
+				+", "+circ
+				+", "+vencimiento;
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}
@@ -85,7 +87,6 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 				ret.add(new Ubicacion(
 						resultados.getInt("ID"),
 						Definido.subsector(resultados.getInt("subsector")),
-						resultados.getInt("deposito"),
 						resultados.getString("otro_cementerio"),
 						resultados.getString("osario"),
 						resultados.getString("nicho"),
@@ -95,12 +96,13 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 						resultados.getString("unidad"),
 						resultados.getString("bis"),
 						resultados.getString("bis_macizo"),
-						resultados.getString("numero"),
+						resultados.getString("numero_sepultura"),
 						resultados.getString("sepultura"),
 						resultados.getString("parcela"),
 						resultados.getString("mueble"),
 						resultados.getString("inhumacion"),
-						resultados.getString("circ")
+						resultados.getString("circ"),
+						resultados.getDate("vencimiento")
 						));
 			}
 

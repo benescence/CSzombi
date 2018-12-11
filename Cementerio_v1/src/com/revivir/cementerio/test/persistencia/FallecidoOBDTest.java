@@ -26,7 +26,7 @@ public class FallecidoOBDTest {
 	}
 	
 	public static void main(String[] args) {
-		Fallecido nuevo = new Fallecido(-1, 1, 1,
+		Fallecido nuevo = new Fallecido(1, 1,
 				TipoFallecimiento.TRAUMATICO, "2", "Benitez", "Jose", "La parca", Almanaque.hoy());
 		insertTest(nuevo);
 		selectTest();

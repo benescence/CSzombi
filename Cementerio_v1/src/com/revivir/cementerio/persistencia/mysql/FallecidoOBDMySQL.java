@@ -14,13 +14,12 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
 public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
-	private final String campos = "cliente, ubicacion, DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria";
+	private final String campos = " ubicacion, DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria";
 	private final String tabla = "rev_fallecidos";
 	
 	@Override
 	public void insert(Fallecido obciso) {
-		String valores = obciso.getCliente()
-				+", "+obciso.getUbicacion()
+		String valores = obciso.getUbicacion()
 				+", '"+obciso.getDni()+"'"
 				+", '"+obciso.getApellido()+"'"
 				+", '"+obciso.getNombre()+"'"
@@ -34,8 +33,7 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 	@Override
 	public void update(Fallecido obciso) {
 		String condicion = "ID = "+obciso.getID();
-		String valores = "cliente = "+obciso.getCliente() 
-				+", DNI = '"+obciso.getDni()+"'"
+		String valores = " DNI = '"+obciso.getDni()+"'"
 				+", apellido = '"+obciso.getApellido()+"'"
 				+", nombre = '"+obciso.getNombre()+"'"
 				+", fecha_fallecimiento = '"+obciso.getFechaFallecimiento()+"'"
@@ -57,10 +55,7 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 		return selectByCondicion("true");
 	}
 
-	@Override
-	public List<Fallecido> selectByCliente(Cliente cliente) {
-		return selectByCondicion("cliente = "+cliente.getID());
-	}
+	
 
 	@Override
 	public List<Fallecido> selectByNombreApellidoDNI(String nombre, String apellido, String DNI) {
@@ -84,7 +79,6 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 			while (resultados.next()) {
 				ret.add(new Fallecido(
 						resultados.getInt("ID"),
-						resultados.getInt("cliente"),
 						resultados.getInt("ubicacion"),
 						Definido.tipoFallecimiento(resultados.getInt("tipo_fallecimiento")),
 						resultados.getString("DNI"),
