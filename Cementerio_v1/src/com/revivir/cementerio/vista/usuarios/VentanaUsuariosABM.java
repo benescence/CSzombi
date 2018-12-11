@@ -17,13 +17,13 @@ import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.VentanaInterna;
 
-public class VentanaUsuarios extends VentanaInterna {
+public class VentanaUsuariosABM extends VentanaInterna {
 	private static final long serialVersionUID = 1L;
 	private EntradaTexto inUsuario;
 	private Boton btnAgregar, btnModificar, btnEliminar, btnBuscar, btnLimpiar;
 	private TablaUsuarios tabla;
 	
-	public VentanaUsuarios() {
+	public VentanaUsuariosABM() {
 		super("Usuarios del sistema", 500, 500);
 		
 		Dimension largoLabel = new Dimension(200, 30);

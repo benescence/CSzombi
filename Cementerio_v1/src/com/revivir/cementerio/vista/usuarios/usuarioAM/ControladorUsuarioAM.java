@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.usuarios.alta;
+package com.revivir.cementerio.vista.usuarios.usuarioAM;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -6,20 +6,20 @@ import java.awt.event.WindowEvent;
 import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.definidos.Rol;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
-import com.revivir.cementerio.vista.usuarios.ControladorUsuarios;
+import com.revivir.cementerio.vista.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorUsuarioAM {
 	private VentanaUsuarioAM ventana;
-	private ControladorUsuarios invocador;
+	private ControladorUsuariosABM invocador;
 	
-	public ControladorUsuarioAM(ControladorUsuarios invocador, Usuario usuario) {
+	public ControladorUsuarioAM(ControladorUsuariosABM invocador, Usuario usuario) {
 		this.invocador = invocador;
 		ventana = new VentanaUsuarioAM(usuario);
 		inicializar();
 	}
 	
-	public ControladorUsuarioAM(ControladorUsuarios invocador) {
+	public ControladorUsuarioAM(ControladorUsuariosABM invocador) {
 		this.invocador = invocador;
 		ventana = new VentanaUsuarioAM();
 		inicializar();

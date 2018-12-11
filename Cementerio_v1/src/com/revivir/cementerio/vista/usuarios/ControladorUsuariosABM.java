@@ -5,20 +5,20 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
-import com.revivir.cementerio.MainPrincipal;
 import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 import com.revivir.cementerio.vista.ControladorInterno;
-import com.revivir.cementerio.vista.usuarios.alta.ControladorUsuarioAM;
+import com.revivir.cementerio.vista.ControladorPrincipal;
+import com.revivir.cementerio.vista.usuarios.usuarioAM.ControladorUsuarioAM;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorUsuarios implements ControladorInterno {
-	private VentanaUsuarios ventana;
-	private MainPrincipal invocador;
+public class ControladorUsuariosABM implements ControladorInterno {
+	private VentanaUsuariosABM ventana;
+	private ControladorPrincipal invocador;
 	
-	public ControladorUsuarios(MainPrincipal invocador) {
+	public ControladorUsuariosABM(ControladorPrincipal invocador) {
 		this.invocador = invocador;
-		ventana = new VentanaUsuarios();
+		ventana = new VentanaUsuariosABM();
 		ventana.botonAgregar().addActionListener(e -> agregar());
 		ventana.botonModificar().addActionListener(e -> modificar());
 		ventana.botonEliminar().addActionListener(e -> eliminar());
@@ -27,7 +27,7 @@ public class ControladorUsuarios implements ControladorInterno {
 	}
 	
 	private void agregar() {
-		invocador.setEnabled(false);
+		invocador.getVentana().setEnabled(false);
 		new ControladorUsuarioAM(this);
 	}
 	
@@ -38,7 +38,7 @@ public class ControladorUsuarios implements ControladorInterno {
 			return;
 		}
 		
-		invocador.setEnabled(false);
+		invocador.getVentana().setEnabled(false);
 		new ControladorUsuarioAM(this, seleccion.get(0));
 	}
 	
@@ -94,8 +94,8 @@ public class ControladorUsuarios implements ControladorInterno {
 	}
 
 	public void mostrar() {
-		invocador.setVisible(true);
-		invocador.setEnabled(true);
+		invocador.getVentana().setVisible(true);
+		invocador.getVentana().setEnabled(true);
 	}
 	
 }

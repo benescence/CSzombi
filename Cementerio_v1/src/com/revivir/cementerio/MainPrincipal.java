@@ -30,7 +30,7 @@ import com.revivir.cementerio.vista.clientes2.busqueda.cliente.ControladorConsul
 import com.revivir.cementerio.vista.clientes2.busqueda.fallecido.ControladorConsultaFallecidos;
 import com.revivir.cementerio.vista.precio.ControladorPrecio;
 import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
-import com.revivir.cementerio.vista.usuarios.ControladorUsuarios;
+import com.revivir.cementerio.vista.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
 @SuppressWarnings("serial")
@@ -344,9 +344,9 @@ public class MainPrincipal extends JFrame {
 
 	private void mostrarConsultaUsuarios() {
 		cerrarAnterior();        
-        controladorInterno = new ControladorUsuarios(this);
+        //controladorInterno = new ControladorUsuariosABM(this);
         PanelVertical panel = new PanelVertical();
-        panel.add(controladorInterno.getVentana());
+        //panel.add(controladorInterno.getVentana());
 		setContentPane(panel);
 	}
 	
