@@ -42,4 +42,24 @@ public class VentanaClientesABM extends VentanaInterna {
 		System.out.println("Se ha creado una ventana");
 	}
 
+	
+	public TablaClientes getTabla() {
+		return tabla;
+	}
+	
+
+	public Boton botonAgregar() {
+		return btnAgregar;
+	}
+
+	
+	public Boton botonModificar() {
+		return btnModificar;
+	}
+	
+
+	public Boton botonEliminar() {
+		return btnEliminar;
+	}
+	
 }

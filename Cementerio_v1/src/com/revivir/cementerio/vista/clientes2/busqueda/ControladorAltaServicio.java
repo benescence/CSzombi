@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.clientes2.alta;
+package com.revivir.cementerio.vista.clientes2.busqueda;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -95,7 +95,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String nombre= ventana.getInNombreFallecido().getText();;
 		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
-		FallecidoManager.guardarFallecido(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
+		FallecidoManager.guardar(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
 		
 		// FINALIZO EL GUARDADO
 		Popup.mostrar("El servicio se ha guardado exitosamente");

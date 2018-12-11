@@ -4,6 +4,7 @@ import javax.swing.JInternalFrame;
 
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
+import com.revivir.cementerio.vista.fallecidos.fallecidoAM.ControladorFallecidoAM;
 
 public class ControladorFallecidosABM implements ControladorInterno {
 	private VentanaFallecidosABM ventana;
@@ -12,6 +13,12 @@ public class ControladorFallecidosABM implements ControladorInterno {
 	public ControladorFallecidosABM(ControladorPrincipal invocador) {
 		this.invocador = invocador;
 		ventana = new VentanaFallecidosABM();
+		ventana.botonAgregar().addActionListener(e -> agregar());
+	}
+
+	private void agregar() {
+		invocador.getVentana().setEnabled(false);
+		new ControladorFallecidoAM(this);
 	}
 
 	@Override
@@ -19,8 +26,9 @@ public class ControladorFallecidosABM implements ControladorInterno {
 		return true;
 	}
 	
-	public void name() {
-		invocador.getVentana().setEnabled(false);
+	public void mostrar() {
+		invocador.getVentana().setEnabled(true);
+		invocador.getVentana().toFront();
 	}
 
 	@Override
