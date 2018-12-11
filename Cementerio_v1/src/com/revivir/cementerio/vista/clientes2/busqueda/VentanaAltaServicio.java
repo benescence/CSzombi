@@ -1,5 +1,6 @@
 package com.revivir.cementerio.vista.clientes2.busqueda;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -454,5 +455,9 @@ public class VentanaAltaServicio extends VentanaInterna {
 	public JButton botonConfirmar() {
 		return btnConfirmar;
 	}
+
+	
+
+	
 		
 }

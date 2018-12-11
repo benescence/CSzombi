@@ -47,7 +47,7 @@ public class Localizador {
 		return ret;
 	}
 
-	public static void guardarUbicacion(SubSector subsector,Integer deposito, String otroCementerio,
+	public static void guardarUbicacion(SubSector subsector, String otroCementerio,
 			String osario, String nicho, String fila, String seccion, String macizo, String unidad,
 			String bis, String bis_macizo, String numero, String sepultura, String parcela,
 			String mueble, String inhumacion, String circ, Date vencimiento) {
