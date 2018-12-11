@@ -3,6 +3,7 @@ package com.revivir.cementerio.vista.clientes.clienteAM;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.util.Popup;
@@ -10,10 +11,12 @@ import com.revivir.cementerio.vista.util.Popup;
 public class ControladorClientesAM {
 	private VentanaClientesAM ventana;
 	private ControladorClientesABM invocador;
+	private Cliente cliente;
 	
 	public ControladorClientesAM(ControladorClientesABM invocador, Cliente cliente) {
 		this.invocador = invocador;
-		ventana = new VentanaClientesAM();
+		this.cliente = cliente;
+		ventana = new VentanaClientesAM(cliente);
 		inicializar();
 	}
 	
@@ -26,16 +29,43 @@ public class ControladorClientesAM {
 	private void inicializar() {
 		ventana.botonAceptar().addActionListener(e -> aceptar());
 		ventana.botonCancelar().addActionListener(e -> cancelar());
-		ventana.mostrar();
+		//ventana.mostrar();
 		ventana.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				volver();
+				cancelar();
 			}
 		});
 	} 
 	
 	private void aceptar() {
+		String nombre = ventana.getInNombre().getText();
+		String apellido = ventana.getInApellido().getText();
+		String dni = ventana.getInDNI().getText();
+		String telefono = ventana.getInTelefono().getText();
+		String email = ventana.getInEmail().getText();
+
+		// Crear un nuevo cliente
+		if (cliente == null) {
+			ClienteManager.guardar(nombre, apellido, dni, telefono, email);
+		}
+		
+		// Modificar uno existente
+		else {
+			cliente.setNombre(nombre);
+			cliente.setApellido(apellido);
+			cliente.setDni(dni);
+			cliente.setTelefono(telefono);
+			cliente.setEmail(email);
+			ClienteManager.modificar(cliente);
+		}
+		
+
+		invocador.actualizar();
+		volver();
+		
+		
+		
 		if (validarCampos()) {
 /*
 			String usuario = ventana.getUsuario().getText();
@@ -58,7 +88,6 @@ public class ControladorClientesAM {
 			}
 			
 			invocador.actualizarTabla();*/
-			volver();
 		}
 		
 	}

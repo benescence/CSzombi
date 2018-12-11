@@ -8,18 +8,20 @@ import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 
 public class ClienteManager {
 	
-	public static void guardarCliente(String DNI, String nombres, String apellido, String telefono, String email) {
-		Cliente cliente = new Cliente(-1, DNI, apellido, nombres, telefono, email);
+	public static void guardar(String nombre, String apellido, String DNI, String telefono, String email) {
+		Cliente cliente = new Cliente(-1, DNI, apellido, nombre, telefono, email);
 		ClienteOBD obd = FactoryOBD.crearClienteOBD();
 		obd.insert(cliente);
 	}
 
 	public static void modificar(Cliente cliente) {
-			
+		ClienteOBD obd = FactoryOBD.crearClienteOBD();
+		obd.update(cliente);
 	}
 		
 	public static void eliminar(Cliente cliente) {
-		
+		ClienteOBD obd = FactoryOBD.crearClienteOBD();
+		obd.delete(cliente);
 	}
 	
 	public static List<Cliente> traerTodo() {
@@ -27,8 +29,9 @@ public class ClienteManager {
 		return obd.select();
 	}
 	
-	public static Cliente traerPorID(int ID) {
-		return null;
+	public static Cliente traerPorID(Integer ID) {
+		ClienteOBD obd = FactoryOBD.crearClienteOBD();
+		return obd.selectByID(ID);
 	}
 	
 	public static Cliente traerPorDNI(String DNI) {

@@ -57,7 +57,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 			String apellidos  = ventana.getApellido().getText();
 			String telefono = ventana.getTelefono().getText();
 			String email = ventana.getEmail().getText();
-			ClienteManager.guardarCliente(DNI, nombres, apellidos, telefono, email);
+			ClienteManager.guardar(DNI, nombres, apellidos, telefono, email);
 			cliente = ClienteManager.traerPorDNI(DNI);
 		}
 		

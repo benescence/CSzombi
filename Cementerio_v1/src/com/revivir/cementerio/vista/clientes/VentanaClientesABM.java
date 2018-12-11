@@ -1,11 +1,11 @@
 package com.revivir.cementerio.vista.clientes;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.vista.tablas.TablaClientes;
 import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
@@ -20,7 +20,7 @@ public class VentanaClientesABM extends VentanaInterna {
 	public VentanaClientesABM() {
 		super("Gestion de clientes", 500, 500);
 		
-		tabla = new TablaClientes(new ArrayList<>());
+		tabla = new TablaClientes(ClienteManager.traerTodo());
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		
 		Dimension dimBoton = new Dimension(100, 25);
@@ -39,25 +39,20 @@ public class VentanaClientesABM extends VentanaInterna {
 		
 		panelPrincipal.add(panelTabla);
 		panelPrincipal.add(panelBotones);
-		System.out.println("Se ha creado una ventana");
 	}
-
 	
 	public TablaClientes getTabla() {
 		return tabla;
 	}
 	
-
 	public Boton botonAgregar() {
 		return btnAgregar;
 	}
 
-	
 	public Boton botonModificar() {
 		return btnModificar;
 	}
 	
-
 	public Boton botonEliminar() {
 		return btnEliminar;
 	}

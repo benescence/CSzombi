@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.EntradaTexto;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
@@ -17,17 +18,30 @@ public class VentanaClientesAM extends Ventana {
 	private Boton btnAceptar, btnCancelar;
 	
 	public VentanaClientesAM() {
-		super("Alta de cliente", 500, 500);
+		super("Alta de cliente", 200, 200);
+		inicializar();
+	}
+	
+	public VentanaClientesAM(Cliente cliente) {
+		super("Modificacion de cliente", 200, 200);
+		inicializar();
+		inNombre.getTextField().setText(cliente.getNombre());
+		inApellido.getTextField().setText(cliente.getApellido());
+		inDNI.getTextField().setText(cliente.getDni());
+		inTelefono.getTextField().setText(cliente.getTelefono());
+		inEmail.getTextField().setText(cliente.getEmail());
+	}
 
-		Dimension largoLabel = new Dimension(100, 25);
-		Dimension largoTextfield = new Dimension(300, 25);
+	public void inicializar() {
+		Dimension dimLabel = new Dimension(100, 25);
+		Dimension dimTextfield = new Dimension(300, 25);
 		Dimension dimBoton = new Dimension(100, 25);
 
-		inNombre = new EntradaTexto("Nombres", largoLabel, largoTextfield);
-		inApellido = new EntradaTexto("Apellidos", largoLabel, largoTextfield);
-		inDNI = new EntradaTexto("DNI", largoLabel, largoTextfield);
-		inTelefono = new EntradaTexto("Telefono", largoLabel, largoTextfield);
-		inEmail = new EntradaTexto("E-Mail", largoLabel, largoTextfield);
+		inNombre = new EntradaTexto("Nombres", dimLabel, dimTextfield);
+		inApellido = new EntradaTexto("Apellidos", dimLabel, dimTextfield);
+		inDNI = new EntradaTexto("DNI", dimLabel, dimTextfield);
+		inTelefono = new EntradaTexto("Telefono", dimLabel, dimTextfield);
+		inEmail = new EntradaTexto("E-Mail", dimLabel, dimTextfield);
 		
 		btnAceptar = new Boton("Aceptar", dimBoton);
 		btnCancelar = new Boton("Cancelar", dimBoton);
@@ -47,38 +61,32 @@ public class VentanaClientesAM extends Ventana {
 		panelPrincipal.add(inEmail);
 		panelPrincipal.add(panelBotones);
 		pack();
+		setLocationRelativeTo(null);
 	}
 
-	
 	public JTextField getInNombre() {
 		return inNombre.getTextField();
-	}
-	
+	}	
 
 	public JTextField getInApellido() {
 		return inApellido.getTextField();
 	}
-	
 
 	public JTextField getInDNI() {
 		return inDNI.getTextField();
-	}
-	
+	}	
 
 	public JTextField getInTelefono() {
 		return inTelefono.getTextField();
 	}
-	
 
 	public JTextField getInEmail() {
 		return inEmail.getTextField();
-	}
-	
+	}	
 
 	public Boton botonAceptar() {
 		return btnAceptar;
 	}
-	
 
 	public Boton botonCancelar() {
 		return btnCancelar;
