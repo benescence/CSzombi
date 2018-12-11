@@ -1,7 +1,6 @@
-package com.revivir.cementerio.vista.clientes.alta;
+package com.revivir.cementerio.vista.fallecidos.fallecidoAM;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,24 +17,20 @@ import com.revivir.cementerio.negocios.Localizador;
 import com.revivir.cementerio.persistencia.definidos.Sector;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
+import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.EntradaTexto;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
-import com.revivir.cementerio.vista.util.VentanaInterna;
+import com.revivir.cementerio.vista.util.Ventana;
 import com.toedter.calendar.JDateChooser;
 
-public class VentanaAltaServicio extends VentanaInterna {
+public class VentanaFallecidoAM extends Ventana {
 	private static final long serialVersionUID = 1L;
-	private JButton btnExistente, btnLimpiarCliente, btnConfirmar, btnLimpiarTodo;
-	
-	// DATOS CLIENTE
-	private EntradaTexto inDNI, inApellido, inNombre, inTelefono, inEmail;
-	
+	private Boton btnAceptar, btnCancelar;
 	// DATOS DEL DIFUNTO
 	private EntradaTexto inDNIFallecido, inApellidoFallecido, inNombreFallecido, inCocheria;
 	private JDateChooser inFechaFallecimiento;
 	private JComboBox<TipoFallecimiento> inTipoFallecimiento;
-	
 	// DATOS DE UBICACION
 	private EntradaTexto inSeccion, inMacizo, inUnidad, inNumeroSepultura, inSepultura, inInhumacion,
 	inNicho, inFila, inCirc, inParcela, inMueble;
@@ -43,69 +38,33 @@ public class VentanaAltaServicio extends VentanaInterna {
 	private JComboBox<Sector> inSector;
 	private JComboBox<SubSector> inSubSector;
 	
-	public VentanaAltaServicio() {
-		super("Alta de servicio", 450, 300);
-		setNormalBounds(new Rectangle(100, 100, 600, 500));
-		
-		// BOTONES
-		btnConfirmar = new JButton("Confirmar alta de servicio");
-		btnLimpiarTodo = new JButton("Limpiar todos los campos");
-		btnConfirmar.setFocusable(false);
-		btnLimpiarTodo.setFocusable(false);
-		
+	public VentanaFallecidoAM() {
+		super("Alta de fallecido", 450, 300);
+		Dimension dimBoton = new Dimension(100, 25);
+
+		btnAceptar = new Boton("Aceptar", dimBoton);
+		btnCancelar = new Boton("Cancelar", dimBoton);		
 		PanelHorizontal panelBotones = new PanelHorizontal();
-		panelBotones.add(btnConfirmar);
-		panelBotones.add(btnLimpiarTodo);
+		panelBotones.add(btnAceptar);
+		panelBotones.add(btnCancelar);
 		
 		// PANELES
 		PanelVertical panelPrincipal = new PanelVertical();
 		panelPrincipal.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(panelPrincipal);
 		
-		PanelHorizontal panel1 = new PanelHorizontal();
-		panel1.add(crearPanelCliente());
-		panel1.add(crearPanelFallecido());
-		panelPrincipal.add(panel1);
+		panelPrincipal.add(crearPanelFallecido());
 		panelPrincipal.add(new JSeparator());
 		panelPrincipal.add(crearPanelUbicacion());
 		panelPrincipal.add(panelBotones);
 		pack();
 	}
 
-	private PanelVertical crearPanelCliente() {
-		Dimension largoLabel = new Dimension(100, 25);
-		Dimension largoTextfield = new Dimension(300, 25);
-
-		inNombre = new EntradaTexto("Nombres", largoLabel, largoTextfield);
-		inApellido = new EntradaTexto("Apellidos", largoLabel, largoTextfield);
-		inDNI = new EntradaTexto("DNI", largoLabel, largoTextfield);
-		inTelefono = new EntradaTexto("Telefono", largoLabel, largoTextfield);
-		inEmail = new EntradaTexto("E-Mail", largoLabel, largoTextfield);
-		
-		btnExistente = new JButton("Seleccionar cliente");
-		btnLimpiarCliente = new JButton("Limpiar campos");
-		btnExistente.setFocusable(false);
-		btnLimpiarCliente.setFocusable(false);
-		PanelHorizontal panelBotones = new PanelHorizontal();
-		panelBotones.setBorder(new EmptyBorder(10, 0, 0, 0));
-		panelBotones.add(btnExistente);
-		panelBotones.add(btnLimpiarCliente);
-		
-		PanelVertical panelCliente = new PanelVertical();
-		panelCliente.add(new JLabel("Datos del cliente"));
-		panelCliente.add(inApellido);
-		panelCliente.add(inNombre);
-		panelCliente.add(inDNI);
-		panelCliente.add(inTelefono);
-		panelCliente.add(inEmail);
-		panelCliente.add(panelBotones);
-		return panelCliente;
-	}
 	
 	private PanelVertical crearPanelFallecido() {
 		Dimension largoLabel = new Dimension(150, 25);
 		Dimension largoTextfield = new Dimension(300, 25);
-
+		
 		inNombreFallecido = new EntradaTexto("Nombres", largoLabel, largoTextfield);
 		inApellidoFallecido = new EntradaTexto("Apellidos", largoLabel, largoTextfield);
 		inDNIFallecido = new EntradaTexto("DNI", largoLabel, largoTextfield);
@@ -330,31 +289,6 @@ public class VentanaAltaServicio extends VentanaInterna {
 			inSubSector.addItem(elemento);
 	}
 
-	
-	
-	
-	
-	//************************************* SOLO GETTERS A PARTIR DE ESTE PUNTO *********************************************
-	public JTextField getDNI() {
-		return inDNI.getTextField();
-	}
-
-	public JTextField getApellido() {
-		return inApellido.getTextField();
-	}
-
-	public JTextField getNombre() {
-		return inNombre.getTextField();
-	}
-
-	public JTextField getTelefono() {
-		return inTelefono.getTextField();
-	}
-
-	public JTextField getEmail() {
-		return inEmail.getTextField();
-	}
-
 	public JTextField getInDNIFallecido() {
 		return inDNIFallecido.getTextField();
 	}
@@ -439,20 +373,12 @@ public class VentanaAltaServicio extends VentanaInterna {
 		return inSubSector;
 	}
 
-	public JButton botonExistente() {
-		return btnExistente;
+	public JButton botonAceptar() {
+		return btnAceptar;
 	}
 
-	public JButton botonLimpiarCliente() {
-		return btnLimpiarCliente;
-	}
-
-	public JButton botonLimpiarTodo() {
-		return btnLimpiarTodo;
-	}
-
-	public JButton botonConfirmar() {
-		return btnConfirmar;
+	public JButton botonCancelar() {
+		return btnCancelar;
 	}
 		
 }

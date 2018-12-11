@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.clientes.alta;
+package com.revivir.cementerio.vista.clientes2.busqueda;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +13,6 @@ import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.ControladorInterno;
-import com.revivir.cementerio.vista.clientes2.busqueda.VentanaAltaServicio;
 import com.revivir.cementerio.vista.seleccion.ClienteSeleccionable;
 import com.revivir.cementerio.vista.seleccion.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.util.Popup;
@@ -84,10 +83,9 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String mueble= (ventana.getInMueble().isEnabled() ? ventana.getInMueble().getText() : null);
 		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
-		Date vencimiento= null;
-		
+
 		Localizador.guardarUbicacion(subsector, deposito, otroCementerio, osario, nicho, fila, seccion,
-				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ, vencimiento);
+				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
 		
 		// GUARDO AL FALLECIDO
 		Integer ubicacion = Localizador.traerUltimaUbicacionGuardada();
@@ -97,7 +95,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String nombre= ventana.getInNombreFallecido().getText();;
 		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
-		FallecidoManager.guardarFallecido(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
+		FallecidoManager.guardar(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
 		
 		// FINALIZO EL GUARDADO
 		Popup.mostrar("El servicio se ha guardado exitosamente");

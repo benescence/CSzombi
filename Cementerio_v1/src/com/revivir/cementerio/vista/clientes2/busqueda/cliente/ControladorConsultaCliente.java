@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.clientes.busqueda.cliente;
+package com.revivir.cementerio.vista.clientes2.busqueda.cliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

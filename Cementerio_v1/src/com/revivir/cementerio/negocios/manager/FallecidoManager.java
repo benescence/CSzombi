@@ -11,7 +11,7 @@ import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
 public class FallecidoManager {
 	
-	public static void guardarFallecido(Integer cliente, Integer ubicacion, TipoFallecimiento tipo,
+	public static void guardar(Integer cliente, Integer ubicacion, TipoFallecimiento tipo,
 			String dni, String apellido, String nombre, String cocheria, Date fechaFallecimiento) {
 		
 		Fallecido fallecido = new Fallecido(-1, ubicacion,tipo, dni, apellido,
@@ -19,6 +19,14 @@ public class FallecidoManager {
 		
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
 		obd.insert(fallecido);	
+	}
+
+	public static void modificar(Fallecido fallecido) {
+		
+	}
+	
+	public static void eliminar(Fallecido fallecido) {
+		
 	}
 	
 	public static Fallecido traerPorDNI(String DNI) {

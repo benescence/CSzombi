@@ -12,8 +12,8 @@ import com.revivir.cementerio.vista.util.Ventana;
 public class VentanaPrincipal extends Ventana {
 	private static final long serialVersionUID = 1L;
 	JMenuItem principalAlta, principalCambiarPassword, principalCerrarSesion;
-	JMenuItem clienteAlta, clienteConsulta; 
-	JMenuItem fallecidoAlta, fallecidoConsulta;
+	private JMenuItem clienteAlta, clienteConsulta; 
+	private JMenuItem fallecidoAlta, fallecidoConsulta;
 	JMenuItem vinculoVincular, vinculoConsultarCliente, vinculoConsultarFallecido;
 	JMenuItem cobranzaAltaCargo, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
 	JMenuItem movimientoTrasladar, movimientoConsultar; 
@@ -47,8 +47,8 @@ public class VentanaPrincipal extends Ventana {
 		barra.add(menuCliente);
 
 		JMenu menuFallecido = new JMenu("Fallecidos");
-		menuFallecido.add(clienteAlta = new JMenuItem("Alta fallecido"));
-		menuFallecido.add(clienteConsulta = new JMenuItem("Consultar fallecidos"));
+		menuFallecido.add(fallecidoAlta = new JMenuItem("Alta fallecido"));
+		menuFallecido.add(fallecidoConsulta = new JMenuItem("Consultar fallecidos"));
 		barra.add(menuFallecido);
 		
 		JMenu menuVinculos = new JMenu("Vinculos");
@@ -82,9 +82,24 @@ public class VentanaPrincipal extends Ventana {
 		return servicioAlta;
 	}
 	
-
 	public JMenuItem getServicioConsulta() {
 		return servicioConsulta;
 	}
 
+	public JMenuItem getClienteAlta() {
+		return clienteAlta;
+	}
+
+	public JMenuItem getClienteConsulta() {
+		return clienteConsulta;
+	}
+
+	public JMenuItem getFallecidoAlta() {
+		return fallecidoAlta;
+	}
+
+	public JMenuItem getFallecidoConsulta() {
+		return fallecidoConsulta;
+	}
+		
 }
