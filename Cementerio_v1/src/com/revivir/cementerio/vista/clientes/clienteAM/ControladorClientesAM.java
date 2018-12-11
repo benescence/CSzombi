@@ -5,12 +5,14 @@ import java.awt.event.WindowEvent;
 
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorClientesAM {
 	private VentanaClientesAM ventana;
 	private ControladorClientesABM invocador;
+	private ControladorPrincipal principal;
 	private Cliente cliente;
 	
 	public ControladorClientesAM(ControladorClientesABM invocador, Cliente cliente) {
@@ -26,10 +28,15 @@ public class ControladorClientesAM {
 		inicializar();
 	}
 	
+	public ControladorClientesAM(ControladorPrincipal invocador) {
+		this.principal = invocador;
+		ventana = new VentanaClientesAM();
+		inicializar();
+	}
+	
 	private void inicializar() {
 		ventana.botonAceptar().addActionListener(e -> aceptar());
 		ventana.botonCancelar().addActionListener(e -> cancelar());
-		//ventana.mostrar();
 		ventana.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -60,8 +67,9 @@ public class ControladorClientesAM {
 			ClienteManager.modificar(cliente);
 		}
 		
-
-		invocador.actualizar();
+		if (invocador != null)
+			invocador.actualizar();
+		
 		volver();
 		
 		
@@ -100,7 +108,10 @@ public class ControladorClientesAM {
 	private void volver() {
 		ventana.dispose();
 		ventana = null;
-		invocador.mostrar();
+		if (invocador != null)
+			invocador.mostrar();
+		else
+			principal.getVentana().mostrar();
 	}
 	
 	private boolean validarCampos() {/*

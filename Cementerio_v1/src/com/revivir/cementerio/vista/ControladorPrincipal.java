@@ -4,6 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.revivir.cementerio.vista.clientes.ControladorClientesABM;
+import com.revivir.cementerio.vista.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.usuarios.ControladorUsuariosABM;
@@ -11,8 +12,8 @@ import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorPrincipal {
-	VentanaPrincipal ventana;
-	ControladorInterno controladorInterno;
+	private VentanaPrincipal ventana;
+	private ControladorInterno controladorInterno;
 	
 	public ControladorPrincipal() {
 		ventana = new VentanaPrincipal();
@@ -28,6 +29,14 @@ public class ControladorPrincipal {
 		ventana.getFallecidoConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorFallecidosABM(this)));
 		ventana.getServicioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorServiciosABM(this)));
 		ventana.getUsuarioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorUsuariosABM(this)));
+		
+		// Accesos directos
+		ventana.getClienteAlta().addActionListener(e -> altaClientes());
+	}
+	
+	private void altaClientes() {
+		ventana.deshabilitar();
+		new ControladorClientesAM(this);
 	}
 	
 	private void colocarVentanaInterna(ControladorInterno controlador) {
