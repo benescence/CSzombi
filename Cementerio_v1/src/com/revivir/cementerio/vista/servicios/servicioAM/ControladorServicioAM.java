@@ -3,17 +3,22 @@ package com.revivir.cementerio.vista.servicios.servicioAM;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
+import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorServicioAM {
 	private VentanaServicioAM ventana;
 	private ControladorServiciosABM invocador;
+	private ControladorPrincipal principal;
+	private Servicio servicio;
 	
 	public ControladorServicioAM(ControladorServiciosABM invocador, Servicio servicio) {
 		this.invocador = invocador;
-		ventana = new VentanaServicioAM();
+		this.servicio = servicio;
+		ventana = new VentanaServicioAM(servicio);
 		inicializar();
 	}
 	
@@ -23,10 +28,15 @@ public class ControladorServicioAM {
 		inicializar();
 	}
 	
+	public ControladorServicioAM(ControladorPrincipal principal) {
+		this.principal = principal;
+		ventana = new VentanaServicioAM();
+		inicializar();
+	}
+	
 	private void inicializar() {
 		ventana.botonAceptar().addActionListener(e -> aceptar());
 		ventana.botonCancelar().addActionListener(e -> cancelar());
-		ventana.mostrar();
 		ventana.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -36,31 +46,28 @@ public class ControladorServicioAM {
 	} 
 	
 	private void aceptar() {
-		if (validarCampos()) {
-/*
-			String usuario = ventana.getUsuario().getText();
-			String password = ventana.getPassword().getText();
-			Rol rol = (Rol) ventana.getPermisos().getSelectedItem();
-			Usuario usuarioActual = ventana.getUsuarioModificacion();
-			
-			// AGREGAR USUARIO
-			if (usuarioActual == null) {
-				Usuario nuevo = new Usuario(-1, usuario, password, rol);
-				UsuarioManager.guardar(nuevo);
-			}
-			
-			// MODIFICAR USUARIO
-			else {
-				usuarioActual.setUsuario(usuario);
-				usuarioActual.setPassword(password);
-				usuarioActual.setRol(rol);
-				UsuarioManager.modificar(usuarioActual);
-			}
-			
-			invocador.actualizarTabla();*/
-			volver();
+		String codigo = ventana.getCodigo().getText();
+		String nombre = ventana.getNombre().getText();
+		String descripcion = ventana.getDescripcion().getText();
+		Double importe = new Double(ventana.getImporte().getText());
+		
+		// Creando un nuevo servicio
+		if (servicio == null) {
+			ServicioManager.guardar(codigo, nombre, importe, descripcion, false);
 		}
 		
+		// Modificando un servicio existente
+		else {
+			servicio.setCodigo(codigo);
+			servicio.setNombre(nombre);
+			servicio.setDescripcion(descripcion);
+			servicio.setImporte(importe);
+			ServicioManager.modificar(servicio);
+		}
+		
+		if (invocador != null)
+			invocador.actualizar();
+		volver();
 	}
 	
 	private void cancelar() {
@@ -71,32 +78,10 @@ public class ControladorServicioAM {
 	private void volver() {
 		ventana.dispose();
 		ventana = null;
-		invocador.mostrar();
+		if (invocador != null)
+			invocador.mostrar();
+		else
+			principal.getVentana().mostrar();
 	}
 	
-	private boolean validarCampos() {/*
-		String usuario = ventana.getUsuario().getText();
-		String password = ventana.getPassword().getText();
-		Usuario usuarioActual = ventana.getUsuarioModificacion();
-		Usuario usuarioBD = UsuarioManager.traerPorUsuario(usuario);
-		String mensaje = "";
-		
-		if (usuario.equals(""))
-			mensaje += "\n   -El USUARIO no puede estar vacio.";
-		else if (usuarioBD != null) {
-			if (usuarioActual == null || usuarioActual.getID() != usuarioBD.getID())
-				mensaje += "\n   -Ya existe un usuario con el nombre de usuario "+usuario+".";
-		}
-		
-		if (password.equals(""))
-			mensaje += "\n   -El PASSWORD no puede estar vacio.";
-		
-		if (!mensaje.equals("")) {
-			Popup.mostrar("Se encontraron los siguientes errores:"+mensaje);
-			return false;
-		}
-		*/
-		return true;
-	}
-
 }

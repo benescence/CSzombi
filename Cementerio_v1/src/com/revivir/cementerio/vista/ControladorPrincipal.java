@@ -7,6 +7,7 @@ import com.revivir.cementerio.vista.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.servicios.ControladorServiciosABM;
+import com.revivir.cementerio.vista.servicios.servicioAM.ControladorServicioAM;
 import com.revivir.cementerio.vista.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Popup;
@@ -32,8 +33,14 @@ public class ControladorPrincipal {
 		
 		// Accesos directos
 		ventana.getClienteAlta().addActionListener(e -> altaClientes());
+		ventana.getServicioAlta().addActionListener(e -> altaServicios());
 	}
 	
+	private void altaServicios() {
+		ventana.deshabilitar();
+		new ControladorServicioAM(this);
+	}
+
 	private void altaClientes() {
 		ventana.deshabilitar();
 		new ControladorClientesAM(this);

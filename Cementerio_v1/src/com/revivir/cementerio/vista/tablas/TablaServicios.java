@@ -6,45 +6,39 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.revivir.cementerio.vista.util.Formato;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 
 public class TablaServicios extends JTable{
 	private static final long serialVersionUID = 1L;
 	private String[] columnas = { "Codigo", "Nombre", "Importe", "Descripcion"};
 	private DefaultTableModel modelo;
-	private List<Object> servicios;
+	private List<Servicio> servicios;
 
-	public TablaServicios(List<Object> servicios) {
+	public TablaServicios(List<Servicio> servicios) {
 		modelo = new DefaultTableModel(null, columnas);
 		setModel(modelo);
 		recargar(servicios);
 	}	
 	
-	public void recargar(List<Object> servicios) {
+	public void recargar(List<Servicio> servicios) {
 		this.servicios = servicios;
 		modelo.setRowCount(0);
 		modelo.setColumnCount(0);
 		modelo.setColumnIdentifiers(columnas);
 
-		//for (Object cliente: servicios) {
-		for (int i=0; i<5; i++) {
+		for (Servicio servicio: servicios) {
 			Object[] fila = {
-					"Codigo",
-					"Nombre",
-					"Importe",
-					"Descripcion"
+					servicio.getCodigo(),
+					servicio.getNombre(),
+					servicio.getImporte(),
+					servicio.getDescripcion()
 				};
-			modelo.addRow(fila);
-			
-			// seteo la altura de la celda
-			int registro = modelo.getRowCount() - 1;
-			int altura = Formato.calcularAlturaDeCelda(fila);
-			setRowHeight(registro, altura);
+			modelo.addRow(fila);			
 		}
 	}
 	
-	public List<Object> obtenerSeleccion() {
-		List<Object> registros = new ArrayList<>();
+	public List<Servicio> obtenerSeleccion() {
+		List<Servicio> registros = new ArrayList<>();
 		int[] indices = getSelectedRows();
 
 		for (int indice : indices) {

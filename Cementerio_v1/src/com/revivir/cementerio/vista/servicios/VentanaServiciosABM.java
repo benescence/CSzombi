@@ -1,11 +1,11 @@
 package com.revivir.cementerio.vista.servicios;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.vista.tablas.TablaServicios;
 import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
@@ -20,7 +20,7 @@ public class VentanaServiciosABM extends VentanaInterna {
 	public VentanaServiciosABM() {
 		super("Gestion de servicios", 500, 500);
 		
-		tabla = new TablaServicios(new ArrayList<>());
+		tabla = new TablaServicios(ServicioManager.traerTodo());
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		
 		Dimension dimBoton = new Dimension(100, 25);
@@ -33,7 +33,6 @@ public class VentanaServiciosABM extends VentanaInterna {
 		panelBotones.add(btnModificar);
 		panelBotones.add(btnEliminar);
 		
-		
 		PanelVertical panelPrincipal = new PanelVertical();
 		panelPrincipal.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(panelPrincipal);
@@ -41,23 +40,19 @@ public class VentanaServiciosABM extends VentanaInterna {
 		panelPrincipal.add(panelTabla);
 		panelPrincipal.add(panelBotones);
 	}
-
 	
 	public TablaServicios getTabla() {
 		return tabla;
 	}
 	
-
 	public Boton botonAgregar() {
 		return btnAgregar;
 	}
 	
-
 	public Boton botonModificar() {
 		return btnModificar;
 	}
 
-	
 	public Boton botonEliminar() {
 		return btnEliminar;
 	}

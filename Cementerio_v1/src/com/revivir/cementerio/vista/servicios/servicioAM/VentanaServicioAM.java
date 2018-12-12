@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.EntradaTexto;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
@@ -20,6 +21,16 @@ public class VentanaServicioAM extends Ventana {
 		super("Agregar servicio", 500, 500);
 		iniciarComponentes();
 		setLocationRelativeTo(null);
+	}
+	
+	public VentanaServicioAM(Servicio servicio) {
+		super("Modificar servicio", 500, 500);
+		iniciarComponentes();
+		setLocationRelativeTo(null);
+		inCodigo.getTextField().setText(servicio.getCodigo());
+		inNombre.getTextField().setText(servicio.getNombre());
+		inImporte.getTextField().setText(servicio.getImporte().toString());
+		inDescripcion.getTextField().setText(servicio.getDescripcion());
 	}
 
 	private void iniciarComponentes() {
@@ -51,12 +62,10 @@ public class VentanaServicioAM extends Ventana {
 		pack();
 	}
 
-	
 	public JTextField getCodigo() {
 		return inCodigo.getTextField();
 	}
 	
-
 	public JTextField getNombre() {
 		return inNombre.getTextField();
 	}
@@ -65,17 +74,14 @@ public class VentanaServicioAM extends Ventana {
 		return inImporte.getTextField();
 	}
 	
-
 	public JTextField getDescripcion() {
 		return inDescripcion.getTextField();
 	}
 	
-
 	public Boton botonAceptar() {
 		return btnAceptar;
 	}
 	
-
 	public Boton botonCancelar() {
 		return btnCancelar;
 	}
