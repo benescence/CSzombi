@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import com.revivir.cementerio.negocios.manager.ClienteManager;
-import com.revivir.cementerio.vista.tablas.TablaClientes;
+import com.revivir.cementerio.negocios.manager.CargoManager;
+import com.revivir.cementerio.vista.tablas.TablaCargos;
 import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
@@ -14,13 +14,13 @@ import com.revivir.cementerio.vista.util.VentanaInterna;
 
 public class VentanaCargosDeFallecidos extends VentanaInterna {
 	private static final long serialVersionUID = 1L;
-	private TablaClientes tabla;
+	private TablaCargos tabla;
 	private Boton btnAgregar, btnModificar, btnEliminar;
 	
 	public VentanaCargosDeFallecidos() {
-		super("Gestion de clientes", 500, 500);
+		super("Gestion de cargos de fallecidos", 500, 500);
 		
-		tabla = new TablaClientes(ClienteManager.traerTodo());
+		tabla = new TablaCargos(CargoManager.traerTodo());
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		
 		Dimension dimBoton = new Dimension(100, 25);
@@ -41,7 +41,7 @@ public class VentanaCargosDeFallecidos extends VentanaInterna {
 		panelPrincipal.add(panelBotones);
 	}
 	
-	public TablaClientes getTabla() {
+	public TablaCargos getTabla() {
 		return tabla;
 	}
 	

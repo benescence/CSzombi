@@ -29,19 +29,19 @@ public class ControladorClientesABM implements ControladorInterno {
 	}
 
 	private void modificar() {
-		List<Cliente> lista = ventana.getTabla().obtenerSeleccion();
+		//List<Cliente> lista = ventana.getTabla().obtenerSeleccion();
 		
-		if (lista.size() != 1) {
+		//if (lista.size() != 1) {
 			Popup.mostrar("Debe seleccionar exactamente 1 cliente para modificarlo");
 			return;
-		}
+		//}
 		
-		invocador.getVentana().setEnabled(false);
+		//invocador.getVentana().setEnabled(false);
 		//new ControladorClientesAM(this, lista.get(0));
 	}
 	
 	private void eliminar() {
-		List<Cliente> lista = ventana.getTabla().obtenerSeleccion();
+		/*List<Cliente> lista = ventana.getTabla().obtenerSeleccion();
 		
 		if (lista.isEmpty()) {
 			Popup.mostrar("Debe seleccionar al menos un cliente para eliminarlo");
@@ -51,7 +51,7 @@ public class ControladorClientesABM implements ControladorInterno {
 		if (Popup.confirmar("¿Esta seguro de que desea eliminar los registros seleccionados?"))
 			for (Cliente elemento : lista)
 				ClienteManager.eliminar(elemento);
-		
+		*/
 		actualizar();
 	}
 
@@ -71,7 +71,7 @@ public class ControladorClientesABM implements ControladorInterno {
 	}
 
 	public void actualizar() {
-		ventana.getTabla().recargar(ClienteManager.traerTodo());
+		//ventana.getTabla().recargar(ClienteManager.traerTodo());
 	}
 
 }
