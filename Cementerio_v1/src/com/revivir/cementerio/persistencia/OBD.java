@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import com.revivir.cementerio.persistencia.entidades.Servicio;
-
 public class OBD {
 	protected final String driver = "com.mysql.jdbc.Driver";
 	
@@ -36,7 +34,6 @@ public class OBD {
 		}
 	}
 
-	
 	public Integer selectLastID(String tabla) {
 		String sql = "select ID from "+tabla+" order by ID desc limit 1";
 		Integer ret = null;
@@ -60,9 +57,5 @@ public class OBD {
 			
 		return ret;
 	}
-
-
-	
-
 	
 }

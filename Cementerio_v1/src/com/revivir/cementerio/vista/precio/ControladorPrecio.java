@@ -106,13 +106,13 @@ private void aceptarAM() {
 			// Crear un nuevo alumno
 			if (precio == null) {
 			
-				ServicioManager.crearServicio(codigo, Descripcion, Monto, nombre, historico);
+				//ServicioManager.crearServicio(codigo, Descripcion, Monto, nombre, historico);
 
 			// Editar un alumno existente
 			} else {
-				precio.setCodigo(codigo);;
-				precio.setDescripcion(Descripcion);;
-				precio.setMonto(Monto);;
+				//precio.setCodigo(codigo);;
+				//precio.setDescripcion(Descripcion);;
+				//precio.setMonto(Monto);;
 				precio.setNombre(nombre);;
 			
 				ServicioManager.modificar(precio);

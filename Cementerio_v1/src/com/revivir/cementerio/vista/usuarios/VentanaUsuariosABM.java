@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 import com.revivir.cementerio.vista.tablas.TablaUsuarios;
 import com.revivir.cementerio.vista.util.Boton;
@@ -45,7 +46,7 @@ public class VentanaUsuariosABM extends VentanaInterna {
 		panelBotones.add(btnBuscar);
 		panelBotones.add(btnLimpiar);
 		
-		List<Usuario> usuarios = new ArrayList<>();
+		List<Usuario> usuarios = UsuarioManager.traerTodo();
 		tabla = new TablaUsuarios(usuarios);
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		

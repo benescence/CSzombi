@@ -15,13 +15,12 @@ public interface ServicioOBD {
 
 	public List<Servicio> select();
 	
+	public Servicio selectByID(Integer iD);
+
+	public Servicio selectBycodigo(String codigo);
+
 	public List<Servicio> selectByDescripcion(String descripcion);
 
 	public List<Servicio> selectByNombre(String nombre);
-	
-	public Servicio selectBycodigo(Integer codigo);
-
-	public Servicio selectByID2(Integer iD);
-
-	
+		
 }

@@ -1,26 +1,17 @@
 package com.revivir.cementerio.persistencia.entidades;
 
 public class Servicio {
-	private Integer ID, codigo, historico;
-	private String nombre, descripcion;
-	private Double  monto;
-
-	public Servicio(Integer ID, Integer codigo, String descripcion, Double monto, String nombre, Integer historico) {
-		this.ID = ID;
-		this.codigo = codigo;
-		this.descripcion = descripcion;
-		this.nombre = nombre;
-		this.monto = monto;
-		this.historico = historico;
-	}
-
+	private Integer ID;
+	private String codigo, nombre, descripcion;
+	private Double importe;
+	private Boolean historico;
 	
-
-	public int getHistorico() {
-		return historico;
-	}
-
-	public void setHistorico(int historico) {
+	public Servicio(Integer iD, String codigo, String nombre, String descripcion, Double importe, Boolean historico) {
+		this.ID = iD;
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.importe = importe;
 		this.historico = historico;
 	}
 
@@ -29,14 +20,14 @@ public class Servicio {
 	}
 
 	public void setID(Integer iD) {
-		ID = iD;
+		this.ID = iD;
 	}
 
-	public Integer getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -56,15 +47,20 @@ public class Servicio {
 		this.descripcion = descripcion;
 	}
 
-	public Double getMonto() {
-		return monto;
+	public Double getImporte() {
+		return importe;
 	}
 
-	public void setMonto(Double monto) {
-		this.monto = monto;
+	public void setImporte(Double importe) {
+		this.importe = importe;
 	}
 
-	
-	
+	public Boolean getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(Boolean historico) {
+		this.historico = historico;
+	}
 	
 }

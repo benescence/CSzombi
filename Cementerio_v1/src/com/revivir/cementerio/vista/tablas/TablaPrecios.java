@@ -31,7 +31,7 @@ public class TablaPrecios  extends JTable{
 				Object[] fila = {
 						precio.getCodigo(),
 						precio.getDescripcion(),
-						precio.getMonto(),
+						//precio.getMonto(),
 						precio.getNombre()
 						
 				};

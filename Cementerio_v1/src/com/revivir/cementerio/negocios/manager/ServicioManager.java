@@ -8,18 +8,20 @@ import com.revivir.cementerio.persistencia.interfaces.ServicioOBD;
 
 public class ServicioManager {
 
-	public static void crearServicio(int codigo, String nombre, Double monto, String descripcion, Integer historico) {
-		Servicio precio = new Servicio(-1, codigo, descripcion, monto, nombre, historico);
+	public static void guardar(String codigo, String nombre, Double importe, String descripcion, boolean historico) {
+		Servicio servicio = new Servicio(-1, codigo, nombre, descripcion, importe, historico);
 		ServicioOBD obd = FactoryOBD.crearPrecioOBD();
-		obd.insert(precio);
+		obd.insert(servicio);
 	}
 
-	public static void modificar(Servicio precio) {
-			
+	public static void modificar(Servicio servicio) {
+		ServicioOBD obd = FactoryOBD.crearPrecioOBD();
+		obd.update(servicio);
 	}
 		
-	public static void eliminar(Servicio precio) {
-		
+	public static void eliminar(Servicio servicio) {
+		ServicioOBD obd = FactoryOBD.crearPrecioOBD();
+		obd.delete(servicio);
 	}
 	
 	public static List<Servicio> traerTodo() {
@@ -27,12 +29,14 @@ public class ServicioManager {
 		return obd.select();
 	}
 	
-	public static Servicio traerPorID(int ID) {
-		return null;
+	public static Servicio traerPorID(Integer ID) {
+		ServicioOBD obd = FactoryOBD.crearPrecioOBD();
+		return obd.selectByID(ID);
 	}
 	
-	public static Servicio traerPorCodigo(int codigo) {
+	public static Servicio traerPorCodigo(String codigo) {
 		ServicioOBD obd = FactoryOBD.crearPrecioOBD();		
 		return obd.selectBycodigo(codigo);
 	}
+
 }

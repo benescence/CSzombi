@@ -28,7 +28,9 @@ public class FactoryOBD {
 	public static UsuarioOBD crearUsuarioOBD() {
 		return new UsuarioOBDMYSQL();
 	}
+
 	public static ServicioOBD crearPrecioOBD() {
 		return new ServicioOBDMySQL();
 	}
+	
 }

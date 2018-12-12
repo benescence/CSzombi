@@ -178,7 +178,4 @@ public class Ubicacion {
 		this.circ = circ;
 	}
 
-	
-
-
 }

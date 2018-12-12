@@ -36,7 +36,7 @@ import com.revivir.cementerio.vista.util.Ventana;
 			this.precio = precio;
 			inCodigo.setText(String.valueOf(precio.getCodigo()));
 			inDescripcion.setText(precio.getDescripcion());
-			inMonto.setText(String.valueOf(precio.getMonto()));
+			//inMonto.setText(String.valueOf(precio.getMonto()));
 			inNombre.setText(precio.getNombre());
 			
 		}

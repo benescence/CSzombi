@@ -8,34 +8,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revivir.cementerio.persistencia.OBD;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.ServicioOBD;
 
 public class ServicioOBDMySQL extends OBD implements ServicioOBD{
-	// TODO falta cambiar los campos aca arriba
-	private final String campos = "codigo, nombre, monto,descripcion, historico ";
+	private final String campos = "codigo, nombre, importe, descripcion, historico ";
 	private final String tabla = "rev_servicios";
 	
 	@Override
 	public void insert(Servicio precio) {
 		String valores = "'"+precio.getCodigo()+"'"
 				+", '"+precio.getDescripcion()+"'"
-				+", '"+precio.getMonto()+"'"
+				+", "+precio.getImporte()
 				+", '"+precio.getNombre()+"'"
-				+", '"+precio.getHistorico()+"'";
+				+", "+precio.getHistorico();
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}
 
-	// TODO fijate que las cadenas van entre comillas simples pero los enteros no
 	@Override
 	public void update(Servicio precio) {
 		String condicion = "ID = "+precio.getID();
 		String valores = "codigo = '"+precio.getCodigo()+"'"
 				+", descripcion = '"+precio.getDescripcion()+"'"
-				+", monto = '"+precio.getMonto()+"'"
-				+", nombre = '"+precio.getNombre()+"'";
+				+", importe = "+precio.getImporte()
+				+", nombre = '"+precio.getNombre()+"'"
+				+", historico = "+precio.getHistorico();
 		String consulta = "update "+tabla+" set "+valores+"  where ("+condicion+");";
 		ejecutarSQL(consulta);
 	}
@@ -51,8 +49,9 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 	public List<Servicio> select() {
 		return selectByCondicion("true");
 	}
+	
 	@Override
-	public Servicio selectByID2(Integer ID) {
+	public Servicio selectByID(Integer ID) {
 		String condicion = "ID = "+ID;
 		List<Servicio> lista = selectByCondicion(condicion);
 		if (lista.size() > 0)
@@ -75,7 +74,7 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 	}
 	
 	@Override
-	public Servicio selectBycodigo(Integer codigo) {
+	public Servicio selectBycodigo(String codigo) {
 		String condicion = "codigo = " +(codigo != null ? "'"+codigo+"'" : "codigo");
 		List<Servicio> lista = selectByCondicion(condicion);
 		if (lista.size() > 0)
@@ -96,12 +95,12 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 			while (resultados.next()) {
 				ret.add(new Servicio(
 						resultados.getInt("ID"),
-						resultados.getInt("codigo"),
-						resultados.getString("descripcion"),
-						resultados.getDouble("monto"),
+						resultados.getString("codigo"),
 						resultados.getString("nombre"),
-						resultados.getInt("historico")
-						));
+						resultados.getString("descripcion"),
+						resultados.getDouble("importe"),
+						resultados.getBoolean("historico")
+					));
 			}
 
 			resultados.close();
@@ -115,6 +114,5 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 			
 		return ret;
 	}
-
 	
 }
