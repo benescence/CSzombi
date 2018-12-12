@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
-import com.revivir.cementerio.MainPrincipal;
+import com.revivir.cementerio.antiguo.MainPrincipal;
 import com.revivir.cementerio.negocios.Busqueda;
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.manager.ServicioManager;

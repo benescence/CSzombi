@@ -1,4 +1,4 @@
-package com.revivir.cementerio.prueba;
+package com.revivir.cementerio;
 
 import java.util.Properties;
 

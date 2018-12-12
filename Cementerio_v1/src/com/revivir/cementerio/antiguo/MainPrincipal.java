@@ -1,4 +1,4 @@
-package com.revivir.cementerio;
+package com.revivir.cementerio.antiguo;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;

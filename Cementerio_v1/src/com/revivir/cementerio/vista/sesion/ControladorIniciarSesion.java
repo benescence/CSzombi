@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import com.revivir.cementerio.MainPrincipal;
+import com.revivir.cementerio.antiguo.MainPrincipal;
 import com.revivir.cementerio.negocios.Sesion;
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.vista.util.Popup;

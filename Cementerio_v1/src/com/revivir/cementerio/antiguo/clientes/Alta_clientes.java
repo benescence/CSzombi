@@ -19,7 +19,7 @@ import java.awt.SystemColor;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.revivir.cementerio.MainPrincipal;
+import com.revivir.cementerio.antiguo.MainPrincipal;
 import com.revivir.cementerio.antiguo.logica.Clientes;
 import com.revivir.cementerio.antiguo.org.eclipse.wb.swing.FocusTraversalOnArray;
 import com.revivir.cementerio.negocios.Recepcion;

@@ -9,7 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.revivir.cementerio.MainPrincipal;
+import com.revivir.cementerio.antiguo.MainPrincipal;
 import com.revivir.cementerio.antiguo.logica.Users;
 
 import javax.swing.JTextPane;
