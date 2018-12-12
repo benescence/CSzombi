@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import com.revivir.cementerio.MainPrincipal;
 import com.revivir.cementerio.negocios.Busqueda;
 import com.revivir.cementerio.negocios.Validador;
-import com.revivir.cementerio.negocios.manager.CargoManager;
-import com.revivir.cementerio.persistencia.entidades.Precio;
+import com.revivir.cementerio.negocios.manager.ServicioManager;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.util.Popup;
 
@@ -85,7 +85,7 @@ public class ControladorPrecio implements ActionListener, ControladorInterno{
 	private void buscar() {
 		String codigo = (ventana.getCodigo().getText().equals("") ? null : ventana.getCodigo().getText());
 		String descripcion = (ventana.getDescripcion().getText().equals("") ? null : ventana.getDescripcion().getText());
-		List<Precio> precios = Busqueda.precios(codigo, descripcion);
+		List<Servicio> precios = Busqueda.precios(codigo, descripcion);
 		ventana.getTabla().recargar(precios);
 		if (precios.size() == 0)
 			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
@@ -96,7 +96,7 @@ public class ControladorPrecio implements ActionListener, ControladorInterno{
 private void aceptarAM() {
 		
 		if (validarCampos()) {
-			Precio precio = ventanaAM.getPrecio();
+			Servicio precio = ventanaAM.getPrecio();
 			String Descripcion = ventanaAM.getInDescripcion().getText();
 			int codigo = Integer.valueOf(ventanaAM.getInCodigo().getText());
 			Double Monto = Double.valueOf(ventanaAM.getInMonto().getText());
@@ -106,7 +106,7 @@ private void aceptarAM() {
 			// Crear un nuevo alumno
 			if (precio == null) {
 			
-				CargoManager.crearCargo(codigo, Descripcion, Monto, nombre, historico);
+				ServicioManager.crearServicio(codigo, Descripcion, Monto, nombre, historico);
 
 			// Editar un alumno existente
 			} else {
@@ -115,7 +115,7 @@ private void aceptarAM() {
 				precio.setMonto(Monto);;
 				precio.setNombre(nombre);;
 			
-				CargoManager.modificar(precio);
+				ServicioManager.modificar(precio);
 			}
 
 			//llenarTabla();

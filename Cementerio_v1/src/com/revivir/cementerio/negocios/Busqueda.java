@@ -5,10 +5,10 @@ import java.util.List;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
-import com.revivir.cementerio.persistencia.entidades.Precio;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
-import com.revivir.cementerio.persistencia.interfaces.PrecioOBD;
+import com.revivir.cementerio.persistencia.interfaces.ServicioOBD;
 
 public class Busqueda {
 	
@@ -16,8 +16,8 @@ public class Busqueda {
 		ClienteOBD obd = FactoryOBD.crearClienteOBD();
 		return obd.selectByNombreApellidoDNI(nombres, apellido, DNI);
 	}
-	public static List<Precio> precios(String codigo, String descripcion) {
-		PrecioOBD obd = FactoryOBD.crearPrecioOBD();
+	public static List<Servicio> precios(String codigo, String descripcion) {
+		ServicioOBD obd = FactoryOBD.crearPrecioOBD();
 		return obd.selectByDescripcion(descripcion);
 	}
 	public static List<Fallecido> fallecidos(String DNI, String nombres, String apellido) {

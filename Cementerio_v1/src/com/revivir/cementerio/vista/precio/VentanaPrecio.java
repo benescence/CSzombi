@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import com.revivir.cementerio.persistencia.entidades.Precio;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 
 import com.revivir.cementerio.vista.tablas.TablaPrecios;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
@@ -27,7 +27,7 @@ public class VentanaPrecio extends VentanaInterna{
 		Dimension largoLabel = new Dimension(100, 25);
 
 		// LA TABLA
-		tabla = new TablaPrecios(new ArrayList<Precio>());
+		tabla = new TablaPrecios(new ArrayList<Servicio>());
 		JScrollPane panelTabla = new JScrollPane();
 		panelTabla.setViewportView(tabla);
 		

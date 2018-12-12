@@ -7,27 +7,27 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
-import com.revivir.cementerio.persistencia.entidades.Precio;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 
 public class TablaPrecios  extends JTable{
 		private static final long serialVersionUID = 1L;
 		private String[] columnas = { "codigo", "descripcion", "monto", "Observaciones"};
 		private DefaultTableModel modelo;
-		private List<Precio> precio;
+		private List<Servicio> precio;
 
-		public TablaPrecios(List<Precio> precios) {
+		public TablaPrecios(List<Servicio> precios) {
 			modelo = new DefaultTableModel(null, columnas);
 			setModel(modelo);
 			recargar(precios);
 		}	
 		
-	public void recargar(List<Precio> precios) {
+	public void recargar(List<Servicio> precios) {
 			this.precio = precios;
 			modelo.setRowCount(0);
 			modelo.setColumnCount(0);
 			modelo.setColumnIdentifiers(columnas);
 
-			for (Precio precio: precios) {
+			for (Servicio precio: precios) {
 				Object[] fila = {
 						precio.getCodigo(),
 						precio.getDescripcion(),
@@ -39,8 +39,8 @@ public class TablaPrecios  extends JTable{
 			}
 		}
 		
-		public List<Precio> obtenerSeleccion() {
-			List<Precio> codigos = new ArrayList<>();
+		public List<Servicio> obtenerSeleccion() {
+			List<Servicio> codigos = new ArrayList<>();
 			int[] indices = getSelectedRows();
 
 			for (int indice : indices) {

@@ -31,7 +31,7 @@ import com.revivir.cementerio.antiguo.usuarios.Alta_usuario;
 import com.revivir.cementerio.antiguo.usuarios.Baja_usuario;
 import com.revivir.cementerio.antiguo.usuarios.Buscar_usuarios;
 import com.revivir.cementerio.antiguo.usuarios.Modif_usuario;
-import com.revivir.cementerio.persistencia.entidades.Precio;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.precio.VentanaPrecio;
 
 import javax.swing.JComboBox;

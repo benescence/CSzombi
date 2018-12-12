@@ -5,56 +5,56 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
-import com.revivir.cementerio.persistencia.entidades.Precio;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
-import com.revivir.cementerio.persistencia.interfaces.PrecioOBD;
+import com.revivir.cementerio.persistencia.interfaces.ServicioOBD;
 
 
-public class CargoOBDTest {
+public class ServicioOBDTest {
 
 	
 		
-		public static void insertTest(Precio nuevo) {
+		public static void insertTest(Servicio nuevo) {
 			System.out.println("___ insert test");
-			PrecioOBD obd = FactoryOBD.crearPrecioOBD();
+			ServicioOBD obd = FactoryOBD.crearPrecioOBD();
 			obd.insert(nuevo);
 		}
 		
-		public static void updateTest(Precio precio) {
+		public static void updateTest(Servicio precio) {
 			System.out.println("___ Update test");
-			PrecioOBD obd = FactoryOBD.crearPrecioOBD();
+			ServicioOBD obd = FactoryOBD.crearPrecioOBD();
 			obd.update(precio);
 		}
 
-		public static void deleteTest(Precio precio) {
+		public static void deleteTest(Servicio precio) {
 			System.out.println("___ Delete test");
-			PrecioOBD obd = FactoryOBD.crearPrecioOBD();
+			ServicioOBD obd = FactoryOBD.crearPrecioOBD();
 			obd.delete(precio);
 		}
 		
 		public static void selectTest() {
 			System.out.println("___ select test");
-			PrecioOBD obd = FactoryOBD.crearPrecioOBD();
-			List<Precio> lista = obd.select();
+			ServicioOBD obd = FactoryOBD.crearPrecioOBD();
+			List<Servicio> lista = obd.select();
 			System.out.println("Cantidad: "+lista.size());
-			for (Precio elemento : lista)
+			for (Servicio elemento : lista)
 				System.out.println(elemento.getCodigo()+", "+elemento.getNombre());
 		}
-		public static Precio selectByIDTest(Integer ID) {
+		public static Servicio selectByIDTest(Integer ID) {
 			System.out.println("____ Select by ID Test");
-			PrecioOBD obd = FactoryOBD.crearPrecioOBD();
-			Precio precio = obd.selectByID2(ID);
-			System.out.println("Cargo: "+precio.getCodigo()+", "+precio.getDescripcion());
+			ServicioOBD obd = FactoryOBD.crearPrecioOBD();
+			Servicio precio = obd.selectByID2(ID);
+			System.out.println("Servicio: "+precio.getCodigo()+", "+precio.getDescripcion());
 			return precio;
 		}
 		
 		
 		public static void main(String[] args) {
-			Precio nuevo = new Precio(-1, 1, "24rrr", 5501.00, "Josefa", 1);
+			Servicio nuevo = new Servicio(-1, 1, "24rrr", 5501.00, "Josefa", 1);
 			
 			insertTest(nuevo);
 			selectTest();
-			Precio precioBd = selectByIDTest(3);
+			Servicio precioBd = selectByIDTest(3);
 			precioBd.setCodigo(999);
 			updateTest(precioBd);
 			selectTest();

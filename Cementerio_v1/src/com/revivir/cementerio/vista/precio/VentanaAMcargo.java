@@ -9,7 +9,7 @@ package com.revivir.cementerio.vista.precio;
 	import javax.swing.border.Border;
 	import javax.swing.border.EmptyBorder;
 
-	import com.revivir.cementerio.persistencia.entidades.Precio;
+	import com.revivir.cementerio.persistencia.entidades.Servicio;
 	import com.revivir.cementerio.vista.util.PanelHorizontal;
 	import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Ventana;
@@ -19,7 +19,7 @@ import com.revivir.cementerio.vista.util.Ventana;
 		private static final long serialVersionUID = 1L;
 		private JButton btnAceptar, btnCancelar;
 		private JTextField inCodigo, inDescripcion, inMonto, inNombre;
-		private Precio precio = null;
+		private Servicio precio = null;
 		
 		// Constructor para un nuevo alumno
 		public VentanaAMcargo() {
@@ -29,7 +29,7 @@ import com.revivir.cementerio.vista.util.Ventana;
 		}
 		
 		// Constructor para editar un alumno
-		public VentanaAMcargo(Precio precio) {
+		public VentanaAMcargo(Servicio precio) {
 			super ("ingresar cargo", 500,500);
 			setTitle("Editar alumno");
 			cargarComponentes();
@@ -155,7 +155,7 @@ import com.revivir.cementerio.vista.util.Ventana;
 			this.inNombre = inNombre;
 		}
 
-		public Precio getPrecio() {
+		public Servicio getPrecio() {
 			return precio;
 		}
 
