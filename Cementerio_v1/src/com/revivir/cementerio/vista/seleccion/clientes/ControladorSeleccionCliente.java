@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.seleccion;
+package com.revivir.cementerio.vista.seleccion.clientes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

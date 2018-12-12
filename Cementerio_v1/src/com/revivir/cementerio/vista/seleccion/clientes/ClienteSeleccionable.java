@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.seleccion;
+package com.revivir.cementerio.vista.seleccion.clientes;
 
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 

@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.seleccion;
+package com.revivir.cementerio.vista.seleccion.clientes;
 
 import javax.swing.JScrollPane;
 

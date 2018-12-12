@@ -13,8 +13,8 @@ import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.ControladorInterno;
-import com.revivir.cementerio.vista.seleccion.ClienteSeleccionable;
-import com.revivir.cementerio.vista.seleccion.ControladorSeleccionCliente;
+import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
+import com.revivir.cementerio.vista.seleccion.clientes.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorAltaServicio implements ActionListener, ClienteSeleccionable, ControladorInterno {
