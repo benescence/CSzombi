@@ -20,4 +20,8 @@ public interface PrecioOBD {
 	public List<Precio> selectByNombre(String nombre);
 	
 	public Precio selectBycodigo(Integer codigo);
+
+	public Precio selectByID2(Integer iD);
+
+	
 }

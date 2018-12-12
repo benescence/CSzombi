@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revivir.cementerio.persistencia.OBD;
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Precio;
 import com.revivir.cementerio.persistencia.interfaces.PrecioOBD;
 
@@ -21,7 +22,8 @@ public class PrecioOBDMySQL extends OBD implements PrecioOBD{
 		String valores = "'"+precio.getCodigo()+"'"
 				+", '"+precio.getDescripcion()+"'"
 				+", '"+precio.getMonto()+"'"
-				+", '"+precio.getNombre()+"'";
+				+", '"+precio.getNombre()+"'"
+				+", '"+precio.getHistorico()+"'";
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}
@@ -48,6 +50,14 @@ public class PrecioOBDMySQL extends OBD implements PrecioOBD{
 	@Override
 	public List<Precio> select() {
 		return selectByCondicion("true");
+	}
+	@Override
+	public Precio selectByID2(Integer ID) {
+		String condicion = "ID = "+ID;
+		List<Precio> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
 	}
 
 	@Override
@@ -89,7 +99,8 @@ public class PrecioOBDMySQL extends OBD implements PrecioOBD{
 						resultados.getInt("codigo"),
 						resultados.getString("descripcion"),
 						resultados.getDouble("monto"),
-						resultados.getString("nombre")
+						resultados.getString("nombre"),
+						resultados.getInt("historico")
 						));
 			}
 

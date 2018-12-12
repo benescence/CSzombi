@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.revivir.cementerio.persistencia.entidades.Precio;
+
 public class OBD {
 	protected final String driver = "com.mysql.jdbc.Driver";
 	
@@ -58,6 +60,9 @@ public class OBD {
 			
 		return ret;
 	}
+
+
+	
 
 	
 }

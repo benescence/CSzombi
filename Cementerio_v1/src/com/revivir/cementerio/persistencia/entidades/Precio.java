@@ -1,16 +1,27 @@
 package com.revivir.cementerio.persistencia.entidades;
 
 public class Precio {
-	private Integer ID, codigo;
+	private Integer ID, codigo, historico;
 	private String nombre, descripcion;
 	private Double  monto;
 
-	public Precio(Integer ID, Integer codigo, String descripcion, Double monto, String nombre) {
+	public Precio(Integer ID, Integer codigo, String descripcion, Double monto, String nombre, Integer historico) {
 		this.ID = ID;
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 		this.nombre = nombre;
 		this.monto = monto;
+		this.historico = historico;
+	}
+
+	
+
+	public int getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(int historico) {
+		this.historico = historico;
 	}
 
 	public Integer getID() {

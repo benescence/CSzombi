@@ -101,12 +101,12 @@ private void aceptarAM() {
 			int codigo = Integer.valueOf(ventanaAM.getInCodigo().getText());
 			Double Monto = Double.valueOf(ventanaAM.getInMonto().getText());
 			String nombre= ventanaAM.getInNombre().getText();
-		
+			int historico= -1;
 
 			// Crear un nuevo alumno
 			if (precio == null) {
 			
-				CargoManager.crearCargo(codigo, Descripcion, Monto, nombre);
+				CargoManager.crearCargo(codigo, Descripcion, Monto, nombre, historico);
 
 			// Editar un alumno existente
 			} else {

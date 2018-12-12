@@ -13,10 +13,12 @@ public interface ClienteOBD {
 
 	public List<Cliente> select();
 	
-	public Cliente selectByID(Integer ID);
+	public Cliente selectByID2(Integer ID);
 
 	public Cliente selectByDNI(String DNI);
 
 	public List<Cliente> selectByNombreApellidoDNI(String nombre, String apellido, String DNI);
+
+	public Cliente selectByID(Integer iD);
 
 }

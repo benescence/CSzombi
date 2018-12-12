@@ -8,8 +8,8 @@ import com.revivir.cementerio.persistencia.interfaces.PrecioOBD;
 
 public class CargoManager {
 
-	public static void crearCargo(int codigo, String nombre, Double monto, String descripcion) {
-		Precio precio = new Precio(-1, codigo, descripcion, monto, nombre);
+	public static void crearCargo(int codigo, String nombre, Double monto, String descripcion, Integer historico) {
+		Precio precio = new Precio(-1, codigo, descripcion, monto, nombre, historico);
 		PrecioOBD obd = FactoryOBD.crearPrecioOBD();
 		obd.insert(precio);
 	}
