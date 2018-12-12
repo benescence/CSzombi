@@ -1,13 +1,8 @@
 package com.revivir.cementerio;
 
 import java.util.Properties;
-
-
 import javax.swing.UIManager;
-
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
-
-
 import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
 
 public class MainLogin {
