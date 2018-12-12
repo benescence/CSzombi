@@ -17,8 +17,11 @@ import com.revivir.cementerio.negocios.Localizador;
 import com.revivir.cementerio.persistencia.definidos.Sector;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.util.Boton;
+import com.revivir.cementerio.vista.util.EntradaFecha;
 import com.revivir.cementerio.vista.util.EntradaTexto;
+import com.revivir.cementerio.vista.util.ListaDesplegable;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Ventana;
@@ -27,24 +30,41 @@ import com.toedter.calendar.JDateChooser;
 public class VentanaFallecidoAM extends Ventana {
 	private static final long serialVersionUID = 1L;
 	private Boton btnAceptar, btnCancelar;
+	
 	// DATOS DEL DIFUNTO
-	private EntradaTexto inDNIFallecido, inApellidoFallecido, inNombreFallecido, inCocheria;
-	private JDateChooser inFechaFallecimiento;
-	private JComboBox<TipoFallecimiento> inTipoFallecimiento;
+	private EntradaTexto inNombre, inApellido, inDNI, inCocheria;
+	private EntradaFecha inFechaFallecimiento;
+	private ListaDesplegable<TipoFallecimiento> inTipoDeFallecimiento;
+	
 	// DATOS DE UBICACION
 	private EntradaTexto inSeccion, inMacizo, inUnidad, inNumeroSepultura, inSepultura, inInhumacion,
 	inNicho, inFila, inCirc, inParcela, inMueble;
 	private JCheckBox inCheckMacizo, inCheckBis;
-	private JComboBox<Sector> inSector;
-	private JComboBox<SubSector> inSubSector;
+	private ListaDesplegable<Sector> inSector;
+	private ListaDesplegable<SubSector> inSubSector;
 	
 	public VentanaFallecidoAM() {
 		super("Alta de fallecido", 450, 300);
+		inicializar();
+	}
+	
+	public VentanaFallecidoAM(Fallecido fallecido) {
+		super("Alta de fallecido", 450, 300);
+		inicializar();
+		inNombre.getTextField().setText(fallecido.getNombre());
+		inApellido.getTextField().setText(fallecido.getApellido());
+		inDNI.getTextField().setText(fallecido.getDni());
+		inCocheria.getTextField().setText(fallecido.getCocheria());
+		inTipoDeFallecimiento.getComboBox().setSelectedItem(fallecido.getTipoFallecimiento());
+	}
+	
+	public void inicializar() {
 		Dimension dimBoton = new Dimension(100, 25);
 
 		btnAceptar = new Boton("Aceptar", dimBoton);
 		btnCancelar = new Boton("Cancelar", dimBoton);		
 		PanelHorizontal panelBotones = new PanelHorizontal();
+		panelBotones.setBorder(new EmptyBorder(10, 0, 0, 0));
 		panelBotones.add(btnAceptar);
 		panelBotones.add(btnCancelar);
 		
@@ -58,63 +78,40 @@ public class VentanaFallecidoAM extends Ventana {
 		panelPrincipal.add(crearPanelUbicacion());
 		panelPrincipal.add(panelBotones);
 		pack();
+		setLocationRelativeTo(null);
 	}
-
 	
 	private PanelVertical crearPanelFallecido() {
-		Dimension largoLabel = new Dimension(150, 25);
-		Dimension largoTextfield = new Dimension(300, 25);
+		Dimension dimLabel = new Dimension(150, 25);
+		Dimension dimTextfield = new Dimension(380, 25);
 		
-		inNombreFallecido = new EntradaTexto("Nombres", largoLabel, largoTextfield);
-		inApellidoFallecido = new EntradaTexto("Apellidos", largoLabel, largoTextfield);
-		inDNIFallecido = new EntradaTexto("DNI", largoLabel, largoTextfield);
-		inCocheria = new EntradaTexto("Cocheria", largoLabel, largoTextfield);
+		inNombre = new EntradaTexto("Nombres", dimLabel, dimTextfield);
+		inApellido = new EntradaTexto("Apellidos", dimLabel, dimTextfield);
+		inDNI = new EntradaTexto("DNI", dimLabel, dimTextfield);
+		inCocheria = new EntradaTexto("Cocheria", dimLabel, dimTextfield);
+		inFechaFallecimiento = new EntradaFecha(Almanaque.hoy(), "Fecha de fallecimiento", dimLabel, dimTextfield);
 		
-		JLabel lblFecha = new JLabel("Fecha de fallecimiento");
-		JLabel lblTipo = new JLabel("Tipo de fallecimiento");
-
-		lblFecha.setMinimumSize(largoLabel);
-		lblFecha.setPreferredSize(largoLabel);
-		lblFecha.setMaximumSize(largoLabel);
-		
-		lblTipo.setMinimumSize(largoLabel);
-		lblTipo.setPreferredSize(largoLabel);
-		lblTipo.setMaximumSize(largoLabel);
-		
-		inFechaFallecimiento = new JDateChooser(Almanaque.hoy());
-		inTipoFallecimiento = new JComboBox<TipoFallecimiento>();
+		inTipoDeFallecimiento = new ListaDesplegable<>("Tipode fallecimiento", dimLabel, dimTextfield);
 		for (TipoFallecimiento tipoFallecimiento : TipoFallecimiento.values())
-			inTipoFallecimiento.addItem(tipoFallecimiento);
-		inTipoFallecimiento.setSelectedItem(TipoFallecimiento.NO_TRAUMATICO);
-		
-		inTipoFallecimiento.setMaximumSize(largoTextfield);
-		inFechaFallecimiento.setMaximumSize(largoTextfield);
+			inTipoDeFallecimiento.getComboBox().addItem(tipoFallecimiento);
+		inTipoDeFallecimiento.getComboBox().setSelectedItem(TipoFallecimiento.NO_TRAUMATICO);
 		
 		// ORGANIZACION DE PANELES
-		PanelHorizontal panelFecha = new PanelHorizontal();
-		panelFecha.add(lblFecha);
-		panelFecha.add(inFechaFallecimiento);
-		
-		PanelHorizontal panelTipo = new PanelHorizontal();
-		panelTipo.add(lblTipo);
-		panelTipo.add(inTipoFallecimiento);
-		
 		PanelVertical panelFallecido = new PanelVertical();
-		panelFallecido.setBorder(new EmptyBorder(10, 30, 10, 10));
 		panelFallecido.add(new JLabel("Datos del difunto"));
-		panelFallecido.add(inApellidoFallecido);
-		panelFallecido.add(inNombreFallecido);
-		panelFallecido.add(inDNIFallecido);
+		panelFallecido.add(inApellido);
+		panelFallecido.add(inNombre);
+		panelFallecido.add(inDNI);
 		panelFallecido.add(inCocheria);
-		panelFallecido.add(panelTipo);
-		panelFallecido.add(panelFecha);
+		panelFallecido.add(inTipoDeFallecimiento);
+		panelFallecido.add(inFechaFallecimiento);
 		return panelFallecido;
 	}
 	
 	private PanelHorizontal crearPanelUbicacion() {
 		Dimension largoLabel1 = new Dimension(100, 25);
-		Dimension largoLabel2 = new Dimension(150, 25);
-		Dimension largoTextfield = new Dimension(300, 25);
+		Dimension largoLabel2 = new Dimension(100, 25);
+		Dimension largoTextfield = new Dimension(150, 25);
 
 		inSeccion = new EntradaTexto("Seccion", largoLabel1, largoTextfield);
 		inMacizo = new EntradaTexto("Macizo", largoLabel1, largoTextfield);
@@ -127,68 +124,40 @@ public class VentanaFallecidoAM extends Ventana {
 		inCirc = new EntradaTexto("Circ", largoLabel2, largoTextfield);
 		inParcela = new EntradaTexto("Parcela", largoLabel2, largoTextfield);
 		inMueble = new EntradaTexto("Mueble", largoLabel2, largoTextfield);
-				
-		JLabel lblSector = new JLabel("Sector");
-		JLabel lblSubSector = new JLabel("Sub sector");
-		JLabel lblCheckMacizo = new JLabel("Check Macizo");
-		JLabel lblCheckBis = new JLabel("Check Bis");
 
-		lblSector.setMinimumSize(largoLabel1);
-		lblSector.setPreferredSize(largoLabel1);
-		lblSector.setMaximumSize(largoLabel1);
-
-		lblSubSector.setMinimumSize(largoLabel2);
-		lblSubSector.setPreferredSize(largoLabel2);
-		lblSubSector.setMaximumSize(largoLabel2);
-		
-		lblCheckMacizo.setPreferredSize(largoLabel2);
-		lblCheckBis.setPreferredSize(largoLabel2);
-		
 		inCheckBis = new JCheckBox("Bis");
-		inCheckMacizo = new JCheckBox("Macizo");
+		inCheckMacizo = new JCheckBox("Macizo1");
 		PanelHorizontal panelCheck = new PanelHorizontal();
 		panelCheck.add(inCheckBis);
 		panelCheck.add(inCheckMacizo);
 		
-		inSector = new JComboBox<>();
-		inSubSector = new JComboBox<>();
+		inSector = new ListaDesplegable<>("Sector", largoLabel1, largoTextfield);
+		inSubSector = new ListaDesplegable<>("Sub Sector", largoLabel2, largoTextfield);
 
 		for (Sector sector : Localizador.traerSectores())
-			inSector.addItem(sector);
+			inSector.getComboBox().addItem(sector);
 		
 		// EL SUB SECTOR DEPENDE DEL SECTOR ESCOGIDO
-		inSector.addActionListener(new ActionListener() {
+		inSector.getComboBox().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				recargarSubSectores();
 			}
 		});
 
-		inSector.setSelectedIndex(0);
-
-		inSector.setMaximumSize(largoTextfield);
-		inSubSector.setMaximumSize(largoTextfield);
+		inSector.getComboBox().setSelectedIndex(0);
 
 		// DEPENDEINDO DEL SUB SECTOR ESCOGIDO ALGUNOS CAMPOS SE INHABILITAN
-		inSubSector.addActionListener(new ActionListener() {
+		inSubSector.getComboBox().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				seleccionarSubSector();
 			}
 		});
-		inSubSector.setSelectedIndex(0);
-		
+		inSubSector.getComboBox().setSelectedIndex(0);
 		
 		// ORGANIZACION DE PANELES
-		PanelHorizontal panelSector = new PanelHorizontal();
-		panelSector.add(lblSector);
-		panelSector.add(inSector);
-
-		PanelHorizontal panelSubSector = new PanelHorizontal();
-		panelSubSector.add(lblSubSector);
-		panelSubSector.add(inSubSector);
-				
 		PanelVertical ret1 = new PanelVertical();
 		ret1.setBorder(new EmptyBorder(10, 0, 0, 0));
-		ret1.add(panelSector);
+		ret1.add(inSector);
 		ret1.add(inSeccion);
 		ret1.add(inMacizo);
 		ret1.add(inUnidad);
@@ -197,26 +166,23 @@ public class VentanaFallecidoAM extends Ventana {
 		ret1.add(inInhumacion);
 		
 		PanelVertical ret2 = new PanelVertical();
-		ret2.setBorder(new EmptyBorder(10, 30, 10, 10));
-		ret2.add(panelSubSector);
+		ret2.setBorder(new EmptyBorder(10, 30, 0, 0));
+		ret2.add(inSubSector);
 		ret2.add(inNicho);
 		ret2.add(inFila);
 		ret2.add(inCirc);
 		ret2.add(inParcela);
 		ret2.add(inMueble);
-		//ret2.add(inCheckBis);
-		//ret2.add(inCheckMacizo);
 		ret2.add(panelCheck);
 		
 		PanelHorizontal ret = new PanelHorizontal();
-		ret.setName("Ubicacion del difunto");
 		ret.add(ret1);
 		ret.add(ret2);
 		return ret;
 	}
 	
 	private void seleccionarSubSector() {
-		SubSector subSector = (SubSector) inSubSector.getSelectedItem();
+		SubSector subSector = (SubSector) inSubSector.getComboBox().getSelectedItem();
 		habilitarCamposUbicacion(false);
 		
 		if (subSector == SubSector.SEPULTURAS) {
@@ -283,22 +249,22 @@ public class VentanaFallecidoAM extends Ventana {
 	}
 	
 	private void recargarSubSectores() {
-		inSubSector.removeAllItems();
-		Sector sector = (Sector) inSector.getSelectedItem();
+		inSubSector.getComboBox().removeAllItems();
+		Sector sector = (Sector) inSector.getComboBox().getSelectedItem();
 		for (SubSector elemento : Localizador.traerSubSectores(sector))
-			inSubSector.addItem(elemento);
+			inSubSector.getComboBox().addItem(elemento);
 	}
 
 	public JTextField getInDNIFallecido() {
-		return inDNIFallecido.getTextField();
+		return inDNI.getTextField();
 	}
 
 	public JTextField getInApellidoFallecido() {
-		return inApellidoFallecido.getTextField();
+		return inApellido.getTextField();
 	}
 
 	public JTextField getInNombreFallecido() {
-		return inNombreFallecido.getTextField();
+		return inNombre.getTextField();
 	}
 
 	public JTextField getInCocheria() {
@@ -306,11 +272,11 @@ public class VentanaFallecidoAM extends Ventana {
 	}
 
 	public JDateChooser getInFechaFallecimiento() {
-		return inFechaFallecimiento;
+		return inFechaFallecimiento.getDataChooser();
 	}
 
 	public JComboBox<TipoFallecimiento> getInTipoFallecimiento() {
-		return inTipoFallecimiento;
+		return inTipoDeFallecimiento.getComboBox();
 	}
 
 	public JTextField getInSeccion() {
@@ -366,11 +332,11 @@ public class VentanaFallecidoAM extends Ventana {
 	}
 
 	public JComboBox<Sector> getInSector() {
-		return inSector;
+		return inSector.getComboBox();
 	}
 
 	public JComboBox<SubSector> getInSubSector() {
-		return inSubSector;
+		return inSubSector.getComboBox();
 	}
 
 	public JButton botonAceptar() {

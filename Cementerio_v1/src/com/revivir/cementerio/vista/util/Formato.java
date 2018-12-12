@@ -1,10 +1,6 @@
 package com.revivir.cementerio.vista.util;
 
-import java.util.List;
-
 import com.revivir.cementerio.negocios.Localizador;
-import com.revivir.cementerio.negocios.manager.FallecidoManager;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 
