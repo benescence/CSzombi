@@ -121,7 +121,7 @@ CREATE TABLE rev_servicios (
 	codigo VARCHAR(50) NULL,
 	nombre VARCHAR(30) NULL,
 	descripcion VARCHAR(100) NULL,
-	monto DOUBLE(10) NOT NULL,
+	importe DOUBLE(10) NOT NULL,
 	historico boolean not null,
 	PRIMARY KEY (ID)
 );
