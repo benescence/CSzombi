@@ -10,12 +10,14 @@ import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorFallecidoAM {
 	private VentanaFallecidoAM ventana;
 	private ControladorFallecidosABM invocador;
+	private ControladorPrincipal principal;
 	private Fallecido fallecido;
 	
 	public ControladorFallecidoAM(ControladorFallecidosABM invocador, Fallecido fallecido) {
@@ -27,6 +29,12 @@ public class ControladorFallecidoAM {
 	
 	public ControladorFallecidoAM(ControladorFallecidosABM invocador) {
 		this.invocador = invocador;
+		ventana = new VentanaFallecidoAM();
+		inicializar();
+	}
+	
+	public ControladorFallecidoAM(ControladorPrincipal principal) {
+		this.principal = principal;
 		ventana = new VentanaFallecidoAM();
 		inicializar();
 	}
@@ -43,16 +51,33 @@ public class ControladorFallecidoAM {
 	} 
 	
 	private void aceptar() {
-		guardarUbicacion();
-		Integer ubicacion = Localizador.traerUltimaUbicacionGuardada();
 		TipoFallecimiento tipo = (TipoFallecimiento) ventana.getInTipoFallecimiento().getSelectedItem();
 		String dni = (!ventana.getInDNIFallecido().getText().equals("") ? ventana.getInDNIFallecido().getText() : null);
 		String apellido= ventana.getInApellidoFallecido().getText();;
 		String nombre= ventana.getInNombreFallecido().getText();;
 		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
-		FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion);
-		invocador.actualizar();
+		
+		// Es un alta
+		if (fallecido == null) {
+			guardarUbicacion();
+			Integer ubicacion = Localizador.traerUltimaUbicacionGuardada();
+			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion);			
+		}
+		
+		// Es una modificacion
+		else {
+			fallecido.setNombre(nombre);
+			fallecido.setApellido(apellido);
+			fallecido.setDni(dni);
+			fallecido.setTipoFallecimiento(tipo);
+			fallecido.setCocheria(cocheria);
+			fallecido.setFechaFallecimiento(fechaFallecimiento);
+			FallecidoManager.modificar(fallecido);
+		}
+		
+		if (invocador != null)
+			invocador.actualizar();
 		volver();
 	}
 	
@@ -90,7 +115,10 @@ public class ControladorFallecidoAM {
 	private void volver() {
 		ventana.dispose();
 		ventana = null;
-		invocador.mostrar();
+		if (invocador != null)
+			invocador.mostrar();
+		else
+			principal.getVentana().mostrar();
 	}
 	
 }
