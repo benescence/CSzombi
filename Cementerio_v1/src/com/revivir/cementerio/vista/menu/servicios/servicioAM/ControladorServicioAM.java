@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.servicios.servicioAM;
+package com.revivir.cementerio.vista.menu.servicios.servicioAM;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -6,7 +6,7 @@ import java.awt.event.WindowEvent;
 import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.servicios.ControladorServiciosABM;
+import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorServicioAM {

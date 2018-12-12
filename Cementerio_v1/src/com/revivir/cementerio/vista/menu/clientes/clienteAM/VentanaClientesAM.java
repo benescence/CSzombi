@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.clientes.clienteAM;
+package com.revivir.cementerio.vista.menu.clientes.clienteAM;
 
 import java.awt.Dimension;
 

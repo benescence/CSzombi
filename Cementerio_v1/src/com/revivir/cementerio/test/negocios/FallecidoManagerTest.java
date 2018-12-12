@@ -3,7 +3,6 @@ package com.revivir.cementerio.test.negocios;
 import java.sql.Date;
 
 import com.revivir.cementerio.negocios.Almanaque;
-import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 
 public class FallecidoManagerTest {

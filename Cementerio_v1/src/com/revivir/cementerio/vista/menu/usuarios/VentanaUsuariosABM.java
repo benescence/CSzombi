@@ -1,7 +1,6 @@
-package com.revivir.cementerio.vista.usuarios;
+package com.revivir.cementerio.vista.menu.usuarios;
 
 import java.awt.Dimension;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;

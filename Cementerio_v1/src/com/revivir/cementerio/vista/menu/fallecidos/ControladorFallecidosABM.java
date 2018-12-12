@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.fallecidos;
+package com.revivir.cementerio.vista.menu.fallecidos;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.fallecidos.fallecidoAM.ControladorFallecidoAM;
+import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorFallecidosABM implements ControladorInterno {

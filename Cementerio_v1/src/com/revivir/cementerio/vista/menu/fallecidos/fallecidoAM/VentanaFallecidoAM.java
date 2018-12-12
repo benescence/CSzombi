@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.fallecidos.fallecidoAM;
+package com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

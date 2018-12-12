@@ -5,16 +5,16 @@ import java.util.Date;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 
 public class Ubicacion {
-	private Integer id, deposito;
+	private Integer ID;
 	private String otroCementerio, osario, nicho, fila, seccion, macizo,
 	unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ;
 	private Date vencimiento;
 	private SubSector subsector;
 	
-	public Ubicacion(Integer id, SubSector subsector, String otroCementerio, String osario,
+	public Ubicacion(Integer ID, SubSector subsector, String otroCementerio, String osario,
 			String nicho, String fila, String seccion, String macizo, String unidad, String bis, String bis_macizo,
 			String numero, String sepultura, String parcela, String mueble, String inhumacion, String circ, Date vencimiento) {
-		this.id = id;
+		this.ID = ID;
 		this.subsector = subsector;
 		this.otroCementerio = otroCementerio;
 		this.osario = osario;
@@ -42,12 +42,12 @@ public class Ubicacion {
 		this.vencimiento = vencimiento;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getID() {
+		return ID;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setID(Integer ID) {
+		this.ID = ID;
 	}
 
 	public SubSector getSubsector() {

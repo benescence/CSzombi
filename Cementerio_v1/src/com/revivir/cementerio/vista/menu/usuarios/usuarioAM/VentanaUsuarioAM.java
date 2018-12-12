@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.usuarios.usuarioAM;
+package com.revivir.cementerio.vista.menu.usuarios.usuarioAM;
 
 import java.awt.Dimension;
 

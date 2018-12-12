@@ -18,7 +18,6 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 			+ "seccion, macizo, unidad, bis, bis_macizo, numero_sepultura, sepultura, parcela, mueble, inhumacion, circ, vencimiento";
 	private final String tabla = "rev_ubicaciones";
 	
-	
 	@Override
 	public void insert(Ubicacion ubicacion) {
 		String otroCementerio = (ubicacion.getOtroCementerio() != null) ? "'"+ubicacion.getOtroCementerio()+"'" : null;
@@ -59,6 +58,16 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 		ejecutarSQL(sql);		
 	}
 
+	@Override
+	public void update(Ubicacion ubicacion) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void delete(Ubicacion ubicacion) {
+		// TODO Auto-generated method stub		
+	}
+	
 	@Override
 	public List<Ubicacion> select() {
 		return selectByCondicion("true");
@@ -122,6 +131,5 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 	public Integer selectLastID() {
 		return selectLastID(tabla);
 	}
-
 	
 }

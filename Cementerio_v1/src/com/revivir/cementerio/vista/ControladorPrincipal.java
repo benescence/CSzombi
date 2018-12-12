@@ -3,13 +3,13 @@ package com.revivir.cementerio.vista;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import com.revivir.cementerio.vista.clientes.ControladorClientesABM;
-import com.revivir.cementerio.vista.clientes.clienteAM.ControladorClientesAM;
-import com.revivir.cementerio.vista.fallecidos.ControladorFallecidosABM;
-import com.revivir.cementerio.vista.fallecidos.fallecidoAM.ControladorFallecidoAM;
-import com.revivir.cementerio.vista.servicios.ControladorServiciosABM;
-import com.revivir.cementerio.vista.servicios.servicioAM.ControladorServicioAM;
-import com.revivir.cementerio.vista.usuarios.ControladorUsuariosABM;
+import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
+import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
+import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
+import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
+import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
+import com.revivir.cementerio.vista.menu.servicios.servicioAM.ControladorServicioAM;
+import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Popup;
 

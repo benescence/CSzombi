@@ -7,6 +7,10 @@ import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 public interface UbicacionOBD {
 	
 	public void insert(Ubicacion ubicacion);
+
+	public void update(Ubicacion ubicacion);
+	
+	public void delete(Ubicacion ubicacion);
 	
 	public List<Ubicacion> select();
 

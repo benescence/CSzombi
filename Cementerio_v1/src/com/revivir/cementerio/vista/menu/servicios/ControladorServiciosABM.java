@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.servicios;
+package com.revivir.cementerio.vista.menu.servicios;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.servicios.servicioAM.ControladorServicioAM;
+import com.revivir.cementerio.vista.menu.servicios.servicioAM.ControladorServicioAM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorServiciosABM implements ControladorInterno {

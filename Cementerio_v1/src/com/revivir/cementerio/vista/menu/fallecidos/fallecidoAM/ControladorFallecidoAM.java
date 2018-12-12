@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.fallecidos.fallecidoAM;
+package com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -11,7 +11,7 @@ import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.fallecidos.ControladorFallecidosABM;
+import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorFallecidoAM {

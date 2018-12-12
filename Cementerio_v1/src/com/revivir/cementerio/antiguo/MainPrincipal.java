@@ -28,9 +28,9 @@ import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.clientes2.busqueda.ControladorAltaServicio;
 import com.revivir.cementerio.vista.clientes2.busqueda.cliente.ControladorConsultaCliente;
 import com.revivir.cementerio.vista.clientes2.busqueda.fallecido.ControladorConsultaFallecidos;
+import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.precio.ControladorPrecio;
 import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
-import com.revivir.cementerio.vista.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.util.PanelVertical;
 
 @SuppressWarnings("serial")

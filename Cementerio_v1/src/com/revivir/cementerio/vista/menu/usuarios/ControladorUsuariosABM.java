@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.usuarios;
+package com.revivir.cementerio.vista.menu.usuarios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.usuarios.usuarioAM.ControladorUsuarioAM;
+import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.ControladorUsuarioAM;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorUsuariosABM implements ControladorInterno {

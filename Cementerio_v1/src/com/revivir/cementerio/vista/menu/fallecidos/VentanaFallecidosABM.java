@@ -1,26 +1,26 @@
-package com.revivir.cementerio.vista.clientes;
+package com.revivir.cementerio.vista.menu.fallecidos;
 
 import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import com.revivir.cementerio.negocios.manager.ClienteManager;
-import com.revivir.cementerio.vista.tablas.TablaClientes;
+import com.revivir.cementerio.negocios.manager.FallecidoManager;
+import com.revivir.cementerio.vista.tablas.TablaFallecidos;
 import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.PanelHorizontal;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.VentanaInterna;
 
-public class VentanaClientesABM extends VentanaInterna {
+public class VentanaFallecidosABM extends VentanaInterna {
 	private static final long serialVersionUID = 1L;
-	private TablaClientes tabla;
+	private TablaFallecidos tabla;
 	private Boton btnAgregar, btnModificar, btnEliminar;
 	
-	public VentanaClientesABM() {
-		super("Gestion de clientes", 500, 500);
+	public VentanaFallecidosABM() {
+		super("Gestion de fallecidos", 500, 500);
 		
-		tabla = new TablaClientes(ClienteManager.traerTodo());
+		tabla = new TablaFallecidos(FallecidoManager.traerTodo());
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		
 		Dimension dimBoton = new Dimension(100, 25);
@@ -41,18 +41,18 @@ public class VentanaClientesABM extends VentanaInterna {
 		panelPrincipal.add(panelBotones);
 	}
 	
-	public TablaClientes getTabla() {
+	public TablaFallecidos getTabla() {
 		return tabla;
 	}
-	
+
 	public Boton botonAgregar() {
 		return btnAgregar;
-	}
+	}	
 
 	public Boton botonModificar() {
 		return btnModificar;
 	}
-	
+
 	public Boton botonEliminar() {
 		return btnEliminar;
 	}
