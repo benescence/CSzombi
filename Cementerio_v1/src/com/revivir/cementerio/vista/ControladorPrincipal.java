@@ -3,6 +3,8 @@ package com.revivir.cementerio.vista;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.revivir.cementerio.vista.cargos.ControladorCargoAM;
+import com.revivir.cementerio.vista.cargos.fallecidos.ControladorCargosDeFallecidos;
 import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
@@ -35,22 +37,30 @@ public class ControladorPrincipal {
 		ventana.getUsuarioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorUsuariosABM(this)));
 		
 		ventana.getResponsableConsultarPorCliente().addActionListener(e -> colocarVentanaInterna(new ControladorConsultarPorCliente(this)));
+		ventana.getCobranzaCargosFallecido().addActionListener(e -> colocarVentanaInterna(new ControladorCargosDeFallecidos(this)));
 		
 		// Accesos directos
 		ventana.getClienteAlta().addActionListener(e -> altaClientes());
 		ventana.getFallecidoAlta().addActionListener(e -> altaFallecidos());
 		ventana.getServicioAlta().addActionListener(e -> altaServicios());
 		ventana.getResponsableVincular().addActionListener(e -> vincular());
+		ventana.getCobranzaAltaCargo().addActionListener(e -> altaCargo());
+		
 	}
 	
 	private void vincular() {
 		ventana.deshabilitar();
 		new ControladorVincular(this);
 	}
-	
+
 	private void altaServicios() {
 		ventana.deshabilitar();
 		new ControladorServicioAM(this);
+	}
+
+	private void altaCargo() {
+		ventana.deshabilitar();
+		new ControladorCargoAM(this);
 	}
 	
 	private void altaFallecidos() {

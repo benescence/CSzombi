@@ -6,25 +6,34 @@ import javax.swing.JInternalFrame;
 
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
+import com.revivir.cementerio.vista.seleccion.fallecidos.ControladorSeleccionarFallecido;
+import com.revivir.cementerio.vista.seleccion.fallecidos.FallecidoSeleccionable;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorClientesABM implements ControladorInterno {
+public class ControladorCargosDeFallecidos implements ControladorInterno, FallecidoSeleccionable {
 	private VentanaCargosDeFallecidos ventana;
 	private ControladorPrincipal invocador;
 	
-	public ControladorClientesABM(ControladorPrincipal invocador) {
+	public ControladorCargosDeFallecidos(ControladorPrincipal invocador) {
 		this.invocador = invocador;
 		ventana = new VentanaCargosDeFallecidos();
-		ventana.botonAgregar().addActionListener(e -> agregar());
-		ventana.botonModificar().addActionListener(e -> modificar());
-		ventana.botonEliminar().addActionListener(e -> eliminar());
+		ventana.botonSeleccionar().addActionListener(e -> seleccionar());
+		//ventana.botonAgregar().addActionListener(e -> agregar());
+		//ventana.botonModificar().addActionListener(e -> modificar());
+		//ventana.botonEliminar().addActionListener(e -> eliminar());
 	}
 	
+	private void seleccionar() {
+		ventana.deshabilitar();
+		new ControladorSeleccionarFallecido(this);
+	}
+
 	private void agregar() {
-		invocador.getVentana().setEnabled(false);
+		//invocador.getVentana().setEnabled(false);
 		//new ControladorClientesAM(this);
 	}
 
@@ -32,8 +41,8 @@ public class ControladorClientesABM implements ControladorInterno {
 		//List<Cliente> lista = ventana.getTabla().obtenerSeleccion();
 		
 		//if (lista.size() != 1) {
-			Popup.mostrar("Debe seleccionar exactamente 1 cliente para modificarlo");
-			return;
+			//Popup.mostrar("Debe seleccionar exactamente 1 cliente para modificarlo");
+			//return;
 		//}
 		
 		//invocador.getVentana().setEnabled(false);
@@ -52,7 +61,7 @@ public class ControladorClientesABM implements ControladorInterno {
 			for (Cliente elemento : lista)
 				ClienteManager.eliminar(elemento);
 		*/
-		actualizar();
+		//actualizar();
 	}
 
 	@Override
@@ -72,6 +81,13 @@ public class ControladorClientesABM implements ControladorInterno {
 
 	public void actualizar() {
 		//ventana.getTabla().recargar(ClienteManager.traerTodo());
+	}
+
+	@Override
+	public void seleccionarFallecido(Fallecido fallecido) {
+		ventana.getNombre().getTextField().setText(fallecido.getNombre());
+		ventana.getApellido().getTextField().setText(fallecido.getApellido());
+		ventana.getDNI().getTextField().setText(fallecido.getDni());
 	}
 
 }

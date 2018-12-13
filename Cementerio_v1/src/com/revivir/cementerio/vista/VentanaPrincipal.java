@@ -15,7 +15,7 @@ public class VentanaPrincipal extends Ventana {
 	private JMenuItem clienteAlta, clienteConsulta; 
 	private JMenuItem fallecidoAlta, fallecidoConsulta;
 	private JMenuItem responsableVincular, responsableConsultarPorCliente, responsableConsultarPorFallecido;
-	JMenuItem cobranzaAltaCargo, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
+	private JMenuItem cobranzaAltaCargo, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
 	JMenuItem movimientoTrasladar, movimientoConsultar; 
 	private JMenuItem servicioAlta, servicioConsulta;
 	private JMenuItem usuarioAlta, usuarioConsulta;
@@ -125,6 +125,22 @@ public class VentanaPrincipal extends Ventana {
 
 	public JMenuItem getResponsableConsultarPorFallecido() {
 		return responsableConsultarPorFallecido;
+	}
+
+	public JMenuItem getCobranzaAltaCargo() {
+		return cobranzaAltaCargo;
+	}
+
+	public JMenuItem getCobranzaCargosFallecido() {
+		return cobranzaCargosFallecido;
+	}
+
+	public JMenuItem getCobranzaCargosClientes() {
+		return cobranzaCargosClientes;
+	}
+
+	public JMenuItem getCobranzaRegistrarPagos() {
+		return cobranzaRegistrarPagos;
 	}
 	
 }
