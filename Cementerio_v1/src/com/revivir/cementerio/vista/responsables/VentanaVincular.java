@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.vinculos;
+package com.revivir.cementerio.vista.responsables;
 
 import java.awt.Dimension;
 

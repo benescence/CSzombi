@@ -10,6 +10,7 @@ import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFalle
 import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.menu.servicios.servicioAM.ControladorServicioAM;
 import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
+import com.revivir.cementerio.vista.responsables.porcliente.ControladorConsultarPorCliente;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Popup;
 
@@ -31,6 +32,8 @@ public class ControladorPrincipal {
 		ventana.getFallecidoConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorFallecidosABM(this)));
 		ventana.getServicioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorServiciosABM(this)));
 		ventana.getUsuarioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorUsuariosABM(this)));
+		
+		ventana.getResponsableConsultarPorCliente().addActionListener(e -> colocarVentanaInterna(new ControladorConsultarPorCliente(this)));
 		
 		// Accesos directos
 		ventana.getClienteAlta().addActionListener(e -> altaClientes());

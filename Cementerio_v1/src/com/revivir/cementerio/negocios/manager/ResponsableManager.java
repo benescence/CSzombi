@@ -36,4 +36,9 @@ public class ResponsableManager {
 		return obd.selectByID(ID);
 	}
 	
+	public static List<Responsable> traerPorCliente(Cliente cliente) {
+		ResponsableOBD obd = FactoryOBD.crearResponsableOBD();
+		return obd.selectByCliente(cliente.getID());
+	}
+	
 }

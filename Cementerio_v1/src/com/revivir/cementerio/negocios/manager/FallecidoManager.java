@@ -40,4 +40,9 @@ public class FallecidoManager {
 		return obd.selectByDNI(DNI);
 	}
 
+	public static Fallecido traerPorID(Integer ID) {
+		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
+		return obd.selectByID(ID);
+	}
+
 }

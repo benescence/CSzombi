@@ -17,6 +17,8 @@ public interface FallecidoOBD {
 	public Fallecido ultimoInsertado();
 	
 	public Fallecido selectByDNI(String DNI);
+
+	public Fallecido selectByID(Integer ID);
 	
 	public List<Fallecido> selectByNombreApellidoDNI(String nombre, String apellido, String DNI);
 

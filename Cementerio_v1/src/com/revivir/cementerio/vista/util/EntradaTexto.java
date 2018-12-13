@@ -23,7 +23,7 @@ public class EntradaTexto extends PanelHorizontal {
 		add(textField);
 	}
 	
-	public void bloquear(boolean bloquear) {
+	public void habilitado(boolean bloquear) {
 		label.setEnabled(bloquear);
 		textField.setEnabled(bloquear);
 	}

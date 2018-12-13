@@ -186,64 +186,64 @@ public class VentanaFallecidoAM extends Ventana {
 		habilitarCamposUbicacion(false);
 		
 		if (subSector == SubSector.SEPULTURAS) {
-			inSeccion.bloquear(true);
-			inMacizo.bloquear(true);
-			inUnidad.bloquear(true);
-			inNumeroSepultura.bloquear(true);
+			inSeccion.habilitado(true);
+			inMacizo.habilitado(true);
+			inUnidad.habilitado(true);
+			inNumeroSepultura.habilitado(true);
 			inCheckMacizo.setEnabled(true);
 			inCheckBis.setEnabled(true);
 
 		} else if (subSector == SubSector.INDIGENTES) {
-			inSeccion.bloquear(true);
-			inMacizo.bloquear(true);
-			inSepultura.bloquear(true);
-			inInhumacion.bloquear(true);
+			inSeccion.habilitado(true);
+			inMacizo.habilitado(true);
+			inSepultura.habilitado(true);
+			inInhumacion.habilitado(true);
 
 		} else if (subSector == SubSector.PALMERAS_ATAUD
 				|| subSector == SubSector.PALMERAS_CENIZAS
 				|| subSector == SubSector.PALMERAS_RESTOS) {
 			
-			inNicho.bloquear(true);
-			inFila.bloquear(true);
+			inNicho.habilitado(true);
+			inFila.habilitado(true);
 			
 		} else if (subSector == SubSector.PALMERAS_SEPULTURAS) {
-			inSepultura.bloquear(true);
+			inSepultura.habilitado(true);
 			
 		} else if (subSector == SubSector.NICHERA) {
-			inCirc.bloquear(true);
-			inSeccion.bloquear(false);
-			inMacizo.bloquear(true);
-			inParcela.bloquear(true);
-			inFila.bloquear(true);
-			inUnidad.bloquear(true);
+			inCirc.habilitado(true);
+			inSeccion.habilitado(false);
+			inMacizo.habilitado(true);
+			inParcela.habilitado(true);
+			inFila.habilitado(true);
+			inUnidad.habilitado(true);
 
 		} else if (subSector == SubSector.CENIZARIO) {
-			inMueble.bloquear(true);
-			inNicho.bloquear(true);
+			inMueble.habilitado(true);
+			inNicho.habilitado(true);
 		
 		} else if (subSector == SubSector.BOVEDA) {
-			inCirc.bloquear(true);
-			inSeccion.bloquear(true);
-			inMacizo.bloquear(true);
-			inParcela.bloquear(true);
-			inUnidad.bloquear(true);
+			inCirc.habilitado(true);
+			inSeccion.habilitado(true);
+			inMacizo.habilitado(true);
+			inParcela.habilitado(true);
+			inUnidad.habilitado(true);
 			inCheckBis.setEnabled(true);
 		}
 		
 	}
 	
 	private void habilitarCamposUbicacion(boolean habilitado) {
-		inSeccion.bloquear(habilitado);
-		inMacizo.bloquear(habilitado);
-		inUnidad.bloquear(habilitado);
-		inNumeroSepultura.bloquear(habilitado);
-		inSepultura.bloquear(habilitado);
-		inInhumacion.bloquear(habilitado);
-		inNicho.bloquear(habilitado);
-		inFila.bloquear(habilitado);
-		inCirc.bloquear(habilitado);
-		inParcela.bloquear(habilitado);
-		inMueble.bloquear(habilitado);
+		inSeccion.habilitado(habilitado);
+		inMacizo.habilitado(habilitado);
+		inUnidad.habilitado(habilitado);
+		inNumeroSepultura.habilitado(habilitado);
+		inSepultura.habilitado(habilitado);
+		inInhumacion.habilitado(habilitado);
+		inNicho.habilitado(habilitado);
+		inFila.habilitado(habilitado);
+		inCirc.habilitado(habilitado);
+		inParcela.habilitado(habilitado);
+		inMueble.habilitado(habilitado);
 		inCheckMacizo.setEnabled(habilitado);
 		inCheckBis.setEnabled(habilitado);
 	}

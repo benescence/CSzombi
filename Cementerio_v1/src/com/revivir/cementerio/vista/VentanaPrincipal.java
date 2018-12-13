@@ -14,7 +14,7 @@ public class VentanaPrincipal extends Ventana {
 	JMenuItem principalAlta, principalCambiarPassword, principalCerrarSesion;
 	private JMenuItem clienteAlta, clienteConsulta; 
 	private JMenuItem fallecidoAlta, fallecidoConsulta;
-	JMenuItem vinculoVincular, vinculoConsultarCliente, vinculoConsultarFallecido;
+	private JMenuItem responsableVincular, responsableConsultarPorCliente, responsableConsultarPorFallecido;
 	JMenuItem cobranzaAltaCargo, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
 	JMenuItem movimientoTrasladar, movimientoConsultar; 
 	private JMenuItem servicioAlta, servicioConsulta;
@@ -52,11 +52,11 @@ public class VentanaPrincipal extends Ventana {
 		menuFallecido.add(fallecidoConsulta = new JMenuItem("Consultar fallecidos"));
 		barra.add(menuFallecido);
 		
-		JMenu menuVinculos = new JMenu("Vinculos");
-		menuVinculos.add(vinculoVincular = new JMenuItem("Vincular"));
-		menuVinculos.add(vinculoConsultarCliente = new JMenuItem("Consultar clientes"));
-		menuVinculos.add(vinculoConsultarFallecido = new JMenuItem("Consultar fallecidos"));
-		barra.add(menuVinculos);
+		JMenu menuResponsables = new JMenu("Responsables");
+		menuResponsables.add(responsableVincular = new JMenuItem("Vincular"));
+		menuResponsables.add(responsableConsultarPorCliente = new JMenuItem("Consultar por cliente"));
+		menuResponsables.add(responsableConsultarPorFallecido = new JMenuItem("Consultar por fallecido"));
+		barra.add(menuResponsables);
 		
 		JMenu menuCobranza = new JMenu("Cobranzas");
 		menuCobranza.add(cobranzaAltaCargo = new JMenuItem("Alta cargo"));
@@ -114,5 +114,17 @@ public class VentanaPrincipal extends Ventana {
 	public JMenuItem getUsuarioConsulta() {
 		return usuarioConsulta;
 	}
-		
+
+	public JMenuItem getResponsableVincular() {
+		return responsableVincular;
+	}
+
+	public JMenuItem getResponsableConsultarPorCliente() {
+		return responsableConsultarPorCliente;
+	}
+
+	public JMenuItem getResponsableConsultarPorFallecido() {
+		return responsableConsultarPorFallecido;
+	}
+	
 }
