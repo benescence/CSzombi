@@ -106,5 +106,22 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 			return null;
 		return lista.get(0);
 	}
-	
+
+	@Override
+	public Fallecido ultimoInsertado() {
+		Integer ID = selectLastID(tabla);
+		if (ID == null)
+			return null;
+		else
+			return selectByID(ID);
+	}
+
+	public Fallecido selectByID(Integer ID) {
+		String condicion = "ID = "+ID;
+		List<Fallecido> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
+	}
+
 }

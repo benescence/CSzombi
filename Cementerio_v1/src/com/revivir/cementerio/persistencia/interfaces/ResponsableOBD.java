@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.entidades.Responsable;
 
-
-
 public interface ResponsableOBD {
 
 	public void insert(Responsable responsable);
@@ -16,10 +14,10 @@ public interface ResponsableOBD {
 
 	public List<Responsable> select();
 
+	public Responsable ultimoInsertado();
 
 	public List<Responsable> selectByCliente(Integer cliente);
 
 	public List<Responsable> selectByFallecido(Integer fallecido);
-
 	
 }

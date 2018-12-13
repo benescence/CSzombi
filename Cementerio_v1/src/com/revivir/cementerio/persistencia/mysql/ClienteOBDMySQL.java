@@ -83,7 +83,6 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 		return null;
 	}
 	
-	//@Override
 	public Cliente selectByID(Integer ID) {
 		String condicion = "ID = "+ID;
 		List<Cliente> lista = selectByCondicion(condicion);

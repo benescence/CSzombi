@@ -11,7 +11,6 @@ import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Responsable;
 import com.revivir.cementerio.persistencia.interfaces.ResponsableOBD;
 
-
 public class ResponsableOBDMYSQL extends OBD implements ResponsableOBD{
 	private final String campos = " cliente, fallecido, observaciones";
 	private final String tabla = "rev_responsables";
@@ -92,9 +91,21 @@ public class ResponsableOBDMYSQL extends OBD implements ResponsableOBD{
 		return ret;
 	}
 
-
-
-
-
-
+	@Override
+	public Responsable ultimoInsertado() {
+		Integer ID = selectLastID(tabla);
+		if (ID == null)
+			return null;
+		else
+			return selectByID(ID);
+	}
+	
+	public Responsable selectByID(Integer ID) {
+		String condicion = "ID = "+ID;
+		List<Responsable> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
+	}
+		
 }

@@ -1,9 +1,6 @@
 package com.revivir.cementerio.persistencia.entidades;
 
-
-
 public class Responsable {
-
 	private Integer ID,  cliente, fallecido;
 	private String observaciones;
 	
