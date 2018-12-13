@@ -13,6 +13,8 @@ public interface ResponsableOBD {
 	public void delete(Responsable responsable);
 
 	public List<Responsable> select();
+	
+	public Responsable selectByID(Integer ID);
 
 	public Responsable ultimoInsertado();
 
