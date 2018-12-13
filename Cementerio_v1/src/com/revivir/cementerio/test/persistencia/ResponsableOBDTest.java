@@ -26,7 +26,7 @@ public class ResponsableOBDTest {
 	}
 	
 	public static void main(String[] args) {
-		Responsable nuevo = new Responsable(-1, 1, 1, "ff");
+		Responsable nuevo = new Responsable(-1, 2, 2, "ff");
 		insertTest(nuevo);
 		selectTest();
 	}

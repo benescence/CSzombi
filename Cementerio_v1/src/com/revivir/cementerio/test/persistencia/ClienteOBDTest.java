@@ -52,7 +52,6 @@ public class ClienteOBDTest {
 		clienteBD.setApellido("Apellido editado");
 		updateTest(clienteBD);
 		selectTest();
-		deleteTest(clienteBD);
 		selectTest();
 	}
 

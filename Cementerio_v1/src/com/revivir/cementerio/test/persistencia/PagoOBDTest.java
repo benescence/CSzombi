@@ -25,7 +25,7 @@ public class PagoOBDTest {
 	}
 	
 	public static void main(String[] args) {
-		Pago nuevo = new Pago(-1,1,3,550, "ff", Almanaque.hoy());
+		Pago nuevo = new Pago(-1,4,2,550, "ff", Almanaque.hoy());
 		insertTest(nuevo);
 		selectTest();
 	}
