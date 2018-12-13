@@ -7,6 +7,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.revivir.cementerio.persistencia.entidades.Cargo;
+import com.revivir.cementerio.vista.util.Formato;
 
 public class TablaCargos extends JTable {
 	private static final long serialVersionUID = 1L;
@@ -28,8 +29,8 @@ public class TablaCargos extends JTable {
 
 		for (Cargo elemento : cargos) {
 			Object[] fila = {
-					elemento.getFallecido(),
-					elemento.getServicio(),
+					Formato.fallecido(elemento),
+					Formato.servicio(elemento),
 					elemento.getPagado(),
 					elemento.getObservaciones()
 				};

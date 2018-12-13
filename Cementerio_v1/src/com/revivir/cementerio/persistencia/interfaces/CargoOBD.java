@@ -3,6 +3,7 @@ package com.revivir.cementerio.persistencia.interfaces;
 import java.util.List;
 
 import com.revivir.cementerio.persistencia.entidades.Cargo;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
 
 public interface CargoOBD {
 	
@@ -15,6 +16,8 @@ public interface CargoOBD {
 	public List<Cargo> select();
 
 	public Cargo selectByID(Integer ID);
+
+	public List<Cargo> selectByFallecido(Fallecido fallecido);
 
 	public Cargo ultimoInsertado();
 

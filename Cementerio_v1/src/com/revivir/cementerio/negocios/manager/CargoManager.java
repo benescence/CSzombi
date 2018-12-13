@@ -31,4 +31,9 @@ public class CargoManager {
 		return obd.select();
 	}
 	
+	public static List<Cargo> traerPorFallecido(Fallecido fallecido) {
+		CargoOBD obd = FactoryOBD.crearCargoOBD();
+		return obd.selectByFallecido(fallecido);
+	}
+	
 }

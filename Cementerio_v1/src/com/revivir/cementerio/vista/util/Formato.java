@@ -1,7 +1,11 @@
 package com.revivir.cementerio.vista.util;
 
 import com.revivir.cementerio.negocios.Localizador;
+import com.revivir.cementerio.negocios.manager.FallecidoManager;
+import com.revivir.cementerio.negocios.manager.ServicioManager;
+import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 
 public class Formato {
@@ -28,6 +32,17 @@ public class Formato {
 		Ubicacion ubicacion = Localizador.traerUbicacionDeFallecido(fallecido);
 		return ubicacion(ubicacion);
 	}
+
+	public static String fallecido(Cargo cargo) {
+		Fallecido fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
+		return fallecido.getApellido()+", "+fallecido.getNombre();
+	}
+
+	public static String servicio(Cargo cargo) {
+		Servicio servicio = ServicioManager.traerPorID(cargo.getServicio());
+		return servicio.getNombre();
+	}
+	
 	
 	/*public static String fallecidos(Cliente cliente) {
 		List<Fallecido> fallecidos = FallecidoManager.traerPorCliente(cliente);

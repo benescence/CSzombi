@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
+import com.revivir.cementerio.negocios.Vinculador;
+import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
@@ -88,6 +90,7 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 		ventana.getNombre().getTextField().setText(fallecido.getNombre());
 		ventana.getApellido().getTextField().setText(fallecido.getApellido());
 		ventana.getDNI().getTextField().setText(fallecido.getDni());
+		ventana.getTabla().recargar(CargoManager.traerPorFallecido(fallecido));
 	}
 
 }

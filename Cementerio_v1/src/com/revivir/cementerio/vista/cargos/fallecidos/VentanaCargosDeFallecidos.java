@@ -1,6 +1,7 @@
 package com.revivir.cementerio.vista.cargos.fallecidos;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -22,7 +23,7 @@ public class VentanaCargosDeFallecidos extends VentanaInterna {
 	public VentanaCargosDeFallecidos() {
 		super("Gestion de cargos de fallecidos", 500, 500);
 		
-		tabla = new TablaCargos(CargoManager.traerTodo());
+		tabla = new TablaCargos(new ArrayList<>());
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		
 		Dimension dimBoton = new Dimension(100, 25);
