@@ -1,11 +1,11 @@
 package com.revivir.cementerio.persistencia.entidades;
 
 public class Cargo {
-	private Integer ID, fallecido, servicio;
+	private Integer ID, fallecido, servicio, pagado;
 	private String observaciones;
-	private Boolean pagado;
+	//private Boolean pagado;
 	
-	public Cargo(Integer ID, Integer fallecido, Integer servicio, String observaciones, Boolean pagado) {
+	public Cargo(Integer ID, Integer fallecido, Integer servicio, String observaciones, Integer pagado) {
 		this.ID = ID;
 		this.fallecido = fallecido;
 		this.servicio = servicio;
@@ -45,11 +45,11 @@ public class Cargo {
 		this.observaciones = observaciones;
 	}
 	
-	public Boolean getPagado() {
+	public Integer getPagado() {
 		return pagado;
 	}
 
-	public void setPagado(Boolean pagado) {
+	public void setPagado(Integer pagado) {
 		this.pagado = pagado;
 	}
 
