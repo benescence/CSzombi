@@ -2,12 +2,9 @@ package com.revivir.cementerio.test.persistencia;
 
 import java.util.List;
 
-
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
-import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
-import com.revivir.cementerio.persistencia.interfaces.ServicioOBD;
 
 
 public class CargoOBDTest {
@@ -41,7 +38,7 @@ public class CargoOBDTest {
 	
 	public static void main(String[] args) {
 		
-		Cargo nuevo = new Cargo(-1, 2,2,"rrryy",1);
+		Cargo nuevo = new Cargo(-1, 2,2,"rrryy",true);
 		insertTest(nuevo);
 		selectTest();
 		deleteTest(nuevo);

@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.responsables.porcliente;
+package com.revivir.cementerio.vista.menu.responsables.porcliente;
 
 import java.awt.Dimension;
 import java.util.ArrayList;

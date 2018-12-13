@@ -7,11 +7,11 @@ import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
+import com.revivir.cementerio.vista.menu.responsables.ControladorVincular;
+import com.revivir.cementerio.vista.menu.responsables.porcliente.ControladorConsultarPorCliente;
 import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.menu.servicios.servicioAM.ControladorServicioAM;
 import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
-import com.revivir.cementerio.vista.responsables.ControladorVincular;
-import com.revivir.cementerio.vista.responsables.porcliente.ControladorConsultarPorCliente;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Popup;
 

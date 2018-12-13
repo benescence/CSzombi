@@ -17,6 +17,8 @@ public interface ServicioOBD {
 	
 	public Servicio selectByID(Integer iD);
 
+	public Servicio ultimoInsertado();
+
 	public Servicio selectBycodigo(String codigo);
 
 	public List<Servicio> selectByDescripcion(String descripcion);

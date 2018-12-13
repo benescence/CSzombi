@@ -17,7 +17,6 @@ import com.revivir.cementerio.persistencia.mysql.ServicioOBDMySQL;
 import com.revivir.cementerio.persistencia.mysql.UbicacionOBDMySQL;
 import com.revivir.cementerio.persistencia.mysql.UsuarioOBDMYSQL;
 
-
 public class FactoryOBD {
 	
 	public static FallecidoOBD crearFallecidoOBD() {
@@ -36,7 +35,7 @@ public class FactoryOBD {
 		return new UsuarioOBDMYSQL();
 	}
 
-	public static ServicioOBD crearPrecioOBD() {
+	public static ServicioOBD crearServicioOBD() {
 		return new ServicioOBDMySQL();
 	}
 
@@ -45,7 +44,6 @@ public class FactoryOBD {
 	}
 
 	public static PagoOBD crearPagoOBD() {
-		
 		return new PagoOBDMYSQL();
 	}
 

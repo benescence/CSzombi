@@ -17,8 +17,9 @@ public class Busqueda {
 		return obd.selectByNombreApellidoDNI(nombres, apellido, DNI);
 	}
 	public static List<Servicio> precios(String codigo, String descripcion) {
-		ServicioOBD obd = FactoryOBD.crearPrecioOBD();
-		return obd.selectByDescripcion(descripcion);
+		//ServicioOBD obd = FactoryOBD.crearPrecioOBD();
+		//return obd.selectByDescripcion(descripcion);
+		return null;
 	}
 	public static List<Fallecido> fallecidos(String DNI, String nombres, String apellido) {
 		// SI TIENE UNA CADENA VACIA LE MANDO NULL

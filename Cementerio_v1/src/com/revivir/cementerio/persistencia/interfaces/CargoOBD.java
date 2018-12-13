@@ -14,8 +14,8 @@ public interface CargoOBD {
 
 	public List<Cargo> select();
 
-	
+	public Cargo selectByID(Integer ID);
 
-
+	public Cargo ultimoInsertado();
 
 }

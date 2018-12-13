@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.responsables;
+package com.revivir.cementerio.vista.menu.responsables;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

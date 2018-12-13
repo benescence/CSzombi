@@ -114,5 +114,14 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 			
 		return ret;
 	}
-	
+
+	@Override
+	public Servicio ultimoInsertado() {
+		Integer ID = selectLastID(tabla);
+		if (ID == null)
+			return null;
+		else
+			return selectByID(ID);
+	}
+
 }

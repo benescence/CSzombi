@@ -7,7 +7,7 @@ import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.ServicioOBD;
 
 public class ServicioOBDTest {
-	
+/*	
 	public static void insertTest(Servicio nuevo) {
 		System.out.println("___ Insert test");
 		ServicioOBD obd = FactoryOBD.crearPrecioOBD();
@@ -56,5 +56,5 @@ public class ServicioOBDTest {
 		deleteTest(servicioBD);
 		selectTest();
 	}
-
+*/
 }
