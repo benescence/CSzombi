@@ -3,8 +3,8 @@ package com.revivir.cementerio.vista;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import com.revivir.cementerio.vista.cargos.ControladorCargoAM;
-import com.revivir.cementerio.vista.cargos.fallecidos.ControladorCargosDeFallecidos;
+import com.revivir.cementerio.vista.menu.cargos.ControladorCargoAM;
+import com.revivir.cementerio.vista.menu.cargos.fallecidos.ControladorCargosDeFallecidos;
 import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;

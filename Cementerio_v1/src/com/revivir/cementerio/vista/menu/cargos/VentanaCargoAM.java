@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.cargos;
+package com.revivir.cementerio.vista.menu.cargos;
 
 import java.awt.Dimension;
 

@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.cargos;
+package com.revivir.cementerio.vista.menu.cargos;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -7,6 +7,7 @@ import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorPrincipal;
+import com.revivir.cementerio.vista.menu.cargos.fallecidos.ControladorCargosDeFallecidos;
 import com.revivir.cementerio.vista.seleccion.fallecidos.ControladorSeleccionarFallecido;
 import com.revivir.cementerio.vista.seleccion.fallecidos.FallecidoSeleccionable;
 import com.revivir.cementerio.vista.seleccion.servicio.ControladorSeleccionarServicio;
@@ -15,12 +16,20 @@ import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSeleccionable {
 	private VentanaCargoAM ventana;
+	private ControladorCargosDeFallecidos invocadorFallecidos;
 	private ControladorPrincipal principal;
 	private Fallecido fallecido;
 	private Servicio servicio;
 	
-	public ControladorCargoAM(ControladorPrincipal invocador) {
-		this.principal = invocador;
+	public ControladorCargoAM(ControladorCargosDeFallecidos invocador, Fallecido fallecido) {
+		this.invocadorFallecidos = invocador;
+		ventana = new VentanaCargoAM();
+		seleccionarFallecido(fallecido);
+		inicializar();
+	}
+
+	public ControladorCargoAM(ControladorPrincipal principal) {
+		this.principal = principal;
 		ventana = new VentanaCargoAM();
 		inicializar();
 	}
@@ -67,7 +76,10 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 	private void volver() {
 		ventana.dispose();
 		ventana = null;
-		principal.getVentana().mostrar();
+		if (principal != null)
+			principal.getVentana().mostrar();
+		else if (invocadorFallecidos != null)
+			invocadorFallecidos.mostrar();
 	}
 
 	@Override

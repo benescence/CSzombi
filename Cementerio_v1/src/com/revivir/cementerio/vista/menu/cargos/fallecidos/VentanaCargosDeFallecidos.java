@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.cargos.fallecidos;
+package com.revivir.cementerio.vista.menu.cargos.fallecidos;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.vista.tablas.TablaCargos;
 import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.EntradaTexto;
