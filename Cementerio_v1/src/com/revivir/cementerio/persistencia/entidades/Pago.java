@@ -12,7 +12,7 @@ public class Pago {
 
 	
 	
-	public Pago(Integer ID, Integer cliente, Integer cargo, Integer importe, String observaciones, Date fecha) {
+	public Pago(Integer ID, Integer cargo, Integer cliente, Integer importe, String observaciones, Date fecha) {
 		this.ID = ID;
 		this.cliente = cliente;
 		this.cargo = cargo;
