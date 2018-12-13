@@ -131,9 +131,13 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 		return null;
 	}
 
-	
+	@Override
+	public Cliente ultimoInsertado() {
+		Integer ID = selectLastID(tabla);
+		if (ID == null)
+			return null;
+		else
+			return selectByID(ID);
+	}
 
-	
-
-	
 }

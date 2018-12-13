@@ -15,6 +15,8 @@ public interface ClienteOBD {
 	
 	public Cliente selectByID2(Integer ID);
 
+	public Cliente ultimoInsertado();
+
 	public Cliente selectByDNI(String DNI);
 
 	public List<Cliente> selectByNombreApellidoDNI(String nombre, String apellido, String DNI);
