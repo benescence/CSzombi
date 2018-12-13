@@ -31,6 +31,7 @@ public class ControladorSeleccionarFallecido {
 		else {
 			invocador.seleccionarFallecido(seleccion.get(0));
 			ventana.dispose();
+			invocador.mostrar();
 		}
 	}
 		

@@ -20,4 +20,8 @@ public class Vinculador {
 		return ret;
 	}
 
+	public static void vincular(Cliente cliente, Fallecido fallecido) {
+		ResponsableManager.guardar(cliente, fallecido, "");
+	}
+	
 }
