@@ -12,6 +12,12 @@ public abstract class Ventana extends JFrame{
 		setLocationRelativeTo(null);
 		mostrar();
 	}
+	
+	public Ventana(String titulo) {
+		setTitle(titulo);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		mostrar();
+	}
 
 	public void ocultar() {
 		setVisible(false);
@@ -24,6 +30,17 @@ public abstract class Ventana extends JFrame{
 	public void mostrar() {
 		setVisible(true);
 		setEnabled(true);
+	}
+	
+	public void compactar() {
+		pack();
+		setLocationRelativeTo(null);
+	}
+	
+	public PanelVertical crearPanelPrincipal() {
+		PanelVertical panel = new PanelVertical();
+		setContentPane(panel);
+		return panel;
 	}
 	
 }

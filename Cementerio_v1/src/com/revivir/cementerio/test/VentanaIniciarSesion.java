@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.sesion;
+package com.revivir.cementerio.test;
 
 import java.awt.Dimension;
 

@@ -62,12 +62,12 @@ public class Localizador {
 	
 	public static Integer traerUltimaUbicacionGuardada() {
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
-		return obd.selectLastID();
+		return null;//obd.selectLastID();
 	}
 	
 	public static Ubicacion traerUbicacionDeFallecido(Fallecido fallecido) {
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
-		return obd.selectByFallecido(fallecido);
+		return null;//obd.selectByFallecido(fallecido);
 	}
 	
 }

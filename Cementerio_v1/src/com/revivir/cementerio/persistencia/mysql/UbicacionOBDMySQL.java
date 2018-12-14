@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.OBD;
-import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
@@ -72,15 +71,6 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 	public List<Ubicacion> select() {
 		return selectByCondicion("true");
 	}
-
-	@Override
-	public Ubicacion selectByFallecido(Fallecido fallecido) {
-		String condicion = "ID = "+fallecido.getUbicacion();
-		List<Ubicacion> lista = selectByCondicion(condicion);
-		if (lista.size()>0)
-			return lista.get(0);
-		return null;
-	}
 	
 	private List<Ubicacion> selectByCondicion(String condicion) {
 		List<Ubicacion> ret = new ArrayList<>();
@@ -128,8 +118,20 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 	}
 
 	@Override
-	public Integer selectLastID() {
-		return selectLastID(tabla);
+	public Ubicacion ultimoInsertado() {
+		Integer ID = selectLastID(tabla);
+		if (ID == null)
+			return null;
+		else
+			return selectByID(ID);
 	}
-	
+
+	public Ubicacion selectByID(Integer ID) {
+		String condicion = "ID = "+ID;
+		List<Ubicacion> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
+	}
+
 }

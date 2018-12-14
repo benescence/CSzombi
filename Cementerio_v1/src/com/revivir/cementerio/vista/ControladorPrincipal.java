@@ -1,5 +1,6 @@
 package com.revivir.cementerio.vista;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -46,6 +47,8 @@ public class ControladorPrincipal {
 		ventana.getResponsableVincular().addActionListener(e -> vincular());
 		ventana.getCobranzaAltaCargo().addActionListener(e -> altaCargo());
 		
+		
+
 	}
 	
 	private void vincular() {
