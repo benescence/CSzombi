@@ -5,7 +5,6 @@ import java.util.List;
 import javax.swing.JInternalFrame;
 
 import com.revivir.cementerio.negocios.manager.CargoManager;
-import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
@@ -26,7 +25,7 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 		ventana.botonSeleccionar().addActionListener(e -> seleccionar());
 		ventana.botonAgregar().addActionListener(e -> agregar());
 		ventana.botonModificar().addActionListener(e -> modificar());
-		//ventana.botonEliminar().addActionListener(e -> eliminar());
+		ventana.botonEliminar().addActionListener(e -> eliminar());
 	}
 	
 	private void seleccionar() {
@@ -56,18 +55,18 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 	}
 	
 	private void eliminar() {
-		/*List<Cliente> lista = ventana.getTabla().obtenerSeleccion();
+		List<Cargo> lista = ventana.getTabla().obtenerSeleccion();
 		
 		if (lista.isEmpty()) {
-			Popup.mostrar("Debe seleccionar al menos un cliente para eliminarlo");
+			Popup.mostrar("Debe seleccionar al menos un cargo para eliminarlo");
 			return;
 		}
 		
 		if (Popup.confirmar("¿Esta seguro de que desea eliminar los registros seleccionados?"))
-			for (Cliente elemento : lista)
-				ClienteManager.eliminar(elemento);
-		*/
-		//actualizar();
+			for (Cargo elemento : lista)
+				CargoManager.eliminar(elemento);
+		
+		actualizar();
 	}
 
 	@Override
@@ -86,7 +85,8 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 	}
 
 	public void actualizar() {
-		//ventana.getTabla().recargar(ClienteManager.traerTodo());
+		if (fallecido != null)
+			ventana.getTabla().recargar(CargoManager.traerPorFallecido(fallecido));
 	}
 
 	@Override

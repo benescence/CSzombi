@@ -34,7 +34,7 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 
 	public ControladorCargoAM(ControladorCargosDeFallecidos invocador, Cargo cargo) {
 		this.invocadorFallecidos = invocador;
-		this.servicio = ServicioManager.traerPorID(cargo.getID());
+		this.servicio = ServicioManager.traerPorID(cargo.getServicio());
 		this.fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
 		this.cargo = cargo;
 		ventana = new VentanaCargoAM();
@@ -94,6 +94,8 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 			CargoManager.modificar(cargo);
 		}
 		
+		if (invocadorFallecidos != null)
+			invocadorFallecidos.actualizar();
 		volver();
 	}
 	

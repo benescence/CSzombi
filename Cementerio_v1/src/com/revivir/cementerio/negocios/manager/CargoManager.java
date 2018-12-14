@@ -18,7 +18,7 @@ public class CargoManager {
 
 	public static void modificar(Cargo modificar) {
 		CargoOBD obd = FactoryOBD.crearCargoOBD();
-		obd.insert(modificar);
+		obd.update(modificar);
 	}
 		
 	public static void eliminar(Cargo eliminar) {
