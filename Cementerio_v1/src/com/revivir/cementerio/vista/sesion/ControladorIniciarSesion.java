@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import com.revivir.cementerio.negocios.Sesion;
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.vista.ControladorPrincipal;
+import com.revivir.cementerio.vista.util.EntradaMouse;
 import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.PresionarEnterListener;
 
@@ -14,23 +15,21 @@ public class ControladorIniciarSesion {
 	
 	public ControladorIniciarSesion() {
 		ventana = new VentanaIniciarSesion();
-		/*ventana.addWindowListener(new WindowAdapter() {
+		ventana.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				cancelar();
 			}
-		});		
-*/
-		ventana.botonAceptar().addActionListener(e -> aceptar());
-		ventana.botonCancelar().addActionListener(e -> cancelar());
-		ventana.botonAceptar().addKeyListener(new PresionarEnterListener(e -> aceptar()));
-		ventana.botonCancelar().addKeyListener(new PresionarEnterListener(e -> cancelar()));
+		});
 		
+		ventana.botonAceptar().addMouseListener(new EntradaMouse(e -> aceptar()));
+		ventana.botonAceptar().addKeyListener(new PresionarEnterListener(e -> aceptar()));
+		ventana.botonCancelar().addMouseListener(new EntradaMouse(e -> cancelar()));
+		ventana.botonCancelar().addKeyListener(new PresionarEnterListener(e -> cancelar()));
 	}
 
 	@SuppressWarnings("deprecation")
 	private void aceptar() {
-		System.out.println("Aceptar");
 		if (validarCampos()) {
 			String nombre = ventana.getUsuario().getText();
 			String password = ventana.getPassword().getText();
@@ -71,11 +70,8 @@ public class ControladorIniciarSesion {
 	}
 
 	private void cancelar() {
-		//if (ventana != null) {
-		System.out.println("Llamando cancelar");
-			ventana.dispose();
-			ventana = null;
-		//}
+		ventana.dispose();
+		ventana = null;
 	}
 
 }

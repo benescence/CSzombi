@@ -88,7 +88,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		//		macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
 		
 		// GUARDO AL FALLECIDO
-		Integer ubicacion = Localizador.traerUltimaUbicacionGuardada();
+		Integer ubicacion = 1;//Localizador.traerUltimaUbicacionGuardada();
 		TipoFallecimiento tipo = (TipoFallecimiento) ventana.getInTipoFallecimiento().getSelectedItem();
 		String dni = (!ventana.getInDNIFallecido().getText().equals("") ? ventana.getInDNIFallecido().getText() : null);
 		String apellido= ventana.getInApellidoFallecido().getText();;

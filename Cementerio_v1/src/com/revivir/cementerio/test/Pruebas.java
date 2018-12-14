@@ -12,6 +12,8 @@ public class Pruebas extends Ventana {
 
 	public Pruebas() {
 		super("Prueba de boton", 500, 500);
+		
+	}/*
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		Boton boton1 = new Boton("Boton 1", new Dimension(100, 25));
 		Boton boton2 = new Boton("Boton 2", new Dimension(100, 25));
@@ -35,7 +37,7 @@ public class Pruebas extends Ventana {
 	private void boton2() {
 		System.out.println("Boton 2");
 	}
-
+*/
 	public static void main(String[] args) {
 		new ControladorIniciarSesion();
 	}

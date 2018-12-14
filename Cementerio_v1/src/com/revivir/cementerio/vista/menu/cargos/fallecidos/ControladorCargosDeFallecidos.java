@@ -34,7 +34,6 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 	}
 
 	private void agregar() {
-		System.out.println(fallecido.getNombre());
 		invocador.getVentana().setEnabled(false);
 		if (fallecido == null)
 			new ControladorCargoAM(invocador);

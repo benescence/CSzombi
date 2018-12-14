@@ -10,6 +10,7 @@ import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.util.Popup;
@@ -61,8 +62,8 @@ public class ControladorFallecidoAM {
 		// Es un alta
 		if (fallecido == null) {
 			guardarUbicacion();
-			Integer ubicacion = Localizador.traerUltimaUbicacionGuardada();
-			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion);			
+			Ubicacion ubicacion = Localizador.traerUltimaUbicacionGuardada();
+			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion.getID());			
 		}
 		
 		// Es una modificacion

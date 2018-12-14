@@ -60,14 +60,14 @@ public class Localizador {
 		obd.insert(ubicacion);
 	}
 	
-	public static Integer traerUltimaUbicacionGuardada() {
+	public static Ubicacion traerUltimaUbicacionGuardada() {
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
-		return null;//obd.selectLastID();
+		return obd.ultimoInsertado();
 	}
 	
 	public static Ubicacion traerUbicacionDeFallecido(Fallecido fallecido) {
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
-		return null;//obd.selectByFallecido(fallecido);
+		return obd.selectByFallecido(fallecido);
 	}
 	
 }
