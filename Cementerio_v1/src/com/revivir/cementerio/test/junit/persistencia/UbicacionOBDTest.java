@@ -1,9 +1,9 @@
 package com.revivir.cementerio.test.junit.persistencia;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import com.revivir.cementerio.negocios.Almanaque;
 import com.revivir.cementerio.persistencia.FactoryOBD;
@@ -11,7 +11,7 @@ import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
-class UbicacionOBDTest {
+public class UbicacionOBDTest {
 	private Ubicacion objeto = crearObjetoDePrueba();
 	private UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
 	
@@ -20,7 +20,7 @@ class UbicacionOBDTest {
 	}
 
 	@Test
-	void testInsert() {
+	public void testInsert() {
 		obd.insert(objeto);
 		Ubicacion objetoBD = obd.ultimoInsertado();
 		iguales(objeto, objetoBD);
@@ -28,7 +28,7 @@ class UbicacionOBDTest {
 	}
 	
 	@Test
-	void testUpdate() {
+	public void testUpdate() {
 		obd.insert(objeto);
 		Ubicacion objetoBD1 = obd.ultimoInsertado();
 		objetoBD1.setSubsector(SubSector.DEPOSITO1);
@@ -39,7 +39,7 @@ class UbicacionOBDTest {
 	}
 	
 	@Test
-	void testDelete() {
+	public void testDelete() {
 		obd.insert(objeto);
 		Ubicacion objetoBD = obd.ultimoInsertado();
 		obd.delete(objetoBD);
@@ -49,7 +49,7 @@ class UbicacionOBDTest {
 	}
 
 	@Test
-	void testUltimoInsertado() {
+	public void testUltimoInsertado() {
 		obd.insert(objeto);
 		Ubicacion clienteBD = obd.ultimoInsertado();
 		iguales(objeto, clienteBD);

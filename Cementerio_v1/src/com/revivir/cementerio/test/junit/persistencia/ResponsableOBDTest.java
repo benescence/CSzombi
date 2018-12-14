@@ -1,12 +1,9 @@
 package com.revivir.cementerio.test.junit.persistencia;
 
 import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cliente;

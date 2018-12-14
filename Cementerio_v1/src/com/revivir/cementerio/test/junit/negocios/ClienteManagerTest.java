@@ -1,8 +1,9 @@
 package com.revivir.cementerio.test.junit.negocios;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.FactoryOBD;

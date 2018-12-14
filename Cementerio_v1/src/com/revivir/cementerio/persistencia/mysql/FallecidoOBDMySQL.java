@@ -22,9 +22,7 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 				+", '"+obciso.getDni()+"'"
 				+", '"+obciso.getApellido()+"'"
 				+", '"+obciso.getNombre()+"'"
-				+", '"+obciso.getFechaFallecimiento()+"'"
-				+", "+Definido.tipoFallecimiento(obciso.getTipoFallecimiento())
-				+", '"+obciso.getCocheria()+"'";
+				+", '"+obciso.getFechaFallecimiento()+"'"+", "+Definido.tipoFallecimiento(obciso.getTipoFallecimiento())+", '"+obciso.getCocheria()+"'";
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}

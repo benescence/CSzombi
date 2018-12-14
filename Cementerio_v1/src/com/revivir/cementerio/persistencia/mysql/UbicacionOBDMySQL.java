@@ -20,6 +20,7 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 	
 	@Override
 	public void insert(Ubicacion ubicacion) {
+		String Sub_sector = String.valueOf(Definido.subsector(ubicacion.getSubsector()));
 		String otroCementerio = (ubicacion.getOtroCementerio() != null) ? "'"+ubicacion.getOtroCementerio()+"'" : null;
 		String osario = (ubicacion.getOsario() != null) ? "'"+ubicacion.getOsario()+"'" : null;
 		String seccion = (ubicacion.getSeccion() != null) ? "'"+ubicacion.getSeccion()+"'" : null;
@@ -37,7 +38,7 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 		String sepultura = (ubicacion.getSepultura() != null) ? "'"+ubicacion.getSepultura()+"'" : null;
 		String vencimiento = (ubicacion.getVencimiento() != null) ? "'"+ubicacion.getVencimiento()+"'" : null;
 		
-		String valores = Definido.subsector(ubicacion.getSubsector())
+		String valores = Sub_sector
 				+", "+otroCementerio
 				+", "+osario
 				+", "+nicho
@@ -60,12 +61,33 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 
 	@Override
 	public void update(Ubicacion ubicacion) {
-		// TODO Auto-generated method stub
+		String condicion = "ID = "+ubicacion.getID();
+		String valores = " Subsector= "+Definido.subsector(ubicacion.getSubsector())
+				+", Otro Cementerio = '"+ubicacion.getOtroCementerio()+"'"
+				+", osario = '"+ubicacion.getOsario()+"'"
+				+", Nicho = '"+ubicacion.getNicho()+"'"
+				+", Fila = '"+ubicacion.getFila()+"'"
+				+", Seccion = "+ubicacion.getSeccion()+"'"
+				+", Macizo = '"+ubicacion.getMacizo()+"'"
+				+", Unidad = '"+ubicacion.getUnidad()+"'"
+				+", bis = '"+ubicacion.getBis()+"'"
+				+", macizo bis = '"+ubicacion.getBis_macizo()+"'"
+				+", Numero = '"+ubicacion.getNumero()+"'"
+				+", Sepultura = '"+ubicacion.getSepultura()+"'"
+				+", Parcela = '"+ubicacion.getParcela()+"'"
+				+", Mueble = '"+ubicacion.getMueble()+"'"
+				+", Inhumacion = '"+ubicacion.getInhumacion()+"'"
+				+", Circ = '"+ubicacion.getCirc()+"'"
+				+", Vencimiento = '"+ubicacion.getVencimiento()+"'";
+		String consulta = "update "+tabla+" set "+valores+"  where ("+condicion+");";
+		ejecutarSQL(consulta);
 	}
 
 	@Override
 	public void delete(Ubicacion ubicacion) {
-		// TODO Auto-generated method stub		
+		String condicion = "ID = "+ubicacion.getID();
+		String consulta = "delete from "+tabla+" where ("+condicion+");";
+		ejecutarSQL(consulta);	
 	}
 
 	@Override

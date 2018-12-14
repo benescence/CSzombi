@@ -8,6 +8,7 @@ import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
+
 public class FallecidoOBDTest {
 	
 	public static void insertTest(Fallecido nuevo) {
@@ -25,11 +26,14 @@ public class FallecidoOBDTest {
 			System.out.println(elemento.getApellido()+", "+elemento.getNombre());
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		Fallecido nuevo = new Fallecido(1, 1,
 				TipoFallecimiento.TRAUMATICO, "2", "Benitez", "Jose", "La parca", Almanaque.hoy());
 		insertTest(nuevo);
 		selectTest();
+		
 	}
 
 }
