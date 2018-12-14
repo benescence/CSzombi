@@ -7,10 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.persistencia.interfaces.PagoOBD;
-
 
 public class PagoOBDMYSQL extends OBD implements PagoOBD{
 	private final String campos = " cargo, cliente, importe, observaciones, fecha";
@@ -19,8 +19,8 @@ public class PagoOBDMYSQL extends OBD implements PagoOBD{
 	@Override
 	public void insert(Pago pago) {
 		String valores = pago.getCargo()
-				+", '"+pago.getCliente()+"'"
-				+", '"+pago.getImporte()+"'"
+				+", "+pago.getCliente()
+				+", "+pago.getImporte()
 				+", '"+pago.getObservaciones()+"'"
 				+", '"+pago.getFecha()+"'";
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
@@ -30,9 +30,10 @@ public class PagoOBDMYSQL extends OBD implements PagoOBD{
 	@Override
 	public void update(Pago pago) {
 		String condicion = "ID = "+pago.getID();
-		String valores = " Cargo = '"+pago.getCargo()+"'"
-				+", Cliente = '"+pago.getCliente()+"'"
-				+", Importe = '"+pago.getObservaciones()+"'"
+		String valores = " cargo = "+pago.getCargo()
+				+", cliente = "+pago.getCliente()
+				+", importe = "+pago.getImporte()
+				+", observaciones = '"+pago.getObservaciones()+"'"
 				+", fecha= '"+pago.getFecha()+"'";
 		String consulta = "update "+tabla+" set "+valores+"  where ("+condicion+");";
 		ejecutarSQL(consulta);
@@ -104,4 +105,22 @@ public class PagoOBDMYSQL extends OBD implements PagoOBD{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Pago ultimoInsertado() {
+		Integer ID = selectLastID(tabla);
+		if (ID == null)
+			return null;
+		else
+			return selectByID(ID);
+	}
+
+	public Pago selectByID(Integer ID) {
+		String condicion = "ID = "+ID;
+		List<Pago> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
+	}
+	
 }

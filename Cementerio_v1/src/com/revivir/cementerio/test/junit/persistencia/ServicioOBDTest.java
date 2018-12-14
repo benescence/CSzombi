@@ -3,6 +3,8 @@ package com.revivir.cementerio.test.junit.persistencia;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import com.revivir.cementerio.persistencia.FactoryOBD;
@@ -10,11 +12,11 @@ import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.ServicioOBD;
 
 class ServicioOBDTest {
-	private Servicio objeto = crearObjetoDePrueba();
+	private Servicio objeto = crearObjeto();
 	private ServicioOBD obd = FactoryOBD.crearServicioOBD();
 	
-	private Servicio crearObjetoDePrueba() {
-		return new Servicio(-1, "99", "Nombre", "descripcion", 999.0, false);
+	private Servicio crearObjeto() {
+		return new Servicio(-1, "000", "Nombre", "Descripcion", 999.0, false);
 	}
 
 	@Test
@@ -29,13 +31,14 @@ class ServicioOBDTest {
 	void testUpdate() {
 		obd.insert(objeto);
 		Servicio objetoBD1 = obd.ultimoInsertado();
-		objetoBD1.setNombre("Prueba1");
-		objetoBD1.setCodigo("888");
-		objetoBD1.setDescripcion("hola");
+		objetoBD1.setNombre("Nombre1");
+		objetoBD1.setCodigo("Codigo1");
+		objetoBD1.setDescripcion("Descripcion1");
 		objetoBD1.setImporte(555.0);
+		objetoBD1.setHistorico(true);
 		obd.update(objetoBD1);
-		Servicio clienteBD2 = obd.ultimoInsertado();
-		iguales(objetoBD1, clienteBD2);
+		Servicio objetoBD2 = obd.ultimoInsertado();
+		iguales(objetoBD1, objetoBD2);
 		obd.delete(objetoBD1);
 	}
 	
@@ -52,23 +55,41 @@ class ServicioOBDTest {
 	@Test
 	void testUltimoInsertado() {
 		obd.insert(objeto);
-		Servicio clienteBD = obd.ultimoInsertado();
-		iguales(objeto, clienteBD);
-		obd.delete(clienteBD);
-	}	
-
-	private void iguales(Servicio c1, Servicio c2) {
-		assertTrue(c1.getCodigo().equals(c2.getCodigo()));
-		assertTrue(c1.getNombre().equals(c2.getNombre()));
-		assertTrue(c1.getDescripcion().equals(c2.getDescripcion()));
-		assertTrue(c1.getImporte().equals(c2.getImporte()));
+		Servicio objetoBD = obd.ultimoInsertado();
+		iguales(objeto, objetoBD);
+		obd.delete(objetoBD);
 	}
 	
-	private void distintos(Servicio c1, Servicio c2) {
-		boolean codigo = c1.getCodigo().equals(c2.getCodigo());
-		boolean nombre = c1.getNombre().equals(c2.getNombre());
-		boolean descripcion = c1.getDescripcion().equals(c2.getDescripcion());
-		boolean importe = c1.getImporte().equals(c2.getImporte());
+	@Test
+	void testSelectByID() {
+		obd.insert(objeto);
+		Servicio objetoBD1 = obd.ultimoInsertado();
+		Servicio objetoBD2 = obd.selectByID(objetoBD1.getID());
+		iguales(objetoBD1, objetoBD2);
+		obd.delete(objetoBD1);
+	}	
+
+	@Test
+	void testSelect() {
+		obd.insert(objeto);
+		Servicio objetoBD1 = obd.ultimoInsertado();
+		List<Servicio> lista = obd.select();
+		assertTrue(lista.size() > 0);
+		obd.delete(objetoBD1);
+	}	
+
+	private void iguales(Servicio obj1, Servicio obj2) {
+		assertTrue(obj1.getCodigo().equals(obj2.getCodigo()));
+		assertTrue(obj1.getNombre().equals(obj2.getNombre()));
+		assertTrue(obj1.getDescripcion().equals(obj2.getDescripcion()));
+		assertTrue(obj1.getImporte().equals(obj2.getImporte()));
+	}
+	
+	private void distintos(Servicio obj1, Servicio obj2) {
+		boolean codigo = obj1.getCodigo().equals(obj2.getCodigo());
+		boolean nombre = obj1.getNombre().equals(obj2.getNombre());
+		boolean descripcion = obj1.getDescripcion().equals(obj2.getDescripcion());
+		boolean importe = obj1.getImporte().equals(obj2.getImporte());
 		assertFalse(codigo && nombre && descripcion && importe);
 	}
 

@@ -1,7 +1,10 @@
 package com.revivir.cementerio.test.junit.persistencia;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,12 +15,18 @@ import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
 
 class CargoOBDTest {
-	private Cargo objeto = crearObjetoDePrueba();
+	private Cargo objeto = crearObjeto();
 	private CargoOBD obd = FactoryOBD.crearCargoOBD();
 	
-	private Cargo crearObjetoDePrueba() {
+	private Cargo crearObjeto() {
 		Fallecido fallecido = FactoryOBD.crearFallecidoOBD().ultimoInsertado();
+		if (fallecido == null)
+			fail("Debe existir al menos un fallecido en la BD para correr este test");
+		
 		Servicio servicio = FactoryOBD.crearServicioOBD().ultimoInsertado();
+		if (servicio == null)
+			fail("Debe existir al meno un servicio en la BD para correr este TEST");
+		
 		return new Cargo(-1, fallecido.getID(), servicio.getID(), "observaciones", false);
 	}
 
@@ -33,7 +42,7 @@ class CargoOBDTest {
 	void testUpdate() {
 		obd.insert(objeto);
 		Cargo objetoBD1 = obd.ultimoInsertado();
-		objetoBD1.setObservaciones("Prueba1");
+		objetoBD1.setObservaciones("Observaciones2");
 		obd.update(objetoBD1);
 		Cargo clienteBD2 = obd.ultimoInsertado();
 		iguales(objetoBD1, clienteBD2);
@@ -53,23 +62,41 @@ class CargoOBDTest {
 	@Test
 	void testUltimoInsertado() {
 		obd.insert(objeto);
-		Cargo clienteBD = obd.ultimoInsertado();
-		iguales(objeto, clienteBD);
-		obd.delete(clienteBD);
+		Cargo objetoBD = obd.ultimoInsertado();
+		iguales(objeto, objetoBD);
+		obd.delete(objetoBD);
 	}	
 
-	private void iguales(Cargo c1, Cargo c2) {
-		assertTrue(c1.getServicio().equals(c2.getServicio()));
-		assertTrue(c1.getFallecido().equals(c2.getFallecido()));
-		assertTrue(c1.getObservaciones().equals(c2.getObservaciones()));
-		assertTrue(c1.getPagado().equals(c2.getPagado()));
+	@Test
+	void testSelectByID() {
+		obd.insert(objeto);
+		Cargo objetoBD1 = obd.ultimoInsertado();
+		Cargo objetoBD2 = obd.selectByID(objetoBD1.getID());
+		iguales(objetoBD1, objetoBD2);
+		obd.delete(objetoBD1);
+	}	
+
+	@Test
+	void testSelect() {
+		obd.insert(objeto);
+		Cargo objetoBD1 = obd.ultimoInsertado();
+		List<Cargo> lista = obd.select();
+		assertTrue(lista.size() > 0);
+		obd.delete(objetoBD1);
+	}	
+
+	private void iguales(Cargo obj1, Cargo obj2) {
+		assertTrue(obj1.getServicio().equals(obj2.getServicio()));
+		assertTrue(obj1.getFallecido().equals(obj2.getFallecido()));
+		assertTrue(obj1.getObservaciones().equals(obj2.getObservaciones()));
+		assertTrue(obj1.getPagado().equals(obj2.getPagado()));
 	}
 	
-	private void distintos(Cargo c1, Cargo c2) {
-		boolean servicio = c1.getServicio().equals(c2.getServicio());
-		boolean fallecido = c1.getFallecido().equals(c2.getFallecido());
-		boolean observaciones = c1.getObservaciones().equals(c2.getObservaciones());
-		boolean pagado = c1.getPagado().equals(c2.getPagado());
+	private void distintos(Cargo obj1, Cargo obj2) {
+		boolean servicio = obj1.getServicio().equals(obj2.getServicio());
+		boolean fallecido = obj1.getFallecido().equals(obj2.getFallecido());
+		boolean observaciones = obj1.getObservaciones().equals(obj2.getObservaciones());
+		boolean pagado = obj1.getPagado().equals(obj2.getPagado());
 		assertFalse(servicio && fallecido && observaciones && pagado);
 	}
 

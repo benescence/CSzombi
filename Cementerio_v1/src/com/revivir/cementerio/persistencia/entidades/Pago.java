@@ -2,15 +2,10 @@ package com.revivir.cementerio.persistencia.entidades;
 
 import java.sql.Date;
 
-
-
 public class Pago {
-
 	private Integer ID,  cliente, cargo, importe;
 	private String observaciones;
 	private Date fecha;
-
-	
 	
 	public Pago(Integer ID, Integer cargo, Integer cliente, Integer importe, String observaciones, Date fecha) {
 		this.ID = ID;
@@ -68,6 +63,5 @@ public class Pago {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-
 	
 }
