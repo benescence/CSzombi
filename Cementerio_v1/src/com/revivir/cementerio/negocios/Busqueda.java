@@ -8,7 +8,6 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
-import com.revivir.cementerio.persistencia.interfaces.ServicioOBD;
 
 public class Busqueda {
 	
