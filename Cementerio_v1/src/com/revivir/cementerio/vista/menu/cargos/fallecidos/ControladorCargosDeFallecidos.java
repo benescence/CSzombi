@@ -1,14 +1,19 @@
 package com.revivir.cementerio.vista.menu.cargos.fallecidos;
 
+import java.util.List;
+
 import javax.swing.JInternalFrame;
 
 import com.revivir.cementerio.negocios.manager.CargoManager;
+import com.revivir.cementerio.negocios.manager.ServicioManager;
+import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.menu.cargos.ControladorCargoAM;
 import com.revivir.cementerio.vista.seleccion.fallecidos.ControladorSeleccionarFallecido;
 import com.revivir.cementerio.vista.seleccion.fallecidos.FallecidoSeleccionable;
+import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorCargosDeFallecidos implements ControladorInterno, FallecidoSeleccionable {
 	private VentanaCargosDeFallecidos ventana;
@@ -20,7 +25,7 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 		ventana = new VentanaCargosDeFallecidos();
 		ventana.botonSeleccionar().addActionListener(e -> seleccionar());
 		ventana.botonAgregar().addActionListener(e -> agregar());
-		//ventana.botonModificar().addActionListener(e -> modificar());
+		ventana.botonModificar().addActionListener(e -> modificar());
 		//ventana.botonEliminar().addActionListener(e -> eliminar());
 	}
 	
@@ -39,15 +44,15 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 	}
 
 	private void modificar() {
-		//List<Cliente> lista = ventana.getTabla().obtenerSeleccion();
+		List<Cargo> lista = ventana.getTabla().obtenerSeleccion();
 		
-		//if (lista.size() != 1) {
-			//Popup.mostrar("Debe seleccionar exactamente 1 cliente para modificarlo");
-			//return;
-		//}
+		if (lista.size() != 1) {
+			Popup.mostrar("Debe seleccionar exactamente 1 cargo para modificarlo");
+			return;
+		}
 		
-		//invocador.getVentana().setEnabled(false);
-		//new ControladorClientesAM(this, lista.get(0));
+		invocador.getVentana().setEnabled(false);
+		new ControladorCargoAM(this, lista.get(0));
 	}
 	
 	private void eliminar() {

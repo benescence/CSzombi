@@ -16,12 +16,12 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 	private final String tabla = "rev_servicios";
 	
 	@Override
-	public void insert(Servicio precio) {
-		String valores = "'"+precio.getCodigo()+"'"
-				+", '"+precio.getDescripcion()+"'"
-				+", "+precio.getImporte()
-				+", '"+precio.getNombre()+"'"
-				+", "+precio.getHistorico();
+	public void insert(Servicio servicio) {
+		String valores = "'"+servicio.getCodigo()+"'"
+				+", '"+servicio.getNombre()+"'"
+				+", "+servicio.getImporte()
+				+", '"+servicio.getDescripcion()+"'"
+				+", "+servicio.getHistorico();
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}

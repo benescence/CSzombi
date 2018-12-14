@@ -4,6 +4,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.revivir.cementerio.negocios.manager.CargoManager;
+import com.revivir.cementerio.negocios.manager.FallecidoManager;
+import com.revivir.cementerio.negocios.manager.ServicioManager;
+import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorPrincipal;
@@ -20,11 +23,24 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 	private ControladorPrincipal principal;
 	private Fallecido fallecido;
 	private Servicio servicio;
+	private Cargo cargo;
 	
 	public ControladorCargoAM(ControladorCargosDeFallecidos invocador, Fallecido fallecido) {
 		this.invocadorFallecidos = invocador;
 		ventana = new VentanaCargoAM();
 		seleccionarFallecido(fallecido);
+		inicializar();
+	}
+
+	public ControladorCargoAM(ControladorCargosDeFallecidos invocador, Cargo cargo) {
+		this.invocadorFallecidos = invocador;
+		this.servicio = ServicioManager.traerPorID(cargo.getID());
+		this.fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
+		this.cargo = cargo;
+		ventana = new VentanaCargoAM();
+		seleccionarFallecido(fallecido);
+		seleccionarServicio(servicio);
+		ventana.getObservaciones().getTextField().setText(cargo.getObservaciones());
 		inicializar();
 	}
 
@@ -64,7 +80,20 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 		}
 		
 		String observaciones = ventana.getObservaciones().getTextField().getText();
-		CargoManager.guardar(fallecido, servicio, observaciones, false);
+		
+		// Estoy dando el alta
+		if (cargo == null) {
+			CargoManager.guardar(fallecido, servicio, observaciones, false);			
+		}
+		
+		// Estoy modificando
+		else {
+			cargo.setFallecido(fallecido.getID());
+			cargo.setServicio(servicio.getID());
+			cargo.setObservaciones(observaciones);
+			CargoManager.modificar(cargo);
+		}
+		
 		volver();
 	}
 	
@@ -98,6 +127,7 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 	@Override
 	public void seleccionarServicio(Servicio servicio) {
 		this.servicio = servicio;
+		System.out.println(servicio);
 		ventana.getCodigo().getTextField().setText(servicio.getCodigo());
 		ventana.getNombreServicio().getTextField().setText(servicio.getNombre());
 		ventana.getDescripcion().getTextField().setText(servicio.getDescripcion());
