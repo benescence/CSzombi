@@ -63,7 +63,7 @@ public class ControladorFallecidoAM {
 		if (fallecido == null) {
 			guardarUbicacion();
 			Ubicacion ubicacion = Localizador.traerUltimaUbicacionGuardada();
-			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion.getID());			
+			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion);			
 		}
 		
 		// Es una modificacion

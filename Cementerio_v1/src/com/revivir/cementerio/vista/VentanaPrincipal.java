@@ -14,7 +14,7 @@ import com.revivir.cementerio.vista.util.Ventana;
 
 public class VentanaPrincipal extends Ventana {
 	private static final long serialVersionUID = 1L;
-	JMenuItem principalAlta, principalCambiarPassword, principalCerrarSesion;
+	private JMenuItem principalAlta, principalCambiarPassword, principalCerrarSesion;
 	private JMenuItem clienteAlta, clienteConsulta; 
 	private JMenuItem fallecidoAlta, fallecidoConsulta;
 	private JMenuItem responsableVincular, responsableConsultarPorCliente, responsableConsultarPorFallecido;
@@ -152,6 +152,18 @@ public class VentanaPrincipal extends Ventana {
 
 	public JMenuItem getCobranzaRegistrarPagos() {
 		return cobranzaRegistrarPagos;
+	}
+
+	public JMenuItem getPrincipalAlta() {
+		return principalAlta;
+	}
+
+	public JMenuItem getPrincipalCambiarPassword() {
+		return principalCambiarPassword;
+	}
+
+	public JMenuItem getPrincipalCerrarSesion() {
+		return principalCerrarSesion;
 	}
 	
 }

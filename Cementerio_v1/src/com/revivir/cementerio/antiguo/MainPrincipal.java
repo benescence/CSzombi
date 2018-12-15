@@ -25,9 +25,9 @@ import com.revivir.cementerio.antiguo.usuarios.Buscar_usuarios;
 import com.revivir.cementerio.antiguo.usuarios.Modif_usuario;
 import com.revivir.cementerio.negocios.Sesion;
 import com.revivir.cementerio.vista.ControladorInterno;
-import com.revivir.cementerio.vista.clientes2.busqueda.ControladorAltaServicio;
 import com.revivir.cementerio.vista.clientes2.busqueda.cliente.ControladorConsultaCliente;
 import com.revivir.cementerio.vista.clientes2.busqueda.fallecido.ControladorConsultaFallecidos;
+import com.revivir.cementerio.vista.menu.principal.ControladorAltaCompleta;
 import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.precio.ControladorPrecio;
 import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
@@ -367,7 +367,7 @@ public class MainPrincipal extends JFrame {
 	
 	private void mostrarAltaCliente() {
 		cerrarAnterior();        
-        controladorInterno = new ControladorAltaServicio();
+        controladorInterno = new ControladorAltaCompleta(null);
         PanelVertical panel = new PanelVertical();
         panel.add(controladorInterno.getVentana());
 		setContentPane(panel);

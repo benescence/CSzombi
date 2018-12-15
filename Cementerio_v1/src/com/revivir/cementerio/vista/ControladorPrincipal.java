@@ -1,6 +1,5 @@
 package com.revivir.cementerio.vista;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -10,6 +9,7 @@ import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
+import com.revivir.cementerio.vista.menu.principal.ControladorAltaCompleta;
 import com.revivir.cementerio.vista.menu.responsables.ControladorVincular;
 import com.revivir.cementerio.vista.menu.responsables.porcliente.ControladorConsultarPorCliente;
 import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
@@ -36,6 +36,7 @@ public class ControladorPrincipal {
 		ventana.getFallecidoConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorFallecidosABM(this)));
 		ventana.getServicioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorServiciosABM(this)));
 		ventana.getUsuarioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorUsuariosABM(this)));
+		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
 		
 		ventana.getResponsableConsultarPorCliente().addActionListener(e -> colocarVentanaInterna(new ControladorConsultarPorCliente(this)));
 		ventana.getCobranzaCargosFallecido().addActionListener(e -> colocarVentanaInterna(new ControladorCargosDeFallecidos(this)));

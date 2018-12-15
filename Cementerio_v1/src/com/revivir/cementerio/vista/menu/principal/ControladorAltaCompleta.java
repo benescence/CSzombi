@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.clientes2.busqueda;
+package com.revivir.cementerio.vista.menu.principal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,23 +6,30 @@ import java.sql.Date;
 
 import javax.swing.JInternalFrame;
 
-import com.revivir.cementerio.negocios.Localizador;
+import com.revivir.cementerio.negocios.Almanaque;
+import com.revivir.cementerio.negocios.Vinculador;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.negocios.manager.FallecidoManager;
+import com.revivir.cementerio.negocios.manager.UbicacionManager;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.vista.ControladorInterno;
+import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
 import com.revivir.cementerio.vista.seleccion.clientes.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorAltaServicio implements ActionListener, ClienteSeleccionable, ControladorInterno {
-	private VentanaAltaServicio ventana;
+public class ControladorAltaCompleta implements ActionListener, ClienteSeleccionable, ControladorInterno {
+	private VentanaAltaCompleta ventana;
+	private ControladorPrincipal principal;
 	private Cliente cliente = null;
 
-	public ControladorAltaServicio() {
-		ventana = new VentanaAltaServicio();
+	public ControladorAltaCompleta(ControladorPrincipal principal) {
+		this.principal = principal;
+		ventana = new VentanaAltaCompleta();
 		ventana.botonExistente().addActionListener(this);
 		ventana.botonLimpiarCliente().addActionListener(this);
 		ventana.botonConfirmar().addActionListener(this);
@@ -58,12 +65,11 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 			String telefono = ventana.getTelefono().getText();
 			String email = ventana.getEmail().getText();
 			ClienteManager.guardar(DNI, nombres, apellidos, telefono, email);
-			cliente = ClienteManager.traerPorDNI(DNI);
+			cliente = ClienteManager.traerMasReciente();
 		}
 		
 		// GUARDAR LA UBICACION
 		SubSector subsector = (SubSector) ventana.getInSubSector().getSelectedItem();
-		Integer deposito = null;
 		String otroCementerio = null;
 		String osario = null;
 		String bis = null;
@@ -83,19 +89,22 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 		String mueble= (ventana.getInMueble().isEnabled() ? ventana.getInMueble().getText() : null);
 		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
-
-		//Localizador.guardarUbicacion(subsector, deposito, otroCementerio, osario, nicho, fila, seccion,
-		//		macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
+		UbicacionManager.guardar(subsector, otroCementerio, osario, nicho, fila, seccion,
+				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ, Almanaque.hoy());
 		
 		// GUARDO AL FALLECIDO
-		Integer ubicacion = 1;//Localizador.traerUltimaUbicacionGuardada();
+		Ubicacion ubicacion = UbicacionManager.traerMasReciente();
 		TipoFallecimiento tipo = (TipoFallecimiento) ventana.getInTipoFallecimiento().getSelectedItem();
 		String dni = (!ventana.getInDNIFallecido().getText().equals("") ? ventana.getInDNIFallecido().getText() : null);
 		String apellido= ventana.getInApellidoFallecido().getText();;
 		String nombre= ventana.getInNombreFallecido().getText();;
 		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
-		//FallecidoManager.guardar(cliente.getID(), ubicacion, tipo, dni, apellido, nombre, cocheria, fechaFallecimiento);
+		FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion);
+		
+		// LOS VINCULO
+		Fallecido fallecido = FallecidoManager.traerMasReciente();
+		Vinculador.vincular(cliente, fallecido);
 		
 		// FINALIZO EL GUARDADO
 		Popup.mostrar("El servicio se ha guardado exitosamente");
@@ -123,7 +132,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 	}
 
 	private void clienteExistente() {
-		ventana.deshabilitar();
+		principal.getVentana().deshabilitar();
 		new ControladorSeleccionCliente(this);
 	}
 		
@@ -279,6 +288,7 @@ public class ControladorAltaServicio implements ActionListener, ClienteSeleccion
 	
 	@Override
 	public void mostrar() {
+		principal.getVentana().deshabilitar();
 		ventana.mostrar();
 	}
 

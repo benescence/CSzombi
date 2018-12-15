@@ -1,6 +1,5 @@
-package com.revivir.cementerio.vista.clientes2.busqueda;
+package com.revivir.cementerio.vista.menu.principal;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -25,7 +24,7 @@ import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.VentanaInterna;
 import com.toedter.calendar.JDateChooser;
 
-public class VentanaAltaServicio extends VentanaInterna {
+public class VentanaAltaCompleta extends VentanaInterna {
 	private static final long serialVersionUID = 1L;
 	private JButton btnExistente, btnLimpiarCliente, btnConfirmar, btnLimpiarTodo;
 	
@@ -44,7 +43,7 @@ public class VentanaAltaServicio extends VentanaInterna {
 	private JComboBox<Sector> inSector;
 	private JComboBox<SubSector> inSubSector;
 	
-	public VentanaAltaServicio() {
+	public VentanaAltaCompleta() {
 		super("Alta de servicio", 450, 300);
 		setNormalBounds(new Rectangle(100, 100, 600, 500));
 		

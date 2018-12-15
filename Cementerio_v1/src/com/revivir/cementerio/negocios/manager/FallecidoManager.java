@@ -6,14 +6,15 @@ import java.util.List;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
 public class FallecidoManager {
 	
 	public static void guardar(String nombre, String apellido, String dni, String cocheria,  
-			TipoFallecimiento tipo, Date fecha, Integer ubicacion) {
+			TipoFallecimiento tipo, Date fecha, Ubicacion ubicacion) {
 		
-		Fallecido fallecido = new Fallecido(-1, ubicacion, tipo, dni, apellido,
+		Fallecido fallecido = new Fallecido(-1, ubicacion.getID(), tipo, dni, apellido,
 				nombre, cocheria, fecha);
 		
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
@@ -43,6 +44,11 @@ public class FallecidoManager {
 	public static Fallecido traerPorID(Integer ID) {
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
 		return obd.selectByID(ID);
+	}
+
+	public static Fallecido traerMasReciente() {
+		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
+		return obd.ultimoInsertado();
 	}
 
 }
