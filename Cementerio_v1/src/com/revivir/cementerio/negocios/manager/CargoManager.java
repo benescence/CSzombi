@@ -25,10 +25,15 @@ public class CargoManager {
 		CargoOBD obd = FactoryOBD.crearCargoOBD();
 		obd.delete(eliminar);
 	}
-	
+
 	public static List<Cargo> traerTodo() {
 		CargoOBD obd = FactoryOBD.crearCargoOBD();
 		return obd.select();
+	}
+
+	public static Cargo traerPorID(Integer ID) {
+		CargoOBD obd = FactoryOBD.crearCargoOBD();
+		return obd.selectByID(ID);
 	}
 	
 	public static List<Cargo> traerPorFallecido(Fallecido fallecido) {

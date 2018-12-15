@@ -13,7 +13,7 @@ public class TablaPrecios  extends JTable{
 		private static final long serialVersionUID = 1L;
 		private String[] columnas = { "codigo", "descripcion", "monto", "Observaciones"};
 		private DefaultTableModel modelo;
-		private List<Servicio> precio;
+		//private List<Servicio> precio;
 
 		public TablaPrecios(List<Servicio> precios) {
 			modelo = new DefaultTableModel(null, columnas);
@@ -22,7 +22,7 @@ public class TablaPrecios  extends JTable{
 		}	
 		
 	public void recargar(List<Servicio> precios) {
-			this.precio = precios;
+			//this.precio = precios;
 			modelo.setRowCount(0);
 			modelo.setColumnCount(0);
 			modelo.setColumnIdentifiers(columnas);
