@@ -61,18 +61,22 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 
 	@Override
 	public void update(Ubicacion ubicacion) {
+		String bis = (ubicacion.getBis() != null) ? "'"+ubicacion.getBis()+"'" : null;
+		
+		
+		
 		String condicion = "ID = "+ubicacion.getID();
 		String valores = " Subsector= "+Definido.subsector(ubicacion.getSubsector())
-				+", Otro Cementerio = '"+ubicacion.getOtroCementerio()+"'"
+				+", otro_cementerio = '"+ubicacion.getOtroCementerio()+"'"
 				+", osario = '"+ubicacion.getOsario()+"'"
 				+", Nicho = '"+ubicacion.getNicho()+"'"
 				+", Fila = '"+ubicacion.getFila()+"'"
-				+", Seccion = "+ubicacion.getSeccion()+"'"
+				+", Seccion = '"+ubicacion.getSeccion()+"'"
 				+", Macizo = '"+ubicacion.getMacizo()+"'"
 				+", Unidad = '"+ubicacion.getUnidad()+"'"
-				+", bis = '"+ubicacion.getBis()+"'"
-				+", macizo bis = '"+ubicacion.getBis_macizo()+"'"
-				+", Numero = '"+ubicacion.getNumero()+"'"
+				+", bis = "+bis
+				+", bis_macizo = '"+ubicacion.getBis_macizo()+"'"
+				+", numero_sepultura = '"+ubicacion.getNumero()+"'"
 				+", Sepultura = '"+ubicacion.getSepultura()+"'"
 				+", Parcela = '"+ubicacion.getParcela()+"'"
 				+", Mueble = '"+ubicacion.getMueble()+"'"
