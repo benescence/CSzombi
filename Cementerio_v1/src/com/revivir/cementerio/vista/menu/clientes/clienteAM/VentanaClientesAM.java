@@ -27,7 +27,7 @@ public class VentanaClientesAM extends Ventana {
 		inicializar();
 		inNombre.getTextField().setText(cliente.getNombre());
 		inApellido.getTextField().setText(cliente.getApellido());
-		inDNI.getTextField().setText(cliente.getDni());
+		inDNI.getTextField().setText(cliente.getDNI());
 		inTelefono.getTextField().setText(cliente.getTelefono());
 		inEmail.getTextField().setText(cliente.getEmail());
 	}

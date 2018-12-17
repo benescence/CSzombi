@@ -12,28 +12,44 @@ import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 
 public class ClienteOBDMySQL extends OBD implements ClienteOBD{
-	private final String campos = "DNI, apellido, nombre, telefono, email";
+	private final String campos = "nombre, apellido, DNI, domicilio, telefono, email";
 	private final String tabla = "rev_clientes";
 	
 	@Override
 	public void insert(Cliente cliente) {
-		String valores = "'"+cliente.getDni()+"'"
-				+", '"+cliente.getApellido()+"'"
-				+", '"+cliente.getNombre()+"'"
-				+", '"+cliente.getTelefono()+"'"
-				+", '"+cliente.getEmail()+"'";
+		String nombre = (cliente.getNombre() == null) ? null : "'"+cliente.getNombre()+"'"; 
+		String apellido = (cliente.getApellido() == null) ? null : "'"+cliente.getApellido()+"'"; 
+		String DNI = (cliente.getDNI() == null) ? null : "'"+cliente.getDNI()+"'"; 
+		String domicilio = (cliente.getDomicilio() == null) ? null : "'"+cliente.getDomicilio()+"'"; 
+		String telefono = (cliente.getTelefono() == null) ? null : "'"+cliente.getTelefono()+"'"; 
+		String email = (cliente.getEmail() == null) ? null : "'"+cliente.getEmail()+"'"; 
+
+		String valores = nombre 
+				+", " + apellido
+				+", " + DNI
+				+", " + domicilio
+				+", " + telefono
+				+", " + email;
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}
 
 	@Override
 	public void update(Cliente cliente) {
+		String nombre = (cliente.getNombre() == null) ? null : "'"+cliente.getNombre()+"'"; 
+		String apellido = (cliente.getApellido() == null) ? null : "'"+cliente.getApellido()+"'"; 
+		String DNI = (cliente.getDNI() == null) ? null : "'"+cliente.getDNI()+"'"; 
+		String domicilio = (cliente.getDomicilio() == null) ? null : "'"+cliente.getDomicilio()+"'"; 
+		String telefono = (cliente.getTelefono() == null) ? null : "'"+cliente.getTelefono()+"'"; 
+		String email = (cliente.getEmail() == null) ? null : "'"+cliente.getEmail()+"'"; 
+
 		String condicion = "ID = "+cliente.getID();
-		String valores = "DNI = '"+cliente.getDni()+"'"
-				+", apellido = '"+cliente.getApellido()+"'"
-				+", nombre = '"+cliente.getNombre()+"'"
-				+", telefono = '"+cliente.getTelefono()+"'"
-				+", email = '"+cliente.getEmail()+"'";
+		String valores = "nombre = "+ nombre
+				+", apellido = "+ apellido 
+				+", DNI = "+DNI
+				+", domicilio = "+domicilio
+				+", telefono = "+telefono
+				+", email = "+email;
 		String consulta = "update "+tabla+" set "+valores+"  where ("+condicion+");";
 		ejecutarSQL(consulta);
 	}
@@ -48,6 +64,41 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 	@Override
 	public List<Cliente> select() {
 		return selectByCondicion("true");
+	}
+
+	@Override
+	public Cliente selectByID(Integer ID) {
+		String condicion = "ID = "+ID;
+		List<Cliente> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
+	}
+
+	@Override
+	public Cliente ultimoInsertado() {
+		Integer ID = selectLastID(tabla);
+		if (ID == null)
+			return null;
+		else
+			return selectByID(ID);
+	}
+
+	
+	// CONSULTAS ESPECIFICAS
+	@Override
+	public Cliente selectByID2(Integer ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cliente selectByDNI(String DNI) {
+		String condicion = "DNI = " +(DNI != null ? "'"+DNI+"'" : "DNI");
+		List<Cliente> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
 	}
 
 	@Override
@@ -74,23 +125,6 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 		return selectByCondicion(condicion);
 	}
 
-	@Override
-	public Cliente selectByDNI(String DNI) {
-		String condicion = "DNI = " +(DNI != null ? "'"+DNI+"'" : "DNI");
-		List<Cliente> lista = selectByCondicion(condicion);
-		if (lista.size() > 0)
-			return lista.get(0);
-		return null;
-	}
-	
-	public Cliente selectByID(Integer ID) {
-		String condicion = "ID = "+ID;
-		List<Cliente> lista = selectByCondicion(condicion);
-		if (lista.size() > 0)
-			return lista.get(0);
-		return null;
-	}
-	
 	private List<Cliente> selectByCondicion(String condicion) {
 		List<Cliente> ret = new ArrayList<Cliente>();
 		String comandoSQL = "select ID, "+campos+" from "+tabla+" where ("+condicion+");";  
@@ -104,12 +138,13 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 			while (resultados.next()) {
 				ret.add(new Cliente(
 						resultados.getInt("ID"),
-						resultados.getString("DNI"),
-						resultados.getString("apellido"),
 						resultados.getString("nombre"),
+						resultados.getString("apellido"),
+						resultados.getString("DNI"),
+						resultados.getString("domicilio"),
 						resultados.getString("telefono"),
 						resultados.getString("email")
-						));
+					));
 			}
 
 			resultados.close();
@@ -122,21 +157,6 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 		}
 			
 		return ret;
-	}
-
-	@Override
-	public Cliente selectByID2(Integer ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Cliente ultimoInsertado() {
-		Integer ID = selectLastID(tabla);
-		if (ID == null)
-			return null;
-		else
-			return selectByID(ID);
 	}
 
 }

@@ -5,6 +5,8 @@ import com.revivir.cementerio.persistencia.entidades.Cliente;
 
 public interface ClienteOBD {
 	
+	// METODOS COMUNES DE PERSISTENCIA
+	
 	public void insert(Cliente cliente);
 	
 	public void update(Cliente cliente);
@@ -13,14 +15,16 @@ public interface ClienteOBD {
 
 	public List<Cliente> select();
 	
-	public Cliente selectByID2(Integer ID);
-
+	public Cliente selectByID(Integer iD);
+	
 	public Cliente ultimoInsertado();
+	
+	// CONSULTAS ESPECIFICAS
+	
+	public Cliente selectByID2(Integer ID);
 
 	public Cliente selectByDNI(String DNI);
 
 	public List<Cliente> selectByNombreApellidoDNI(String nombre, String apellido, String DNI);
-
-	public Cliente selectByID(Integer iD);
 
 }

@@ -16,7 +16,7 @@ class ClienteOBDTest {
 	private ClienteOBD obd = FactoryOBD.crearClienteOBD();
 	
 	private Cliente crearObjeto() {
-		return new Cliente(-1, "000", "Apellido", "Nombre", "Telefono", "Email");
+		return new Cliente(-1, "Nombre", "Apellido", "DNI", "Domiclio", "Telefono", "Email");
 	}
 
 	@Test
@@ -31,11 +31,12 @@ class ClienteOBDTest {
 	void testUpdate() {
 		obd.insert(objeto);
 		Cliente objetoBD1 = obd.ultimoInsertado();
-		objetoBD1.setNombre("Nombre1");
-		objetoBD1.setApellido("Nombre2");
-		objetoBD1.setDni("Nombre3");
-		objetoBD1.setTelefono("Nombre4");
-		objetoBD1.setEmail("Nombre5");
+		objetoBD1.setNombre("Nombre2");
+		objetoBD1.setApellido("Apellido2");
+		objetoBD1.setDNI("DNI2");
+		objetoBD1.setDomicilio("Domicilio2");
+		objetoBD1.setTelefono("Telefono2");
+		objetoBD1.setEmail("Email2");
 		obd.update(objetoBD1);
 		Cliente objetoBD2 = obd.ultimoInsertado();
 		iguales(objetoBD1, objetoBD2);
@@ -48,7 +49,8 @@ class ClienteOBDTest {
 		Cliente objetoBD = obd.ultimoInsertado();
 		obd.delete(objetoBD);
 		objetoBD = obd.ultimoInsertado();
-		distintos(objeto, objetoBD);
+		if (objetoBD != null)
+			distintos(objeto, objetoBD);
 	}
 
 	@Test
@@ -80,7 +82,8 @@ class ClienteOBDTest {
 	private void iguales(Cliente obj1, Cliente obj2) {
 		assertTrue(obj1.getNombre().equals(obj2.getNombre()));
 		assertTrue(obj1.getApellido().equals(obj2.getApellido()));
-		assertTrue(obj1.getDni().equals(obj2.getDni()));
+		assertTrue(obj1.getDNI().equals(obj2.getDNI()));
+		assertTrue(obj1.getDomicilio().equals(obj2.getDomicilio()));
 		assertTrue(obj1.getTelefono().equals(obj2.getTelefono()));
 		assertTrue(obj1.getEmail().equals(obj2.getEmail()));
 	}
@@ -88,10 +91,11 @@ class ClienteOBDTest {
 	private void distintos(Cliente obj1, Cliente obj2) {
 		boolean nombre = obj1.getNombre().equals(obj2.getNombre());
 		boolean apellido = obj1.getApellido().equals(obj2.getApellido());
-		boolean dni = obj1.getDni().equals(obj2.getDni());
+		boolean dni = obj1.getDNI().equals(obj2.getDNI());
+		boolean domicilio = obj1.getDomicilio().equals(obj2.getDomicilio());
 		boolean telefono = obj1.getTelefono().equals(obj2.getTelefono());
 		boolean email = obj1.getEmail().equals(obj2.getEmail());
-		assertFalse(nombre && apellido && dni && telefono && email);
+		assertFalse(nombre && apellido && dni && domicilio && telefono && email);
 	}
 
 }

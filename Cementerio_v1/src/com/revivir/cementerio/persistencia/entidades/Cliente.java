@@ -2,13 +2,15 @@ package com.revivir.cementerio.persistencia.entidades;
 
 public class Cliente {
 	private Integer ID;
-	private String dni, apellido, nombre, telefono, email;
+	private String nombre, apellido, DNI, domicilio, telefono, email;
 
-	public Cliente(Integer ID, String dni, String apellido, String nombre, String telefono, String email) {
-		this.ID = ID;
-		this.dni = dni;
-		this.apellido = apellido;
+	public Cliente(Integer iD, String nombre, String apellido, String DNI, String domicilio, String telefono,
+			String email) {
+		this.ID = iD;
 		this.nombre = nombre;
+		this.apellido = apellido;
+		this.DNI = DNI;
+		this.domicilio = domicilio;
 		this.telefono = telefono;
 		this.email = email;
 	}
@@ -17,16 +19,16 @@ public class Cliente {
 		return ID;
 	}
 
-	public void setID(Integer ID) {
-		this.ID = ID;
+	public void setID(Integer iD) {
+		this.ID = iD;
 	}
 
-	public String getDni() {
-		return dni;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getApellido() {
@@ -37,12 +39,20 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getDNI() {
+		return DNI;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setDNI(String DNI) {
+		this.DNI =DNI;
+	}
+
+	public String getDomicilio() {
+		return domicilio;
+	}
+
+	public void setDomicilio(String domicilio) {
+		this.domicilio = domicilio;
 	}
 
 	public String getTelefono() {

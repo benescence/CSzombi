@@ -43,7 +43,7 @@ public class ControladorConsultarPorCliente implements ControladorInterno, Clien
 	public void setCliente(Cliente cliente) {
 		ventana.getNombre().getTextField().setText(cliente.getNombre());
 		ventana.getApellido().getTextField().setText(cliente.getApellido());
-		ventana.getDNI().getTextField().setText(cliente.getDni());
+		ventana.getDNI().getTextField().setText(cliente.getDNI());
 		ventana.getTelefono().getTextField().setText(cliente.getTelefono());
 		ventana.getEmail().getTextField().setText(cliente.getEmail());
 		ventana.getTabla().recargar(Vinculador.traerFallecidosDeCliente(cliente));

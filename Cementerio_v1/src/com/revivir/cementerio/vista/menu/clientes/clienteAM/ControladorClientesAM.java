@@ -61,7 +61,7 @@ public class ControladorClientesAM {
 		else {
 			cliente.setNombre(nombre);
 			cliente.setApellido(apellido);
-			cliente.setDni(dni);
+			cliente.setDNI(dni);
 			cliente.setTelefono(telefono);
 			cliente.setEmail(email);
 			ClienteManager.modificar(cliente);

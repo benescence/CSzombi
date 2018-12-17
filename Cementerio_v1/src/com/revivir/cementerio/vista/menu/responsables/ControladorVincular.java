@@ -75,7 +75,7 @@ public class ControladorVincular implements ClienteSeleccionable, FallecidoSelec
 		ventana.setCliente(cliente);
 		ventana.getNombreCliente().getTextField().setText(cliente.getNombre());
 		ventana.getApellidoCliente().getTextField().setText(cliente.getApellido());
-		ventana.getDNICliente().getTextField().setText(cliente.getDni());
+		ventana.getDNICliente().getTextField().setText(cliente.getDNI());
 	}
 
 	@Override

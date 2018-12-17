@@ -27,7 +27,7 @@ public class TablaClientes extends JTable{
 
 		for (Cliente cliente: clientes) {
 			Object[] fila = {
-					cliente.getDni(),
+					cliente.getDNI(),
 					cliente.getNombre(),
 					cliente.getApellido(),
 					cliente.getTelefono(),
