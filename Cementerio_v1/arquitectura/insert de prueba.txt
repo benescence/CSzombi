@@ -1,0 +1,25 @@
+-- INSERT DE DATOS DE PRUEBA
+
+-- INSERT DE CLIENTES
+INSERT INTO rev_clientes(DNI, apellido, nombre, telefono, email) VALUES
+("1", "Caballero", "Carlos", "1234-4569", "carlos@gmail.com"),
+("2", "Gutierrez", "Jose", "5634-4569", "asas@gmail.com"),
+("3", "Gonzalez", "Juan", "12356569", "hola@gmail.com"),
+("4", "Velazquez", "Cyntia", "1278-4569", "cyntia@gmail.com"),
+("5", "Martinez", "Maria", "1234-4649", "carlos2@gmail.com");
+
+-- INSERT UBICACIONES
+INSERT INTO rev_ubicaciones(subsector, deposito, otro_cementerio, osario, nicho, fila,
+seccion, macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ) VALUES
+(1, null, null, null, 15, 2, "15", null, null, null, null, null, null, null, null, null, null),
+(3, null, null, null, 15, 2, "16", null, null, null, null, null, null, null, null, null, "has"),
+(7, null, "La alameda", null, 15, 2, "15", null, null, null, null, null, null, null, null, "sor", null);
+
+-- INSERT DE FALLECIDOS
+INSERT INTO rev_fallecidos (cliente, ubicacion, DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria) VALUES
+(1, 1, "6", "Suarez", "Veronica", '2015-11-11', 1, "Los 3 amigo"),
+(1, 2, "7", "Kennedy", "Javier", '2016-11-11', 2, "Titanic"),
+(1, 3, "8", "Benitez", "Willy", '2010-11-11', 1, "Los 3 amigo"),
+(1, 1, "9", "Fort", "Ricardo", '2002-11-11', 2, "La parca dorada"),
+(1, 2, null, null, "Logan", '2017-1-1', 1, "El tronco");
+
