@@ -3,9 +3,9 @@ package com.revivir.cementerio.vista.menu.principal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JInternalFrame;
-
 import com.revivir.cementerio.negocios.Almanaque;
 import com.revivir.cementerio.negocios.Vinculador;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
@@ -89,8 +89,10 @@ public class ControladorAltaCompleta implements ActionListener, ClienteSeleccion
 		String mueble= (ventana.getInMueble().isEnabled() ? ventana.getInMueble().getText() : null);
 		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
-		UbicacionManager.guardar(subsector, otroCementerio, osario, nicho, fila, seccion,
-				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ, Almanaque.hoy());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		
+		UbicacionManager.guardar(subsector, otroCementerio, nicho, fila, seccion,
+				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
 		
 		// GUARDO AL FALLECIDO
 		Ubicacion ubicacion = UbicacionManager.traerMasReciente();
@@ -100,7 +102,8 @@ public class ControladorAltaCompleta implements ActionListener, ClienteSeleccion
 		String nombre= ventana.getInNombreFallecido().getText();;
 		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
-		FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion);
+		Date fechaIngreso =new Date( ventana.getInFechaIngreso().getDate().getTime());
+		FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion, fechaIngreso);
 		
 		// LOS VINCULO
 		Fallecido fallecido = FallecidoManager.traerMasReciente();

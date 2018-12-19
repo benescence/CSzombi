@@ -24,7 +24,9 @@ public class Localizador {
 		List<SubSector> ret = new ArrayList<>();
 		
 		if (sector == Sector.SEPULTURAS) {
-			ret.add(SubSector.SEPULTURAS);
+			ret.add(SubSector.COMPRADA);
+			ret.add(SubSector.ANGELITOS);			
+			ret.add(SubSector.ADULTOS);
 			ret.add(SubSector.INDIGENTES);
 		}
 		
@@ -47,14 +49,12 @@ public class Localizador {
 		return ret;
 	}
 
-	public static void guardarUbicacion(SubSector subsector, String otroCementerio,
-			String osario, String nicho, String fila, String seccion, String macizo, String unidad,
-			String bis, String bis_macizo, String numero, String sepultura, String parcela,
-			String mueble, String inhumacion, String circ, Date vencimiento) {
+	public static void guardarUbicacion(SubSector subsector, String otroCementerio,Integer nicho, Integer fila, String seccion, Integer macizo, Integer unidad,
+			Integer bis, Integer bis_macizo, Integer sepultura, Integer parcela,
+			Integer mueble, Integer inhumacion, Integer circ) {
 		
-		Ubicacion ubicacion = new Ubicacion(-1, subsector, otroCementerio,
-				osario, nicho, fila, seccion, macizo, unidad, bis, bis_macizo, numero,
-				sepultura, parcela, mueble, inhumacion, circ, vencimiento);
+		Ubicacion ubicacion = new Ubicacion(-1, subsector, otroCementerio, nicho, fila, seccion, macizo, unidad, bis, bis_macizo,
+				sepultura, parcela, mueble, inhumacion, circ);
 		
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
 		obd.insert(ubicacion);

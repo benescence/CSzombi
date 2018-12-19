@@ -12,10 +12,10 @@ import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 public class FallecidoManager {
 	
 	public static void guardar(String nombre, String apellido, String dni, String cocheria,  
-			TipoFallecimiento tipo, Date fecha, Ubicacion ubicacion) {
+			TipoFallecimiento tipo, Date fecha, Ubicacion ubicacion, Date fechaIngreso) {
 		
 		Fallecido fallecido = new Fallecido(-1, ubicacion.getID(), tipo, dni, apellido,
-				nombre, cocheria, fecha);
+				nombre, cocheria, fecha, fechaIngreso);
 		
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
 		obd.insert(fallecido);	

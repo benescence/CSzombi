@@ -1,23 +1,20 @@
 package com.revivir.cementerio.persistencia.entidades;
 
-import java.util.Date;
+
 
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 
 public class Ubicacion {
-	private Integer ID;
-	private String otroCementerio, osario, nicho, fila, seccion, macizo,
-	unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ;
-	private Date vencimiento;
+	private Integer ID, nicho, fila, macizo,
+	unidad, bis, bis_macizo, sepultura, parcela, mueble, inhumacion, circ;
+	private String  otroCementerio, seccion;
 	private SubSector subsector;
 	
-	public Ubicacion(Integer ID, SubSector subsector, String otroCementerio, String osario,
-			String nicho, String fila, String seccion, String macizo, String unidad, String bis, String bis_macizo,
-			String numero, String sepultura, String parcela, String mueble, String inhumacion, String circ, Date vencimiento) {
+	public Ubicacion(Integer ID, SubSector subsector, String otroCementerio,
+			Integer nicho, Integer fila, String seccion, Integer macizo, Integer unidad,Integer bis, Integer bis_macizo, Integer sepultura, Integer parcela, Integer mueble, Integer inhumacion, Integer circ) {
 		this.ID = ID;
 		this.subsector = subsector;
 		this.otroCementerio = otroCementerio;
-		this.osario = osario;
 		this.nicho = nicho;
 		this.fila = fila;
 		this.seccion = seccion;
@@ -25,22 +22,13 @@ public class Ubicacion {
 		this.unidad = unidad;
 		this.bis = bis;
 		this.bis_macizo = bis_macizo;
-		this.numero = numero;
 		this.sepultura = sepultura;
 		this.parcela = parcela;
 		this.mueble = mueble;
 		this.inhumacion = inhumacion;
 		this.circ = circ;
-		this.vencimiento= vencimiento;
 	}
 
-	public Date getVencimiento() {
-		return vencimiento;
-	}
-
-	public void setVencimiento(Date vencimiento) {
-		this.vencimiento = vencimiento;
-	}
 
 	public Integer getID() {
 		return ID;
@@ -66,116 +54,125 @@ public class Ubicacion {
 		this.otroCementerio = otroCementerio;
 	}
 
-	public String getOsario() {
-		return osario;
-	}
 
-	public void setOsario(String osario) {
-		this.osario = osario;
-	}
-
-	public String getNicho() {
+	public Integer getNicho() {
 		return nicho;
 	}
 
-	public void setNicho(String nicho) {
+
+	public void setNicho(Integer nicho) {
 		this.nicho = nicho;
 	}
 
-	public String getFila() {
+
+	public Integer getFila() {
 		return fila;
 	}
 
-	public void setFila(String fila) {
+
+	public void setFila(Integer fila) {
 		this.fila = fila;
 	}
+
+
+	public Integer getMacizo() {
+		return macizo;
+	}
+
+
+	public void setMacizo(Integer macizo) {
+		this.macizo = macizo;
+	}
+
+
+	public Integer getUnidad() {
+		return unidad;
+	}
+
+
+	public void setUnidad(Integer unidad) {
+		this.unidad = unidad;
+	}
+
+
+	public Integer getBis() {
+		return bis;
+	}
+
+
+	public void setBis(Integer bis) {
+		this.bis = bis;
+	}
+
+
+	public Integer getBis_macizo() {
+		return bis_macizo;
+	}
+
+
+	public void setBis_macizo(Integer bis_macizo) {
+		this.bis_macizo = bis_macizo;
+	}
+
+
+	public Integer getSepultura() {
+		return sepultura;
+	}
+
+
+	public void setSepultura(Integer sepultura) {
+		this.sepultura = sepultura;
+	}
+
+
+	public Integer getParcela() {
+		return parcela;
+	}
+
+
+	public void setParcela(Integer parcela) {
+		this.parcela = parcela;
+	}
+
+
+	public Integer getMueble() {
+		return mueble;
+	}
+
+
+	public void setMueble(Integer mueble) {
+		this.mueble = mueble;
+	}
+
+
+	public Integer getInhumacion() {
+		return inhumacion;
+	}
+
+
+	public void setInhumacion(Integer inhumacion) {
+		this.inhumacion = inhumacion;
+	}
+
+
+	public Integer getCirc() {
+		return circ;
+	}
+
+
+	public void setCirc(Integer circ) {
+		this.circ = circ;
+	}
+
 
 	public String getSeccion() {
 		return seccion;
 	}
 
+
 	public void setSeccion(String seccion) {
 		this.seccion = seccion;
 	}
 
-	public String getMacizo() {
-		return macizo;
-	}
-
-	public void setMacizo(String macizo) {
-		this.macizo = macizo;
-	}
-
-	public String getUnidad() {
-		return unidad;
-	}
-
-	public void setUnidad(String unidad) {
-		this.unidad = unidad;
-	}
-
-	public String getBis() {
-		return bis;
-	}
-
-	public void setBis(String bis) {
-		this.bis = bis;
-	}
-
-	public String getBis_macizo() {
-		return bis_macizo;
-	}
-
-	public void setBis_macizo(String bis_macizo) {
-		this.bis_macizo = bis_macizo;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getSepultura() {
-		return sepultura;
-	}
-
-	public void setSepultura(String sepultura) {
-		this.sepultura = sepultura;
-	}
-
-	public String getParcela() {
-		return parcela;
-	}
-
-	public void setParcela(String parcela) {
-		this.parcela = parcela;
-	}
-
-	public String getMueble() {
-		return mueble;
-	}
-
-	public void setMueble(String mueble) {
-		this.mueble = mueble;
-	}
-
-	public String getInhumacion() {
-		return inhumacion;
-	}
-
-	public void setInhumacion(String inhumacion) {
-		this.inhumacion = inhumacion;
-	}
-
-	public String getCirc() {
-		return circ;
-	}
-
-	public void setCirc(String circ) {
-		this.circ = circ;
-	}
 
 }

@@ -2,7 +2,9 @@ package com.revivir.cementerio.persistencia.definidos;
 
 public enum SubSector {
 
-	SEPULTURAS,
+	ADULTOS,
+	ANGELITOS,
+	COMPRADA,
 	INDIGENTES,
 	PALMERAS_ATAUD,
 	PALMERAS_CENIZAS,
@@ -11,8 +13,8 @@ public enum SubSector {
 	NICHERA,
 	CENIZARIO,
 	BOVEDA, 
-	DEPOSITO2, 
 	DEPOSITO1, 
+	DEPOSITO2, 
 	DEPOSITO3
 	
 }

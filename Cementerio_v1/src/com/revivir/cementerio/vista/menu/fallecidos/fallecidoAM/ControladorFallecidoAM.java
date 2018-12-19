@@ -58,12 +58,12 @@ public class ControladorFallecidoAM {
 		String nombre= ventana.getInNombreFallecido().getText();;
 		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
-		
+		Date fechaIngreso = new Date(ventana.getInFechaIngreso().getDate().getTime());
 		// Es un alta
 		if (fallecido == null) {
 			guardarUbicacion();
 			Ubicacion ubicacion = Localizador.traerUltimaUbicacionGuardada();
-			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion);			
+			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion, fechaIngreso);			
 		}
 		
 		// Es una modificacion
@@ -84,15 +84,14 @@ public class ControladorFallecidoAM {
 	
 	private void guardarUbicacion() {
 		SubSector subsector = (SubSector) ventana.getInSubSector().getSelectedItem();
-		String otroCementerio = null;
-		String osario = null;
+		String otroCementerio = null
 		String bis = null;
 		if (ventana.getInCheckBis().isEnabled()) 
 			bis = (ventana.getInCheckBis().isSelected())?"S":"N";
 		String bis_macizo = null;
 		if (ventana.getInCheckMacizo().isEnabled()) 
 			bis = (ventana.getInCheckMacizo().isSelected())?"S":"N";
-		String nicho = (ventana.getInNicho().isEnabled() ? ventana.getInNicho().getText() : null);
+		String nicho = (ventana.getInNicho().isEnabled() ? ventana.getInNicho().getTex() : null);
 		String fila = (ventana.getInFila().isEnabled() ? ventana.getInFila().getText() : null);
 		String seccion = (ventana.getInSeccion().isEnabled() ? ventana.getInFila().getText() : null);
 		String macizo= (ventana.getInMacizo().isEnabled() ? ventana.getInMacizo().getText() : null);
@@ -104,8 +103,8 @@ public class ControladorFallecidoAM {
 		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
 
-		Localizador.guardarUbicacion(subsector, otroCementerio, osario, nicho, fila, seccion,
-				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ, Almanaque.hoy());
+		Localizador.guardarUbicacion(subsector, otroCementerio,  nicho, fila, seccion,
+				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
 	}	
 	
 	private void cancelar() {

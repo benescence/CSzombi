@@ -33,7 +33,7 @@ public class VentanaFallecidoAM extends Ventana {
 	
 	// DATOS DEL DIFUNTO
 	private EntradaTexto inNombre, inApellido, inDNI, inCocheria;
-	private EntradaFecha inFechaFallecimiento;
+	private EntradaFecha inFechaFallecimiento, inFechaIngreso;
 	private ListaDesplegable<TipoFallecimiento> inTipoDeFallecimiento;
 	
 	// DATOS DE UBICACION
@@ -90,7 +90,7 @@ public class VentanaFallecidoAM extends Ventana {
 		inDNI = new EntradaTexto("DNI", dimLabel, dimTextfield);
 		inCocheria = new EntradaTexto("Cocheria", dimLabel, dimTextfield);
 		inFechaFallecimiento = new EntradaFecha(Almanaque.hoy(), "Fecha de fallecimiento", dimLabel, dimTextfield);
-		
+		inFechaIngreso = new EntradaFecha(Almanaque.hoy(), "Fecha de Ingreso", dimLabel, dimTextfield);
 		inTipoDeFallecimiento = new ListaDesplegable<>("Tipode fallecimiento", dimLabel, dimTextfield);
 		for (TipoFallecimiento tipoFallecimiento : TipoFallecimiento.values())
 			inTipoDeFallecimiento.getComboBox().addItem(tipoFallecimiento);
@@ -105,6 +105,7 @@ public class VentanaFallecidoAM extends Ventana {
 		panelFallecido.add(inCocheria);
 		panelFallecido.add(inTipoDeFallecimiento);
 		panelFallecido.add(inFechaFallecimiento);
+		panelFallecido.add(inFechaIngreso);
 		return panelFallecido;
 	}
 	
@@ -185,15 +186,32 @@ public class VentanaFallecidoAM extends Ventana {
 		SubSector subSector = (SubSector) inSubSector.getComboBox().getSelectedItem();
 		habilitarCamposUbicacion(false);
 		
-		if (subSector == SubSector.SEPULTURAS) {
+		if (subSector == SubSector.ADULTOS) {
 			inSeccion.habilitado(true);
 			inMacizo.habilitado(true);
 			inUnidad.habilitado(true);
-			inNumeroSepultura.habilitado(true);
+			inSepultura.habilitado(true);
 			inCheckMacizo.setEnabled(true);
 			inCheckBis.setEnabled(true);
 
-		} else if (subSector == SubSector.INDIGENTES) {
+		}else if (subSector == SubSector.ANGELITOS) {
+			inSeccion.habilitado(true);
+			inMacizo.habilitado(true);
+			inUnidad.habilitado(true);
+			inSepultura.habilitado(true);
+			inCheckMacizo.setEnabled(true);
+			inCheckBis.setEnabled(true); 
+			
+		}else if (subSector == SubSector.COMPRADA) {
+			inSeccion.habilitado(true);
+			inMacizo.habilitado(true);
+			inUnidad.habilitado(true);
+			inSepultura.habilitado(true);
+			inCheckMacizo.setEnabled(true);
+			inCheckBis.setEnabled(true);
+			inParcela.habilitado(true);
+			
+		}else if (subSector == SubSector.INDIGENTES) {
 			inSeccion.habilitado(true);
 			inMacizo.habilitado(true);
 			inSepultura.habilitado(true);
@@ -274,6 +292,11 @@ public class VentanaFallecidoAM extends Ventana {
 	public JDateChooser getInFechaFallecimiento() {
 		return inFechaFallecimiento.getDataChooser();
 	}
+	
+	public JDateChooser getInFechaIngreso() {
+		return inFechaIngreso.getDataChooser();
+	}
+	
 
 	public JComboBox<TipoFallecimiento> getInTipoFallecimiento() {
 		return inTipoDeFallecimiento.getComboBox();

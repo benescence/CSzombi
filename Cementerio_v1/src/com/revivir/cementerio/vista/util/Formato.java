@@ -23,7 +23,6 @@ public class Formato {
 		ret += (ubicacion.getUnidad() != null) ? ", unidad "+ubicacion.getUnidad() : ""; 
 		ret += (ubicacion.getBis() != null) ? ", bis "+ubicacion.getBis() : ""; 
 		ret += (ubicacion.getBis_macizo() != null) ? ", bis macizo "+ubicacion.getBis_macizo() : ""; 
-		ret += (ubicacion.getNumero() != null) ? ", numero "+ubicacion.getNumero(): ""; 
 		ret += (ubicacion.getSepultura() != null) ? ", sepultura "+ubicacion.getSepultura() : ""; 
 		ret += (ubicacion.getParcela() != null) ? ", parcela "+ubicacion.getParcela() : ""; 
 		ret += (ubicacion.getMueble() != null) ? ", mueble "+ubicacion.getMueble() : ""; 

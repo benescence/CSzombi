@@ -6,6 +6,7 @@ public enum Sector {
 	PALMERAS,
 	NICHERA,
 	CENIZARIO,
+	DEPOSITO,
 	BOVEDA
 
 }

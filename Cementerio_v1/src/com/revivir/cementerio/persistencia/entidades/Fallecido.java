@@ -7,11 +7,11 @@ import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 public class Fallecido {
 	private Integer ID,  ubicacion;
 	private String dni, apellido, nombre, cocheria;
-	private Date fechaFallecimiento;
+	private Date fechaFallecimiento, fechaIngreso;
 	private TipoFallecimiento tipoFallecimiento;
 	
 	public Fallecido(Integer ID, Integer ubicacion, TipoFallecimiento tipoFallecimiento, String dni, String apellido, String nombre, String cocheria,
-			Date fechaFallecimiento) {
+			Date fechaFallecimiento, Date fechaIngreso) {
 		this.ID = ID;
 		this.ubicacion = ubicacion;
 		this.tipoFallecimiento = tipoFallecimiento;
@@ -20,6 +20,15 @@ public class Fallecido {
 		this.nombre = nombre;
 		this.cocheria = cocheria;
 		this.fechaFallecimiento = fechaFallecimiento;
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
 	}
 
 	public Integer getID() {

@@ -13,7 +13,7 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
 public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
-	private final String campos = " ubicacion, DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria";
+	private final String campos = " ubicacion, DNI, apellido, nombre, fecha_fallecimiento, tipo_fallecimiento, cocheria, fecha_ingreso";
 	private final String tabla = "rev_fallecidos";
 	
 	@Override
@@ -22,7 +22,7 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 				+", '"+obciso.getDni()+"'"
 				+", '"+obciso.getApellido()+"'"
 				+", '"+obciso.getNombre()+"'"
-				+", '"+obciso.getFechaFallecimiento()+"'"+", "+Definido.tipoFallecimiento(obciso.getTipoFallecimiento())+", '"+obciso.getCocheria()+"'";
+				+", '"+obciso.getFechaFallecimiento()+"'"+", "+Definido.tipoFallecimiento(obciso.getTipoFallecimiento())+", '"+obciso.getCocheria()+"'"+", '"+obciso.getFechaIngreso()+"'";
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
 		ejecutarSQL(sql);		
 	}
@@ -35,7 +35,8 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 				+", nombre = '"+obciso.getNombre()+"'"
 				+", fecha_fallecimiento = '"+obciso.getFechaFallecimiento()+"'"
 				+", tipo_fallecimiento = "+Definido.tipoFallecimiento(obciso.getTipoFallecimiento())
-				+", cocheria = '"+obciso.getCocheria()+"'";
+				+", cocheria = '"+obciso.getCocheria()+"'"
+				+", fecha_ingreso = '"+obciso.getFechaIngreso()+"'";
 		String consulta = "update "+tabla+" set "+valores+"  where ("+condicion+");";
 		ejecutarSQL(consulta);
 	}
@@ -80,7 +81,8 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 						resultados.getString("apellido"),
 						resultados.getString("nombre"),
 						resultados.getString("cocheria"),
-						resultados.getDate("fecha_fallecimiento")
+						resultados.getDate("fecha_fallecimiento"),
+						resultados.getDate("fecha_ingreso")
 						));
 			}
 			

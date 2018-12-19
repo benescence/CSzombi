@@ -27,7 +27,7 @@ public class UbicacionOBDTest {
 		System.out.println("____ Select by ID Test");
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
 		Ubicacion ubicacion = obd.selectByID(ID);
-		System.out.println("Cliente: "+ubicacion.getSubsector()+", "+ubicacion.getBis_macizo());
+		System.out.println("Cliente: "+ubicacion.getSubsector()+", "+ubicacion.getMacizo());
 		return ubicacion;
 	}
 	
@@ -41,12 +41,12 @@ public class UbicacionOBDTest {
 	}
 	
 	public static void main(String[] args) {
-		Ubicacion ubicacion = new Ubicacion(-1, Definido.subsector(1),null , null, null, "2", null, null, null, "1", null, null, null, null, null, null, null, null);
+		Ubicacion ubicacion = new Ubicacion(-1, Definido.subsector(2), null, null, 2, "3", null, 1, null, null, null, null, null, null, null);
 		insertTest(ubicacion);
 		selectTest();
 		Ubicacion uberBD = selectByIDTest(1);
-		System.out.println(uberBD.getMacizo() + "macizo"+ uberBD.getFila());
-		uberBD.setMacizo("5");
+		System.out.println("  "+ uberBD.getMacizo() + "macizo"+ uberBD.getMacizo());
+		uberBD.setMacizo(5);
 		updateTest(uberBD);
 		selectTest();
 	}

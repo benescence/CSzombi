@@ -33,7 +33,7 @@ public class VentanaAltaCompleta extends VentanaInterna {
 	
 	// DATOS DEL DIFUNTO
 	private EntradaTexto inDNIFallecido, inApellidoFallecido, inNombreFallecido, inCocheria;
-	private JDateChooser inFechaFallecimiento;
+	private JDateChooser inFechaFallecimiento, inFechaIngreso;
 	private JComboBox<TipoFallecimiento> inTipoFallecimiento;
 	
 	// DATOS DE UBICACION
@@ -112,17 +112,23 @@ public class VentanaAltaCompleta extends VentanaInterna {
 		inCocheria = new EntradaTexto("Cocheria", largoLabel, largoTextfield);
 		
 		JLabel lblFecha = new JLabel("Fecha de fallecimiento");
+		JLabel lblFechaIngreso = new JLabel("   Fecha de ingreso");
 		JLabel lblTipo = new JLabel("Tipo de fallecimiento");
 
 		lblFecha.setMinimumSize(largoLabel);
 		lblFecha.setPreferredSize(largoLabel);
 		lblFecha.setMaximumSize(largoLabel);
 		
+		lblFechaIngreso.setMinimumSize(largoLabel);
+		lblFechaIngreso.setPreferredSize(largoLabel);
+		lblFechaIngreso.setMaximumSize(largoLabel);
+		
 		lblTipo.setMinimumSize(largoLabel);
 		lblTipo.setPreferredSize(largoLabel);
 		lblTipo.setMaximumSize(largoLabel);
 		
 		inFechaFallecimiento = new JDateChooser(Almanaque.hoy());
+		inFechaIngreso= new JDateChooser();
 		inTipoFallecimiento = new JComboBox<TipoFallecimiento>();
 		for (TipoFallecimiento tipoFallecimiento : TipoFallecimiento.values())
 			inTipoFallecimiento.addItem(tipoFallecimiento);
@@ -130,12 +136,13 @@ public class VentanaAltaCompleta extends VentanaInterna {
 		
 		inTipoFallecimiento.setMaximumSize(largoTextfield);
 		inFechaFallecimiento.setMaximumSize(largoTextfield);
-		
+		inFechaIngreso.setMaximumSize(largoTextfield);
 		// ORGANIZACION DE PANELES
 		PanelHorizontal panelFecha = new PanelHorizontal();
 		panelFecha.add(lblFecha);
 		panelFecha.add(inFechaFallecimiento);
-		
+		panelFecha.add(lblFechaIngreso);
+		panelFecha.add(inFechaIngreso);
 		PanelHorizontal panelTipo = new PanelHorizontal();
 		panelTipo.add(lblTipo);
 		panelTipo.add(inTipoFallecimiento);
@@ -260,15 +267,32 @@ public class VentanaAltaCompleta extends VentanaInterna {
 		SubSector subSector = (SubSector) inSubSector.getSelectedItem();
 		habilitarCamposUbicacion(false);
 		
-		if (subSector == SubSector.SEPULTURAS) {
+		if (subSector == SubSector.ADULTOS) {
 			inSeccion.habilitado(true);
 			inMacizo.habilitado(true);
 			inUnidad.habilitado(true);
-			inNumeroSepultura.habilitado(true);
+			inSepultura.habilitado(true);
 			inCheckMacizo.setEnabled(true);
 			inCheckBis.setEnabled(true);
 
-		} else if (subSector == SubSector.INDIGENTES) {
+		}else if (subSector == SubSector.ANGELITOS) {
+			inSeccion.habilitado(true);
+			inMacizo.habilitado(true);
+			inUnidad.habilitado(true);
+			inSepultura.habilitado(true);
+			inCheckMacizo.setEnabled(true);
+			inCheckBis.setEnabled(true); 
+			
+		}else if (subSector == SubSector.COMPRADA) {
+			inSeccion.habilitado(true);
+			inMacizo.habilitado(true);
+			inUnidad.habilitado(true);
+			inSepultura.habilitado(true);
+			inCheckMacizo.setEnabled(true);
+			inCheckBis.setEnabled(true);
+			inParcela.habilitado(true);
+			
+		}else if (subSector == SubSector.INDIGENTES) {
 			inSeccion.habilitado(true);
 			inMacizo.habilitado(true);
 			inSepultura.habilitado(true);
@@ -375,6 +399,12 @@ public class VentanaAltaCompleta extends VentanaInterna {
 		return inFechaFallecimiento;
 	}
 
+	
+	public JDateChooser getInFechaIngreso() {
+		return inFechaIngreso;
+	}
+
+	
 	public JComboBox<TipoFallecimiento> getInTipoFallecimiento() {
 		return inTipoFallecimiento;
 	}
@@ -454,6 +484,8 @@ public class VentanaAltaCompleta extends VentanaInterna {
 	public JButton botonConfirmar() {
 		return btnConfirmar;
 	}
+
+	
 
 	
 
