@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.FactoryOBD;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
-import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
 public class UbicacionOBDTest {

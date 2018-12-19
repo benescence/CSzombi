@@ -49,9 +49,36 @@ public class UsuarioOBDMYSQL extends OBD implements UsuarioOBD{
 	}
 
 	@Override
+	public Usuario selectByID(Integer ID) {
+		String condicion = "ID = "+ID;
+		List<Usuario> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
+	}
+
+	@Override
+	public Usuario ultimoInsertado() {
+		Integer ID = selectLastID(tabla);
+		if (ID == null)
+			return null;
+		else
+			return selectByID(ID);
+	}
+	
+	@Override
 	public List<Usuario> selectByRol(Rol rol) {
 		String condicion = "rol = "+Definido.rol(rol);
 		return selectByCondicion(condicion);
+	}
+	
+	@Override
+	public Usuario selectByUsuario(String usuario) {
+		String condicion = "usuario = '"+usuario+"'";
+		List<Usuario> ret = selectByCondicion(condicion);
+		if (ret.isEmpty())
+			return null;
+		return ret.get(0);
 	}
 	
 	private List<Usuario> selectByCondicion(String condicion) {
@@ -84,15 +111,5 @@ public class UsuarioOBDMYSQL extends OBD implements UsuarioOBD{
 			
 		return ret;
 	}
-
 	
-	@Override
-	public Usuario selectByUsuario(String usuario) {
-		String condicion = "usuario = '"+usuario+"'";
-		List<Usuario> ret = selectByCondicion(condicion);
-		if (ret.isEmpty())
-			return null;
-		return ret.get(0);
-	}
-
 }

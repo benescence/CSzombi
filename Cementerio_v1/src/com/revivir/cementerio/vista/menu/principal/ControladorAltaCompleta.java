@@ -91,8 +91,8 @@ public class ControladorAltaCompleta implements ActionListener, ClienteSeleccion
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		
-		UbicacionManager.guardar(subsector, otroCementerio, nicho, fila, seccion,
-				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
+		//UbicacionManager.guardar(subsector, otroCementerio, nicho, fila, seccion,
+			//	macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
 		
 		// GUARDO AL FALLECIDO
 		Ubicacion ubicacion = UbicacionManager.traerMasReciente();

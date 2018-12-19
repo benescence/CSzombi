@@ -34,6 +34,11 @@ public class ServicioManager {
 		return obd.selectByID(ID);
 	}
 	
+	public static Servicio traerMasReciente() {
+		ServicioOBD obd = FactoryOBD.crearServicioOBD();
+		return obd.ultimoInsertado();
+	}
+	
 	public static Servicio traerPorCodigo(String codigo) {
 		ServicioOBD obd = FactoryOBD.crearServicioOBD();	
 		return obd.selectBycodigo(codigo);

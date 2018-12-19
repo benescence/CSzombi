@@ -48,17 +48,6 @@ public class Localizador {
 		
 		return ret;
 	}
-
-	public static void guardarUbicacion(SubSector subsector, String otroCementerio,Integer nicho, Integer fila, String seccion, Integer macizo, Integer unidad,
-			Integer bis, Integer bis_macizo, Integer sepultura, Integer parcela,
-			Integer mueble, Integer inhumacion, Integer circ) {
-		
-		Ubicacion ubicacion = new Ubicacion(-1, subsector, otroCementerio, nicho, fila, seccion, macizo, unidad, bis, bis_macizo,
-				sepultura, parcela, mueble, inhumacion, circ);
-		
-		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
-		obd.insert(ubicacion);
-	}
 	
 	public static Ubicacion traerUltimaUbicacionGuardada() {
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();

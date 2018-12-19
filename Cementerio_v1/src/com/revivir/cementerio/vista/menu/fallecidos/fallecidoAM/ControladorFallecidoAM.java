@@ -7,6 +7,7 @@ import java.sql.Date;
 import com.revivir.cementerio.negocios.Almanaque;
 import com.revivir.cementerio.negocios.Localizador;
 import com.revivir.cementerio.negocios.manager.FallecidoManager;
+import com.revivir.cementerio.negocios.manager.UbicacionManager;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
@@ -84,14 +85,14 @@ public class ControladorFallecidoAM {
 	
 	private void guardarUbicacion() {
 		SubSector subsector = (SubSector) ventana.getInSubSector().getSelectedItem();
-		String otroCementerio = null
+		String otroCementerio = null;
 		String bis = null;
 		if (ventana.getInCheckBis().isEnabled()) 
 			bis = (ventana.getInCheckBis().isSelected())?"S":"N";
 		String bis_macizo = null;
 		if (ventana.getInCheckMacizo().isEnabled()) 
 			bis = (ventana.getInCheckMacizo().isSelected())?"S":"N";
-		String nicho = (ventana.getInNicho().isEnabled() ? ventana.getInNicho().getTex() : null);
+		String nicho = (ventana.getInNicho().isEnabled() ? ventana.getInNicho().getText() : null);
 		String fila = (ventana.getInFila().isEnabled() ? ventana.getInFila().getText() : null);
 		String seccion = (ventana.getInSeccion().isEnabled() ? ventana.getInFila().getText() : null);
 		String macizo= (ventana.getInMacizo().isEnabled() ? ventana.getInMacizo().getText() : null);
@@ -102,9 +103,8 @@ public class ControladorFallecidoAM {
 		String mueble= (ventana.getInMueble().isEnabled() ? ventana.getInMueble().getText() : null);
 		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
+		//UbicacionManager.guardar(subsector, otroCementerio, nicho, fila, seccion, macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
 
-		Localizador.guardarUbicacion(subsector, otroCementerio,  nicho, fila, seccion,
-				macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
 	}	
 	
 	private void cancelar() {
