@@ -14,7 +14,7 @@ import com.revivir.cementerio.vista.util.Ventana;
 
 public class VentanaClientesAM extends Ventana {
 	private static final long serialVersionUID = 1L;
-	private EntradaTexto inNombre, inApellido, inDNI, inTelefono, inEmail;
+	private EntradaTexto inNombre, inApellido, inDNI, inTelefono, inEmail, inDomicilio;
 	private Boton btnAceptar, btnCancelar;
 	
 	public VentanaClientesAM() {
@@ -30,6 +30,7 @@ public class VentanaClientesAM extends Ventana {
 		inDNI.getTextField().setText(cliente.getDNI());
 		inTelefono.getTextField().setText(cliente.getTelefono());
 		inEmail.getTextField().setText(cliente.getEmail());
+		inDomicilio.getTextField().setText(cliente.getDomicilio());
 	}
 
 	public void inicializar() {
@@ -42,6 +43,7 @@ public class VentanaClientesAM extends Ventana {
 		inDNI = new EntradaTexto("DNI", dimTexto, dimEntrada);
 		inTelefono = new EntradaTexto("Telefono", dimTexto, dimEntrada);
 		inEmail = new EntradaTexto("E-Mail", dimTexto, dimEntrada);
+		inDomicilio = new EntradaTexto("Domicilio", dimTexto, dimEntrada);
 		
 		btnAceptar = new Boton("Aceptar", dimBoton);
 		btnCancelar = new Boton("Cancelar", dimBoton);
@@ -59,6 +61,7 @@ public class VentanaClientesAM extends Ventana {
 		panelPrincipal.add(inDNI);
 		panelPrincipal.add(inTelefono);
 		panelPrincipal.add(inEmail);
+		panelPrincipal.add(inDomicilio);
 		panelPrincipal.add(panelBotones);
 		compactar();
 	}
@@ -81,6 +84,10 @@ public class VentanaClientesAM extends Ventana {
 
 	public JTextField getInEmail() {
 		return inEmail.getTextField();
+	}	
+
+	public JTextField getDomicilio() {
+		return inDomicilio.getTextField();
 	}	
 
 	public Boton botonAceptar() {

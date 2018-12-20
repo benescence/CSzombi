@@ -4,7 +4,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.revivir.cementerio.negocios.Recepcion;
-import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
@@ -62,23 +61,15 @@ public class ControladorClientesAM {
 			String dni = ventana.getInDNI().getText();
 			String telefono = ventana.getInTelefono().getText();
 			String email = ventana.getInEmail().getText();
-			String domicilio = "sss";			
+			String domicilio = ventana.getDomicilio().getText();			
 			
 			// Crear un nuevo cliente
-			if (cliente == null) {
+			if (cliente == null)
 				Recepcion.registrarCliente(nombre, apellido, dni, telefono, email, domicilio);
-			}
 			
 			// Modificar uno existente
-			else {
-				cliente.setNombre(nombre);
-				cliente.setApellido(apellido);
-				cliente.setDNI(dni);
-				cliente.setTelefono(telefono);
-				cliente.setEmail(email);
-				cliente.setDomicilio(domicilio);
-				ClienteManager.modificar(cliente);
-			}
+			else 
+				Recepcion.modificarCliente(cliente, nombre, apellido, dni, telefono, email, domicilio);
 			
 			actualizarVentana();
 			volver();

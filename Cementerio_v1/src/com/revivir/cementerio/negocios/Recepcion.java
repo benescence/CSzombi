@@ -18,6 +18,27 @@ public class Recepcion {
 		validar(null, nombre, apellido, DNI, telefono, email, domicilio);
 		ClienteManager.guardar(nombre, apellido, DNI, telefono, email, domicilio);
 	}
+
+	public static void modificarCliente(Cliente cliente, String nombre, String apellido, String DNI,
+			String telefono, String email, String domicilio) throws Exception {
+		
+		nombre = (isNull(nombre)) ? null : nombre;
+		apellido = (isNull(apellido)) ? null : apellido;
+		DNI = (isNull(DNI)) ? null : DNI;
+		telefono = (isNull(telefono)) ? null : telefono;
+		email = (isNull(email)) ? null : email;
+		domicilio = (isNull(domicilio)) ? null : domicilio;
+		
+		validar(cliente, nombre, apellido, DNI, telefono, email, domicilio);
+		
+		cliente.setNombre(nombre);
+		cliente.setApellido(apellido);
+		cliente.setDNI(DNI);
+		cliente.setTelefono(telefono);
+		cliente.setEmail(email);
+		cliente.setDomicilio(domicilio);
+		ClienteManager.modificar(cliente);
+	}
 	
 	private static void validar(Cliente cliente, String nombre, String apellido, String DNI, String telefono,
 			String email, String domicilio) throws Exception {
@@ -46,6 +67,9 @@ public class Recepcion {
 		
 		if (telefono != null && !Validador.telefono(telefono))
 			mensaje += "\n    -El TELEFONO solo puede estar compuesto de numeros.";
+		
+		if (email != null && !Validador.email(email))
+			mensaje += "\n    -El EMAIL debe tener un formato de E-Mail apropiado.";
 		
 		if (!mensaje.equals(""))
 			throw new Exception("Se encontraron los siguientes errores en el formulario:"+mensaje);

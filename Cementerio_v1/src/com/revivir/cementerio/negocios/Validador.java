@@ -18,6 +18,9 @@ public class Validador {
 		return formatoNumero(telefono);
 	}
 		
+	public static boolean email(String email) {
+		return email.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" + "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$");
+	}
 	
 	
 	
@@ -52,13 +55,6 @@ public class Validador {
 	
 	
 	// METODOS QUE USAN LOS DEMAS PARA VALIDAR CAMPOS
-	public static boolean validarExamen(String nombre) {
-		return (formatoNumeroLetraEspacio(nombre));
-	}
-	
-	public static boolean validarEmail(String texto) {
-		return texto.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" + "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$");
-	}
 	
 	
 	public static boolean validarNumero(String texto) {
@@ -73,15 +69,15 @@ public class Validador {
 		return (formatoNumeroLetra(texto));
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(formatoLetra("TamóÑ"));
-		System.out.println(formatoNumeroLetraEspacio("45 XCarlós Ñ ñ"));
-		
-	}
 
 	public static boolean validarCodigo(String codigo) {
 		
 	return (formatoNumero(codigo));
+	}
+	
+	public static void main(String[] args) {
+		formatoNumeroLetraEspacio("");
+		formatoLetra("");
 	}
 			
 }

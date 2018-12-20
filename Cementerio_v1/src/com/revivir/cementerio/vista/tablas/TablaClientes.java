@@ -9,7 +9,7 @@ import com.revivir.cementerio.vista.util.Formato;
 
 public class TablaClientes extends JTable{
 	private static final long serialVersionUID = 1L;
-	private String[] columnas = { "DNI", "Nombre", "Apellido", "Telefono", "E-Mail", "Difuntos asociados"};
+	private String[] columnas = { "DNI", "Nombre", "Apellido", "Telefono", "E-Mail", "Difuntos asociados", "Domicilio"};
 	private DefaultTableModel modelo;
 	private List<Cliente> clientes;
 
@@ -32,7 +32,8 @@ public class TablaClientes extends JTable{
 					cliente.getApellido(),
 					cliente.getTelefono(),
 					cliente.getEmail(),
-					Formato.fallecidos(cliente)
+					Formato.fallecidos(cliente),
+					cliente.getDomicilio()
 			};
 			modelo.addRow(fila);
 			
