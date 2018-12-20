@@ -8,7 +8,8 @@ import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 
 public class ClienteManager {
 	
-	public static void guardar(String nombre, String apellido, String DNI, String telefono, String email) {
+	public static void guardar(String nombre, String apellido, String DNI, String telefono,
+			String email, String domicilio) {
 		Cliente cliente = new Cliente(-1, nombre, apellido, DNI, "Domicilio1", telefono, email);
 		ClienteOBD obd = FactoryOBD.crearClienteOBD();
 		obd.insert(cliente);
@@ -43,5 +44,6 @@ public class ClienteManager {
 		ClienteOBD obd = FactoryOBD.crearClienteOBD();		
 		return obd.ultimoInsertado();
 	}
+	
 
 }

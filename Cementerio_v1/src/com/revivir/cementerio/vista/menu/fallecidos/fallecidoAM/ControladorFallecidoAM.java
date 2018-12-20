@@ -63,7 +63,7 @@ public class ControladorFallecidoAM {
 		// Es un alta
 		if (fallecido == null) {
 			guardarUbicacion();
-			Ubicacion ubicacion = Localizador.traerUltimaUbicacionGuardada();
+			Ubicacion ubicacion = UbicacionManager.traerMasReciente();
 			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion, fechaIngreso);			
 		}
 		

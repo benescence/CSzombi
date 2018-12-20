@@ -1,10 +1,13 @@
 package com.revivir.cementerio.vista.util;
 
-import com.revivir.cementerio.negocios.Localizador;
+import java.util.List;
+
+import com.revivir.cementerio.negocios.Vinculador;
 import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.negocios.manager.ServicioManager;
+import com.revivir.cementerio.negocios.manager.UbicacionManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
@@ -32,7 +35,7 @@ public class Formato {
 	}
 	
 	public static String ubicacion(Fallecido fallecido) {
-		Ubicacion ubicacion = Localizador.traerUbicacionDeFallecido(fallecido);
+		Ubicacion ubicacion = UbicacionManager.traerPorFallecido(fallecido);
 		return ubicacion(ubicacion);
 	}
 
@@ -57,8 +60,8 @@ public class Formato {
 	}
 	
 	
-	/*public static String fallecidos(Cliente cliente) {
-		List<Fallecido> fallecidos = FallecidoManager.traerPorCliente(cliente);
+	public static String fallecidos(Cliente cliente) {
+		List<Fallecido> fallecidos = Vinculador.traerFallecidosDeCliente(cliente);
 		String ret = "<html>";
 
 		for (Fallecido fallecido : fallecidos) {
@@ -70,9 +73,11 @@ public class Formato {
 		
 		return ret += "</html>";
 	}
-*/
+
 	public static Integer contarRenglones(String texto) {
 		Integer cantidad = 1;
+		if (texto == null)
+			return 0;
 		
 		for (int i = 0; i < texto.length()-3; i++)
 			if (texto.charAt(i) == '<' && texto.charAt(i+1) == 'b' && texto.charAt(i+2) == 'r' && texto.charAt(i+3) == '>')
@@ -84,8 +89,8 @@ public class Formato {
 	public static Integer calcularAlturaDeCelda(Object[] fila) {
 		int renglonesMaximo = 0;
 		for (Object objecto : fila) {
-			int renglones = Formato.contarRenglones((String)objecto);
-			if (renglones>renglonesMaximo)
+			int renglones = contarRenglones((String)objecto);
+			if (renglones > renglonesMaximo)
 				renglonesMaximo = renglones;
 		}
 		

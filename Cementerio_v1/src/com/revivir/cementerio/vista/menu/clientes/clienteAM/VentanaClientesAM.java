@@ -33,15 +33,15 @@ public class VentanaClientesAM extends Ventana {
 	}
 
 	public void inicializar() {
-		Dimension dimLabel = new Dimension(100, 25);
-		Dimension dimTextfield = new Dimension(300, 25);
+		Dimension dimTexto = new Dimension(100, 25);
+		Dimension dimEntrada = new Dimension(300, 25);
 		Dimension dimBoton = new Dimension(100, 25);
 
-		inNombre = new EntradaTexto("Nombres", dimLabel, dimTextfield);
-		inApellido = new EntradaTexto("Apellidos", dimLabel, dimTextfield);
-		inDNI = new EntradaTexto("DNI", dimLabel, dimTextfield);
-		inTelefono = new EntradaTexto("Telefono", dimLabel, dimTextfield);
-		inEmail = new EntradaTexto("E-Mail", dimLabel, dimTextfield);
+		inNombre = new EntradaTexto("Nombres", dimTexto, dimEntrada);
+		inApellido = new EntradaTexto("Apellidos", dimTexto, dimEntrada);
+		inDNI = new EntradaTexto("DNI", dimTexto, dimEntrada);
+		inTelefono = new EntradaTexto("Telefono", dimTexto, dimEntrada);
+		inEmail = new EntradaTexto("E-Mail", dimTexto, dimEntrada);
 		
 		btnAceptar = new Boton("Aceptar", dimBoton);
 		btnCancelar = new Boton("Cancelar", dimBoton);
@@ -60,8 +60,7 @@ public class VentanaClientesAM extends Ventana {
 		panelPrincipal.add(inTelefono);
 		panelPrincipal.add(inEmail);
 		panelPrincipal.add(panelBotones);
-		pack();
-		setLocationRelativeTo(null);
+		compactar();
 	}
 
 	public JTextField getInNombre() {

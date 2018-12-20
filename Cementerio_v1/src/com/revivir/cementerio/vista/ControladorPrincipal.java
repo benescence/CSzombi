@@ -97,4 +97,8 @@ public class ControladorPrincipal {
 		return ventana;
 	}
 	
+	public ControladorInterno getControladorInterno() {
+		return controladorInterno;
+	}
+	
 }

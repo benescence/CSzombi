@@ -17,7 +17,7 @@ class ClienteManagerTest {
 	@Test
 	void testGuardar() {
 		Cliente local = new Cliente(-1, nombre, apellido, DNI, domicilio, telefono, email);
-		ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
+		//ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
 		Cliente objetoBD = obd.ultimoInsertado();
 		iguales(objetoBD, local);
 		obd.delete(objetoBD);
@@ -25,7 +25,7 @@ class ClienteManagerTest {
 	
 	@Test
 	void testModificar() {
-		ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
+		//ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
 		Cliente objetoBD1 = obd.ultimoInsertado();
 		
 		objetoBD1.setNombre("Nombre2");
@@ -44,7 +44,7 @@ class ClienteManagerTest {
 	
 	@Test
 	void testEliminar() {
-		ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
+		//ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
 		Cliente objetoBD1 = obd.ultimoInsertado();		
 		ClienteManager.eliminar(objetoBD1);
 		Cliente objetoBD2 = obd.ultimoInsertado();

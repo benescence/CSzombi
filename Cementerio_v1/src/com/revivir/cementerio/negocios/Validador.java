@@ -1,6 +1,33 @@
 package com.revivir.cementerio.negocios;
 
 public class Validador {
+	
+	public static boolean nombrePersona(String nombre) {
+		return formatoLetraEspacio(nombre);
+	}
+
+	public static boolean apellido(String apellido) {
+		return formatoLetraEspacio(apellido);
+	}
+
+	public static boolean DNI(String DNI) {
+		return formatoNumero(DNI);
+	}
+	
+	public static boolean telefono(String telefono) {
+		return formatoNumero(telefono);
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// METODOS INTERNOS DEL VALIDADOR
 	private static boolean formatoNumero(String texto) {
@@ -33,21 +60,6 @@ public class Validador {
 		return texto.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" + "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$");
 	}
 	
-	public static boolean validarApellido(String texto) {
-		return (formatoLetraEspacio(texto));
-	}
-	
-	public static boolean validarNombre(String texto) {
-		return (formatoNumeroLetraEspacio(texto));
-	}
-	
-	public static boolean validarDNI(String texto) {
-		return (formatoNumero(texto));
-	}
-	
-	public static boolean validarTelefono(String texto) {
-		return (formatoNumero(texto) || texto.isEmpty());
-	}
 	
 	public static boolean validarNumero(String texto) {
 		return (formatoNumero(texto));

@@ -64,7 +64,7 @@ public class ControladorAltaCompleta implements ActionListener, ClienteSeleccion
 			String apellidos  = ventana.getApellido().getText();
 			String telefono = ventana.getTelefono().getText();
 			String email = ventana.getEmail().getText();
-			ClienteManager.guardar(DNI, nombres, apellidos, telefono, email);
+			//ClienteManager.guardar(DNI, nombres, apellidos, telefono, email);
 			cliente = ClienteManager.traerMasReciente();
 		}
 		

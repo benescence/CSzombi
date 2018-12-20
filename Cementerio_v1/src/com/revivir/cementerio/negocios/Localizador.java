@@ -1,15 +1,10 @@
 package com.revivir.cementerio.negocios;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.definidos.Sector;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
-import com.revivir.cementerio.persistencia.entidades.Fallecido;
-import com.revivir.cementerio.persistencia.entidades.Ubicacion;
-import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
 public class Localizador {
 	
@@ -47,16 +42,6 @@ public class Localizador {
 			ret.add(SubSector.BOVEDA);
 		
 		return ret;
-	}
-	
-	public static Ubicacion traerUltimaUbicacionGuardada() {
-		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
-		return obd.ultimoInsertado();
-	}
-	
-	public static Ubicacion traerUbicacionDeFallecido(Fallecido fallecido) {
-		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
-		return obd.selectByFallecido(fallecido);
 	}
 	
 }

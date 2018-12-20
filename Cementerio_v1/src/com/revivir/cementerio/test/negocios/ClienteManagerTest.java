@@ -9,7 +9,7 @@ public class ClienteManagerTest {
 
 	public static void guardarTest(String nombre, String apellido, String DNI, String telefono, String email) {
 		System.out.println("___ Guardar test");
-		ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
+		//ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
 	}
 	
 	public static void modificarTest(Cliente cliente) {

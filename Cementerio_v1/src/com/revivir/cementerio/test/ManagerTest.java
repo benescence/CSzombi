@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import com.revivir.cementerio.negocios.Almanaque;
 import com.revivir.cementerio.negocios.manager.CargoManager;
+import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.negocios.manager.UbicacionManager;
@@ -21,6 +22,15 @@ public class ManagerTest {
 		String dni = "123";
 		Date fecha = Almanaque.hoy();		
 		FallecidoManager.guardar(nombre, apellido, dni, "123", TipoFallecimiento.NO_TRAUMATICO, fecha, ubicacion, fecha);
+	}
+	
+	public static void crearUnCliente() {
+		String nombre = "Carlos";
+		String apellido = "Caballero";
+		String DNI = "123";
+		String telefono = "123";
+		String email = "123";
+		//ClienteManager.guardar(nombre, apellido, DNI, telefono, email);
 	}
 	
 	public static void crearUnServicio() {
@@ -43,7 +53,8 @@ public class ManagerTest {
 	public static void main(String[] args) {
 		//crearUnFallecido();
 		//crearUnServicio();
-		crearUnCargo();
+		//crearUnCargo();
+		crearUnCliente();
 	}
 
 }
