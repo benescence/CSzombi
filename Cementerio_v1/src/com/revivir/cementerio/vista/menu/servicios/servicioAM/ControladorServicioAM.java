@@ -1,92 +1,71 @@
 package com.revivir.cementerio.vista.menu.servicios.servicioAM;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
-import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
+import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
-import com.revivir.cementerio.vista.util.PresionarEnterListener;
-import com.revivir.cementerio.vista.util.entradas.EntradaMouse;
 
 public class ControladorServicioAM {
 	private VentanaServicioAM ventana;
-	private ControladorServiciosABM invocador;
-	private ControladorPrincipal principal;
-	private Servicio servicio;
+	private ServicioInvocable invocador;
+	private Servicio modificar;
 	
-	public ControladorServicioAM(ControladorServiciosABM invocador, Servicio servicio) {
+	public ControladorServicioAM(ServicioInvocable invocador, Servicio modificar) {
 		this.invocador = invocador;
-		this.servicio = servicio;
-		ventana = new VentanaServicioAM(servicio);
+		this.modificar = modificar;
+		ventana = new VentanaServicioAM(modificar);
 		inicializar();
 	}
-	
-	public ControladorServicioAM(ControladorServiciosABM invocador) {
+
+	public ControladorServicioAM(ServicioInvocable invocador) {
 		this.invocador = invocador;
-		ventana = new VentanaServicioAM();
-		inicializar();
-	}
-	
-	public ControladorServicioAM(ControladorPrincipal principal) {
-		this.principal = principal;
 		ventana = new VentanaServicioAM();
 		inicializar();
 	}
 	
 	private void inicializar() {
-		ventana.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				volver();
-			}
-		});
-
-		ventana.botonAceptar().addKeyListener(new PresionarEnterListener(e -> aceptar()));
-		ventana.botonAceptar().addMouseListener(new EntradaMouse(e -> aceptar()));
-		ventana.botonCancelar().addKeyListener(new PresionarEnterListener(e -> cancelar()));
-		ventana.botonCancelar().addMouseListener(new EntradaMouse(e -> cancelar()));
+		ventana.addWindowListener(new AccionCerrarVentana(e -> cancelar()));
+		ventana.botonAceptar().setAccion(e -> aceptar());
+		ventana.botonCancelar().setAccion(e -> cancelar());
 	} 
 	
 	private void aceptar() {
-		String codigo = ventana.getCodigo().getText();
-		String nombre = ventana.getNombre().getText();
-		String descripcion = ventana.getDescripcion().getText();
-		Double importe = new Double(ventana.getImporte().getText());
+		ventana.requestFocusInWindow();
+		try {
+			String codigo = ventana.getCodigo().getText();
+			String nombre = ventana.getNombre().getText();
+			String descripcion = ventana.getDescripcion().getText();
+			Double importe = new Double(ventana.getImporte().getText());
+			Servicio nuevo = new Servicio(-1, codigo, nombre, descripcion, importe, false);
+			
+			// Creando un nuevo servicio
+			if (modificar == null)
+				ServicioManager.guardar(nuevo);
+			
+			// Modificando un servicio existente
+			else
+				ServicioManager.modificar(nuevo, modificar);
+			
+			ventana.dispose();
+			ventana = null;
+			invocador.mostrar();
+			invocador.actualizarServicios();
+			
+		} catch (NumberFormatException e) {
+			Popup.mostrar("El valor para el importe no tiene un formato valido para numero decimal.");
 		
-		// Creando un nuevo servicio
-		if (servicio == null) {
-			ServicioManager.guardar(codigo, nombre, importe, descripcion, false);
+		} catch (Exception e) {
+			Popup.mostrar(e.getMessage());
 		}
 		
-		// Modificando un servicio existente
-		else {
-			servicio.setCodigo(codigo);
-			servicio.setNombre(nombre);
-			servicio.setDescripcion(descripcion);
-			servicio.setImporte(importe);
-			ServicioManager.modificar(servicio);
-		}
-		
-		if (invocador != null)
-			invocador.actualizar();
-		volver();
 	}
 	
 	private void cancelar() {
-		if (Popup.confirmar("Se perderan los datos ingresados.\n¿Esta seguro de que desea cancelar la operacion?"))
-			volver();
-	}
-
-	private void volver() {
-		ventana.dispose();
-		ventana = null;
-		if (invocador != null)
+		if (Popup.confirmar("Se perderan los datos ingresados.\n¿Esta seguro de que desea cancelar la operacion?")) {
+			ventana.dispose();
+			ventana = null;
 			invocador.mostrar();
-		else
-			principal.getVentana().mostrar();
+		}
 	}
 	
 }

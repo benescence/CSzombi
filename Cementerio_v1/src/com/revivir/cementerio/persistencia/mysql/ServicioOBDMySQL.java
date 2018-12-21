@@ -60,13 +60,6 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 	}
 
 	@Override
-	public List<Servicio> selectByDescripcion(String descripcion) {
-		String condicion = "";
-		condicion += "descripcion = " +(descripcion != null ? "'"+descripcion+"'" : "descripcion");
-		return selectByCondicion(condicion);
-	}
-
-	@Override
 	public List<Servicio> selectByNombre(String nombre) {
 		String condicion = "";
 		condicion += "descripcion = " +(nombre != null ? "'"+nombre+"'" : "nombre");
@@ -74,8 +67,8 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 	}
 	
 	@Override
-	public Servicio selectBycodigo(String codigo) {
-		String condicion = "codigo = " +(codigo != null ? "'"+codigo+"'" : "codigo");
+	public Servicio selectActivoBycodigo(String codigo) {
+		String condicion = "codigo = " +(codigo != null ? "'"+codigo+"'" : "codigo")+" and historico = false";
 		List<Servicio> lista = selectByCondicion(condicion);
 		if (lista.size() > 0)
 			return lista.get(0);

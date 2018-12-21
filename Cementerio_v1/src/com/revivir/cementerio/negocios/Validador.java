@@ -22,8 +22,14 @@ public class Validador {
 		return email.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" + "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$");
 	}
 	
+	public static boolean codigo(String codigo) {
+		return (formatoNumero(codigo));
+	}
 	
-	
+	public static boolean nombreServicio(String nombre) {
+		return formatoNumeroLetraEspacio(nombre);
+	}
+
 	
 	
 	
@@ -70,10 +76,6 @@ public class Validador {
 	}
 	
 
-	public static boolean validarCodigo(String codigo) {
-		
-	return (formatoNumero(codigo));
-	}
 	
 	public static void main(String[] args) {
 		formatoNumeroLetraEspacio("");

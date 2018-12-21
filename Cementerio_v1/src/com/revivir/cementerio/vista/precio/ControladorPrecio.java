@@ -115,7 +115,7 @@ private void aceptarAM() {
 				//precio.setMonto(Monto);;
 				precio.setNombre(nombre);;
 			
-				ServicioManager.modificar(precio);
+				//ServicioManager.modificar(precio);
 			}
 
 			//llenarTabla();
@@ -179,15 +179,15 @@ private void aceptarAM() {
 			mensaje += "    -Por favor ingrese el APELLIDO.\n";
 
 		}
-
+/*
 		if (codigo == null) {
 			isOk = false;
 			mensaje += "    -Por favor ingrese el CODIGO.\n";
-
+/*
 		} else if (!Validador.validarCodigo(codigo)) {
 			isOk = false;
 			mensaje += "    -El Codigo solo puede consistir de numeros.\n";
-		} 
+		}
 		if (monto == null) {
 			isOk = false;
 			mensaje += "    -Por favor ingrese el MONTO.\n";
@@ -198,9 +198,9 @@ private void aceptarAM() {
 		} 
 		if (isOk == false)
 			JOptionPane.showMessageDialog(null, mensaje);
-
+*/
 		return isOk;
-		}
+	}
 	
 	@Override
 	public boolean finalizar() {

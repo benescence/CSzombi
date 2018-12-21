@@ -39,7 +39,7 @@ public class ManagerTest {
 		double importe = 99.9;
 		String descripcion = "Descripcion1";
 		boolean historico = false;
-		ServicioManager.guardar(codigo, nombre, importe, descripcion, historico);
+		//ServicioManager.guardar(codigo, nombre, importe, descripcion, historico);
 	}	
 	
 	public static void crearUnCargo() {

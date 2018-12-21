@@ -1,7 +1,9 @@
 package com.revivir.cementerio.negocios;
 
 import com.revivir.cementerio.negocios.manager.ClienteManager;
+import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 
 public class Verificador {
 
@@ -53,6 +55,40 @@ public class Verificador {
 		nuevo.setEmail(email);
 		nuevo.setDomicilio(domicilio);
 
+		return nuevo;
+	}
+	
+	public static Servicio servicio(Servicio nuevo, Servicio anterior) throws Exception {
+		String codigo = anular(nuevo.getCodigo());
+		String nombre = anular(nuevo.getNombre());
+		String descripcion = anular(nuevo.getDescripcion());
+		String mensaje = "";
+
+		if (codigo == null)
+			mensaje += "\n    -El CODIGO no puede estar vacio.";
+		else if (!Validador.codigo(codigo))
+			mensaje += "\n    -El CODIGO solo puede estar compuesto de numeros.";
+		else {
+			Servicio objetoCodigo = ServicioManager.traerActivoPorCodigo(codigo);
+			if (objetoCodigo != null && (anterior == null || anterior.getID() != objetoCodigo.getID()))
+				mensaje += "\n    -Ya se encuentra registrado un servicio con el CODIGO: "+codigo+".";
+		}
+		
+		if (nombre == null)
+			mensaje += "\n    -El NOMBRE no puede estar vacío.";
+		else if (!Validador.nombreServicio(nombre))
+			mensaje += "\n    -El NOMBRE solo puede estar compuesto de letras, numeros y espacios.";
+		
+		
+		if (!mensaje.equals(""))
+			throw new Exception("Se encontraron los siguientes errores en el formulario:"+mensaje);
+		
+		// Debo setearlos porque pudieron ser anulados
+		if (anterior != null)
+			nuevo.setID(anterior.getID());
+		nuevo.setCodigo(codigo);
+		nuevo.setNombre(nombre);
+		nuevo.setDescripcion(descripcion);
 		return nuevo;
 	}
 

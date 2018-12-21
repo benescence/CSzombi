@@ -9,9 +9,10 @@ import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.menu.servicios.servicioAM.ControladorServicioAM;
+import com.revivir.cementerio.vista.menu.servicios.servicioAM.ServicioInvocable;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorServiciosABM implements ControladorInterno {
+public class ControladorServiciosABM implements ControladorInterno, ServicioInvocable {
 	private VentanaServiciosABM ventana;
 	private ControladorPrincipal invocador;
 	
@@ -50,16 +51,12 @@ public class ControladorServiciosABM implements ControladorInterno {
 			for (Servicio elemento : seleccion)
 				ServicioManager.eliminar(elemento);
 			
-			actualizar();
+			actualizarServicios();
 		}
 	}
 	
-	public void actualizar() {
-		ventana.getTabla().recargar(ServicioManager.traerTodo());
-	}
-
 	public void mostrar() {
-		invocador.getVentana().setEnabled(true);
+		invocador.getVentana().mostrar();
 		invocador.getVentana().toFront();
 	}
 	
@@ -71,6 +68,11 @@ public class ControladorServiciosABM implements ControladorInterno {
 	@Override
 	public JInternalFrame getVentana() {		
 		return ventana;
+	}
+
+	@Override
+	public void actualizarServicios() {
+		ventana.getTabla().recargar(ServicioManager.traerTodo());		
 	}
 
 }

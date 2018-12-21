@@ -7,21 +7,23 @@ import com.revivir.cementerio.persistencia.entidades.Servicio;
 
 public interface ServicioOBD {
 	
-	public void insert(Servicio precio);
+	// METODOS GENERALES
 	
-	public void update(Servicio precio);
+	public void insert(Servicio servicio);
 	
-	public void delete(Servicio precio);
+	public void update(Servicio servicio);
+	
+	public void delete(Servicio servicio);
 
 	public List<Servicio> select();
 	
 	public Servicio selectByID(Integer iD);
 
 	public Servicio ultimoInsertado();
+	
+	// METODOS ESPECIFICOS DE CONSULTA
 
-	public Servicio selectBycodigo(String codigo);
-
-	public List<Servicio> selectByDescripcion(String descripcion);
+	public Servicio selectActivoBycodigo(String codigo);
 
 	public List<Servicio> selectByNombre(String nombre);
 		

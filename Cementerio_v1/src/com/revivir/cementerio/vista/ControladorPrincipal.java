@@ -15,11 +15,12 @@ import com.revivir.cementerio.vista.menu.responsables.ControladorVincular;
 import com.revivir.cementerio.vista.menu.responsables.porcliente.ControladorConsultarPorCliente;
 import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.menu.servicios.servicioAM.ControladorServicioAM;
+import com.revivir.cementerio.vista.menu.servicios.servicioAM.ServicioInvocable;
 import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
-public class ControladorPrincipal implements ClienteInvocable {
+public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable {
 	private VentanaPrincipal ventana;
 	private ControladorInterno controladorInterno;
 	
@@ -110,6 +111,12 @@ public class ControladorPrincipal implements ClienteInvocable {
 	@Override
 	public void actualizarClientes() {
 		
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actualizarServicios() {
 		// TODO Auto-generated method stub
 		
 	}
