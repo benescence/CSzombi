@@ -9,7 +9,7 @@ import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.menu.cargos.ControladorCargoAM;
+import com.revivir.cementerio.vista.menu.cargos.cargoAM.ControladorCargoAM;
 import com.revivir.cementerio.vista.seleccion.fallecidos.ControladorSeleccionarFallecido;
 import com.revivir.cementerio.vista.seleccion.fallecidos.FallecidoSeleccionable;
 import com.revivir.cementerio.vista.util.Popup;

@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.menu.cargos;
+package com.revivir.cementerio.vista.menu.cargos.cargoAM;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -53,8 +53,8 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 	private void inicializar() {
 		ventana.botonAceptar().addActionListener(e -> aceptar());
 		ventana.botonCancelar().addActionListener(e -> cancelar());
-		ventana.botonFallecido().addActionListener(e -> seleccionarFallecido());
-		ventana.botonServicio().addActionListener(e -> seleccionarServicio());
+		//ventana.botonFallecido().addActionListener(e -> seleccionarFallecido());
+		//ventana.botonServicio().addActionListener(e -> seleccionarServicio());
 		ventana.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
