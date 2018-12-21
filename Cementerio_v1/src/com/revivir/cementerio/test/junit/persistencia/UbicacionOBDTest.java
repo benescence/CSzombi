@@ -1,5 +1,6 @@
 package com.revivir.cementerio.test.junit.persistencia;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class UbicacionOBDTest {
 	private UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
 	
 	private Ubicacion crearObjetoDePrueba() {
-		return new Ubicacion(-1, SubSector.BOVEDA, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		return new Ubicacion(-1, SubSector.BOVEDA, "rr", 3, 4, "casa", 3, 5, 77, 99,99, 8, 7, 6, 8);
 	}
 
 	@Test
@@ -74,13 +75,42 @@ public class UbicacionOBDTest {
 		obd.delete(objetoBD1);
 	}	
 	
-	private void iguales(Ubicacion c1, Ubicacion c2) {
-		//assertTrue(c1.getSubsector().equals(c2.getSubsector()));
+	private void iguales(Ubicacion obj1, Ubicacion obj2) {
+		assertTrue(obj1.getOtroCementerio().equals(obj2.getOtroCementerio()));
+		assertTrue(obj1.getSubsector().equals(obj2.getSubsector()));
+		assertTrue(obj1.getSeccion().equals(obj2.getSeccion()));
+		assertTrue(obj1.getMacizo().equals(obj2.getMacizo()));
+		assertTrue(obj1.getParcela().equals(obj2.getParcela()));
+		assertTrue(obj1.getNicho().equals(obj2.getNicho()));
+		assertTrue(obj1.getUnidad().equals(obj2.getUnidad()));
+		assertTrue(obj1.getMueble().equals(obj2.getMueble()));
+		assertTrue(obj1.getInhumacion().equals(obj2.getInhumacion()));
+		assertTrue(obj1.getFila().equals(obj2.getFila()));
+		assertTrue(obj1.getCirc().equals(obj2.getCirc()));
+		assertTrue(obj1.getBis_macizo().equals(obj2.getBis_macizo()));
+		assertTrue(obj1.getBis().equals(obj2.getBis()));
+		assertTrue(obj1.getSepultura().equals(obj2.getSepultura()));
 	}
 	
-	private void distintos(Ubicacion c1, Ubicacion c2) {
-		//boolean subsector = c1.getSubsector().equals(c2.getSubsector());
-		//assertFalse(subsector);
+	private void distintos(Ubicacion obj1, Ubicacion obj2) {
+		
+	
+		
+		boolean subsector =obj1.getSubsector().equals(obj2.getSubsector());
+		boolean otroCementerio = obj1.getOtroCementerio().equals(obj2.getOtroCementerio());
+		boolean seccion = obj1.getSeccion().equals(obj2.getSeccion());
+		boolean macizo = obj1.getMacizo().equals(obj2.getMacizo());
+		boolean parcela = obj1.getParcela().equals(obj2.getParcela());
+		boolean nicho = obj1.getNicho().equals(obj2.getNicho());
+		boolean unidad=  obj1.getUnidad().equals(obj2.getUnidad());
+		boolean mueble = obj1.getMueble().equals(obj2.getMueble());
+		boolean inhumacion = obj1.getInhumacion().equals(obj2.getInhumacion());
+		boolean fila = obj1.getFila().equals(obj2.getFila());
+		boolean circ = obj1.getCirc().equals(obj2.getCirc());
+		boolean bis_Macizo = obj1.getBis_macizo().equals(obj2.getBis_macizo());
+		boolean bis = obj1.getBis().equals(obj2.getBis());
+		boolean sepultura = obj1.getSepultura().equals(obj2.getSepultura());
+		assertFalse(subsector && otroCementerio && seccion && macizo && parcela && nicho && unidad && mueble && inhumacion && fila && circ && bis_Macizo && bis && sepultura);
 	}
 
 }
