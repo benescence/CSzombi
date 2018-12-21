@@ -2,6 +2,7 @@ package com.revivir.cementerio.persistencia;
 
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
 import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
+import com.revivir.cementerio.persistencia.interfaces.ExpensasOBD;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 import com.revivir.cementerio.persistencia.interfaces.MovimientoOBD;
 import com.revivir.cementerio.persistencia.interfaces.PagoOBD;
@@ -11,6 +12,7 @@ import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 import com.revivir.cementerio.persistencia.interfaces.UsuarioOBD;
 import com.revivir.cementerio.persistencia.mysql.CargoOBDMYSQL;
 import com.revivir.cementerio.persistencia.mysql.ClienteOBDMySQL;
+import com.revivir.cementerio.persistencia.mysql.ExpensasOBDMySQL;
 import com.revivir.cementerio.persistencia.mysql.FallecidoOBDMySQL;
 import com.revivir.cementerio.persistencia.mysql.MovimientoOBDMySQL;
 import com.revivir.cementerio.persistencia.mysql.PagoOBDMYSQL;
@@ -56,6 +58,11 @@ public class FactoryOBD {
 	public static MovimientoOBD crearMovimientoOBD() {
 		
 		return new MovimientoOBDMySQL();
+	}
+
+	public static ExpensasOBD crearExpensasOBD() {
+		
+		return new ExpensasOBDMySQL();
 	}
 	
 }
