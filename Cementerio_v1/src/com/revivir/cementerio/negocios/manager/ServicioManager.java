@@ -2,6 +2,7 @@ package com.revivir.cementerio.negocios.manager;
 
 import java.util.List;
 
+import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
@@ -57,4 +58,25 @@ public class ServicioManager {
 		return obd.selectActivoBycodigo(codigo);
 	}
 
+	public static List<Servicio> traer(String nombre, String codigo) throws Exception {
+		nombre = Verificador.anular(nombre);
+		codigo = Verificador.anular(codigo);
+		String mensaje = "";
+
+		if (nombre != null && !Validador.nombreServicio(nombre))
+			mensaje += "\n    -El NOMBRE solo puede estar compuesto de letras, numeros y espacios.";
+
+		if (codigo != null && !Validador.codigo(codigo))
+			mensaje += "\n    -El CODIGO solo puede estar compuesto de numeros.";
+		
+		if (nombre == null && codigo == null)
+			mensaje += "\n    -Debe llenar al menos uno de los campos para realizar la busqueda.";
+		
+		if (!mensaje.equals(""))
+			throw new Exception("Se encontraron los siguientes errores:"+mensaje);
+		
+		ServicioOBD obd = FactoryOBD.crearServicioOBD();
+		return obd.selectByCodigoNombre(codigo, nombre);
+	}
+	
 }

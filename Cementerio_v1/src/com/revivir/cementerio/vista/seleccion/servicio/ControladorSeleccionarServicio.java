@@ -1,10 +1,10 @@
 package com.revivir.cementerio.vista.seleccion.servicio;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 
+import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
+import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorSeleccionarServicio {
@@ -14,16 +14,34 @@ public class ControladorSeleccionarServicio {
 	public ControladorSeleccionarServicio(ServicioSeleccionable invocador) {
 		this.invocador = invocador;
 		ventana = new VentanaSeleccionarServicio();
-		ventana.botonAceptar().addActionListener(e -> seleccionar());
-		ventana.botonCancelar().addActionListener(e -> cancelar());
-		ventana.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				cancelar();
-			}
-		});
+		ventana.addWindowListener(new AccionCerrarVentana(e -> cancelar()));
+
+		ventana.botonSeleccionar().setAccion(e -> seleccionar());
+		ventana.botonCancelar().setAccion(e -> cancelar());
+		ventana.botonBuscar().setAccion(e -> buscar());
+		ventana.botonLimpiar().setAccion(e -> limpiar());
 	}
 
+	private void buscar() {
+		ventana.requestFocusInWindow();
+		try {
+			String nombre = ventana.getNombre().getTextField().getText();
+			String codigo = ventana.getCodigo().getTextField().getText();
+
+			List<Servicio> lista = ServicioManager.traer(nombre, codigo);
+			if (lista.isEmpty())
+				Popup.mostrar("No se ha encontrado ningun servicio con los parametros ingresados.");
+			ventana.getTabla().recargar(lista);
+		} catch (Exception e) {
+			Popup.mostrar(e.getMessage());
+		}
+	}
+	
+	private void limpiar() {
+		ventana.getNombre().getTextField().setText("");
+		ventana.getCodigo().getTextField().setText("");
+	}
+	
 	private void seleccionar() {
 		List<Servicio> seleccion = ventana.getTabla().obtenerSeleccion();
 		if (seleccion.size() != 1)

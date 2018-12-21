@@ -27,6 +27,6 @@ public interface ServicioOBD {
 		
 	public Servicio selectActivoBycodigo(String codigo);
 
-	public List<Servicio> selectByNombre(String nombre);
+	public List<Servicio> selectByCodigoNombre(String Codigo, String nombre);
 		
 }
