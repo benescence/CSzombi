@@ -35,7 +35,7 @@ class ClienteManagerTest {
 		objetoBD1.setTelefono("Telefono2");
 		objetoBD1.setEmail("Email2");
 		
-		ClienteManager.modificar(objetoBD1);
+		//ClienteManager.modificar(objetoBD1);
 		Cliente objetoBD2 = obd.ultimoInsertado();
 		
 		iguales(objetoBD1, objetoBD2);

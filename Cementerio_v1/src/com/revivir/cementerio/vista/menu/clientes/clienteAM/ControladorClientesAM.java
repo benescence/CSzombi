@@ -1,6 +1,6 @@
 package com.revivir.cementerio.vista.menu.clientes.clienteAM;
 
-import com.revivir.cementerio.negocios.Recepcion;
+import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
@@ -24,7 +24,7 @@ public class ControladorClientesAM {
 	}
 	
 	private void inicializar() {
-		ventana.addWindowListener(new AccionCerrarVentana(e->cancelar()));
+		ventana.addWindowListener(new AccionCerrarVentana(e -> cancelar()));
 		ventana.botonAceptar().setAccion(e -> aceptar());
 		ventana.botonCancelar().setAccion(e -> cancelar());
 	} 
@@ -35,18 +35,19 @@ public class ControladorClientesAM {
 		try {
 			String nombre = ventana.getInNombre().getText();
 			String apellido = ventana.getInApellido().getText();
-			String dni = ventana.getInDNI().getText();
+			String DNI = ventana.getInDNI().getText();
 			String telefono = ventana.getInTelefono().getText();
 			String email = ventana.getInEmail().getText();
-			String domicilio = ventana.getDomicilio().getText();			
+			String domicilio = ventana.getDomicilio().getText();
+			Cliente nuevo = new Cliente(-1, nombre, apellido, DNI, domicilio, telefono, email);
 			
 			// Crear un nuevo cliente
 			if (modificar == null)
-				Recepcion.registrarCliente(nombre, apellido, dni, telefono, email, domicilio);
+				ClienteManager.guardar(nuevo);
 			
 			// Modificar uno existente
 			else 
-				Recepcion.modificarCliente(modificar, nombre, apellido, dni, telefono, email, domicilio);
+				ClienteManager.modificar(nuevo, modificar);
 			
 			invocador.actualizarClientes();
 			ventana.dispose();

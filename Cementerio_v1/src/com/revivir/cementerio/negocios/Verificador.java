@@ -3,13 +3,15 @@ package com.revivir.cementerio.negocios;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 
-public class Recepcion {
-	
+public class Verificador {
 
-	
-	private static void validar(Cliente cliente, String nombre, String apellido, String DNI, String telefono,
-			String email, String domicilio) throws Exception {
-		
+	public static Cliente cliente(Cliente nuevo, Cliente anterior) throws Exception {
+		String nombre = anular(nuevo.getNombre());
+		String apellido = anular(nuevo.getApellido());
+		String DNI = anular(nuevo.getDNI());
+		String telefono = anular(nuevo.getTelefono());
+		String email = anular(nuevo.getEmail());
+		String domicilio = anular(nuevo.getDomicilio());
 		String mensaje = "";
 
 		if (nombre == null)
@@ -27,8 +29,8 @@ public class Recepcion {
 		else if (!Validador.DNI(DNI))
 			mensaje += "\n    -El DNI solo puede estar compuesto de números.";
 		else {
-			Cliente clienteBD = ClienteManager.traerPorDNI(DNI);
-			if (clienteBD != null && (cliente == null || clienteBD.getID() != cliente.getID()))
+			Cliente clienteDNI = ClienteManager.traerPorDNI(DNI);
+			if (clienteDNI != null && (anterior == null || anterior.getID() != clienteDNI.getID()))
 				mensaje += "\n    -Ya se encuentra registrado un cliente con el DNI: "+DNI+".";
 		}
 		
@@ -40,10 +42,25 @@ public class Recepcion {
 		
 		if (!mensaje.equals(""))
 			throw new Exception("Se encontraron los siguientes errores en el formulario:"+mensaje);
+		
+		// Debo setearlos porque pudieron ser anulados
+		if (anterior != null)
+			nuevo.setID(anterior.getID());
+		nuevo.setNombre(nombre);
+		nuevo.setApellido(apellido);
+		nuevo.setDNI(DNI);
+		nuevo.setTelefono(telefono);
+		nuevo.setEmail(email);
+		nuevo.setDomicilio(domicilio);
+
+		return nuevo;
 	}
-	
-	private static boolean isNull(String texto) {
-		return (texto == null || texto.equals(""));
+
+	private static String anular(String texto) {
+		if (texto == null || texto.equals(""))
+			return null;
+		else
+			return texto;
 	}
 
 }

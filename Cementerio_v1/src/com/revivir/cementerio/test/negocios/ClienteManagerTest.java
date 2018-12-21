@@ -14,7 +14,7 @@ public class ClienteManagerTest {
 	
 	public static void modificarTest(Cliente cliente) {
 		System.out.println("___ Modificar test");
-		ClienteManager.modificar(cliente);
+		//ClienteManager.modificar(cliente);
 	}
 	
 	public static void eliminarTest(Cliente cliente) {

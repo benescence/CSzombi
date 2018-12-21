@@ -2,22 +2,21 @@ package com.revivir.cementerio.negocios.manager;
 
 import java.util.List;
 
-import com.revivir.cementerio.negocios.Vinculador;
+import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
-import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 
 public class ClienteManager {
 	
-	public static void guardar(String nombre, String apellido, String DNI, String telefono,
-			String email, String domicilio) {
-		Cliente cliente = new Cliente(-1, nombre, apellido, DNI, "Domicilio1", telefono, email);
+	public static void guardar(Cliente nuevo) throws Exception {
+		Cliente cliente = Verificador.cliente(nuevo, null);
 		ClienteOBD obd = FactoryOBD.crearClienteOBD();
 		obd.insert(cliente);
 	}
 
-	public static void modificar(Cliente cliente) {
+	public static void modificar(Cliente nuevo, Cliente anterior) throws Exception {
+		Cliente cliente = Verificador.cliente(nuevo, anterior);
 		ClienteOBD obd = FactoryOBD.crearClienteOBD();
 		obd.update(cliente);
 	}
