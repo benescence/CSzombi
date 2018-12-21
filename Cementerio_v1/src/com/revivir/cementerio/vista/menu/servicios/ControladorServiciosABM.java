@@ -72,7 +72,7 @@ public class ControladorServiciosABM implements ControladorInterno, ServicioInvo
 
 	@Override
 	public void actualizarServicios() {
-		ventana.getTabla().recargar(ServicioManager.traerTodo());		
+		ventana.getTabla().recargar(ServicioManager.traerActivos());		
 	}
 
 }

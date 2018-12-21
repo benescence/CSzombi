@@ -16,7 +16,7 @@ public class TablaServiciosTest extends Ventana{
 		super("Prueba tabla de servicios", 500, 500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		TablaServicios tabla = new TablaServicios(ServicioManager.traerTodo());
+		TablaServicios tabla = new TablaServicios(ServicioManager.traerActivos());
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		
 		PanelVertical panel = new PanelVertical();

@@ -20,7 +20,7 @@ public class VentanaServiciosABM extends VentanaInterna {
 	public VentanaServiciosABM() {
 		super("Gestion de servicios", 500, 500);
 		
-		tabla = new TablaServicios(ServicioManager.traerTodo());
+		tabla = new TablaServicios(ServicioManager.traerActivos());
 		JScrollPane panelTabla = new JScrollPane(tabla);
 		
 		Dimension dimBoton = new Dimension(100, 25);

@@ -110,15 +110,14 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 
 	@Override
 	public void actualizarClientes() {
-		
-		// TODO Auto-generated method stub
-		
+		if (controladorInterno instanceof ClienteInvocable)
+			((ClienteInvocable)controladorInterno).actualizarClientes();
 	}
 
 	@Override
 	public void actualizarServicios() {
-		// TODO Auto-generated method stub
-		
+		if (controladorInterno instanceof ServicioInvocable)
+			((ServicioInvocable)controladorInterno).actualizarServicios();
 	}
 	
 }

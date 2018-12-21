@@ -37,6 +37,11 @@ public class ServicioManager {
 		return obd.select();
 	}
 	
+	public static List<Servicio> traerActivos() {
+		ServicioOBD obd = FactoryOBD.crearServicioOBD();
+		return obd.selectActivos();
+	}
+	
 	public static Servicio traerPorID(Integer ID) {
 		ServicioOBD obd = FactoryOBD.crearServicioOBD();
 		return obd.selectByID(ID);

@@ -23,6 +23,8 @@ public interface ServicioOBD {
 	
 	// METODOS ESPECIFICOS DE CONSULTA
 
+	public List<Servicio> selectActivos();
+		
 	public Servicio selectActivoBycodigo(String codigo);
 
 	public List<Servicio> selectByNombre(String nombre);

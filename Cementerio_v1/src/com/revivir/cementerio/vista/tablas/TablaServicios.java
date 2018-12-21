@@ -31,7 +31,7 @@ public class TablaServicios extends JTable{
 					servicio.getCodigo(),
 					servicio.getNombre(),
 					servicio.getImporte(),
-					servicio.getDescripcion()
+					((servicio.getDescripcion() == null) ? "": servicio.getDescripcion())
 				};
 			modelo.addRow(fila);			
 		}

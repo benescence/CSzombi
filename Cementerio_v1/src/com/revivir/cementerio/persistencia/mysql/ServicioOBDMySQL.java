@@ -51,6 +51,11 @@ public class ServicioOBDMySQL extends OBD implements ServicioOBD{
 	}
 	
 	@Override
+	public List<Servicio> selectActivos() {
+		return selectByCondicion("historico = false");
+	}
+	
+	@Override
 	public Servicio selectByID(Integer ID) {
 		String condicion = "ID = "+ID;
 		List<Servicio> lista = selectByCondicion(condicion);
