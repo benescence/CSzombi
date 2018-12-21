@@ -41,10 +41,10 @@ public class ControladorConsultaCliente implements ActionListener, ControladorIn
 		String DNI = (ventana.getDNI().getText().equals("") ? null : ventana.getDNI().getText());
 		String nombres = (ventana.getNombre().getText().equals("") ? null : ventana.getNombre().getText());
 		String apellido = (ventana.getApellido().getText().equals("") ? null : ventana.getApellido().getText());
-		List<Cliente> clientes = Busqueda.clientes(DNI, nombres, apellido);
-		ventana.getTabla().recargar(clientes);
-		if (clientes.size() == 0)
-			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
+		//List<Cliente> clientes = Busqueda.clientes(DNI, nombres, apellido);
+		//ventana.getTabla().recargar(clientes);
+		//if (clientes.size() == 0)
+			//Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
 	}
 
 	@Override

@@ -9,11 +9,11 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 public class BusquedaTest {
 	
 	public static void clientesTest(String DNI, String nombres, String apellido) {
-		System.out.println("___ Busqueda de clientes test");
+		/*System.out.println("___ Busqueda de clientes test");
 		List<Cliente> lista = Busqueda.clientes(DNI, nombres, apellido);
 		System.out.println("Cantidad: "+lista.size());
 		for (Cliente elemento : lista)
-			System.out.println(elemento.getApellido()+", "+elemento.getNombre());
+			System.out.println(elemento.getApellido()+", "+elemento.getNombre());*/
 	}
 
 	public static void fallecidosTest(String DNI, String nombres, String apellido) {

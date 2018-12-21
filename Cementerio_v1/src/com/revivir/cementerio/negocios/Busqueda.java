@@ -11,10 +11,6 @@ import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
 public class Busqueda {
 	
-	public static List<Cliente> clientes(String DNI, String nombres, String apellido) {
-		ClienteOBD obd = FactoryOBD.crearClienteOBD();
-		return obd.selectByNombreApellidoDNI(nombres, apellido, DNI);
-	}
 	public static List<Servicio> precios(String codigo, String descripcion) {
 		//ServicioOBD obd = FactoryOBD.crearPrecioOBD();
 		//return obd.selectByDescripcion(descripcion);

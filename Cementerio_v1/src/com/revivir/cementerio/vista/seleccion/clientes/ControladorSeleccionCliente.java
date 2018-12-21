@@ -1,41 +1,46 @@
 package com.revivir.cementerio.vista.seleccion.clientes;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 
+import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorSeleccionCliente implements ActionListener{
+public class ControladorSeleccionCliente {
 	private VentanaSeleccionCliente ventana;
 	private ClienteSeleccionable invocador;
 
 	public ControladorSeleccionCliente(ClienteSeleccionable invocador) {
 		this.invocador = invocador;
 		ventana = new VentanaSeleccionCliente();
-		ventana.botonCancelar().addActionListener(this);
-		ventana.botonSeleccionar().addActionListener(this);
-		ventana.mostrar();
-		ventana.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				cancelar();
-			}
-		});
+		ventana.addWindowListener(new AccionCerrarVentana(e -> cancelar()));
 
+		ventana.botonSeleccionar().setAccion(e -> seleccionar());
+		ventana.botonCancelar().setAccion(e -> cancelar());
+		ventana.botonBuscar().setAccion(e -> buscar());
+		ventana.botonLimpiar().setAccion(e -> limpiar());
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		// BOTON SELECCIONAR
-		if (e.getSource() == ventana.botonSeleccionar())
-			seleccionar();
+	private void buscar() {
+		ventana.requestFocusInWindow();
+		try {
+			String nombre = ventana.getNombre().getTextField().getText();
+			String apellido = ventana.getApellido().getTextField().getText();
+			String DNI = ventana.getDNI().getTextField().getText();
+			List<Cliente> lista = ClienteManager.traer(nombre, apellido, DNI);
+			if (lista.isEmpty())
+				Popup.mostrar("No se ha encontrado ningun cliente con los paramteros ingresados.");
+			ventana.getTabla().recargar(lista);
+		} catch (Exception e) {
+			Popup.mostrar(e.getMessage());
+		}
+	}
 	
-		// BOTON CANCELAR
-		else if (e.getSource() == ventana.botonCancelar())
-			cancelar();
+	private void limpiar() {
+		ventana.getNombre().getTextField().setText("");
+		ventana.getApellido().getTextField().setText("");
+		ventana.getDNI().getTextField().setText("");
 	}
 	
 	private void seleccionar() {

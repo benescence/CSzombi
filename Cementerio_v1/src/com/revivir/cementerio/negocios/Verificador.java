@@ -92,7 +92,7 @@ public class Verificador {
 		return nuevo;
 	}
 
-	private static String anular(String texto) {
+	public static String anular(String texto) {
 		if (texto == null || texto.equals(""))
 			return null;
 		else
