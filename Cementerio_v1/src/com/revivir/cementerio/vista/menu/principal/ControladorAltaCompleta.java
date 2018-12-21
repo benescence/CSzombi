@@ -155,7 +155,7 @@ public class ControladorAltaCompleta implements ActionListener, ClienteSeleccion
 	}
 
 	@Override
-	public void setCliente(Cliente cliente) {
+	public void seleccionarCliente(Cliente cliente) {
 		this.cliente = cliente;
 		ventana.getDNI().setText(cliente.getDNI());
 		ventana.getNombre().setText(cliente.getNombre());

@@ -4,7 +4,7 @@ import com.revivir.cementerio.persistencia.entidades.Cliente;
 
 public interface ClienteSeleccionable {
 	
-	public void setCliente(Cliente cliente);
+	public void seleccionarCliente(Cliente cliente);
 
 	public void mostrar();
 

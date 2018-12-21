@@ -40,7 +40,7 @@ public class ControladorConsultarPorCliente implements ControladorInterno, Clien
 	}
 
 	@Override
-	public void setCliente(Cliente cliente) {
+	public void seleccionarCliente(Cliente cliente) {
 		ventana.getNombre().getTextField().setText(cliente.getNombre());
 		ventana.getApellido().getTextField().setText(cliente.getApellido());
 		ventana.getDNI().getTextField().setText(cliente.getDNI());

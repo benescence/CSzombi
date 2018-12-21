@@ -48,7 +48,7 @@ public class ControladorSeleccionCliente {
 		if (seleccion.size() != 1)
 			Popup.mostrar("Debe seleccionar exactamente un cliente");
 		else {
-			invocador.setCliente(seleccion.get(0));
+			invocador.seleccionarCliente(seleccion.get(0));
 			ventana.dispose();
 			invocador.mostrar();
 		}

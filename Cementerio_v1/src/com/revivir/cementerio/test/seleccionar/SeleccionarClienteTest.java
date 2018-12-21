@@ -7,7 +7,7 @@ import com.revivir.cementerio.vista.seleccion.clientes.ControladorSeleccionClien
 public class SeleccionarClienteTest implements ClienteSeleccionable {
 
 	@Override
-	public void setCliente(Cliente cliente) {
+	public void seleccionarCliente(Cliente cliente) {
 		System.out.println("Se ha seleccionado el cliente:"+cliente.getNombre()+", "+cliente.getApellido()+", "+cliente.getDNI());
 	}
 

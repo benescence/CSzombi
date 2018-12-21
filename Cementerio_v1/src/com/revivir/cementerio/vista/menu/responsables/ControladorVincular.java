@@ -71,7 +71,7 @@ public class ControladorVincular implements ClienteSeleccionable, FallecidoSelec
 	}
 
 	@Override
-	public void setCliente(Cliente cliente) {
+	public void seleccionarCliente(Cliente cliente) {
 		ventana.setCliente(cliente);
 		ventana.getNombreCliente().getTextField().setText(cliente.getNombre());
 		ventana.getApellidoCliente().getTextField().setText(cliente.getApellido());

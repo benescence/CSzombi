@@ -1,10 +1,10 @@
 package com.revivir.cementerio.vista.seleccion.fallecidos;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 
+import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorSeleccionarFallecido {
@@ -14,14 +14,33 @@ public class ControladorSeleccionarFallecido {
 	public ControladorSeleccionarFallecido(FallecidoSeleccionable invocador) {
 		this.invocador = invocador;
 		ventana = new VentanaSeleccionarFallecido();
-		ventana.botonAceptar().addActionListener(e -> seleccionar());
-		ventana.botonCancelar().addActionListener(e -> cancelar());
-		ventana.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				cancelar();
-			}
-		});
+		ventana.addWindowListener(new AccionCerrarVentana(e -> cancelar()));
+
+		ventana.botonSeleccionar().setAccion(e -> seleccionar());
+		ventana.botonCancelar().setAccion(e -> cancelar());
+		ventana.botonBuscar().setAccion(e -> buscar());
+		ventana.botonLimpiar().setAccion(e -> limpiar());
+	}
+	
+	private void buscar() {
+		ventana.requestFocusInWindow();
+		try {
+			String nombre = ventana.getNombre().getTextField().getText();
+			String apellido = ventana.getApellido().getTextField().getText();
+			String DNI = ventana.getDNI().getTextField().getText();
+			List<Fallecido> lista = FallecidoManager.traer(nombre, apellido, DNI);
+			if (lista.isEmpty())
+				Popup.mostrar("No se ha encontrado ningun fallecido con los paramteros ingresados.");
+			ventana.getTabla().recargar(lista);
+		} catch (Exception e) {
+			Popup.mostrar(e.getMessage());
+		}
+	}
+	
+	private void limpiar() {
+		ventana.getNombre().getTextField().setText("");
+		ventana.getApellido().getTextField().setText("");
+		ventana.getDNI().getTextField().setText("");
 	}
 
 	private void seleccionar() {

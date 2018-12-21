@@ -103,9 +103,6 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 
 	@Override
 	public List<Cliente> selectByNombreApellidoDNI(String nombre, String apellido, String DNI) {
-		if (nombre == null && apellido == null && DNI == null )
-			return selectByCondicion("true");
-		
 		String condicion = "";
 		if (nombre != null)
 			condicion += "upper(nombre) like '"+nombre.toUpperCase()+"%'";
