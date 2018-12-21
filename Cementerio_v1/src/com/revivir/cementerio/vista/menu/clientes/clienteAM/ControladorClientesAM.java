@@ -1,55 +1,32 @@
 package com.revivir.cementerio.vista.menu.clientes.clienteAM;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import com.revivir.cementerio.negocios.Recepcion;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
-import com.revivir.cementerio.vista.ControladorInterno;
-import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
-import com.revivir.cementerio.vista.util.EntradaMouse;
+import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
-import com.revivir.cementerio.vista.util.PresionarEnterListener;
 
 public class ControladorClientesAM {
 	private VentanaClientesAM ventana;
-	private ControladorClientesABM invocador;
-	private ControladorPrincipal principal;
-	private Cliente cliente;
+	private ClienteInvocable invocador;
+	private Cliente modificar;
 	
-	public ControladorClientesAM(ControladorClientesABM invocador, Cliente cliente) {
+	public ControladorClientesAM(ClienteInvocable invocador, Cliente modificar) {
 		this.invocador = invocador;
-		this.cliente = cliente;
-		ventana = new VentanaClientesAM(cliente);
+		this.modificar = modificar;
+		ventana = new VentanaClientesAM(modificar);
 		inicializar();
 	}
 	
-	public ControladorClientesAM(ControladorClientesABM invocador) {
+	public ControladorClientesAM(ClienteInvocable invocador) {
 		this.invocador = invocador;
-		ventana = new VentanaClientesAM();
-		inicializar();
-	}
-	
-	public ControladorClientesAM(ControladorPrincipal invocador) {
-		this.principal = invocador;
 		ventana = new VentanaClientesAM();
 		inicializar();
 	}
 	
 	private void inicializar() {
-		ventana.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				cancelar();
-			}
-		});
-		
-		ventana.botonAceptar().addKeyListener(new PresionarEnterListener(e -> aceptar()));
-		ventana.botonCancelar().addKeyListener(new PresionarEnterListener(e -> cancelar()));
-		
-		ventana.botonAceptar().addMouseListener(new EntradaMouse(e -> aceptar()));
-		ventana.botonCancelar().addMouseListener(new EntradaMouse(e -> cancelar()));
+		ventana.addWindowListener(new AccionCerrarVentana(e->cancelar()));
+		ventana.botonAceptar().setAccion(e -> aceptar());
+		ventana.botonCancelar().setAccion(e -> cancelar());
 	} 
 	
 	private void aceptar() {
@@ -64,15 +41,17 @@ public class ControladorClientesAM {
 			String domicilio = ventana.getDomicilio().getText();			
 			
 			// Crear un nuevo cliente
-			if (cliente == null)
+			if (modificar == null)
 				Recepcion.registrarCliente(nombre, apellido, dni, telefono, email, domicilio);
 			
 			// Modificar uno existente
 			else 
-				Recepcion.modificarCliente(cliente, nombre, apellido, dni, telefono, email, domicilio);
+				Recepcion.modificarCliente(modificar, nombre, apellido, dni, telefono, email, domicilio);
 			
-			actualizarVentana();
-			volver();
+			invocador.actualizarClientes();
+			ventana.dispose();
+			ventana = null;
+			invocador.mostrar();
 			
 		} catch (Exception e) {
 			Popup.mostrar(e.getMessage());
@@ -81,27 +60,11 @@ public class ControladorClientesAM {
 	}
 	
 	private void cancelar() {
-		if (Popup.confirmar("Se perderan los datos ingresados.\n¿Esta seguro de que desea cancelar la operacion?"))
-			volver();
-	}
-
-	private void actualizarVentana() {
-		if (invocador != null)
-			invocador.actualizar();
-		else {
-			ControladorInterno c = principal.getControladorInterno();
-			if (c != null && c instanceof ControladorClientesABM)
-				((ControladorClientesABM)c).actualizar();
+		if (Popup.confirmar("Se perderan los datos ingresados.\n¿Esta seguro de que desea cancelar la operacion?")) {
+			ventana.dispose();
+			ventana = null;
+			invocador.mostrar();
 		}
 	}
-	
-	private void volver() {
-		ventana.dispose();
-		ventana = null;
-		if (invocador != null)
-			invocador.mostrar();
-		else
-			principal.getVentana().mostrar();
-	}	
 
 }

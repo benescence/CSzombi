@@ -2,8 +2,10 @@ package com.revivir.cementerio.negocios.manager;
 
 import java.util.List;
 
+import com.revivir.cementerio.negocios.Vinculador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 
 public class ClienteManager {
@@ -21,6 +23,11 @@ public class ClienteManager {
 	}
 		
 	public static void eliminar(Cliente cliente) {
+		//List<Fallecido> fallecidos = Vinculador.traerFallecidosDeCliente(cliente);
+		//if (fallecidos.size() > 0)
+		
+		
+		
 		ClienteOBD obd = FactoryOBD.crearClienteOBD();
 		obd.delete(cliente);
 	}

@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import com.revivir.cementerio.vista.menu.cargos.ControladorCargoAM;
 import com.revivir.cementerio.vista.menu.cargos.fallecidos.ControladorCargosDeFallecidos;
 import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
+import com.revivir.cementerio.vista.menu.clientes.clienteAM.ClienteInvocable;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
@@ -18,7 +19,7 @@ import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorPrincipal {
+public class ControladorPrincipal implements ClienteInvocable {
 	private VentanaPrincipal ventana;
 	private ControladorInterno controladorInterno;
 	
@@ -99,6 +100,18 @@ public class ControladorPrincipal {
 	
 	public ControladorInterno getControladorInterno() {
 		return controladorInterno;
+	}
+
+	@Override
+	public void mostrar() {
+		ventana.mostrar();
+	}
+
+	@Override
+	public void actualizarClientes() {
+		
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

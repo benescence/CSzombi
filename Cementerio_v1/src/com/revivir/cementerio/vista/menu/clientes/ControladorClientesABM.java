@@ -8,10 +8,11 @@ import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
+import com.revivir.cementerio.vista.menu.clientes.clienteAM.ClienteInvocable;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorClientesABM implements ControladorInterno {
+public class ControladorClientesABM implements ControladorInterno, ClienteInvocable {
 	private VentanaClientesABM ventana;
 	private ControladorPrincipal invocador;
 	
@@ -61,7 +62,7 @@ public class ControladorClientesABM implements ControladorInterno {
 	}
 	
 	public void mostrar() {
-		invocador.getVentana().setEnabled(true);
+		invocador.getVentana().mostrar();
 		invocador.getVentana().toFront();
 	}
 
@@ -72,6 +73,11 @@ public class ControladorClientesABM implements ControladorInterno {
 
 	public void actualizar() {
 		ventana.getTabla().recargar(ClienteManager.traerTodo());
+	}
+
+	@Override
+	public void actualizarClientes() {
+		actualizar();
 	}
 
 }
