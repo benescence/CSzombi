@@ -10,6 +10,7 @@ import java.util.List;
 import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Movimiento;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
@@ -111,6 +112,8 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 			return lista.get(0);
 		return null;
 	}
+	
+
 	
 	@Override
 	public List<Ubicacion> select() {

@@ -48,6 +48,8 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 		ejecutarSQL(consulta);
 	}
 
+	
+	
 	@Override
 	public List<Fallecido> select() {
 		return selectByCondicion("true");

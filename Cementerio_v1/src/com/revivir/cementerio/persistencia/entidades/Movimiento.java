@@ -1,16 +1,28 @@
 package com.revivir.cementerio.persistencia.entidades;
 
+import java.util.Date;
+
 public class Movimiento {
 	private Integer ID, fallecido;
 	private String antiguaUbicacion, causaTraslado, observaciones;
+	private Date ferchaTranslado;
 	
 	public Movimiento(Integer ID, Integer fallecido, String antiguaUbicacion, String causaTraslado,
-			String observaciones) {
+			String observaciones, Date fechaTranslado) {
 		this.ID = ID;
 		this.fallecido = fallecido;
 		this.antiguaUbicacion = antiguaUbicacion;
 		this.causaTraslado = causaTraslado;
 		this.observaciones = observaciones;
+		this.ferchaTranslado = fechaTranslado;
+	}
+
+	public Date getFerchaTranslado() {
+		return ferchaTranslado;
+	}
+
+	public void setFerchaTranslado(Date ferchaTranslado) {
+		this.ferchaTranslado = ferchaTranslado;
 	}
 
 	public Integer getID() {
