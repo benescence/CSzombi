@@ -1,9 +1,11 @@
-package com.revivir.cementerio.vista.util;
+package com.revivir.cementerio.vista.util.entradas;
 
 import java.awt.Dimension;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 
 public class ListaDesplegable<E> extends PanelHorizontal {
 	private static final long serialVersionUID = 1L;

@@ -18,10 +18,10 @@ import com.revivir.cementerio.negocios.Localizador;
 import com.revivir.cementerio.persistencia.definidos.Sector;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
-import com.revivir.cementerio.vista.util.EntradaTexto;
-import com.revivir.cementerio.vista.util.PanelHorizontal;
-import com.revivir.cementerio.vista.util.PanelVertical;
-import com.revivir.cementerio.vista.util.VentanaInterna;
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
+import com.revivir.cementerio.vista.util.contenedores.VentanaInterna;
+import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
 import com.toedter.calendar.JDateChooser;
 
 public class VentanaAltaCompleta extends VentanaInterna {

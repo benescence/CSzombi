@@ -7,9 +7,9 @@ import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
-import com.revivir.cementerio.vista.util.EntradaMouse;
 import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.PresionarEnterListener;
+import com.revivir.cementerio.vista.util.entradas.EntradaMouse;
 
 public class ControladorServicioAM {
 	private VentanaServicioAM ventana;

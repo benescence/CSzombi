@@ -10,7 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import com.revivir.cementerio.vista.util.Ventana;
+import com.revivir.cementerio.vista.util.contenedores.Ventana;
 
 public class VentanaPrincipal extends Ventana {
 	private static final long serialVersionUID = 1L;

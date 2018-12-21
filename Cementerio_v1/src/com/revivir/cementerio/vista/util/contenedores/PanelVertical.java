@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.util;
+package com.revivir.cementerio.vista.util.contenedores;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;

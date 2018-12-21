@@ -8,14 +8,12 @@ import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Expensas;
 import com.revivir.cementerio.persistencia.interfaces.ExpensasOBD;
 
-
 class ExpensasOBDMySQL {
-
 	private Expensas objeto = crearObjeto();
 	private ExpensasOBD obd = FactoryOBD.crearExpensasOBD();
 	
 	private Expensas crearObjeto() {
-		
+		//new Expensas(iD, responsable, periodo, ubicacion, fechaVencimiento, importe, observacones)
 		return new Expensas(-1, 8, 1, 2,Almanaque.hoy(), 600, "obs");
 	}
 

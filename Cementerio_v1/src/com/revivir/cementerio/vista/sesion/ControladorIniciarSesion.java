@@ -6,9 +6,9 @@ import java.awt.event.WindowEvent;
 import com.revivir.cementerio.negocios.Sesion;
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.util.EntradaMouse;
 import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.PresionarEnterListener;
+import com.revivir.cementerio.vista.util.entradas.EntradaMouse;
 
 public class ControladorIniciarSesion {
 	private VentanaIniciarSesion ventana;

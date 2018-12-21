@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import com.revivir.cementerio.vista.util.entradas.EntradaMouse;
+
 public class Boton extends JButton{
 	private static final long serialVersionUID = 1L;
 	

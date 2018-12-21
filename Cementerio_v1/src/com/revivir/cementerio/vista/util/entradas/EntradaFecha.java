@@ -1,10 +1,11 @@
-package com.revivir.cementerio.vista.util;
+package com.revivir.cementerio.vista.util.entradas;
 
 import java.awt.Dimension;
 import java.sql.Date;
 
 import javax.swing.JLabel;
 
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 import com.toedter.calendar.JDateChooser;
 
 public class EntradaFecha extends PanelHorizontal {

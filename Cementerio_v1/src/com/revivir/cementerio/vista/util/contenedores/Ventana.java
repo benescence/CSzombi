@@ -1,6 +1,7 @@
-package com.revivir.cementerio.vista.util;
+package com.revivir.cementerio.vista.util.contenedores;
 
 import javax.swing.JFrame;
+import javax.swing.border.EmptyBorder;
 
 public abstract class Ventana extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -39,6 +40,7 @@ public abstract class Ventana extends JFrame{
 	
 	public PanelVertical crearPanelPrincipal() {
 		PanelVertical panel = new PanelVertical();
+		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(panel);
 		return panel;
 	}

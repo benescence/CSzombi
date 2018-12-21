@@ -1,8 +1,10 @@
-package com.revivir.cementerio.vista.util;
+package com.revivir.cementerio.vista.util.entradas;
 
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 
 public class EntradaTexto extends PanelHorizontal {
 	private static final long serialVersionUID = 1L;

@@ -31,7 +31,7 @@ import com.revivir.cementerio.vista.menu.principal.ControladorAltaCompleta;
 import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.precio.ControladorPrecio;
 import com.revivir.cementerio.vista.sesion.ControladorIniciarSesion;
-import com.revivir.cementerio.vista.util.PanelVertical;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
 @SuppressWarnings("serial")
 public class MainPrincipal extends JFrame {

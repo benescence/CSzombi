@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.util;
+package com.revivir.cementerio.vista.util.entradas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

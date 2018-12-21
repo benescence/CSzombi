@@ -1,9 +1,11 @@
-package com.revivir.cementerio.vista.util;
+package com.revivir.cementerio.vista.util.entradas;
 
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 
 public class EntradaTextoPassword extends PanelHorizontal {
 	private static final long serialVersionUID = 1L;

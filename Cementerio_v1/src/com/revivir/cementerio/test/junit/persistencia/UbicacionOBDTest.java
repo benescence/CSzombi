@@ -17,7 +17,7 @@ public class UbicacionOBDTest {
 	private UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
 	
 	private Ubicacion crearObjetoDePrueba() {
-		return new Ubicacion(-1, SubSector.BOVEDA, "rr", 3, 4, "casa", 3, 5, 77, 99,99, 8, 7, 6, 8);
+		return new Ubicacion(-1, SubSector.BOVEDA, "rr", 3, 4, null, 1, 5, 77, 99,99, 8, 7, 6, 8);
 	}
 
 	@Test
@@ -76,9 +76,21 @@ public class UbicacionOBDTest {
 	}	
 	
 	private void iguales(Ubicacion obj1, Ubicacion obj2) {
+		
+		// Si ambos son null, entonces son iguales
+		boolean seccion = (obj1.getSeccion() == null) && (obj2.getSeccion() == null); 
+		
+		// Si ambos son distintos de null, son iguales si sus atributos son iguales
+		if (obj1.getSeccion() != null && obj2.getSeccion() != null)
+			seccion = obj1.getSeccion().equals(obj2.getSeccion()); 
+		
+		// Notar que si uno es null y el otro no, entonces son necesariamente distintos
+		assertTrue(seccion);
+		
+		
+		
 		assertTrue(obj1.getOtroCementerio().equals(obj2.getOtroCementerio()));
 		assertTrue(obj1.getSubsector().equals(obj2.getSubsector()));
-		assertTrue(obj1.getSeccion().equals(obj2.getSeccion()));
 		assertTrue(obj1.getMacizo().equals(obj2.getMacizo()));
 		assertTrue(obj1.getParcela().equals(obj2.getParcela()));
 		assertTrue(obj1.getNicho().equals(obj2.getNicho()));
@@ -93,12 +105,16 @@ public class UbicacionOBDTest {
 	}
 	
 	private void distintos(Ubicacion obj1, Ubicacion obj2) {
+		// Si ambos son null, entonces son iguales
+		boolean seccion = obj1.getSeccion() == null && obj2.getSeccion() == null; 
 		
-	
+		// Si ambos son distintos de null, son iguales si sus atributos son iguales
+		if (obj1.getSeccion() != null && obj2.getSeccion() != null)
+			seccion = obj1.getSeccion().equals(obj2.getSeccion()); 
+		
 		
 		boolean subsector =obj1.getSubsector().equals(obj2.getSubsector());
 		boolean otroCementerio = obj1.getOtroCementerio().equals(obj2.getOtroCementerio());
-		boolean seccion = obj1.getSeccion().equals(obj2.getSeccion());
 		boolean macizo = obj1.getMacizo().equals(obj2.getMacizo());
 		boolean parcela = obj1.getParcela().equals(obj2.getParcela());
 		boolean nicho = obj1.getNicho().equals(obj2.getNicho());

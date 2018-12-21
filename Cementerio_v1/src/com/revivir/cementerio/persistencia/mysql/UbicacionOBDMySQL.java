@@ -10,7 +10,6 @@ import java.util.List;
 import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
-import com.revivir.cementerio.persistencia.entidades.Movimiento;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
@@ -57,15 +56,14 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 	@Override
 	public void update(Ubicacion ubicacion) {
 		String bis = (ubicacion.getBis() != null) ? "'"+ubicacion.getBis()+"'" : null;
-		
-		
+		String seccion = (ubicacion.getSeccion() != null) ? "'"+ubicacion.getSeccion()+"'" : null;
 		
 		String condicion = "ID = "+ubicacion.getID();
 		String valores = " Subsector= "+Definido.subsector(ubicacion.getSubsector())
 				+", otro_cementerio = '"+ubicacion.getOtroCementerio()+"'"
 				+", Nicho = '"+ubicacion.getNicho()+"'"
 				+", Fila = '"+ubicacion.getFila()+"'"
-				+", Seccion = '"+ubicacion.getSeccion()+"'"
+				+", Seccion = "+seccion
 				+", Macizo = '"+ubicacion.getMacizo()+"'"
 				+", Unidad = '"+ubicacion.getUnidad()+"'"
 				+", bis = "+bis

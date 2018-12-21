@@ -6,8 +6,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.vista.tablas.TablaFallecidos;
-import com.revivir.cementerio.vista.util.PanelVertical;
-import com.revivir.cementerio.vista.util.Ventana;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
+import com.revivir.cementerio.vista.util.contenedores.Ventana;
 
 public class TablaFallecidosTest extends Ventana{
 	private static final long serialVersionUID = 1L;

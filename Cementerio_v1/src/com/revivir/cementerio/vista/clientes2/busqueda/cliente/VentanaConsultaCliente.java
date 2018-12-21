@@ -10,9 +10,9 @@ import javax.swing.JTextField;
 
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.tablas.TablaClientes;
-import com.revivir.cementerio.vista.util.PanelHorizontal;
-import com.revivir.cementerio.vista.util.PanelVertical;
-import com.revivir.cementerio.vista.util.VentanaInterna;
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
+import com.revivir.cementerio.vista.util.contenedores.VentanaInterna;
 
 public class VentanaConsultaCliente extends VentanaInterna{
 	private static final long serialVersionUID = 1L;

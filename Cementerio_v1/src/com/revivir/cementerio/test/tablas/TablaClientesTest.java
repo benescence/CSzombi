@@ -6,8 +6,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.vista.tablas.TablaClientes;
-import com.revivir.cementerio.vista.util.PanelVertical;
-import com.revivir.cementerio.vista.util.Ventana;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
+import com.revivir.cementerio.vista.util.contenedores.Ventana;
 
 public class TablaClientesTest extends Ventana{
 	private static final long serialVersionUID = 1L;

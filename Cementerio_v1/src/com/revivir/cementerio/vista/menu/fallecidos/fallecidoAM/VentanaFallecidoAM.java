@@ -19,12 +19,12 @@ import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.util.Boton;
-import com.revivir.cementerio.vista.util.EntradaFecha;
-import com.revivir.cementerio.vista.util.EntradaTexto;
-import com.revivir.cementerio.vista.util.ListaDesplegable;
-import com.revivir.cementerio.vista.util.PanelHorizontal;
-import com.revivir.cementerio.vista.util.PanelVertical;
-import com.revivir.cementerio.vista.util.Ventana;
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
+import com.revivir.cementerio.vista.util.contenedores.Ventana;
+import com.revivir.cementerio.vista.util.entradas.EntradaFecha;
+import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
+import com.revivir.cementerio.vista.util.entradas.ListaDesplegable;
 import com.toedter.calendar.JDateChooser;
 
 public class VentanaFallecidoAM extends Ventana {
@@ -34,7 +34,7 @@ public class VentanaFallecidoAM extends Ventana {
 	// DATOS DEL DIFUNTO
 	private EntradaTexto inNombre, inApellido, inDNI, inCocheria;
 	private EntradaFecha inFechaFallecimiento, inFechaIngreso;
-	private ListaDesplegable<TipoFallecimiento> inTipoDeFallecimiento;
+	private ListaDesplegable<TipoFallecimiento> inTipo;
 	
 	// DATOS DE UBICACION
 	private EntradaTexto inSeccion, inMacizo, inUnidad, inNumeroSepultura, inSepultura, inInhumacion,
@@ -55,7 +55,7 @@ public class VentanaFallecidoAM extends Ventana {
 		inApellido.getTextField().setText(fallecido.getApellido());
 		inDNI.getTextField().setText(fallecido.getDni());
 		inCocheria.getTextField().setText(fallecido.getCocheria());
-		inTipoDeFallecimiento.getComboBox().setSelectedItem(fallecido.getTipoFallecimiento());
+		inTipo.getComboBox().setSelectedItem(fallecido.getTipoFallecimiento());
 	}
 	
 	public void inicializar() {
@@ -69,16 +69,12 @@ public class VentanaFallecidoAM extends Ventana {
 		panelBotones.add(btnCancelar);
 		
 		// PANELES
-		PanelVertical panelPrincipal = new PanelVertical();
-		panelPrincipal.setBorder(new EmptyBorder(10, 10, 10, 10));
-		setContentPane(panelPrincipal);
-		
+		PanelVertical panelPrincipal = crearPanelPrincipal();
 		panelPrincipal.add(crearPanelFallecido());
 		panelPrincipal.add(new JSeparator());
 		panelPrincipal.add(crearPanelUbicacion());
 		panelPrincipal.add(panelBotones);
-		pack();
-		setLocationRelativeTo(null);
+		compactar();
 	}
 	
 	private PanelVertical crearPanelFallecido() {
@@ -91,10 +87,10 @@ public class VentanaFallecidoAM extends Ventana {
 		inCocheria = new EntradaTexto("Cocheria", dimLabel, dimTextfield);
 		inFechaFallecimiento = new EntradaFecha(Almanaque.hoy(), "Fecha de fallecimiento", dimLabel, dimTextfield);
 		inFechaIngreso = new EntradaFecha(Almanaque.hoy(), "Fecha de Ingreso", dimLabel, dimTextfield);
-		inTipoDeFallecimiento = new ListaDesplegable<>("Tipode fallecimiento", dimLabel, dimTextfield);
-		for (TipoFallecimiento tipoFallecimiento : TipoFallecimiento.values())
-			inTipoDeFallecimiento.getComboBox().addItem(tipoFallecimiento);
-		inTipoDeFallecimiento.getComboBox().setSelectedItem(TipoFallecimiento.NO_TRAUMATICO);
+		inTipo = new ListaDesplegable<>("Tipode fallecimiento", dimLabel, dimTextfield);
+		for (TipoFallecimiento tipo : TipoFallecimiento.values())
+			inTipo.getComboBox().addItem(tipo);
+		inTipo.getComboBox().setSelectedItem(TipoFallecimiento.NO_TRAUMATICO);
 		
 		// ORGANIZACION DE PANELES
 		PanelVertical panelFallecido = new PanelVertical();
@@ -103,7 +99,7 @@ public class VentanaFallecidoAM extends Ventana {
 		panelFallecido.add(inNombre);
 		panelFallecido.add(inDNI);
 		panelFallecido.add(inCocheria);
-		panelFallecido.add(inTipoDeFallecimiento);
+		panelFallecido.add(inTipo);
 		panelFallecido.add(inFechaFallecimiento);
 		panelFallecido.add(inFechaIngreso);
 		return panelFallecido;
@@ -299,7 +295,7 @@ public class VentanaFallecidoAM extends Ventana {
 	
 
 	public JComboBox<TipoFallecimiento> getInTipoFallecimiento() {
-		return inTipoDeFallecimiento.getComboBox();
+		return inTipo.getComboBox();
 	}
 
 	public JTextField getInSeccion() {

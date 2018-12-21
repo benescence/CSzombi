@@ -12,10 +12,10 @@ import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 import com.revivir.cementerio.vista.tablas.TablaUsuarios;
 import com.revivir.cementerio.vista.util.Boton;
-import com.revivir.cementerio.vista.util.EntradaTexto;
-import com.revivir.cementerio.vista.util.PanelHorizontal;
-import com.revivir.cementerio.vista.util.PanelVertical;
-import com.revivir.cementerio.vista.util.VentanaInterna;
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
+import com.revivir.cementerio.vista.util.contenedores.VentanaInterna;
+import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
 
 public class VentanaUsuariosABM extends VentanaInterna {
 	private static final long serialVersionUID = 1L;

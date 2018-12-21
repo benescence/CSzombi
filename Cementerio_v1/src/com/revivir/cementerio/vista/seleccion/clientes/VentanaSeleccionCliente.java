@@ -5,9 +5,9 @@ import javax.swing.JScrollPane;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.vista.tablas.TablaClientes;
 import com.revivir.cementerio.vista.util.Boton;
-import com.revivir.cementerio.vista.util.PanelHorizontal;
-import com.revivir.cementerio.vista.util.PanelVertical;
-import com.revivir.cementerio.vista.util.Ventana;
+import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
+import com.revivir.cementerio.vista.util.contenedores.Ventana;
 
 import java.awt.Dimension;
 

@@ -16,8 +16,8 @@ import com.revivir.cementerio.vista.menu.responsables.porcliente.ControladorCons
 import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.menu.servicios.servicioAM.ControladorServicioAM;
 import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
-import com.revivir.cementerio.vista.util.PanelVertical;
 import com.revivir.cementerio.vista.util.Popup;
+import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
 public class ControladorPrincipal implements ClienteInvocable {
 	private VentanaPrincipal ventana;
