@@ -80,9 +80,12 @@ public class VentanaPrincipal extends Ventana {
 		menuMovimientos.add(movimientoConsultar = new JMenuItem("Consultar movimientos"));
 		barra.add(menuMovimientos);
 
+		//********************** MENU SERVICIOS ***************************
 		JMenu menuSevicio = new JMenu("Servicios");
-		menuSevicio.add(servicioAlta = new JMenuItem("Alta de servicio"));
-		menuSevicio.add(servicioConsulta = new JMenuItem("Consultar servicios"));
+		menuSevicio.setMnemonic('s');
+		menuSevicio.add(servicioAlta = new JMenuItem("Alta de servicio", 'a'));
+		menuSevicio.add(servicioConsulta = new JMenuItem("Consultar servicios", 'c'));
+		servicioAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Event.CTRL_MASK | Event.ALT_MASK));
 		barra.add(menuSevicio);
 
 		//********************** MENU USUARIOS ***************************
