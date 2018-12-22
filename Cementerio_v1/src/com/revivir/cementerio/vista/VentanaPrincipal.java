@@ -46,7 +46,7 @@ public class VentanaPrincipal extends Ventana {
 		menuPrincipal.add(principalCerrarSesion = new JMenuItem("Cerrar sesion"));
 		barra.add(menuPrincipal);
 
-		//********************** MENU USUARIOS ***************************
+		//********************** MENU CLIENTES ***************************
 		JMenu menuCliente = new JMenu("Clientes");
 		menuCliente.setMnemonic('c');
 		menuCliente.add(clienteAlta = new JMenuItem("Alta cliente", 'a'));
@@ -54,9 +54,12 @@ public class VentanaPrincipal extends Ventana {
 		clienteAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, Event.CTRL_MASK | Event.ALT_MASK));
 		barra.add(menuCliente);
 
+		//********************** MENU FALLECIDOS ***************************
 		JMenu menuFallecido = new JMenu("Fallecidos");
-		menuFallecido.add(fallecidoAlta = new JMenuItem("Alta fallecido"));
-		menuFallecido.add(fallecidoConsulta = new JMenuItem("Consultar fallecidos"));
+		menuFallecido.setMnemonic('f');
+		menuFallecido.add(fallecidoAlta = new JMenuItem("Alta fallecido", 'a'));
+		menuFallecido.add(fallecidoConsulta = new JMenuItem("Consultar fallecidos", 'c'));
+		fallecidoAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Event.CTRL_MASK | Event.ALT_MASK));
 		barra.add(menuFallecido);
 		
 		JMenu menuResponsables = new JMenu("Responsables");
