@@ -10,6 +10,7 @@ import java.util.List;
 import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Movimiento;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
@@ -20,7 +21,7 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 	
 	@Override
 	public void insert(Ubicacion ubicacion) {
-		String Sub_sector = String.valueOf(Definido.subsector(ubicacion.getSubsector()));
+		/*String Sub_sector = String.valueOf(Definido.subsector(ubicacion.getSubsector()));
 		String otroCementerio = (ubicacion.getOtroCementerio() != null) ? "'"+ubicacion.getOtroCementerio()+"'" : null;
 		String seccion = (ubicacion.getSeccion() != null) ? "'"+ubicacion.getSeccion()+"'" : null;
 		String macizo = (ubicacion.getMacizo() != null) ? "'"+ubicacion.getMacizo()+"'" : null;
@@ -33,9 +34,11 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 		String nicho = (ubicacion.getNicho() != null) ? "'"+ubicacion.getNicho()+"'" : null;
 		String bis = (ubicacion.getBis() != null) ? "'"+ubicacion.getBis()+"'" : null;
 		String bisMacizo = (ubicacion.getBis_macizo() != null) ? "'"+ubicacion.getBis_macizo()+"'" : null;
-		String sepultura = (ubicacion.getSepultura() != null) ? "'"+ubicacion.getSepultura()+"'" : null;
+		String sepultura = (ubicacion.getSepultura() != null) ? "'"+ubicacion.getSepultura()+"'" : null;*/
 		
-		String valores = Sub_sector
+		String otroCementerio = (ubicacion.getOtroCementerio() != null) ? "'"+ubicacion.getOtroCementerio()+"'" : null;
+		String seccion = (ubicacion.getSeccion() != null) ? "'"+ubicacion.getSeccion()+"'" : null;
+		/*String valores = Sub_sector
 				+", "+otroCementerio
 				+", "+nicho
 				+", "+fila
@@ -48,8 +51,25 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 				+", "+parcela
 				+", "+mueble
 				+", "+inhumacion
-				+", "+circ;
+				+", "+circ;*/
+		
+		
+		String valores = Definido.subsector(ubicacion.getSubsector())
+				+", "+otroCementerio
+				+", "+ubicacion.getNicho()
+				+", "+ubicacion.getFila()
+				+", "+seccion
+				+", "+ubicacion.getMacizo()
+				+", "+ubicacion.getUnidad()
+				+", "+ubicacion.getBis()
+				+", "+ubicacion.getBis_macizo()
+				+", "+ubicacion.getSepultura()
+				+", "+ubicacion.getParcela()
+				+", "+ubicacion.getMueble()
+				+", "+ubicacion.getInhumacion()
+				+", "+ubicacion.getCirc();
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
+		System.out.println(sql);
 		ejecutarSQL(sql);		
 	}
 
