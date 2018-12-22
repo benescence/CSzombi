@@ -1,6 +1,6 @@
 package com.revivir.cementerio.persistencia.entidades;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Movimiento {
 	private Integer ID, fallecido;

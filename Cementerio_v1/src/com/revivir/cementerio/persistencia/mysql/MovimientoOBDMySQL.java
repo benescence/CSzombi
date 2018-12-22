@@ -34,14 +34,13 @@ public class MovimientoOBDMySQL extends OBD implements MovimientoOBD{
 
 	@Override
 	public void update(Movimiento movimiento) {
-		String fallecido = (movimiento.getFallecido() == null) ? null : "'"+movimiento.getFallecido()+"'"; 
 		String antiguaUbicacion = (movimiento.getAntiguaUbicacion() == null) ? null : "'"+movimiento.getAntiguaUbicacion()+"'"; 
 		String causaTranslado = (movimiento.getCausaTraslado() == null) ? null : "'"+movimiento.getCausaTraslado()+"'"; 
 		String observciones = (movimiento.getObservaciones() == null) ? null : "'"+movimiento.getObservaciones()+"'"; 
 		String fecha = (movimiento.getFerchaTranslado() == null) ? null : "'"+movimiento.getFerchaTranslado()+"'"; 
 
 		String condicion = "ID = "+movimiento.getID();
-		String valores = "fallecido = "+ fallecido
+		String valores = "fallecido = "+ movimiento.getFallecido()
 				+", antigua_ubicacion = "+ antiguaUbicacion
 				+", causa_traslado = "+causaTranslado
 				+", observaciones = "+observciones

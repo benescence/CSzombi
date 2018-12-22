@@ -51,10 +51,10 @@ public class ManagerTest {
 	}	
 	
 	public static void main(String[] args) {
-		//crearUnFallecido();
+		crearUnFallecido();
 		//crearUnServicio();
 		//crearUnCargo();
-		crearUnCliente();
+		//crearUnCliente();
 	}
 
 }
