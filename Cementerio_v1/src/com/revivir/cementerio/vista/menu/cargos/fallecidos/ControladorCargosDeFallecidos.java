@@ -34,11 +34,11 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 	}
 
 	private void agregar() {
-		invocador.getVentana().setEnabled(false);
-		if (fallecido == null)
-			new ControladorCargoAM(invocador);
-		else
-			new ControladorCargoAM(this, fallecido);
+		//invocador.getVentana().setEnabled(false);
+		//if (fallecido == null)
+	//		new ControladorCargoAM(invocador);
+		//else
+			//new ControladorCargoAM(this, fallecido);
 	}
 
 	private void modificar() {
@@ -50,7 +50,7 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 		}
 		
 		invocador.getVentana().setEnabled(false);
-		new ControladorCargoAM(this, lista.get(0));
+		//new ControladorCargoAM(this, lista.get(0));
 	}
 	
 	private void eliminar() {

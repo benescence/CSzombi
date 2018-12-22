@@ -3,6 +3,7 @@ package com.revivir.cementerio.vista;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.revivir.cementerio.vista.menu.cargos.cargoAM.CargoInvocable;
 import com.revivir.cementerio.vista.menu.cargos.cargoAM.ControladorCargoAM;
 import com.revivir.cementerio.vista.menu.cargos.fallecidos.ControladorCargosDeFallecidos;
 import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
@@ -22,7 +23,7 @@ import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.UsuarioInvocable;
 import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
-public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable {
+public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable, CargoInvocable {
 	private VentanaPrincipal ventana;
 	private ControladorInterno controladorInterno;
 	
@@ -132,6 +133,12 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 	public void actualizarServicios() {
 		if (controladorInterno instanceof ServicioInvocable)
 			((ServicioInvocable)controladorInterno).actualizarServicios();
+	}
+
+	@Override
+	public void actualizarCargos() {
+		if (controladorInterno instanceof CargoInvocable)
+			((CargoInvocable)controladorInterno).actualizarCargos();
 	}
 	
 }

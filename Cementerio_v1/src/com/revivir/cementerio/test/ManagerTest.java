@@ -47,7 +47,7 @@ public class ManagerTest {
 		Servicio servicio = ServicioManager.traerMasReciente();
 		String observaciones = "Observaciones1";
 		boolean pagado = false;
-		CargoManager.guardar(fallecido, servicio, observaciones, pagado);
+		//CargoManager.guardar(fallecido, servicio, observaciones, pagado);
 	}	
 	
 	public static void main(String[] args) {

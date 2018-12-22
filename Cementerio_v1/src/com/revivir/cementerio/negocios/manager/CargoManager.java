@@ -2,23 +2,24 @@ package com.revivir.cementerio.negocios.manager;
 
 import java.util.List;
 
+import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
-import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
 
 public class CargoManager {
 
-	public static void guardar(Fallecido fallecido, Servicio servicio, String observaciones, Boolean pagado) {
-		Cargo nuevo = new Cargo(-1, fallecido.getID(), servicio.getID(), observaciones, pagado);
+	public static void guardar(Cargo cargo) throws Exception {
+		cargo = Verificador.cargo(cargo, null);
 		CargoOBD obd = FactoryOBD.crearCargoOBD();
-		obd.insert(nuevo);
+		obd.insert(cargo);
 	}
 
-	public static void modificar(Cargo modificar) {
+	public static void modificar(Cargo nuevo, Cargo anterior) throws Exception {
+		nuevo = Verificador.cargo(nuevo, anterior);
 		CargoOBD obd = FactoryOBD.crearCargoOBD();
-		obd.update(modificar);
+		obd.update(nuevo);
 	}
 		
 	public static void eliminar(Cargo eliminar) {
