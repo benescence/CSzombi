@@ -1,7 +1,6 @@
 package com.revivir.cementerio.vista;
 
 import java.awt.Event;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -40,23 +39,19 @@ public class VentanaPrincipal extends Ventana {
 			public void mouseClicked(MouseEvent arg0) {}
 		});
 		
-		
-
-		//Setting the accelerator:
-		//menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.ALT_MASK));
-		
-		
+				
 		JMenu menuPrincipal = new JMenu("Principal");
 		menuPrincipal.add(principalAlta = new JMenuItem("Alta completa"));
 		menuPrincipal.add(principalCambiarPassword = new JMenuItem("Cambiar contraseña"));
 		menuPrincipal.add(principalCerrarSesion = new JMenuItem("Cerrar sesion"));
 		barra.add(menuPrincipal);
 
+		//********************** MENU USUARIOS ***************************
 		JMenu menuCliente = new JMenu("Clientes");
-		menuCliente.setMnemonic(KeyEvent.VK_C);
-		menuCliente.add(clienteAlta = new JMenuItem("Alta cliente", KeyEvent.VK_A));
-		clienteAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.ALT_MASK));
-		menuCliente.add(clienteConsulta = new JMenuItem("Consultar clientes"));
+		menuCliente.setMnemonic('c');
+		menuCliente.add(clienteAlta = new JMenuItem("Alta cliente", 'a'));
+		menuCliente.add(clienteConsulta = new JMenuItem("Consultar clientes", 'c'));
+		clienteAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, Event.CTRL_MASK | Event.ALT_MASK));
 		barra.add(menuCliente);
 
 		JMenu menuFallecido = new JMenu("Fallecidos");
@@ -93,7 +88,6 @@ public class VentanaPrincipal extends Ventana {
 		menuUsuario.add(usuarioAlta = new JMenuItem("Alta de usuario", 'a'));
 		menuUsuario.add(usuarioConsulta = new JMenuItem("Consultar usuarios", 'c'));
 		usuarioAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, Event.CTRL_MASK | Event.ALT_MASK));
-		
 		barra.add(menuUsuario);
 		
 		return barra;
