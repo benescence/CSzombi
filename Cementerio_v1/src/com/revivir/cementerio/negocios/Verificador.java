@@ -2,8 +2,10 @@ package com.revivir.cementerio.negocios;
 
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.negocios.manager.ServicioManager;
+import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
+import com.revivir.cementerio.persistencia.entidades.Usuario;
 
 public class Verificador {
 
@@ -89,6 +91,38 @@ public class Verificador {
 		nuevo.setCodigo(codigo);
 		nuevo.setNombre(nombre);
 		nuevo.setDescripcion(descripcion);
+		return nuevo;
+	}
+	
+	public static Usuario usuario(Usuario nuevo, Usuario anterior) throws Exception {
+		String nombre = anular(nuevo.getUsuario());
+		String password = anular(nuevo.getPassword());
+		String mensaje = "";
+		
+		if (nombre == null)
+			mensaje += "\n    -El NOMBRE no puede estar vacio.";
+		else if (!Validador.usuario(nombre))
+			mensaje += "\n    -El NOMBRE solo puede estar compuesto de letras y numeros.";
+		else {
+			Usuario objetoNombre = UsuarioManager.traerPorUsuario(nombre);
+			if (objetoNombre != null && (anterior == null || anterior.getID() != objetoNombre.getID()))
+				mensaje += "\n    -Ya se encuentra registrado un USUARIO con el nombre: "+nombre+".";
+		}
+		
+		if (password == null)
+			mensaje += "\n    -El PASSWORD no puede estar vacío.";
+		else if (!Validador.password(password))
+			mensaje += "\n    -El PASSWORD solo puede estar compuesto de letras, numeros y espacios.";
+		
+		
+		if (!mensaje.equals(""))
+			throw new Exception("Se encontraron los siguientes errores en el formulario:"+mensaje);
+		
+		// Debo setearlos porque pudieron ser anulados
+		if (anterior != null)
+			nuevo.setID(anterior.getID());
+		nuevo.setUsuario(nombre);
+		nuevo.setPassword(password);
 		return nuevo;
 	}
 

@@ -7,22 +7,22 @@ import javax.swing.JLabel;
 
 import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 
-public class ListaDesplegable<E> extends PanelHorizontal {
+public class EntradaLista<E> extends PanelHorizontal {
 	private static final long serialVersionUID = 1L;
 	private JComboBox<E> lista;
 	private JLabel label;
 	
-	public ListaDesplegable (String texto, Dimension dimLabel, Dimension dimTextfield) {
+	public EntradaLista (String texto, Dimension dimTexto, Dimension dimEntrada) {
 		label = new JLabel(texto);
-		label.setMaximumSize(dimLabel);
-		label.setMinimumSize(dimLabel);
-		label.setPreferredSize(dimLabel);
+		label.setMaximumSize(dimTexto);
+		label.setMinimumSize(dimTexto);
+		label.setPreferredSize(dimTexto);
 		add(label);
 		
 		lista = new JComboBox<E>();
-		lista.setMaximumSize(dimTextfield);
-		lista.setMinimumSize(dimTextfield);
-		lista.setPreferredSize(dimTextfield);
+		lista.setMaximumSize(dimEntrada);
+		lista.setMinimumSize(dimEntrada);
+		lista.setPreferredSize(dimEntrada);
 		add(lista);
 	}
 	

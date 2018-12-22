@@ -30,6 +30,13 @@ public class Validador {
 		return formatoNumeroLetraEspacio(nombre);
 	}
 
+	public static boolean usuario(String texto) {
+		return (formatoNumeroLetra(texto));
+	}
+	
+	public static boolean password(String texto) {
+		return (formatoNumeroLetra(texto));
+	}
 	
 	
 	
@@ -67,13 +74,6 @@ public class Validador {
 		return (formatoNumero(texto));
 	}
 	
-	public static boolean validarUsuario(String texto) {
-		return (formatoNumeroLetra(texto));
-	}
-	
-	public static boolean validarPassword(String texto) {
-		return (formatoNumeroLetra(texto));
-	}
 	
 
 	

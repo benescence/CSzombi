@@ -17,10 +17,12 @@ import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
 import com.revivir.cementerio.vista.menu.servicios.servicioAM.ControladorServicioAM;
 import com.revivir.cementerio.vista.menu.servicios.servicioAM.ServicioInvocable;
 import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
+import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.ControladorUsuarioAM;
+import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.UsuarioInvocable;
 import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
-public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable {
+public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable {
 	private VentanaPrincipal ventana;
 	private ControladorInterno controladorInterno;
 	
@@ -47,6 +49,7 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		ventana.getClienteAlta().addActionListener(e -> altaClientes());
 		ventana.getFallecidoAlta().addActionListener(e -> altaFallecidos());
 		ventana.getServicioAlta().addActionListener(e -> altaServicios());
+		ventana.getUsuarioAlta().addActionListener(e -> altaUsuarios());
 		ventana.getResponsableVincular().addActionListener(e -> vincular());
 		ventana.getCobranzaAltaCargo().addActionListener(e -> altaCargo());
 		
@@ -62,6 +65,11 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 	private void altaServicios() {
 		ventana.deshabilitar();
 		new ControladorServicioAM(this);
+	}
+
+	private void altaUsuarios() {
+		ventana.deshabilitar();
+		new ControladorUsuarioAM(this);
 	}
 
 	private void altaCargo() {
@@ -112,6 +120,12 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 	public void actualizarClientes() {
 		if (controladorInterno instanceof ClienteInvocable)
 			((ClienteInvocable)controladorInterno).actualizarClientes();
+	}
+
+	@Override
+	public void actualizarUsuarios() {
+		if (controladorInterno instanceof UsuarioInvocable)
+			((UsuarioInvocable)controladorInterno).actualizarUsuarios();
 	}
 
 	@Override

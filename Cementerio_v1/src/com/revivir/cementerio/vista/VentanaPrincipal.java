@@ -1,5 +1,6 @@
 package com.revivir.cementerio.vista;
 
+import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -86,9 +87,13 @@ public class VentanaPrincipal extends Ventana {
 		menuSevicio.add(servicioConsulta = new JMenuItem("Consultar servicios"));
 		barra.add(menuSevicio);
 
+		//********************** MENU USUARIOS ***************************
 		JMenu menuUsuario = new JMenu("Usuarios");
-		menuUsuario.add(usuarioAlta = new JMenuItem("Alta de usuario"));
-		menuUsuario.add(usuarioConsulta = new JMenuItem("Consultar usuarios"));
+		menuUsuario.setMnemonic('u');
+		menuUsuario.add(usuarioAlta = new JMenuItem("Alta de usuario", 'a'));
+		menuUsuario.add(usuarioConsulta = new JMenuItem("Consultar usuarios", 'c'));
+		usuarioAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, Event.CTRL_MASK | Event.ALT_MASK));
+		
 		barra.add(menuUsuario);
 		
 		return barra;

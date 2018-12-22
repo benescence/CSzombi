@@ -10,9 +10,10 @@ import com.revivir.cementerio.persistencia.entidades.Usuario;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.ControladorUsuarioAM;
+import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.UsuarioInvocable;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorUsuariosABM implements ControladorInterno {
+public class ControladorUsuariosABM implements ControladorInterno, UsuarioInvocable {
 	private VentanaUsuariosABM ventana;
 	private ControladorPrincipal invocador;
 	
@@ -96,6 +97,12 @@ public class ControladorUsuariosABM implements ControladorInterno {
 	public void mostrar() {
 		invocador.getVentana().setVisible(true);
 		invocador.getVentana().setEnabled(true);
+	}
+
+	@Override
+	public void actualizarUsuarios() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

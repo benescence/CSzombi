@@ -54,12 +54,12 @@ public class ControladorIniciarSesion {
 		
 		if (nombre.equals(""))
 			mensaje += "\n    -El campo USUARIO no puede estar vacio.";
-		else if (!Validador.validarUsuario(nombre))
+		else if (!Validador.usuario(nombre))
 			mensaje += "\n    -El campo USUARIO solo puede contener letras y numeros.";
 		
 		if (password.equals(""))
 			mensaje += "\n    -El campo PASSWORD no puede estar vacio.";
-		else if (!Validador.validarPassword(password))
+		else if (!Validador.password(password))
 			mensaje += "\n    -El campo PASSWORD solo puede contener letras y numeros.";
 		
 		if (mensaje.equals(""))

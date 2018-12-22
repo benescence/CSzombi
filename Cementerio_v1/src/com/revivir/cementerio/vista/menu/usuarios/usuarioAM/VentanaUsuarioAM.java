@@ -2,9 +2,7 @@ package com.revivir.cementerio.vista.menu.usuarios.usuarioAM;
 
 import java.awt.Dimension;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -15,53 +13,39 @@ import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 import com.revivir.cementerio.vista.util.contenedores.Ventana;
+import com.revivir.cementerio.vista.util.entradas.EntradaLista;
 import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
 
 public class VentanaUsuarioAM extends Ventana {
 	private static final long serialVersionUID = 1L;
 	private EntradaTexto inUsuario, inPassword;
-	private JComboBox<Rol> inPermisos;
+	private EntradaLista<Rol> inPermisos;
 	private Boton btnAceptar, btnCancelar;
-	private Usuario usuario = null;
 
 	public VentanaUsuarioAM() {
-		super("Alta de usuario", 500, 500);
+		super("Alta de usuario");
 		cargarcomponentes();
 	}
 	
 	public VentanaUsuarioAM(Usuario usuario) {
-		super("Modificación de usuario", 500, 500);
+		super("Modificación de usuario");
 		cargarcomponentes();
-		this.usuario = usuario;
 		inUsuario.getTextField().setText(usuario.getUsuario());
 		inPassword.getTextField().setText(usuario.getPassword());
-		inPermisos.setSelectedItem(usuario.getRol());
+		inPermisos.getComboBox().setSelectedItem(usuario.getRol());
 	}
 	
 	public void cargarcomponentes() {
-		Dimension largoLabel = new Dimension(150, 25);
-		Dimension largoEntrada = new Dimension(300, 25);
+		Dimension dimTexto = new Dimension(150, 25);
+		Dimension dimEntrada = new Dimension(300, 25);
 		Dimension dimBoton = new Dimension(100, 25);
 		
-		inUsuario = new EntradaTexto("Usuario", largoLabel, largoEntrada);
-		inPassword = new EntradaTexto("Password", largoLabel, largoEntrada);
-		
-		JLabel lblPermisos = new JLabel("Permisos");
-		lblPermisos.setMinimumSize(largoLabel);
-		lblPermisos.setPreferredSize(largoLabel);
-		lblPermisos.setMaximumSize(largoLabel);
+		inUsuario = new EntradaTexto("Usuario", dimTexto, dimEntrada);
+		inPassword = new EntradaTexto("Password", dimTexto, dimEntrada);
+		inPermisos = new EntradaLista<>("Permisos", dimTexto, dimEntrada);
+		inPermisos.getComboBox().addItem(Rol.ADMINISTRATIVO);
+		inPermisos.getComboBox().addItem(Rol.SUPERVISOR);
 
-		inPermisos = new JComboBox<Rol>();
-		inPermisos.setMinimumSize(largoEntrada);
-		inPermisos.setPreferredSize(largoEntrada);
-		inPermisos.setMaximumSize(largoEntrada);
-		inPermisos.addItem(Rol.ADMINISTRATIVO);
-		inPermisos.addItem(Rol.SUPERVISOR);
-
-		PanelHorizontal panelPermisos = new PanelHorizontal();
-		panelPermisos.add(lblPermisos);
-		panelPermisos.add(inPermisos);
-		
 		btnAceptar = new Boton("Aceptar", dimBoton);
 		btnCancelar = new Boton("Cancelar", dimBoton);
 		PanelHorizontal panelBotones = new PanelHorizontal();
@@ -69,20 +53,16 @@ public class VentanaUsuarioAM extends Ventana {
 		panelBotones.add(btnCancelar);
 		panelBotones.setBorder(new EmptyBorder(10, 0, 0, 0));
 		
-		// PANELES
 		PanelVertical panelPrincipal = new PanelVertical();
 		panelPrincipal.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(panelPrincipal);
 		
 		panelPrincipal.add(inUsuario);
 		panelPrincipal.add(inPassword);
-		panelPrincipal.add(panelPermisos);
+		panelPrincipal.add(inPermisos);
 		panelPrincipal.add(new JSeparator());
 		panelPrincipal.add(panelBotones);
-		
-		pack();
-		setResizable(false);
-		setLocationRelativeTo(null);
+		compactar();
 	}
 	
 	public JTextField getUsuario() {
@@ -94,19 +74,15 @@ public class VentanaUsuarioAM extends Ventana {
 	}
 	
 	public JComboBox<Rol> getPermisos() {
-		return inPermisos;
+		return inPermisos.getComboBox();
 	}
 	
-	public JButton botonAceptar() {
+	public Boton botonAceptar() {
 		return btnAceptar;
 	}
 
-	public JButton botonCancelar() {
+	public Boton botonCancelar() {
 		return btnCancelar;
-	}
-	
-	public Usuario getUsuarioModificacion() {
-		return usuario;
 	}
 	
 }

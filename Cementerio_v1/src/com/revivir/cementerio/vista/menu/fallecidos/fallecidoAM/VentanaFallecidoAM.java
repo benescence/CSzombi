@@ -24,7 +24,7 @@ import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 import com.revivir.cementerio.vista.util.contenedores.Ventana;
 import com.revivir.cementerio.vista.util.entradas.EntradaFecha;
 import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
-import com.revivir.cementerio.vista.util.entradas.ListaDesplegable;
+import com.revivir.cementerio.vista.util.entradas.EntradaLista;
 import com.toedter.calendar.JDateChooser;
 
 public class VentanaFallecidoAM extends Ventana {
@@ -34,14 +34,14 @@ public class VentanaFallecidoAM extends Ventana {
 	// DATOS DEL DIFUNTO
 	private EntradaTexto inNombre, inApellido, inDNI, inCocheria;
 	private EntradaFecha inFechaFallecimiento, inFechaIngreso;
-	private ListaDesplegable<TipoFallecimiento> inTipo;
+	private EntradaLista<TipoFallecimiento> inTipo;
 	
 	// DATOS DE UBICACION
 	private EntradaTexto inSeccion, inMacizo, inUnidad, inNumeroSepultura, inSepultura, inInhumacion,
 	inNicho, inFila, inCirc, inParcela, inMueble;
 	private JCheckBox inCheckMacizo, inCheckBis;
-	private ListaDesplegable<Sector> inSector;
-	private ListaDesplegable<SubSector> inSubSector;
+	private EntradaLista<Sector> inSector;
+	private EntradaLista<SubSector> inSubSector;
 	
 	public VentanaFallecidoAM() {
 		super("Alta de fallecido", 450, 300);
@@ -87,7 +87,7 @@ public class VentanaFallecidoAM extends Ventana {
 		inCocheria = new EntradaTexto("Cocheria", dimLabel, dimTextfield);
 		inFechaFallecimiento = new EntradaFecha(Almanaque.hoy(), "Fecha de fallecimiento", dimLabel, dimTextfield);
 		inFechaIngreso = new EntradaFecha(Almanaque.hoy(), "Fecha de Ingreso", dimLabel, dimTextfield);
-		inTipo = new ListaDesplegable<>("Tipode fallecimiento", dimLabel, dimTextfield);
+		inTipo = new EntradaLista<>("Tipode fallecimiento", dimLabel, dimTextfield);
 		for (TipoFallecimiento tipo : TipoFallecimiento.values())
 			inTipo.getComboBox().addItem(tipo);
 		inTipo.getComboBox().setSelectedItem(TipoFallecimiento.NO_TRAUMATICO);
@@ -128,8 +128,8 @@ public class VentanaFallecidoAM extends Ventana {
 		panelCheck.add(inCheckBis);
 		panelCheck.add(inCheckMacizo);
 		
-		inSector = new ListaDesplegable<>("Sector", largoLabel1, largoTextfield);
-		inSubSector = new ListaDesplegable<>("Sub Sector", largoLabel2, largoTextfield);
+		inSector = new EntradaLista<>("Sector", largoLabel1, largoTextfield);
+		inSubSector = new EntradaLista<>("Sub Sector", largoLabel2, largoTextfield);
 
 		for (Sector sector : Localizador.traerSectores())
 			inSector.getComboBox().addItem(sector);
