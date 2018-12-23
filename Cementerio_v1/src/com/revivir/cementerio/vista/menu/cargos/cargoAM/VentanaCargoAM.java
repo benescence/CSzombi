@@ -2,10 +2,10 @@ package com.revivir.cementerio.vista.menu.cargos.cargoAM;
 
 import java.awt.Dimension;
 
-import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import com.revivir.cementerio.vista.util.Boton;
+import com.revivir.cementerio.vista.util.TextoCentrado;
 import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 import com.revivir.cementerio.vista.util.contenedores.Ventana;
@@ -63,7 +63,7 @@ public class VentanaCargoAM extends Ventana {
 		panelBotones.add(btnSelFallecido);
 		
 		PanelVertical ret = new PanelVertical();
-		ret.add(new JLabel("Datos del fallecido"));
+		ret.add(new TextoCentrado("Datos del fallecido"));
 		ret.add(inNombre);
 		ret.add(inApellido);
 		ret.add(inDNI);
@@ -88,13 +88,13 @@ public class VentanaCargoAM extends Ventana {
 		btnCargarServicio = new Boton("Cargar", dimBoton);
 		btnSelServicio = new Boton("Seleccionar", dimBoton);
 		PanelHorizontal panelBotones = new PanelHorizontal();
-		panelBotones.setBorder(new EmptyBorder(10, 0, 0, 0));
+		panelBotones.setBorder(new EmptyBorder(10, 0, 10, 0));
 		panelBotones.add(btnCargarServicio);
 		panelBotones.add(btnSelServicio);
 		
 		PanelVertical ret = new PanelVertical();
 		ret.setBorder(new EmptyBorder(10, 0, 0, 0));
-		ret.add(new JLabel("Datos del servicio"));
+		ret.add(new TextoCentrado("Datos del servicio"));
 		ret.add(inCodigo);
 		ret.add(inNombreServicio);
 		ret.add(inDescripcion);

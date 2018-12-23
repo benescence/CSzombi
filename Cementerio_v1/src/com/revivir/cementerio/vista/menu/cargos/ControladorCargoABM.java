@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.menu.cargos.fallecidos;
+package com.revivir.cementerio.vista.menu.cargos;
 
 import java.util.List;
 
@@ -6,54 +6,65 @@ import javax.swing.JInternalFrame;
 
 import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.menu.cargos.cargoAM.ControladorCargoAM;
+import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
+import com.revivir.cementerio.vista.seleccion.clientes.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.seleccion.fallecidos.ControladorSeleccionarFallecido;
 import com.revivir.cementerio.vista.seleccion.fallecidos.FallecidoSeleccionable;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorCargosDeFallecidos implements ControladorInterno, FallecidoSeleccionable {
-	private VentanaCargosDeFallecidos ventana;
+public class ControladorCargoABM implements ControladorInterno, FallecidoSeleccionable, ClienteSeleccionable {
+	private VentanaCargoABM ventana;
 	private ControladorPrincipal invocador;
 	private Fallecido fallecido;
+	private Cliente cliente;
 	
-	public ControladorCargosDeFallecidos(ControladorPrincipal invocador) {
+	public ControladorCargoABM(ControladorPrincipal invocador) {
 		this.invocador = invocador;
-		ventana = new VentanaCargosDeFallecidos();
-		ventana.botonSeleccionar().addActionListener(e -> seleccionar());
+		ventana = new VentanaCargoABM();
 		ventana.botonAgregar().addActionListener(e -> agregar());
 		ventana.botonModificar().addActionListener(e -> modificar());
 		ventana.botonEliminar().addActionListener(e -> eliminar());
+		
+		ventana.botonSelFallecido().setAccion(e -> seleccionarFallecido());
+		ventana.botonSelCliente().setAccion(e -> seleccionarCliente());
 	}
 	
-	private void seleccionar() {
+	private void seleccionarFallecido() {
 		ventana.deshabilitar();
 		new ControladorSeleccionarFallecido(this);
 	}
 
+	private void seleccionarCliente() {
+		ventana.deshabilitar();
+		new ControladorSeleccionCliente(this);
+	}
+
 	private void agregar() {
-		invocador.getVentana().setEnabled(false);
-		if (fallecido == null)
-			new ControladorCargoAM(invocador);
-		else
-			new ControladorCargoAM(this, fallecido);
+		//invocador.getVentana().setEnabled(false);
+		//if (fallecido == null)
+	//		new ControladorCargoAM(invocador);
+		//else
+			//new ControladorCargoAM(this, fallecido);
 	}
 
 	private void modificar() {
-		List<Cargo> lista = ventana.getTabla().obtenerSeleccion();
+		/*List<Cargo> lista = ventana.getTabla().obtenerSeleccion();
 		
 		if (lista.size() != 1) {
 			Popup.mostrar("Debe seleccionar exactamente 1 cargo para modificarlo");
 			return;
 		}
 		
-		invocador.getVentana().setEnabled(false);
-		new ControladorCargoAM(this, lista.get(0));
+		invocador.getVentana().setEnabled(false);*/
+		//new ControladorCargoAM(this, lista.get(0));
 	}
 	
-	private void eliminar() {
+	private void eliminar() {/*
 		List<Cargo> lista = ventana.getTabla().obtenerSeleccion();
 		
 		if (lista.isEmpty()) {
@@ -65,7 +76,7 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 			for (Cargo elemento : lista)
 				CargoManager.eliminar(elemento);
 		
-		actualizar();
+		actualizar();*/
 	}
 
 	@Override
@@ -74,7 +85,7 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 	}
 	
 	public void mostrar() {
-		invocador.getVentana().setEnabled(true);
+		invocador.getVentana().mostrar();
 		invocador.getVentana().toFront();
 	}
 
@@ -84,17 +95,26 @@ public class ControladorCargosDeFallecidos implements ControladorInterno, Fallec
 	}
 
 	public void actualizar() {
-		if (fallecido != null)
-			ventana.getTabla().recargar(CargoManager.traerPorFallecido(fallecido));
+		List<Cargo> lista = CargoManager.traerPorFallecidoCliente(fallecido, cliente);
+		ventana.getTabla().recargar(lista);
 	}
 
 	@Override
 	public void seleccionarFallecido(Fallecido fallecido) {
 		this.fallecido = fallecido;
-		ventana.getNombre().getTextField().setText(fallecido.getNombre());
-		ventana.getApellido().getTextField().setText(fallecido.getApellido());
-		ventana.getDNI().getTextField().setText(fallecido.getDni());
-		ventana.getTabla().recargar(CargoManager.traerPorFallecido(fallecido));
+		ventana.getNombreFal().getTextField().setText(fallecido.getNombre());
+		ventana.getApellidoFal().getTextField().setText(fallecido.getApellido());
+		ventana.getDNIFal().getTextField().setText(fallecido.getDni());
+		actualizar();
+	}
+
+	@Override
+	public void seleccionarCliente(Cliente cliente) {
+		this.cliente = cliente;
+		ventana.getNombreCli().getTextField().setText(cliente.getNombre());
+		ventana.getApellidoCli().getTextField().setText(cliente.getApellido());
+		ventana.getDNICli().getTextField().setText(cliente.getDNI());
+		actualizar();
 	}
 
 }

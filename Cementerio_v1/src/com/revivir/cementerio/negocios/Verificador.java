@@ -3,6 +3,7 @@ package com.revivir.cementerio.negocios;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.negocios.manager.UsuarioManager;
+import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
@@ -60,6 +61,16 @@ public class Verificador {
 		return nuevo;
 	}
 	
+	public static Cargo cargo(Cargo nuevo, Cargo anterior) throws Exception {
+		String observaciones = anular(nuevo.getObservaciones());
+		
+		// Debo setearlos porque pudieron ser anulados
+		if (anterior != null)
+			nuevo.setID(anterior.getID());
+		nuevo.setObservaciones(observaciones);
+		return nuevo;
+	}
+
 	public static Servicio servicio(Servicio nuevo, Servicio anterior) throws Exception {
 		String codigo = anular(nuevo.getCodigo());
 		String nombre = anular(nuevo.getNombre());

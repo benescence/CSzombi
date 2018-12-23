@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
 
