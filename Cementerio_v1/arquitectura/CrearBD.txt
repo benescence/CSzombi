@@ -84,8 +84,8 @@ CREATE TABLE rev_fallecidos (
 CREATE TABLE rev_movimientos (
 	ID INT(10) AUTO_INCREMENT,
 	fallecido int(10) not null,
-	antigua_ubicacion VARCHAR(50) not NULL,
-	causa_traslado VARCHAR(50) not NULL,
+	antigua_ubicacion VARCHAR(150) not NULL,
+	causa_traslado VARCHAR(150) not NULL,
 	observaciones VARCHAR(50) NULL,
 	fecha_movimiento date not null,
 	FOREIGN KEY (fallecido) REFERENCES rev_fallecidos(ID),

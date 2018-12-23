@@ -18,7 +18,7 @@ public class VentanaPrincipal extends Ventana {
 	private JMenuItem clienteAlta, clienteConsulta; 
 	private JMenuItem fallecidoAlta, fallecidoConsulta;
 	private JMenuItem responsableVincular, responsableConsultarPorCliente, responsableConsultarPorFallecido;
-	private JMenuItem cobranzaAltaCargo, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
+	private JMenuItem cargoAlta, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
 	private JMenuItem movimientoTrasladar, movimientoConsultar; 
 	public JMenuItem getMovimientoTrasladar() {
 		return movimientoTrasladar;
@@ -77,7 +77,7 @@ public class VentanaPrincipal extends Ventana {
 		barra.add(menuResponsables);
 		
 		JMenu menuCobranza = new JMenu("Cobranzas");
-		menuCobranza.add(cobranzaAltaCargo = new JMenuItem("Alta cargo"));
+		menuCobranza.add(cargoAlta = new JMenuItem("Alta cargo"));
 		menuCobranza.add(cobranzaCargosClientes = new JMenuItem("Cargos de cliente"));
 		menuCobranza.add(cobranzaCargosFallecido = new JMenuItem("Cargos de fallecido"));
 		menuCobranza.add(cobranzaRegistrarPagos = new JMenuItem("Registrar pago"));
@@ -152,7 +152,7 @@ public class VentanaPrincipal extends Ventana {
 	}
 
 	public JMenuItem getCobranzaAltaCargo() {
-		return cobranzaAltaCargo;
+		return cargoAlta;
 	}
 
 	public JMenuItem getCobranzaCargosFallecido() {
