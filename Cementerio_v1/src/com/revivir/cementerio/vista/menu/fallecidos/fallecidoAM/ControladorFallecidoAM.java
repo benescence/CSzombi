@@ -104,7 +104,6 @@ public class ControladorFallecidoAM {
 		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
 		//UbicacionManager.guardar(subsector, otroCementerio, nicho, fila, seccion, macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
-
 	}	
 	
 	private void cancelar() {
