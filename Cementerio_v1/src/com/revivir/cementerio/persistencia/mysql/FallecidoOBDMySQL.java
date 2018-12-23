@@ -76,6 +76,23 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 		return selectByCondicion(condicion);
 	}
 
+	
+	@Override
+	public List<Fallecido> selectByNombreApellido(String nombre, String apellido) {
+		String condicion = "";
+		if (nombre != null)
+			condicion += "upper(nombre) like '"+nombre.toUpperCase()+"%'";
+		
+		if (apellido != null) {
+			if (!condicion.equals(""))
+				condicion += " and "; 
+			condicion += "upper(apellido) like '"+apellido.toUpperCase()+"%'";
+		}
+		
+		
+		return selectByCondicion(condicion);
+	}
+	
 	private List<Fallecido> selectByCondicion(String condicion) {
 		List<Fallecido> ret = new ArrayList<Fallecido>();
 		String comandoSQL = "select ID, "+campos+" from "+tabla+" where ("+condicion+");";  

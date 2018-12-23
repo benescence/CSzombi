@@ -14,7 +14,7 @@ import com.revivir.cementerio.persistencia.interfaces.MovimientoOBD;
 public class MovimientoOBDMySQL extends OBD implements MovimientoOBD{
 	private final String campos = "fallecido, antigua_ubicacion, causa_traslado, observaciones, fecha_movimiento";
 	private final String tabla = "rev_movimientos";
-	
+	private final String Inner = "rev_movimientos inner join rev_fallecidos";
 	@Override
 	public void insert(Movimiento movimiento) {
 		String fallecido = (movimiento.getFallecido() == null) ? null : ""+movimiento.getFallecido()+""; 
@@ -116,6 +116,38 @@ public class MovimientoOBDMySQL extends OBD implements MovimientoOBD{
 			
 		return ret;
 	}
+	private List<Movimiento> selectByCondicionInner(String condicion) {
+		List<Movimiento> ret = new ArrayList<Movimiento>();
+		String comandoSQL = "select rev_movimientos.ID, "+campos+" from "+Inner+" where ("+condicion+");";  
+		
+		try { 
+			Class.forName(driver); 
+			Connection conexion = DriverManager.getConnection(cadenaConexion, usuarioBD, passwordBD); 
+			Statement sentencia = conexion.createStatement ();
+			ResultSet resultados = sentencia.executeQuery(comandoSQL);			
+
+			while (resultados.next()) {
+				ret.add(new Movimiento (
+						resultados.getInt("ID"),
+						resultados.getInt("fallecido"),
+						resultados.getString("antigua_ubicacion"),
+						resultados.getString("causa_traslado"),
+						resultados.getString("observaciones"),
+						resultados.getDate("fecha_movimiento")
+					));
+			}
+
+			resultados.close();
+			sentencia.close();
+			conexion.close();
+			
+		}catch(Exception e) {
+			System.out.println(comandoSQL);
+			e.printStackTrace();
+		}
+			
+		return ret;
+	}
 
 	@Override
 	public Movimiento selectByDNI(String DNI) {
@@ -132,4 +164,20 @@ public class MovimientoOBDMySQL extends OBD implements MovimientoOBD{
 		return null;
 	}
 
+	
+	public List<Movimiento> selectByFallecidoNombre(String nombre, String apellido) {
+		String condicion = "";
+		if (nombre != null)
+			condicion += "upper(nombre) like '"+nombre.toUpperCase()+"%'";
+		
+		if (apellido != null) {
+			if (!condicion.equals(""))
+				condicion += " and "; 
+			condicion += "upper(apellido) like '"+apellido.toUpperCase()+"%'";
+		}
+		
+		
+		return selectByCondicionInner(condicion);
+	}
+	
 }

@@ -3,11 +3,11 @@ package com.revivir.cementerio.negocios;
 import java.util.List;
 
 import com.revivir.cementerio.persistencia.FactoryOBD;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Movimiento;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
-import com.revivir.cementerio.persistencia.interfaces.ClienteOBD;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
+import com.revivir.cementerio.persistencia.interfaces.MovimientoOBD;
 
 public class Busqueda {
 	
@@ -26,4 +26,15 @@ public class Busqueda {
 		return obd.selectByNombreApellidoDNI(nombres, apellido, DNI);
 	}
 
-}
+	public static List<Movimiento> movimientos( String nombres, String apellido) {
+
+				nombres = (nombres != null && nombres.equals("")) ? null : nombres;
+				apellido = (apellido != null && apellido.equals("")) ? null : apellido;
+				
+				MovimientoOBD obd = FactoryOBD.crearMovimientoOBD();
+				return obd.selectByFallecidoNombre(nombres, apellido);
+			}
+	}
+	
+	
+

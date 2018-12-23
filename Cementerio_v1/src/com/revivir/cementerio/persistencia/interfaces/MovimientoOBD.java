@@ -26,4 +26,6 @@ public void insert(Movimiento movimiento);
 	
 	public List<Movimiento> selectByFallecido(Integer fallecido);
 
+	public List<Movimiento> selectByFallecidoNombre(String nombre, String apellido);
+
 }
