@@ -103,7 +103,7 @@ public class ControladorAltaCompleta implements ActionListener, ClienteSeleccion
 		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
 		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
 		Date fechaIngreso =new Date( ventana.getInFechaIngreso().getDate().getTime());
-		FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion, fechaIngreso);
+		//FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion, fechaIngreso);
 		
 		// LOS VINCULO
 		Fallecido fallecido = FallecidoManager.traerMasReciente();

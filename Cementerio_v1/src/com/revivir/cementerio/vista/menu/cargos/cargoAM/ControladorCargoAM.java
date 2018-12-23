@@ -151,7 +151,7 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 		this.fallecido = fallecido;
 		ventana.getNombre().getTextField().setText(fallecido.getNombre());
 		ventana.getApellido().getTextField().setText(fallecido.getApellido());
-		ventana.getDNI().getTextField().setText(fallecido.getDni());
+		ventana.getDNI().getTextField().setText(fallecido.getDNI());
 	}
 
 	@Override

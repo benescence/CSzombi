@@ -8,6 +8,7 @@ import com.revivir.cementerio.vista.menu.clientes.clienteAM.ClienteInvocable;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
+import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.FallecidoInvocable;
 import com.revivir.cementerio.vista.menu.movimientos.ControladorMovimiento;
 import com.revivir.cementerio.vista.menu.movimientos.translado.TransladoInvocable;
 import com.revivir.cementerio.vista.menu.principal.ControladorAltaCompleta;
@@ -24,7 +25,8 @@ import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
 
-public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable , CargoInvocable,TransladoInvocable {
+public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable ,
+		CargoInvocable,TransladoInvocable, FallecidoInvocable {
 	private VentanaPrincipal ventana;
 	private ControladorInterno controladorInterno;
 	
@@ -55,6 +57,7 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		ventana.deshabilitar();
 		new ControladorVincular(this);
 	}
+	
 	private void transladar() {
 		ventana.deshabilitar();
 		new ControladorMovimiento(this);
@@ -140,6 +143,12 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 
 	@Override
 	public void actualizarCargos() {
+		if (controladorInterno instanceof CargoInvocable)
+			((CargoInvocable)controladorInterno).actualizarCargos();
+	}
+
+	@Override
+	public void actualizarFallecidos() {
 		if (controladorInterno instanceof CargoInvocable)
 			((CargoInvocable)controladorInterno).actualizarCargos();
 	}

@@ -19,7 +19,7 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 	@Override
 	public void insert(Fallecido obciso) {
 		String valores = obciso.getUbicacion()
-				+", '"+obciso.getDni()+"'"
+				+", '"+obciso.getDNI()+"'"
 				+", '"+obciso.getApellido()+"'"
 				+", '"+obciso.getNombre()+"'"
 				+", '"+obciso.getFechaFallecimiento()+"'"+", "+Definido.tipoFallecimiento(obciso.getTipoFallecimiento())+", '"+obciso.getCocheria()+"'"+", '"+obciso.getFechaIngreso()+"'";
@@ -30,7 +30,7 @@ public class FallecidoOBDMySQL extends OBD implements FallecidoOBD{
 	@Override
 	public void update(Fallecido obciso) {
 		String condicion = "ID = "+obciso.getID();
-		String valores = " DNI = '"+obciso.getDni()+"'"
+		String valores = " DNI = '"+obciso.getDNI()+"'"
 				+", apellido = '"+obciso.getApellido()+"'"
 				+", nombre = '"+obciso.getNombre()+"'"
 				+", fecha_fallecimiento = '"+obciso.getFechaFallecimiento()+"'"

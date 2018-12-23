@@ -104,7 +104,7 @@ public class ControladorCargoABM implements ControladorInterno, FallecidoSelecci
 		this.fallecido = fallecido;
 		ventana.getNombreFal().getTextField().setText(fallecido.getNombre());
 		ventana.getApellidoFal().getTextField().setText(fallecido.getApellido());
-		ventana.getDNIFal().getTextField().setText(fallecido.getDni());
+		ventana.getDNIFal().getTextField().setText(fallecido.getDNI());
 		actualizar();
 	}
 

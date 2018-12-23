@@ -29,7 +29,7 @@ public class TablaFallecidos extends JTable{
 
 		for (Fallecido elemento: lista) {
 			Object[] fila = {
-					elemento.getDni(),
+					elemento.getDNI(),
 					elemento.getNombre(),
 					elemento.getApellido(),
 					//elemento.getFechaFallecimiento(),

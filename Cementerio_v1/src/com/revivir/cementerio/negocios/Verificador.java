@@ -1,10 +1,12 @@
 package com.revivir.cementerio.negocios;
 
 import com.revivir.cementerio.negocios.manager.ClienteManager;
+import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 
@@ -59,6 +61,42 @@ public class Verificador {
 		nuevo.setDomicilio(domicilio);
 
 		return nuevo;
+	}
+	
+	public static Fallecido fallecido(Fallecido verificar) throws Exception {
+		String nombre = anular(verificar.getNombre());
+		String apellido = anular(verificar.getApellido());
+		String DNI = anular(verificar.getDNI());
+		String cocheria = anular(verificar.getCocheria());
+		String mensaje = "";
+
+		if (nombre == null)
+			mensaje += "\n    -El NOMBRE no puede estar vacío.";
+		else if (!Validador.nombrePersona(nombre))
+			mensaje += "\n    -El NOMBRE solo puede estar compuesto de letras y espacios.";
+
+		if (apellido == null)
+			mensaje += "\n    -El APELLIDO no puede estar vacio.";
+		else if (!Validador.apellido(apellido))
+			mensaje += "\n    -El APELLIDO solo puede estar compuesto de letras y espacios.";
+		
+		if (DNI == null)
+			mensaje += "\n    -El DNI no puede estar vacio.";
+		else if (!Validador.DNI(DNI))
+			mensaje += "\n    -El DNI solo puede estar compuesto de números.";
+		else {
+			// Verifico que no exista ya un objeto con ese DNi, y si existe debe tener el mismo iD
+			Fallecido objetoDNI = FallecidoManager.traerPorDNI(DNI);
+			if (objetoDNI != null && verificar.getID() != objetoDNI.getID())
+				mensaje += "\n    -Ya se encuentra registrado un fallecido con el DNI: "+DNI+".";
+		}
+		
+		if (!mensaje.equals(""))
+			throw new Exception("Se encontraron los siguientes errores en el formulario:"+mensaje);
+		
+		// Seteo los que pudieron ser anulados
+		verificar.setCocheria(cocheria);
+		return verificar;
 	}
 	
 	public static Cargo cargo(Cargo nuevo, Cargo anterior) throws Exception {

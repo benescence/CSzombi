@@ -53,7 +53,7 @@ public class VentanaFallecidoAM extends Ventana {
 		inicializar();
 		inNombre.getTextField().setText(fallecido.getNombre());
 		inApellido.getTextField().setText(fallecido.getApellido());
-		inDNI.getTextField().setText(fallecido.getDni());
+		inDNI.getTextField().setText(fallecido.getDNI());
 		inCocheria.getTextField().setText(fallecido.getCocheria());
 		inTipo.getComboBox().setSelectedItem(fallecido.getTipoFallecimiento());
 	}
@@ -358,11 +358,11 @@ public class VentanaFallecidoAM extends Ventana {
 		return inSubSector.getComboBox();
 	}
 
-	public JButton botonAceptar() {
+	public Boton botonAceptar() {
 		return btnAceptar;
 	}
 
-	public JButton botonCancelar() {
+	public Boton botonCancelar() {
 		return btnCancelar;
 	}
 		

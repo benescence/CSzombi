@@ -1,26 +1,19 @@
 package com.revivir.cementerio.negocios.manager;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
-import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
-import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 
 public class FallecidoManager {
 	
-	public static void guardar(String nombre, String apellido, String dni, String cocheria,  
-			TipoFallecimiento tipo, Date fecha, Ubicacion ubicacion, Date fechaIngreso) {
-		
-		Fallecido fallecido = new Fallecido(-1, ubicacion.getID(), tipo, dni, apellido,
-				nombre, cocheria, fecha, fechaIngreso);
-		
+	public static void guardar(Fallecido nuevo) throws Exception {
+		Fallecido fallecido = Verificador.fallecido(nuevo);
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
-		obd.insert(fallecido);	
+		obd.insert(fallecido);
 	}
 
 	public static void modificar(Fallecido fallecido) {
