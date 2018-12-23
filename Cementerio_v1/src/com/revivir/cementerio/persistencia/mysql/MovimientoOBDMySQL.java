@@ -17,7 +17,7 @@ public class MovimientoOBDMySQL extends OBD implements MovimientoOBD{
 	
 	@Override
 	public void insert(Movimiento movimiento) {
-		String fallecido = (movimiento.getFallecido() == null) ? null : "'"+movimiento.getFallecido()+"'"; 
+		String fallecido = (movimiento.getFallecido() == null) ? null : ""+movimiento.getFallecido()+""; 
 		String antiguaUbicacion = (movimiento.getAntiguaUbicacion() == null) ? null : "'"+movimiento.getAntiguaUbicacion()+"'"; 
 		String causaTranslado = (movimiento.getCausaTraslado() == null) ? null : "'"+movimiento.getCausaTraslado()+"'"; 
 		String observciones = (movimiento.getObservaciones() == null) ? null : "'"+movimiento.getObservaciones()+"'"; 
