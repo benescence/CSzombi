@@ -21,7 +21,7 @@ public interface ClienteOBD {
 	
 	// CONSULTAS ESPECIFICAS
 	
-	public Cliente selectByID2(Integer ID);
+	
 
 	public Cliente selectByDNI(String DNI);
 

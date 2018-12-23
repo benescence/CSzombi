@@ -86,11 +86,7 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 
 	
 	// CONSULTAS ESPECIFICAS
-	@Override
-	public Cliente selectByID2(Integer ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public Cliente selectByDNI(String DNI) {
@@ -155,5 +151,7 @@ public class ClienteOBDMySQL extends OBD implements ClienteOBD{
 			
 		return ret;
 	}
+
+
 
 }
