@@ -50,6 +50,8 @@ public class Formato {
 		return servicio(cargo);
 	}
 
+
+	
 	public static String fallecido(Cargo cargo) {
 		Fallecido fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
 		return fallecido.getApellido()+", "+fallecido.getNombre();
@@ -102,5 +104,17 @@ public class Formato {
 		
 		return renglonesMaximo*20;
 	}
+	
+	// REPORTES
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -15,6 +15,7 @@ import com.revivir.cementerio.vista.menu.clientes.clienteAM.ClienteInvocable;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
+import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.FallecidoInvocable;
 import com.revivir.cementerio.vista.menu.movimientos.ControladorMovimiento;
 import com.revivir.cementerio.vista.menu.movimientos.ControladorTranslado;
 import com.revivir.cementerio.vista.menu.movimientos.translado.MovimientoInvocable;
@@ -54,7 +55,7 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
 	
 
-		ventana.getCobranzaCargosFallecido().addActionListener(e -> colocarVentanaInterna(new ControladorCargoABM(this)));
+		//ventana.getCobranzaCargosFallecido().addActionListener(e -> colocarVentanaInterna(new ControladorCargoABM(this)));
 
 		
 		// Accesos directos
@@ -165,6 +166,12 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 	public void actualizarCargos() {
 		if (controladorInterno instanceof CargoInvocable)
 			((CargoInvocable)controladorInterno).actualizarCargos();
+	}
+
+	@Override
+	public void actualizarFallecidos() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
