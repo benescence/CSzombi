@@ -3,8 +3,7 @@ package com.revivir.cementerio.vista;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import com.revivir.cementerio.vista.menu.cargos.cargoAM.CargoInvocable;
-import com.revivir.cementerio.vista.menu.cargos.cargoAM.ControladorCargoABM;
+
 import com.revivir.cementerio.vista.menu.cargos.cargoAM.ControladorCargoAM;
 import com.revivir.cementerio.vista.menu.cargos.fallecidos.ControladorCargosDeFallecidos;
 import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
@@ -26,7 +25,7 @@ import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.UsuarioInvocable;
 import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
-public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable,CargoInvocable , TransladoInvocable {
+public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable , TransladoInvocable {
 	private VentanaPrincipal ventana;
 	private ControladorInterno controladorInterno;
 	
@@ -47,7 +46,6 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
 		
 		ventana.getResponsableConsultarPorCliente().addActionListener(e -> colocarVentanaInterna(new ControladorConsultarPorCliente(this)));
-		ventana.getCobranzaCargosFallecido().addActionListener(e -> colocarVentanaInterna(new ControladorCargoABM(this)));
 		
 		// Accesos directos
 		ventana.getClienteAlta().addActionListener(e -> altaClientes());
@@ -146,9 +144,5 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		if (controladorInterno instanceof TransladoInvocable)
 			((TransladoInvocable)controladorInterno).actualizarMovimientos();
 	}
-	@Override
-	public void actualizarCargos() {
-		if (controladorInterno instanceof CargoInvocable)
-			((CargoInvocable)controladorInterno).actualizarCargos();
-	}
+
 }
