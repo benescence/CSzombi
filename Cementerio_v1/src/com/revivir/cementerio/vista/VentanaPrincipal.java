@@ -19,7 +19,15 @@ public class VentanaPrincipal extends Ventana {
 	private JMenuItem fallecidoAlta, fallecidoConsulta;
 	private JMenuItem responsableVincular, responsableConsultarPorCliente, responsableConsultarPorFallecido;
 	private JMenuItem cobranzaAltaCargo, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
-	JMenuItem movimientoTrasladar, movimientoConsultar; 
+	private JMenuItem movimientoTrasladar, movimientoConsultar; 
+	public JMenuItem getMovimientoTrasladar() {
+		return movimientoTrasladar;
+	}
+
+	public JMenuItem getMovimientoConsultar() {
+		return movimientoConsultar;
+	}
+
 	private JMenuItem servicioAlta, servicioConsulta;
 	private JMenuItem usuarioAlta, usuarioConsulta;
 	

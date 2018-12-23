@@ -8,48 +8,36 @@ import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Movimiento;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
+import com.revivir.cementerio.persistencia.interfaces.MovimientoOBD;
 
-public class FallecidoManager {
-	
-	public static void guardar(String nombre, String apellido, String dni, String cocheria,  
-			TipoFallecimiento tipo, Date fecha, Ubicacion ubicacion, Date fechaIngreso) {
+public class MovimientoManager {
+	public static void guardar(Integer fallecido, String ubicacion, String causa, String observaciones , Date fecha ) {
 		
-		Fallecido fallecido = new Fallecido(-1, ubicacion.getID(), tipo, dni, apellido,
-				nombre, cocheria, fecha, fechaIngreso);
+		Movimiento movimiento = new Movimiento(-1, fallecido,  ubicacion, causa, observaciones, fecha);
 		
-		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
-		obd.insert(fallecido);	
+		MovimientoOBD obd = FactoryOBD.crearMovimientoOBD();
+		obd.insert(movimiento);	
 	}
 
-	public static void modificar(Fallecido fallecido) {
-		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
-
-		obd.update(fallecido);
+	public static void modificar(Movimiento movimiento) {
+		MovimientoOBD obd = FactoryOBD.crearMovimientoOBD();
+		obd.update(movimiento);
 	}
 	
-	
-	/*public static void modificarUbicacion(Fallecido fallecido,Ubicacion ubicacion) {
-		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
-		obd.selectByID(fallecido.getID());
-		
-		Fallecido fallecido2 = new Fallecido(null, null, null, null, null, null, null, null, null);
-		obd.update(fallecido2);
-	
-	}*/
-	
-	public static void eliminar(Fallecido fallecido) {
-		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
-		obd.delete(fallecido);
+	public static void eliminar(Movimiento movimiento) {
+		MovimientoOBD obd = FactoryOBD.crearMovimientoOBD();
+		obd.delete(movimiento);
 	}
 	
-	public static List<Fallecido> traerTodo() {
-		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
+	public static List<Movimiento> traerTodo() {
+		MovimientoOBD obd = FactoryOBD.crearMovimientoOBD();
 		return obd.select();
 	}
 
-	public static Fallecido traerPorDNI(String DNI) {
+	/*public static Fallecido traerPorDNI(String DNI) {
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
 		return obd.selectByDNI(DNI);
 	}
@@ -87,6 +75,5 @@ public class FallecidoManager {
 		
 		FallecidoOBD obd = FactoryOBD.crearFallecidoOBD();
 		return obd.selectByNombreApellidoDNI(nombres, apellido, DNI);
-	}
-	
+	}*/
 }

@@ -11,6 +11,7 @@ import com.revivir.cementerio.negocios.manager.UbicacionManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Movimiento;
 import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
@@ -53,6 +54,11 @@ public class Formato {
 		Fallecido fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
 		return fallecido.getApellido()+", "+fallecido.getNombre();
 	}
+	public static String fallecido(Movimiento movimiento) {
+		Fallecido fallecido = FallecidoManager.traerPorID(movimiento.getFallecido());
+		return fallecido.getApellido()+", "+fallecido.getNombre();
+	}
+	
 
 	public static String servicio(Cargo cargo) {
 		Servicio servicio = ServicioManager.traerPorID(cargo.getServicio());
