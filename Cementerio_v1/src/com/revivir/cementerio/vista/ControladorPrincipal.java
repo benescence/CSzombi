@@ -3,9 +3,9 @@ package com.revivir.cementerio.vista;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import com.revivir.cementerio.vista.menu.cargos.ControladorCargoABM;
 import com.revivir.cementerio.vista.menu.cargos.cargoAM.CargoInvocable;
 import com.revivir.cementerio.vista.menu.cargos.cargoAM.ControladorCargoAM;
-import com.revivir.cementerio.vista.menu.cargos.fallecidos.ControladorCargosDeFallecidos;
 import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ClienteInvocable;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesAM;
@@ -44,7 +44,7 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
 		
 		ventana.getResponsableConsultarPorCliente().addActionListener(e -> colocarVentanaInterna(new ControladorConsultarPorCliente(this)));
-		ventana.getCobranzaCargosFallecido().addActionListener(e -> colocarVentanaInterna(new ControladorCargosDeFallecidos(this)));
+		ventana.getCobranzaCargosFallecido().addActionListener(e -> colocarVentanaInterna(new ControladorCargoABM(this)));
 		
 		// Accesos directos
 		ventana.getClienteAlta().addActionListener(e -> altaClientes());

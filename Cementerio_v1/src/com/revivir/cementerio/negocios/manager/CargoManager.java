@@ -1,11 +1,14 @@
 package com.revivir.cementerio.negocios.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Responsable;
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
 
 public class CargoManager {
@@ -40,6 +43,27 @@ public class CargoManager {
 	public static List<Cargo> traerPorFallecido(Fallecido fallecido) {
 		CargoOBD obd = FactoryOBD.crearCargoOBD();
 		return obd.selectByFallecido(fallecido);
+	}
+
+	public static List<Cargo> traerPorFallecidoCliente(Fallecido fallecido, Cliente cliente) {
+		if (cliente == null)
+			return traerPorFallecido(fallecido);
+		
+		if (fallecido == null)
+			return traerPorFallecidoCliente(fallecido, cliente);
+		
+		List<Cargo> cargos = new ArrayList<>();
+		List<Responsable> responsables = ResponsableManager.traerPorCliente(cliente);
+		if (responsables.isEmpty())
+			return cargos;
+		
+		for (Responsable responsable : responsables) {
+			Fallecido tem = new Fallecido(responsable.getFallecido(), null, null, null, null, null, null, null, null);
+			List<Cargo> cargosTem = CargoManager.traerPorFallecido(tem);
+			cargos.addAll(cargosTem);
+		}
+		
+		return cargos;
 	}
 	
 }
