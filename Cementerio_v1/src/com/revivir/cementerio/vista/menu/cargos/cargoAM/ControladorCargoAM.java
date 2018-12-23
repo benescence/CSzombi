@@ -128,6 +128,7 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 				CargoManager.modificar(nuevo, cargo);
 			
 			ventana.dispose();
+			invocador.actualizarCargos();
 			invocador.mostrar();
 		} catch (Exception e) {
 			Popup.mostrar(e.getMessage());
@@ -151,7 +152,7 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 		this.fallecido = fallecido;
 		ventana.getNombre().getTextField().setText(fallecido.getNombre());
 		ventana.getApellido().getTextField().setText(fallecido.getApellido());
-		ventana.getDNI().getTextField().setText(fallecido.getDni());
+		ventana.getDNI().getTextField().setText(fallecido.getDNI());
 	}
 
 	@Override

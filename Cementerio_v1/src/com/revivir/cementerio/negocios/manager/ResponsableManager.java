@@ -35,10 +35,15 @@ public class ResponsableManager {
 		ResponsableOBD obd = FactoryOBD.crearResponsableOBD();
 		return obd.selectByID(ID);
 	}
-	
+
 	public static List<Responsable> traerPorCliente(Cliente cliente) {
 		ResponsableOBD obd = FactoryOBD.crearResponsableOBD();
 		return obd.selectByCliente(cliente.getID());
+	}
+
+	public static Responsable traerPorClienteFallecido(Cliente cliente, Fallecido fallecido) {
+		ResponsableOBD obd = FactoryOBD.crearResponsableOBD();
+		return obd.selectByClienteFallecido(cliente, fallecido);
 	}
 	
 }

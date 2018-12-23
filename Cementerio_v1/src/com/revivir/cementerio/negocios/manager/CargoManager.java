@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revivir.cementerio.negocios.Verificador;
+import com.revivir.cementerio.negocios.Vinculador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
-import com.revivir.cementerio.persistencia.entidades.Responsable;
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
 
 public class CargoManager {
@@ -44,26 +44,28 @@ public class CargoManager {
 		CargoOBD obd = FactoryOBD.crearCargoOBD();
 		return obd.selectByFallecido(fallecido);
 	}
+	
+	public static List<Cargo> traerPorCliente(Cliente cliente) {
+		List<Fallecido> lista = Vinculador.traerFallecidosDeCliente(cliente);
+		List<Cargo> ret = new ArrayList<>();
+		
+		for (Fallecido elemento: lista)
+			ret.addAll(traerPorFallecido(elemento));
+		
+		return ret;
+	}
 
 	public static List<Cargo> traerPorFallecidoCliente(Fallecido fallecido, Cliente cliente) {
 		if (cliente == null)
 			return traerPorFallecido(fallecido);
 		
 		if (fallecido == null)
-			return traerPorFallecidoCliente(fallecido, cliente);
+			return traerPorCliente(cliente);
 		
-		List<Cargo> cargos = new ArrayList<>();
-		List<Responsable> responsables = ResponsableManager.traerPorCliente(cliente);
-		if (responsables.isEmpty())
-			return cargos;
-		
-		for (Responsable responsable : responsables) {
-			Fallecido tem = new Fallecido(responsable.getFallecido(), null, null, null, null, null, null, null, null);
-			List<Cargo> cargosTem = CargoManager.traerPorFallecido(tem);
-			cargos.addAll(cargosTem);
-		}
-		
-		return cargos;
+		if (!Vinculador.estanVinculados(cliente, fallecido))
+			return new ArrayList<>();
+		else
+			return traerPorFallecido(fallecido);
 	}
 	
 }

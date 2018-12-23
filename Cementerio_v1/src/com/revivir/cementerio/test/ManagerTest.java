@@ -21,7 +21,7 @@ public class ManagerTest {
 		String apellido = "Caballero";
 		String dni = "123";
 		Date fecha = Almanaque.hoy();		
-		FallecidoManager.guardar(nombre, apellido, dni, "123", TipoFallecimiento.NO_TRAUMATICO, fecha, ubicacion, fecha);
+		//FallecidoManager.guardar(nombre, apellido, dni, "123", TipoFallecimiento.NO_TRAUMATICO, fecha, ubicacion, fecha);
 	}
 	
 	public static void crearUnCliente() {

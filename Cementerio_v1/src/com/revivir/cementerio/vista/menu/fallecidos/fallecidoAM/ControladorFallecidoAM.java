@@ -1,86 +1,75 @@
 package com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.Date;
 
-import com.revivir.cementerio.negocios.Almanaque;
-import com.revivir.cementerio.negocios.Localizador;
 import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.negocios.manager.UbicacionManager;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
-import com.revivir.cementerio.vista.ControladorPrincipal;
-import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
+import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorFallecidoAM {
 	private VentanaFallecidoAM ventana;
-	private ControladorFallecidosABM invocador;
-	private ControladorPrincipal principal;
+	private FallecidoInvocable invocador;
 	private Fallecido fallecido;
 	
-	public ControladorFallecidoAM(ControladorFallecidosABM invocador, Fallecido fallecido) {
+	public ControladorFallecidoAM(FallecidoInvocable invocador, Fallecido fallecido) {
 		this.invocador = invocador;
 		this.fallecido = fallecido;
 		ventana = new VentanaFallecidoAM(fallecido);
 		inicializar();
 	}
 	
-	public ControladorFallecidoAM(ControladorFallecidosABM invocador) {
+	public ControladorFallecidoAM(FallecidoInvocable invocador) {
 		this.invocador = invocador;
 		ventana = new VentanaFallecidoAM();
 		inicializar();
 	}
 	
-	public ControladorFallecidoAM(ControladorPrincipal principal) {
-		this.principal = principal;
-		ventana = new VentanaFallecidoAM();
-		inicializar();
-	}
-	
 	private void inicializar() {
-		ventana.botonAceptar().addActionListener(e -> aceptar());
-		ventana.botonCancelar().addActionListener(e -> cancelar());
-		ventana.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				volver();
-			}
-		});
+		ventana.botonAceptar().setAccion(e -> aceptar());
+		ventana.botonCancelar().setAccion(e -> cancelar());
+		ventana.addWindowListener(new AccionCerrarVentana(e -> cancelar()));
 	} 
 	
 	private void aceptar() {
-		TipoFallecimiento tipo = (TipoFallecimiento) ventana.getInTipoFallecimiento().getSelectedItem();
-		String dni = (!ventana.getInDNIFallecido().getText().equals("") ? ventana.getInDNIFallecido().getText() : null);
-		String apellido= ventana.getInApellidoFallecido().getText();;
-		String nombre= ventana.getInNombreFallecido().getText();;
-		String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
-		Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
-		Date fechaIngreso = new Date(ventana.getInFechaIngreso().getDate().getTime());
-		// Es un alta
-		if (fallecido == null) {
-			guardarUbicacion();
-			Ubicacion ubicacion = UbicacionManager.traerMasReciente();
-			FallecidoManager.guardar(nombre, apellido, dni, cocheria, tipo, fechaFallecimiento, ubicacion, fechaIngreso);			
+		ventana.requestFocusInWindow();
+		
+		try {
+			String nombre= ventana.getInNombreFallecido().getText();;
+			String apellido= ventana.getInApellidoFallecido().getText();;
+			String DNI = (!ventana.getInDNIFallecido().getText().equals("") ? ventana.getInDNIFallecido().getText() : null);
+			String cocheria= (!ventana.getInCocheria().getText().equals("") ? ventana.getInCocheria().getText() : null);
+			TipoFallecimiento tipo = (TipoFallecimiento) ventana.getInTipoFallecimiento().getSelectedItem();
+			Date fechaFallecimiento = new Date(ventana.getInFechaFallecimiento().getDate().getTime());
+			Date fechaIngreso = new Date(ventana.getInFechaIngreso().getDate().getTime());
+			
+
+			// Es un alta
+			if (fallecido == null) {
+				guardarUbicacion();
+				Ubicacion ubicacion = UbicacionManager.traerMasReciente();
+				Fallecido nuevo = new Fallecido(-1, ubicacion.getID(), tipo, DNI, apellido, nombre, cocheria, fechaFallecimiento, fechaIngreso);
+				FallecidoManager.guardar(nuevo);			
+			}
+			
+			// Es una modificacion
+			else {
+				Fallecido nuevo = new Fallecido(fallecido.getID(), fallecido.getUbicacion(), tipo, DNI, apellido, nombre, cocheria, fechaFallecimiento, fechaIngreso);
+				FallecidoManager.modificar(nuevo);
+			}
+			
+			ventana.dispose();
+			invocador.actualizarFallecidos();
+			invocador.mostrar();
+		
+		} catch (Exception e) {
+			Popup.mostrar(e.getMessage());
 		}
 		
-		// Es una modificacion
-		else {
-			fallecido.setNombre(nombre);
-			fallecido.setApellido(apellido);
-			fallecido.setDni(dni);
-			fallecido.setTipoFallecimiento(tipo);
-			fallecido.setCocheria(cocheria);
-			fallecido.setFechaFallecimiento(fechaFallecimiento);
-			FallecidoManager.modificar(fallecido);
-		}
-		
-		if (invocador != null)
-			invocador.actualizar();
-		volver();
 	}
 	
 	private void guardarUbicacion() {
@@ -104,21 +93,13 @@ public class ControladorFallecidoAM {
 		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
 		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
 		//UbicacionManager.guardar(subsector, otroCementerio, nicho, fila, seccion, macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
-
 	}	
 	
 	private void cancelar() {
-		if (Popup.confirmar("Se perderan los datos ingresados.\n¿Esta seguro de que desea cancelar la operacion?"))
-			volver();
-	}
-
-	private void volver() {
-		ventana.dispose();
-		ventana = null;
-		if (invocador != null)
+		if (Popup.confirmar("Se perderan los datos ingresados.\n¿Esta seguro de que desea cancelar la operacion?")) {
+			ventana.dispose();
 			invocador.mostrar();
-		else
-			principal.getVentana().mostrar();
+		}
 	}
 	
 }

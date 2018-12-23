@@ -17,17 +17,9 @@ public class VentanaPrincipal extends Ventana {
 	private JMenuItem principalAlta, principalCambiarPassword, principalCerrarSesion;
 	private JMenuItem clienteAlta, clienteConsulta; 
 	private JMenuItem fallecidoAlta, fallecidoConsulta;
-	private JMenuItem responsableVincular, responsableConsultarPorCliente, responsableConsultarPorFallecido;
-	private JMenuItem cargoAlta, cobranzaCargosFallecido, cobranzaCargosClientes, cobranzaRegistrarPagos; 
+	private JMenuItem cargoAlta, cargoConsultar; 
 	private JMenuItem movimientoTrasladar, movimientoConsultar; 
-	public JMenuItem getMovimientoTrasladar() {
-		return movimientoTrasladar;
-	}
-
-	public JMenuItem getMovimientoConsultar() {
-		return movimientoConsultar;
-	}
-
+	private JMenuItem responsableVincular, responsableConsultarPorCliente, responsableConsultarPorFallecido;		
 	private JMenuItem servicioAlta, servicioConsulta;
 	private JMenuItem usuarioAlta, usuarioConsulta;
 	
@@ -75,13 +67,17 @@ public class VentanaPrincipal extends Ventana {
 		menuResponsables.add(responsableConsultarPorCliente = new JMenuItem("Consultar por cliente"));
 		menuResponsables.add(responsableConsultarPorFallecido = new JMenuItem("Consultar por fallecido"));
 		barra.add(menuResponsables);
+
 		
-		JMenu menuCobranza = new JMenu("Cobranzas");
-		menuCobranza.add(cargoAlta = new JMenuItem("Alta cargo"));
-		menuCobranza.add(cobranzaCargosClientes = new JMenuItem("Cargos de cliente"));
-		menuCobranza.add(cobranzaCargosFallecido = new JMenuItem("Cargos de fallecido"));
-		menuCobranza.add(cobranzaRegistrarPagos = new JMenuItem("Registrar pago"));
-		barra.add(menuCobranza);
+		//********************** MENU CARGOS ***************************
+		JMenu menuCargos = new JMenu("Cargos");
+		menuCargos.setMnemonic('g');
+		menuCargos.add(cargoAlta = new JMenuItem("Alta cargo", 'a'));
+		menuCargos.add(cargoConsultar = new JMenuItem("Cargos de fallecido", 'c'));
+		cargoAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Event.CTRL_MASK | Event.ALT_MASK));
+		barra.add(menuCargos);
+		
+		
 		
 		JMenu menuMovimientos = new JMenu("Movimientos");
 		menuMovimientos.add(movimientoTrasladar = new JMenuItem("Trasladar"));
@@ -151,20 +147,12 @@ public class VentanaPrincipal extends Ventana {
 		return responsableConsultarPorFallecido;
 	}
 
-	public JMenuItem getCobranzaAltaCargo() {
+	public JMenuItem getCargoAlta() {
 		return cargoAlta;
 	}
 
-	public JMenuItem getCobranzaCargosFallecido() {
-		return cobranzaCargosFallecido;
-	}
-
-	public JMenuItem getCobranzaCargosClientes() {
-		return cobranzaCargosClientes;
-	}
-
-	public JMenuItem getCobranzaRegistrarPagos() {
-		return cobranzaRegistrarPagos;
+	public JMenuItem getCargoConsultar() {
+		return cargoConsultar;
 	}
 
 	public JMenuItem getPrincipalAlta() {
@@ -177,6 +165,14 @@ public class VentanaPrincipal extends Ventana {
 
 	public JMenuItem getPrincipalCerrarSesion() {
 		return principalCerrarSesion;
+	}
+	
+	public JMenuItem getMovimientoTrasladar() {
+		return movimientoTrasladar;
+	}
+
+	public JMenuItem getMovimientoConsultar() {
+		return movimientoConsultar;
 	}
 	
 }

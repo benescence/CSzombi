@@ -4,15 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.List;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 import com.revivir.cementerio.antiguo.MainPrincipal;
-import com.revivir.cementerio.negocios.Busqueda;
-import com.revivir.cementerio.negocios.Validador;
-import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.util.Popup;
@@ -85,9 +81,9 @@ public class ControladorPrecio implements ActionListener, ControladorInterno{
 	private void buscar() {
 		String codigo = (ventana.getCodigo().getText().equals("") ? null : ventana.getCodigo().getText());
 		String descripcion = (ventana.getDescripcion().getText().equals("") ? null : ventana.getDescripcion().getText());
-		List<Servicio> precios = Busqueda.precios(codigo, descripcion);
-		ventana.getTabla().recargar(precios);
-		if (precios.size() == 0)
+		//List<Servicio> precios = Busqueda.precios(codigo, descripcion);
+		//ventana.getTabla().recargar(precios);
+		//if (precios.size() == 0)
 			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
 	}
 

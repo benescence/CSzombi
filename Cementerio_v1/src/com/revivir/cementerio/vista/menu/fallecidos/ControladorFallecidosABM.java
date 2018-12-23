@@ -9,9 +9,10 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
+import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.FallecidoInvocable;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorFallecidosABM implements ControladorInterno {
+public class ControladorFallecidosABM implements ControladorInterno, FallecidoInvocable {
 	private VentanaFallecidosABM ventana;
 	private ControladorPrincipal invocador;
 	
@@ -72,6 +73,12 @@ public class ControladorFallecidosABM implements ControladorInterno {
 	@Override
 	public JInternalFrame getVentana() {		
 		return ventana;
+	}
+
+	@Override
+	public void actualizarFallecidos() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

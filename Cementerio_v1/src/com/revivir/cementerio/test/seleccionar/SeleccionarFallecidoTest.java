@@ -8,7 +8,7 @@ public class SeleccionarFallecidoTest implements FallecidoSeleccionable {
 
 	@Override
 	public void seleccionarFallecido(Fallecido fallecido) {
-		System.out.println("Se ha seleccionado el cliente:"+fallecido.getNombre()+", "+fallecido.getApellido()+", "+fallecido.getDni());
+		System.out.println("Se ha seleccionado el cliente:"+fallecido.getNombre()+", "+fallecido.getApellido()+", "+fallecido.getDNI());
 	}
 
 	@Override

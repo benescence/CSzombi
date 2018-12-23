@@ -5,17 +5,17 @@ import java.sql.Date;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 
 public class Fallecido {
-	private Integer ID,  ubicacion;
-	private String dni, apellido, nombre, cocheria;
+	private Integer ID, ubicacion;
+	private String DNI, apellido, nombre, cocheria;
 	private Date fechaFallecimiento, fechaIngreso;
 	private TipoFallecimiento tipoFallecimiento;
 	
-	public Fallecido(Integer ID, Integer ubicacion, TipoFallecimiento tipoFallecimiento, String dni, String apellido, String nombre, String cocheria,
+	public Fallecido(Integer ID, Integer ubicacion, TipoFallecimiento tipoFallecimiento, String DNI, String apellido, String nombre, String cocheria,
 			Date fechaFallecimiento, Date fechaIngreso) {
 		this.ID = ID;
 		this.ubicacion = ubicacion;
 		this.tipoFallecimiento = tipoFallecimiento;
-		this.dni = dni;
+		this.DNI = DNI;
 		this.apellido = apellido;
 		this.nombre = nombre;
 		this.cocheria = cocheria;
@@ -23,22 +23,14 @@ public class Fallecido {
 		this.fechaIngreso = fechaIngreso;
 	}
 
-	public Date getFechaIngreso() {
-		return fechaIngreso;
-	}
-
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
-	}
-
 	public Integer getID() {
 		return ID;
 	}
 
-	public void setID(Integer ID) {
-		this.ID = ID;
+	public void setID(Integer iD) {
+		this.ID = iD;
 	}
-	
+
 	public Integer getUbicacion() {
 		return ubicacion;
 	}
@@ -47,20 +39,12 @@ public class Fallecido {
 		this.ubicacion = ubicacion;
 	}
 
-	public TipoFallecimiento getTipoFallecimiento() {
-		return tipoFallecimiento;
+	public String getDNI() {
+		return DNI;
 	}
 
-	public void setTipoFallecimiento(TipoFallecimiento tipoFallecimiento) {
-		this.tipoFallecimiento = tipoFallecimiento;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setDNI(String DNI) {
+		this.DNI = DNI;
 	}
 
 	public String getApellido() {
@@ -93,6 +77,22 @@ public class Fallecido {
 
 	public void setFechaFallecimiento(Date fechaFallecimiento) {
 		this.fechaFallecimiento = fechaFallecimiento;
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	public TipoFallecimiento getTipoFallecimiento() {
+		return tipoFallecimiento;
+	}
+
+	public void setTipoFallecimiento(TipoFallecimiento tipoFallecimiento) {
+		this.tipoFallecimiento = tipoFallecimiento;
 	}
 	
 }

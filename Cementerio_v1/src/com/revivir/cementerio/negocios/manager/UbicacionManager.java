@@ -1,6 +1,5 @@
 package com.revivir.cementerio.negocios.manager;
 
-import java.util.Date;
 import java.util.List;
 
 import com.revivir.cementerio.persistencia.FactoryOBD;

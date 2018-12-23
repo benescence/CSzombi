@@ -23,5 +23,9 @@ public class Vinculador {
 	public static void vincular(Cliente cliente, Fallecido fallecido) {
 		ResponsableManager.guardar(cliente, fallecido, "");
 	}
+
+	public static boolean estanVinculados(Cliente cliente, Fallecido fallecido) {
+		return ResponsableManager.traerPorClienteFallecido(cliente, fallecido) != null;
+	}
 	
 }

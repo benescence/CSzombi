@@ -30,8 +30,8 @@ import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
 
-public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable , CargoInvocable, MovimientoInvocable {
-
+public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable ,
+		CargoInvocable,MovimientoInvocable, FallecidoInvocable {
 	private VentanaPrincipal ventana;
 	private ControladorInterno controladorInterno;
 	

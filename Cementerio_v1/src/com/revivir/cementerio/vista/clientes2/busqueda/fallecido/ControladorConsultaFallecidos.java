@@ -1,11 +1,7 @@
 package com.revivir.cementerio.vista.clientes2.busqueda.fallecido;
 
-import java.util.List;
-
 import javax.swing.JInternalFrame;
 
-import com.revivir.cementerio.negocios.Busqueda;
-import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.util.Popup;
 
@@ -34,9 +30,9 @@ public class ControladorConsultaFallecidos implements ControladorInterno{
 			return;
 		}
 	
-		List<Fallecido> lista = Busqueda.fallecidos(DNI, nombres, apellido);
-		ventana.getTabla().recargar(lista);
-		if (lista.size() == 0)
+		//List<Fallecido> lista = Busqueda.fallecidos(DNI, nombres, apellido);
+		//ventana.getTabla().recargar(lista);
+		//if (lista.size() == 0)
 			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
 	}
 	

@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -23,8 +22,8 @@ import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 import com.revivir.cementerio.vista.util.contenedores.Ventana;
 import com.revivir.cementerio.vista.util.entradas.EntradaFecha;
-import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
 import com.revivir.cementerio.vista.util.entradas.EntradaLista;
+import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
 import com.toedter.calendar.JDateChooser;
 
 public class VentanaFallecidoAM extends Ventana {
@@ -53,7 +52,7 @@ public class VentanaFallecidoAM extends Ventana {
 		inicializar();
 		inNombre.getTextField().setText(fallecido.getNombre());
 		inApellido.getTextField().setText(fallecido.getApellido());
-		inDNI.getTextField().setText(fallecido.getDni());
+		inDNI.getTextField().setText(fallecido.getDNI());
 		inCocheria.getTextField().setText(fallecido.getCocheria());
 		inTipo.getComboBox().setSelectedItem(fallecido.getTipoFallecimiento());
 	}
@@ -358,11 +357,11 @@ public class VentanaFallecidoAM extends Ventana {
 		return inSubSector.getComboBox();
 	}
 
-	public JButton botonAceptar() {
+	public Boton botonAceptar() {
 		return btnAceptar;
 	}
 
-	public JButton botonCancelar() {
+	public Boton botonCancelar() {
 		return btnCancelar;
 	}
 		

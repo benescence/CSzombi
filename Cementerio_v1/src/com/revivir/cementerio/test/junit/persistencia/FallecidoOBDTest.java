@@ -40,7 +40,7 @@ class FallecidoOBDTest {
 		obd.insert(objeto);
 		Fallecido objetoBD1 = obd.ultimoInsertado();
 		objetoBD1.setTipoFallecimiento(TipoFallecimiento.NO_TRAUMATICO);
-		objetoBD1.setDni("1111");
+		objetoBD1.setDNI("1111");
 		objetoBD1.setNombre("Nombre1");
 		objetoBD1.setApellido("Apellido1");
 		objetoBD1.setCocheria("Cocheria1");
@@ -89,7 +89,7 @@ class FallecidoOBDTest {
 	private void iguales(Fallecido obj1, Fallecido obj2) {
 		assertTrue(obj1.getUbicacion().equals(obj2.getUbicacion()));
 		assertTrue(obj1.getTipoFallecimiento().equals(obj2.getTipoFallecimiento()));
-		assertTrue(obj1.getDni().equals(obj2.getDni()));
+		assertTrue(obj1.getDNI().equals(obj2.getDNI()));
 		assertTrue(obj1.getApellido().equals(obj2.getApellido()));
 		assertTrue(obj1.getNombre().equals(obj2.getNombre()));
 		assertTrue(obj1.getCocheria().equals(obj2.getCocheria()));
@@ -98,7 +98,7 @@ class FallecidoOBDTest {
 	private void distintos(Fallecido obj1, Fallecido obj2) {
 		boolean ubicacion = obj1.getUbicacion().equals(obj2.getUbicacion());
 		boolean tipo = obj1.getTipoFallecimiento().equals(obj2.getTipoFallecimiento());
-		boolean dni = obj1.getDni().equals(obj2.getDni());
+		boolean dni = obj1.getDNI().equals(obj2.getDNI());
 		boolean apellido = obj1.getApellido().equals(obj2.getApellido());
 		boolean nombre = obj1.getNombre().equals(obj2.getNombre());
 		boolean cocheria = obj1.getCocheria().equals(obj2.getCocheria());
