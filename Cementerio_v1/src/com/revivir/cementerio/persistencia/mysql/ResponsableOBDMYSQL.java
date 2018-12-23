@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revivir.cementerio.persistencia.OBD;
+import com.revivir.cementerio.persistencia.entidades.Cliente;
+import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Responsable;
 import com.revivir.cementerio.persistencia.interfaces.ResponsableOBD;
 
@@ -52,12 +54,21 @@ public class ResponsableOBDMYSQL extends OBD implements ResponsableOBD{
 		condicion += "cliente = " +"'"+cliente+"'";
 		return selectByCondicion(condicion);
 	}
-	
+
 	@Override
 	public List<Responsable> selectByFallecido(Integer fallecido) {
 		String condicion = "";
 		condicion += "fallecido = " +"'"+fallecido+"'";
 		return selectByCondicion(condicion);
+	}
+
+	@Override
+	public Responsable selectByClienteFallecido(Cliente cliente, Fallecido fallecido) {
+		String condicion = "cliente = "+cliente.getID() +" and fallecido = " +fallecido.getID();
+		List<Responsable> lista = selectByCondicion(condicion);
+		if (lista.size() > 0)
+			return lista.get(0);
+		return null;
 	}
 	
 	private List<Responsable> selectByCondicion(String condicion) {

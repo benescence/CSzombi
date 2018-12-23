@@ -128,6 +128,7 @@ public class ControladorCargoAM implements ServicioSeleccionable, FallecidoSelec
 				CargoManager.modificar(nuevo, cargo);
 			
 			ventana.dispose();
+			invocador.actualizarCargos();
 			invocador.mostrar();
 		} catch (Exception e) {
 			Popup.mostrar(e.getMessage());

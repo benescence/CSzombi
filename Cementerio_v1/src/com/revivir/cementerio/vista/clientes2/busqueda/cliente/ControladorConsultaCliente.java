@@ -2,14 +2,10 @@ package com.revivir.cementerio.vista.clientes2.busqueda.cliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JInternalFrame;
 
-import com.revivir.cementerio.negocios.Busqueda;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.vista.ControladorInterno;
-import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorConsultaCliente implements ActionListener, ControladorInterno{
 	private VentanaConsultaCliente ventana;

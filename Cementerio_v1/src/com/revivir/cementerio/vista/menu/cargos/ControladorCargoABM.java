@@ -4,12 +4,16 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
+import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.manager.CargoManager;
+import com.revivir.cementerio.negocios.manager.ClienteManager;
+import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
+import com.revivir.cementerio.vista.menu.cargos.cargoAM.CargoInvocable;
 import com.revivir.cementerio.vista.menu.cargos.cargoAM.ControladorCargoAM;
 import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
 import com.revivir.cementerio.vista.seleccion.clientes.ControladorSeleccionCliente;
@@ -17,7 +21,7 @@ import com.revivir.cementerio.vista.seleccion.fallecidos.ControladorSeleccionarF
 import com.revivir.cementerio.vista.seleccion.fallecidos.FallecidoSeleccionable;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorCargoABM implements ControladorInterno, FallecidoSeleccionable, ClienteSeleccionable {
+public class ControladorCargoABM implements ControladorInterno, FallecidoSeleccionable, ClienteSeleccionable, CargoInvocable {
 	private VentanaCargoABM ventana;
 	private ControladorPrincipal invocador;
 	private Fallecido fallecido;
@@ -32,6 +36,8 @@ public class ControladorCargoABM implements ControladorInterno, FallecidoSelecci
 		
 		ventana.botonSelFallecido().setAccion(e -> seleccionarFallecido());
 		ventana.botonSelCliente().setAccion(e -> seleccionarCliente());
+		ventana.botonCargarFallecido().setAccion(e -> cargarFallecido());
+		ventana.botonCargarCliente().setAccion(e -> cargarCliente());		
 	}
 	
 	private void seleccionarFallecido() {
@@ -44,12 +50,50 @@ public class ControladorCargoABM implements ControladorInterno, FallecidoSelecci
 		new ControladorSeleccionCliente(this);
 	}
 
-	private void agregar() {
-		//invocador.getVentana().setEnabled(false);
-		//if (fallecido == null)
-	//		new ControladorCargoAM(invocador);
-		//else
-			//new ControladorCargoAM(this, fallecido);
+	private void cargarCliente() {
+		ventana.requestFocusInWindow();
+		
+		String DNI = ventana.getDNICli().getTextField().getText();
+		if (!Validador.DNI(DNI)) {
+			Popup.mostrar("El DNI solo puede consistir de numeros");
+			return;
+		}
+		
+		Cliente directo = ClienteManager.traerPorDNI(DNI);
+		if (directo == null) {
+			Popup.mostrar("No hay registros de un cliente con el DNI: "+DNI+".");
+			return;
+		}
+		
+		seleccionarCliente(directo);
+		ventana.getDNIFal().getTextField().requestFocusInWindow();
+	}
+
+	private void cargarFallecido() {
+		ventana.requestFocusInWindow();
+		
+		String DNI = ventana.getDNIFal().getTextField().getText();
+		if (!Validador.DNI(DNI)) {
+			Popup.mostrar("El DNI solo puede consistir de numeros");
+			return;
+		}
+		
+		Fallecido directo = FallecidoManager.traerPorDNI(DNI);
+		if (directo == null) {
+			Popup.mostrar("No hay registros de un fallecido con el DNI: "+DNI+".");
+			return;
+		}
+		
+		seleccionarFallecido(directo);
+		ventana.getDNICli().getTextField().requestFocusInWindow();
+	}
+
+	private void agregar() { 
+		invocador.getVentana().setEnabled(false);
+		if (fallecido == null)
+			new ControladorCargoAM(this);
+		else
+			new ControladorCargoAM(this, fallecido);
 	}
 
 	private void modificar() {
@@ -94,18 +138,13 @@ public class ControladorCargoABM implements ControladorInterno, FallecidoSelecci
 		return ventana;
 	}
 
-	public void actualizar() {
-		List<Cargo> lista = CargoManager.traerPorFallecidoCliente(fallecido, cliente);
-		ventana.getTabla().recargar(lista);
-	}
-
 	@Override
 	public void seleccionarFallecido(Fallecido fallecido) {
 		this.fallecido = fallecido;
 		ventana.getNombreFal().getTextField().setText(fallecido.getNombre());
 		ventana.getApellidoFal().getTextField().setText(fallecido.getApellido());
 		ventana.getDNIFal().getTextField().setText(fallecido.getDNI());
-		actualizar();
+		actualizarCargos();
 	}
 
 	@Override
@@ -114,7 +153,15 @@ public class ControladorCargoABM implements ControladorInterno, FallecidoSelecci
 		ventana.getNombreCli().getTextField().setText(cliente.getNombre());
 		ventana.getApellidoCli().getTextField().setText(cliente.getApellido());
 		ventana.getDNICli().getTextField().setText(cliente.getDNI());
-		actualizar();
+		actualizarCargos();
+	}
+
+	@Override
+	public void actualizarCargos() {
+		if (cliente != null || fallecido != null) {
+			List<Cargo> lista = CargoManager.traerPorFallecidoCliente(fallecido, cliente);
+			ventana.getTabla().recargar(lista);
+		}		
 	}
 
 }

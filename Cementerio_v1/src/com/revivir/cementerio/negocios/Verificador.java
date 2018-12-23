@@ -8,6 +8,7 @@ import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
+import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
 
 public class Verificador {
@@ -16,7 +17,7 @@ public class Verificador {
 		String nombre = anular(nuevo.getNombre());
 		String apellido = anular(nuevo.getApellido());
 		String DNI = anular(nuevo.getDNI());
-		String telefono = anular(nuevo.getTelefono());
+		String telefono = anular(nuevo.getTelefono()); 
 		String email = anular(nuevo.getEmail());
 		String domicilio = anular(nuevo.getDomicilio());
 		String mensaje = "";
@@ -98,6 +99,12 @@ public class Verificador {
 		verificar.setCocheria(cocheria);
 		return verificar;
 	}
+	
+	public static Ubicacion ubicacion(Ubicacion verificar) {
+		// Completar verificaciones de ubicacion
+		return verificar;
+	}
+	
 	
 	public static Cargo cargo(Cargo nuevo, Cargo anterior) throws Exception {
 		String observaciones = anular(nuevo.getObservaciones());

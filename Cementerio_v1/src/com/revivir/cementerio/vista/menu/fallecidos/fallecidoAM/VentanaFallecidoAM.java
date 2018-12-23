@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -23,8 +22,8 @@ import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 import com.revivir.cementerio.vista.util.contenedores.Ventana;
 import com.revivir.cementerio.vista.util.entradas.EntradaFecha;
-import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
 import com.revivir.cementerio.vista.util.entradas.EntradaLista;
+import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
 import com.toedter.calendar.JDateChooser;
 
 public class VentanaFallecidoAM extends Ventana {
