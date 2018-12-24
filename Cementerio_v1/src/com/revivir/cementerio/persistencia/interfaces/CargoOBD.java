@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 
 public interface CargoOBD {
 	
@@ -18,6 +19,8 @@ public interface CargoOBD {
 	public Cargo selectByID(Integer ID);
 
 	public List<Cargo> selectByFallecido(Fallecido fallecido);
+
+	public List<Cargo> selectByFallecidoServicio(Fallecido fallecido, Servicio servicio);
 
 	public Cargo ultimoInsertado();
 

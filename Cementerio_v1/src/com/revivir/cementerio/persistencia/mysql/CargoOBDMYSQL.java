@@ -9,8 +9,8 @@ import java.util.List;
 
 import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
 
 public class CargoOBDMYSQL extends OBD implements CargoOBD{
@@ -102,6 +102,12 @@ public class CargoOBDMYSQL extends OBD implements CargoOBD{
 	@Override
 	public List<Cargo> selectByFallecido(Fallecido fallecido) {
 		String condicion = "fallecido = "+fallecido.getID();
+		return  selectByCondicion(condicion);
+	}
+
+	@Override
+	public List<Cargo> selectByFallecidoServicio(Fallecido fallecido, Servicio servicio) {
+		String condicion = "fallecido = "+fallecido.getID()+" and servicio = "+servicio.getID();
 		return  selectByCondicion(condicion);
 	}
 	

@@ -9,6 +9,7 @@ import com.revivir.cementerio.persistencia.FactoryOBD;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.interfaces.CargoOBD;
 
 public class CargoManager {
@@ -43,6 +44,11 @@ public class CargoManager {
 	public static List<Cargo> traerPorFallecido(Fallecido fallecido) {
 		CargoOBD obd = FactoryOBD.crearCargoOBD();
 		return obd.selectByFallecido(fallecido);
+	}
+	
+	public static List<Cargo> traerPorFallecidoServicio(Fallecido fallecido, Servicio servicio) {
+		CargoOBD obd = FactoryOBD.crearCargoOBD();
+		return obd.selectByFallecidoServicio(fallecido, servicio);
 	}
 	
 	public static List<Cargo> traerPorCliente(Cliente cliente) {
