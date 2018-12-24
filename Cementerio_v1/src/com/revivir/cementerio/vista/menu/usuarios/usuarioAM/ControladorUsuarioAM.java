@@ -3,10 +3,11 @@ package com.revivir.cementerio.vista.menu.usuarios.usuarioAM;
 import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.definidos.Rol;
 import com.revivir.cementerio.persistencia.entidades.Usuario;
+import com.revivir.cementerio.vista.ControladorExterno;
 import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorUsuarioAM {
+public class ControladorUsuarioAM implements ControladorExterno{
 	private VentanaUsuarioAM ventana;
 	private UsuarioInvocable invocador;
 	private Usuario modificar;

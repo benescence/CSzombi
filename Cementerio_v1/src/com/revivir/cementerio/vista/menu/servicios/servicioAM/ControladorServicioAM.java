@@ -2,10 +2,11 @@ package com.revivir.cementerio.vista.menu.servicios.servicioAM;
 
 import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
+import com.revivir.cementerio.vista.ControladorExterno;
 import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorServicioAM {
+public class ControladorServicioAM implements ControladorExterno{
 	private VentanaServicioAM ventana;
 	private ServicioInvocable invocador;
 	private Servicio modificar;

@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.AbstractButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -174,16 +173,6 @@ public class VentanaPrincipal extends Ventana {
 
 	public JMenuItem getMovimientoConsultar() {
 		return movimientoConsultar;
-	}
-
-	public AbstractButton getCobranzaCargosFallecido() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public AbstractButton getCobranzaAltaCargo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

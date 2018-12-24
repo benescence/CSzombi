@@ -1,14 +1,7 @@
 package com.revivir.cementerio.vista;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-
-
-
 import com.revivir.cementerio.vista.menu.cargos.ControladorCargoABM;
 import com.revivir.cementerio.vista.menu.cargos.cargoAM.CargoInvocable;
-
 import com.revivir.cementerio.vista.menu.cargos.cargoAM.ControladorCargoAM;
 import com.revivir.cementerio.vista.menu.clientes.ControladorClientesABM;
 import com.revivir.cementerio.vista.menu.clientes.clienteAM.ClienteInvocable;
@@ -27,9 +20,9 @@ import com.revivir.cementerio.vista.menu.servicios.servicioAM.ServicioInvocable;
 import com.revivir.cementerio.vista.menu.usuarios.ControladorUsuariosABM;
 import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.ControladorUsuarioAM;
 import com.revivir.cementerio.vista.menu.usuarios.usuarioAM.UsuarioInvocable;
+import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
-
 
 public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable ,
 		CargoInvocable,MovimientoInvocable, FallecidoInvocable {
@@ -38,72 +31,34 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 	
 	public ControladorPrincipal() {
 		ventana = new VentanaPrincipal();
-		ventana.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				cerrarAplicacion();
-			}
-		});
+		ventana.addWindowListener(new AccionCerrarVentana(e -> cerrarAplicacion()));
 		
-		// Acciones para las opciones de menu
+		// ALTA DIRECTA
+		ventana.getClienteAlta().addActionListener(e -> colocarVentanaExterna(new ControladorClientesAM(this)));
+		ventana.getFallecidoAlta().addActionListener(e -> colocarVentanaExterna(new ControladorFallecidoAM(this)));
+		ventana.getServicioAlta().addActionListener(e -> colocarVentanaExterna(new ControladorServicioAM(this)));
+		ventana.getUsuarioAlta().addActionListener(e -> colocarVentanaExterna(new ControladorUsuarioAM(this)));
+		ventana.getCargoAlta().addActionListener(e -> colocarVentanaExterna(new ControladorCargoAM(this)));
+		
+		ventana.getResponsableVincular().addActionListener(e -> vincular());
+		ventana.getMovimientoTrasladar().addActionListener(e -> transladar());
+	
+		
+		
+		// CONSULTAS
 		ventana.getClienteConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorClientesABM(this)));
 		ventana.getFallecidoConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorFallecidosABM(this)));
 		ventana.getServicioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorServiciosABM(this)));
-		ventana.getMovimientoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorMovimiento(this)));
 		ventana.getUsuarioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorUsuariosABM(this)));
-		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
-		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
-	
-
-		//ventana.getCobranzaCargosFallecido().addActionListener(e -> colocarVentanaInterna(new ControladorCargoABM(this)));
-
+		ventana.getCargoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorCargoABM(this)));
 		
-		// Accesos directos
-		ventana.getClienteAlta().addActionListener(e -> altaClientes());
-		ventana.getFallecidoAlta().addActionListener(e -> altaFallecidos());
-		ventana.getServicioAlta().addActionListener(e -> altaServicios());
-		ventana.getUsuarioAlta().addActionListener(e -> altaUsuarios());
-		ventana.getResponsableVincular().addActionListener(e -> vincular());
-		ventana.getMovimientoTrasladar().addActionListener(e -> transladar());
-		ventana.getCobranzaAltaCargo().addActionListener(e -> altaCargo());
-	
-
-	}
-	
-	private void vincular() {
-		ventana.deshabilitar();
-		new ControladorVincular(this);
-	}
-	private void transladar() {
-		ventana.deshabilitar();
-		new ControladorTranslado(this);
+		ventana.getMovimientoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorMovimiento(this)));
+		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
+		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
 	}
 
-	private void altaServicios() {
+	private void colocarVentanaExterna(ControladorExterno controlador) {
 		ventana.deshabilitar();
-		new ControladorServicioAM(this);
-	}
-
-	private void altaUsuarios() {
-		ventana.deshabilitar();
-		new ControladorUsuarioAM(this);
-	}
-
-	private void altaCargo() {
-		ventana.deshabilitar();
-		new ControladorCargoAM(this);
-	}
-	
-	
-	
-	private void altaFallecidos() {
-		ventana.deshabilitar();
-		new ControladorFallecidoAM(this);
-	}
-
-	private void altaClientes() {
-		ventana.deshabilitar();
-		new ControladorClientesAM(this);
 	}
 	
 	private void colocarVentanaInterna(ControladorInterno controlador) {
@@ -114,7 +69,16 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 			ventana.setContentPane(panel);
 		}
 	}
-	
+
+	private void vincular() {
+		ventana.deshabilitar();
+		new ControladorVincular(this);
+	}
+	private void transladar() {
+		ventana.deshabilitar();
+		new ControladorTranslado(this);
+	}
+
 	private void cerrarAplicacion() {
 		if (Popup.confirmar("¿Está seguro de que desea cerrar la aplicación?")) {
 			ventana.dispose();
@@ -159,9 +123,6 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 			((MovimientoInvocable)controladorInterno).actualizarMovimientos();
 	}
 
-	
-
-
 	@Override
 	public void actualizarCargos() {
 		if (controladorInterno instanceof CargoInvocable)
@@ -170,9 +131,8 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 
 	@Override
 	public void actualizarFallecidos() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+		if (controladorInterno instanceof FallecidoInvocable)
+			((FallecidoInvocable)controladorInterno).actualizarFallecidos();
+	}	
 
 }

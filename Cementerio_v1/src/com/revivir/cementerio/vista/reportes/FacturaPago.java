@@ -1,5 +1,5 @@
 package com.revivir.cementerio.vista.reportes;
-
+/*
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +14,11 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-
+*/
 
 
 public class FacturaPago
-{
+{/*
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
 	private JasperPrint	reporteLleno;
@@ -38,7 +38,7 @@ public class FacturaPago
     		JasperCompileManager.compileReportToFile(
                     "FacturaPago.jrxml",//the path to the jrxml file to compile
                     "FacturaPago.jasper");//the path and name we want to save the compiled file to
-                    */
+                    
 			this.reporte = (JasperReport) JRLoader.loadObjectFromFile("reportes\\FacturaPago.jasper" );
 			this.reporteLleno = JasperFillManager.fillReport(this.reporte, totalPersonas, 
 					new JRBeanCollectionDataSource(pagos));
@@ -55,5 +55,5 @@ public class FacturaPago
 		this.reporteViewer = new JasperViewer(this.reporteLleno,false);
 		this.reporteViewer.setVisible(true);
 	}
-   
+   */
 }	

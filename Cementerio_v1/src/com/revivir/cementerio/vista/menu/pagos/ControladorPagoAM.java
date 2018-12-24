@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.menu.cargos.cargoAM;
+package com.revivir.cementerio.vista.menu.pagos;
 
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.manager.CargoManager;
@@ -15,35 +15,14 @@ import com.revivir.cementerio.vista.seleccion.servicio.ServicioSeleccionable;
 import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorCargoAM implements ControladorExterno, ServicioSeleccionable, FallecidoSeleccionable {
-	private VentanaCargoAM ventana;
-	private CargoInvocable invocador;
-	private Fallecido fallecido;
-	private Servicio servicio;
+public class ControladorPagoAM implements ControladorExterno {
+	private VentanaPagoAM ventana;
+	private PagoInvocable invocador;
 	private Cargo cargo;
 	
-	public ControladorCargoAM(CargoInvocable invocador) {
+	public ControladorPagoAM(PagoInvocable invocador) {
 		this.invocador = invocador;
-		ventana = new VentanaCargoAM();
-		inicializar();
-	}
-	
-	public ControladorCargoAM(CargoInvocable invocador, Fallecido fallecido) {
-		this.invocador = invocador;
-		ventana = new VentanaCargoAM();
-		seleccionarFallecido(fallecido);
-		inicializar();
-	}
-
-	public ControladorCargoAM(CargoInvocable invocador, Cargo cargo) {
-		this.invocador = invocador;
-		this.cargo = cargo;
-		this.servicio = ServicioManager.traerPorID(cargo.getServicio());
-		this.fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
-		ventana = new VentanaCargoAM();
-		seleccionarFallecido(fallecido);
-		seleccionarServicio(servicio);
-		ventana.getObservaciones().getTextField().setText(cargo.getObservaciones());
+		ventana = new VentanaPagoAM();
 		inicializar();
 	}
 
@@ -53,11 +32,11 @@ public class ControladorCargoAM implements ControladorExterno, ServicioSeleccion
 		ventana.botonAceptar().setAccion(e -> aceptar());
 		ventana.botonCancelar().setAccion(e -> cancelar());
 		
-		ventana.botonSelServicio().setAccion(e -> seleccionarServicio());
-		ventana.botonSelFallecido().setAccion(e -> seleccionarFallecido());
+		//ventana.botonSelServicio().setAccion(e -> seleccionarServicio());
+		//ventana.botonSelFallecido().setAccion(e -> seleccionarFallecido());
 		
-		ventana.botonCargarFallecido().setAccion(e -> cargarFallecido());
-		ventana.botonCargarServicio().setAccion(e -> cargarServicio());
+		//ventana.botonCargarFallecido().setAccion(e -> cargarFallecido());
+		//ventana.botonCargarServicio().setAccion(e -> cargarServicio());
 	} 
 	
 	private void cargarServicio() {
@@ -75,14 +54,14 @@ public class ControladorCargoAM implements ControladorExterno, ServicioSeleccion
 			return;
 		}
 		
-		seleccionarServicio(directo);
+		//seleccionarServicio(directo);
 		ventana.getObservaciones().getTextField().requestFocusInWindow();
 	}
 	
 	private void cargarFallecido() {
 		ventana.requestFocusInWindow();
 		
-		String DNI = ventana.getDNI().getTextField().getText();
+		String DNI = ventana.getDNIFal().getTextField().getText();
 		if (!Validador.DNI(DNI)) {
 			Popup.mostrar("El DNI solo puede consistir de numeros");
 			return;
@@ -94,23 +73,23 @@ public class ControladorCargoAM implements ControladorExterno, ServicioSeleccion
 			return;
 		}
 		
-		seleccionarFallecido(directo);
+		//seleccionarFallecido(directo);
 		ventana.getCodigo().getTextField().requestFocusInWindow();
 	}
 	
 	private void seleccionarServicio() {
 		ventana.setEnabled(false);
-		new ControladorSeleccionarServicio(this);
+		//new ControladorSeleccionarServicio(this);
 	}
 
 	private void seleccionarFallecido() {
 		ventana.setEnabled(false);
-		new ControladorSeleccionarFallecido(this);
+		//new ControladorSeleccionarFallecido(this);
 	}
 	
 	private void aceptar() {
 		ventana.requestFocusInWindow();
-		
+		/*
 		try {
 			if (servicio == null || fallecido == null) {
 				Popup.mostrar("Debe seleccionar un servicio y un fallecido para poder crear un cargo.");
@@ -133,7 +112,7 @@ public class ControladorCargoAM implements ControladorExterno, ServicioSeleccion
 			invocador.mostrar();
 		} catch (Exception e) {
 			Popup.mostrar(e.getMessage());
-		}
+		}*/
 	}
 	
 	private void cancelar() {
@@ -142,12 +121,7 @@ public class ControladorCargoAM implements ControladorExterno, ServicioSeleccion
 			invocador.mostrar();
 		}
 	}
-
-	@Override
-	public void mostrar() {
-		ventana.mostrar();
-	}
-
+/*
 	@Override
 	public void seleccionarFallecido(Fallecido fallecido) {
 		this.fallecido = fallecido;
@@ -164,5 +138,5 @@ public class ControladorCargoAM implements ControladorExterno, ServicioSeleccion
 		ventana.getDescripcion().getTextField().setText(servicio.getDescripcion());
 		ventana.getImporte().getTextField().setText(servicio.getImporte().toString());
 	}
-	
+*/	
 }

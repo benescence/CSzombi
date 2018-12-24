@@ -8,10 +8,11 @@ import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
+import com.revivir.cementerio.vista.ControladorExterno;
 import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorFallecidoAM {
+public class ControladorFallecidoAM implements ControladorExterno{
 	private VentanaFallecidoAM ventana;
 	private FallecidoInvocable invocador;
 	private Fallecido fallecido;
