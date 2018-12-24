@@ -2,12 +2,18 @@ package com.revivir.cementerio.vista.menu.pagos;
 
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.manager.CargoManager;
+import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.negocios.manager.FallecidoManager;
 import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorExterno;
+import com.revivir.cementerio.vista.seleccion.cargos.CargoSeleccionable;
+import com.revivir.cementerio.vista.seleccion.cargos.ControladorSeleccionCargo;
+import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
+import com.revivir.cementerio.vista.seleccion.clientes.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.seleccion.fallecidos.ControladorSeleccionarFallecido;
 import com.revivir.cementerio.vista.seleccion.fallecidos.FallecidoSeleccionable;
 import com.revivir.cementerio.vista.seleccion.servicio.ControladorSeleccionarServicio;
@@ -15,10 +21,11 @@ import com.revivir.cementerio.vista.seleccion.servicio.ServicioSeleccionable;
 import com.revivir.cementerio.vista.util.AccionCerrarVentana;
 import com.revivir.cementerio.vista.util.Popup;
 
-public class ControladorPagoAM implements ControladorExterno {
+public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionable, CargoSeleccionable {
 	private VentanaPagoAM ventana;
 	private PagoInvocable invocador;
 	private Cargo cargo;
+	private Cliente cliente;
 	
 	public ControladorPagoAM(PagoInvocable invocador) {
 		this.invocador = invocador;
@@ -31,11 +38,10 @@ public class ControladorPagoAM implements ControladorExterno {
 
 		ventana.botonAceptar().setAccion(e -> aceptar());
 		ventana.botonCancelar().setAccion(e -> cancelar());
+		ventana.botonSelCliente().setAccion(e -> seleccionarCliente());
+		ventana.botonCargarCliente().setAccion(e -> cargarCliente());
+		ventana.botonSelCargo().setAccion(e -> seleccionarCargo());
 		
-		//ventana.botonSelServicio().setAccion(e -> seleccionarServicio());
-		//ventana.botonSelFallecido().setAccion(e -> seleccionarFallecido());
-		
-		//ventana.botonCargarFallecido().setAccion(e -> cargarFallecido());
 		//ventana.botonCargarServicio().setAccion(e -> cargarServicio());
 	} 
 	
@@ -58,33 +64,33 @@ public class ControladorPagoAM implements ControladorExterno {
 		ventana.getObservaciones().getTextField().requestFocusInWindow();
 	}
 	
-	private void cargarFallecido() {
+	private void cargarCliente() {
 		ventana.requestFocusInWindow();
 		
-		String DNI = ventana.getDNIFal().getTextField().getText();
+		String DNI = ventana.getDNICli().getTextField().getText();
 		if (!Validador.DNI(DNI)) {
-			Popup.mostrar("El DNI solo puede consistir de numeros");
+			Popup.mostrar("El DNI solo puede consistir de numeros.");
 			return;
 		}
 		
-		Fallecido directo = FallecidoManager.traerPorDNI(DNI);
+		Cliente directo = ClienteManager.traerPorDNI(DNI);
 		if (directo == null) {
-			Popup.mostrar("No hay registros de un fallecidos con el DNI "+DNI+".");
+			Popup.mostrar("No hay registros de un cliente con el DNI "+DNI+".");
 			return;
 		}
 		
-		//seleccionarFallecido(directo);
-		ventana.getCodigo().getTextField().requestFocusInWindow();
+		seleccionarCliente(directo);
+		//ventana.getCodigo().getTextField().requestFocusInWindow();
 	}
 	
-	private void seleccionarServicio() {
+	private void seleccionarCargo() {
 		ventana.setEnabled(false);
-		//new ControladorSeleccionarServicio(this);
+		new ControladorSeleccionCargo(this);
 	}
 
-	private void seleccionarFallecido() {
+	private void seleccionarCliente() {
 		ventana.setEnabled(false);
-		//new ControladorSeleccionarFallecido(this);
+		new ControladorSeleccionCliente(this);
 	}
 	
 	private void aceptar() {
@@ -123,14 +129,6 @@ public class ControladorPagoAM implements ControladorExterno {
 	}
 /*
 	@Override
-	public void seleccionarFallecido(Fallecido fallecido) {
-		this.fallecido = fallecido;
-		ventana.getNombre().getTextField().setText(fallecido.getNombre());
-		ventana.getApellido().getTextField().setText(fallecido.getApellido());
-		ventana.getDNI().getTextField().setText(fallecido.getDNI());
-	}
-
-	@Override
 	public void seleccionarServicio(Servicio servicio) {
 		this.servicio = servicio;
 		ventana.getCodigo().getTextField().setText(servicio.getCodigo());
@@ -138,5 +136,25 @@ public class ControladorPagoAM implements ControladorExterno {
 		ventana.getDescripcion().getTextField().setText(servicio.getDescripcion());
 		ventana.getImporte().getTextField().setText(servicio.getImporte().toString());
 	}
-*/	
+*/
+
+	@Override
+	public void seleccionarCliente(Cliente cliente) {
+		this.cliente = cliente;
+		ventana.getNombreCli().getTextField().setText(cliente.getNombre());
+		ventana.getApellidoCli().getTextField().setText(cliente.getApellido());
+		ventana.getDNICli().getTextField().setText(cliente.getDNI());
+	}
+
+	@Override
+	public void mostrar() {
+		ventana.mostrar();
+	}
+
+	@Override
+	public void seleccionarCargo(Cargo cargo) {
+		// TODO Auto-generated method stub
+		
+	}	
+
 }

@@ -12,6 +12,8 @@ import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.FallecidoInvocab
 import com.revivir.cementerio.vista.menu.movimientos.ControladorMovimiento;
 import com.revivir.cementerio.vista.menu.movimientos.ControladorTranslado;
 import com.revivir.cementerio.vista.menu.movimientos.translado.MovimientoInvocable;
+import com.revivir.cementerio.vista.menu.pagos.ControladorPagoAM;
+import com.revivir.cementerio.vista.menu.pagos.PagoInvocable;
 import com.revivir.cementerio.vista.menu.principal.ControladorAltaCompleta;
 import com.revivir.cementerio.vista.menu.responsables.ControladorVincular;
 import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
@@ -25,7 +27,7 @@ import com.revivir.cementerio.vista.util.Popup;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 
 public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable, UsuarioInvocable ,
-		CargoInvocable,MovimientoInvocable, FallecidoInvocable {
+		CargoInvocable,MovimientoInvocable, FallecidoInvocable, PagoInvocable {
 	private VentanaPrincipal ventana;
 	private ControladorInterno controladorInterno;
 	
@@ -39,6 +41,7 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		ventana.getServicioAlta().addActionListener(e -> colocarVentanaExterna(new ControladorServicioAM(this)));
 		ventana.getUsuarioAlta().addActionListener(e -> colocarVentanaExterna(new ControladorUsuarioAM(this)));
 		ventana.getCargoAlta().addActionListener(e -> colocarVentanaExterna(new ControladorCargoAM(this)));
+		ventana.getPagoAlta().addActionListener(e -> colocarVentanaExterna(new ControladorPagoAM(this)));
 		
 		ventana.getResponsableVincular().addActionListener(e -> vincular());
 		ventana.getMovimientoTrasladar().addActionListener(e -> transladar());
@@ -131,6 +134,12 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 
 	@Override
 	public void actualizarFallecidos() {
+		if (controladorInterno instanceof FallecidoInvocable)
+			((FallecidoInvocable)controladorInterno).actualizarFallecidos();
+	}	
+
+	@Override
+	public void actualizarPagos() {
 		if (controladorInterno instanceof FallecidoInvocable)
 			((FallecidoInvocable)controladorInterno).actualizarFallecidos();
 	}	

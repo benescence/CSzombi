@@ -18,6 +18,7 @@ public class VentanaPrincipal extends Ventana {
 	private JMenuItem clienteAlta, clienteConsulta; 
 	private JMenuItem fallecidoAlta, fallecidoConsulta;
 	private JMenuItem cargoAlta, cargoConsultar; 
+	private JMenuItem pagoAlta, pagoConsultar; 
 	private JMenuItem movimientoTrasladar, movimientoConsultar; 
 	private JMenuItem responsableVincular, responsableConsultarPorCliente, responsableConsultarPorFallecido;		
 	private JMenuItem servicioAlta, servicioConsulta;
@@ -68,14 +69,22 @@ public class VentanaPrincipal extends Ventana {
 		menuResponsables.add(responsableConsultarPorFallecido = new JMenuItem("Consultar por fallecido"));
 		barra.add(menuResponsables);
 
-		
+
 		//********************** MENU CARGOS ***************************
 		JMenu menuCargos = new JMenu("Cargos");
 		menuCargos.setMnemonic('g');
 		menuCargos.add(cargoAlta = new JMenuItem("Alta cargo", 'a'));
-		menuCargos.add(cargoConsultar = new JMenuItem("Cargos de fallecido", 'c'));
+		menuCargos.add(cargoConsultar = new JMenuItem("Consultar cargos", 'c'));
 		cargoAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Event.CTRL_MASK | Event.ALT_MASK));
 		barra.add(menuCargos);
+
+		//********************** MENU PAGOS ***************************
+		JMenu menuPagos = new JMenu("Pagos");
+		menuPagos.setMnemonic('p');
+		menuPagos.add(pagoAlta = new JMenuItem("Alta pago", 'a'));
+		menuPagos.add(pagoConsultar = new JMenuItem("Consultar pagos", 'c'));
+		pagoAlta.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, Event.CTRL_MASK | Event.ALT_MASK));
+		barra.add(menuPagos);
 		
 		
 		
@@ -174,5 +183,13 @@ public class VentanaPrincipal extends Ventana {
 	public JMenuItem getMovimientoConsultar() {
 		return movimientoConsultar;
 	}
-	
+
+	public JMenuItem getPagoAlta() {
+		return pagoAlta;
+	}
+
+	public JMenuItem getPagoConsultar() {
+		return pagoConsultar;
+	}
+		
 }
