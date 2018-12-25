@@ -12,6 +12,7 @@ import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorExterno;
+import com.revivir.cementerio.vista.reportes.FacturaPago;
 import com.revivir.cementerio.vista.seleccion.cargos.CargoSeleccionable;
 import com.revivir.cementerio.vista.seleccion.cargos.ControladorSeleccionCargo;
 import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
@@ -82,6 +83,21 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 		
 		seleccionarCargo(directos.get(0));
 		ventana.getImporte().getTextField().requestFocusInWindow();
+	}
+	
+	private void verFactura() {
+		List<Pago> pagos = ventana.getTabla().obtenerSeleccion();
+		if (pagos.size() != 1) {
+			Popup.mostrar("Debe seleccionar exactamente 1 pago para obtener el comprobante.");
+			return;
+		}
+		if (!pagos.get(0).isPagoCompleto()) {
+			Popup.mostrar("El pago no fue realizado.");
+			return;
+		}
+		// ventana.deshabilitar();
+		FacturaPago reporte = new FacturaPago(pagos);
+		reporte.mostrar();
 	}
 	
 	private void cargarCliente() {
