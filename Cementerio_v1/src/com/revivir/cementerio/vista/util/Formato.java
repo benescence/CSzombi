@@ -45,6 +45,8 @@ public class Formato {
 		return cliente.getApellido()+", "+cliente.getNombre();
 	}
 
+
+	
 	public static String cargo(Pago pago) {
 		Cargo cargo = CargoManager.traerPorID(pago.getCargo());
 		return servicio(cargo);

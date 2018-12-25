@@ -1,7 +1,9 @@
 package com.revivir.cementerio.vista.menu.pagos;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.revivir.cementerio.negocios.Almanaque;
 import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
@@ -10,6 +12,7 @@ import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorExterno;
 import com.revivir.cementerio.vista.reportes.FacturaPago;
@@ -25,6 +28,8 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 	private PagoInvocable invocador;
 	private Cargo cargo;
 	private Cliente cliente;
+	private Pago pago;
+	private List<Pago> pagos;
 	
 	public ControladorPagoAM(PagoInvocable invocador) {
 		this.invocador = invocador;
@@ -41,6 +46,7 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 		ventana.botonCargarCliente().setAccion(e -> cargarCliente());
 		ventana.botonSelCargo().setAccion(e -> seleccionarCargo());
 		ventana.botonCargarCargo().setAccion(e -> cargarCargo());
+		ventana.botonAceptar().addActionListener(s -> verFactura());
 	} 
 	
 	private void cargarCargo() {
@@ -86,16 +92,14 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 	}
 	
 	private void verFactura() {
-		List<Pago> pagos = ventana.getTabla().obtenerSeleccion();
-		if (pagos.size() != 1) {
-			Popup.mostrar("Debe seleccionar exactamente 1 pago para obtener el comprobante.");
-			return;
-		}
-		if (!pagos.get(0).isPagoCompleto()) {
-			Popup.mostrar("El pago no fue realizado.");
-			return;
-		}
-		// ventana.deshabilitar();
+		List <Pago> pagos = new ArrayList<Pago>();
+		Integer importe = new Integer(ventana.getImporte().getTextField().getText());
+		Integer cliente = new Integer(ventana.getDNICli().getTextField().getText());
+		Integer codigo = new Integer(ventana.getCodigo().getTextField().getText());
+		String observaciones = ventana.getObservaciones().getTextField().getText();
+		System.out.println( "cargo :" +codigo+ "cliente: "+ cliente +"monto : "+ importe+"observaciones: "+ observaciones +"fecha  :"+ Almanaque.hoy());
+		Pago pago = new Pago (1,codigo, cliente, importe, observaciones, Almanaque.hoy());
+		pagos.add(pago);
 		FacturaPago reporte = new FacturaPago(pagos);
 		reporte.mostrar();
 	}
