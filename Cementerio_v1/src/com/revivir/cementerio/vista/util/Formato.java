@@ -17,6 +17,46 @@ import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 
 public class Formato {
+
+	// BASICOS
+	public static String cliente(Cliente cliente) {
+		return cliente.getApellido()+", "+cliente.getNombre();
+	}
+
+	public static String fallecido(Fallecido fallecido) {
+		return fallecido.getApellido()+", "+fallecido.getNombre();
+	}
+
+	// COMPUESTOS
+	public static String cliente(Pago pago) {
+		Cliente cliente = ClienteManager.traerPorID(pago.getCliente());
+		return cliente(cliente);
+	}
+
+	public static String fallecido(Pago pago) {
+		Cargo cargo = CargoManager.traerPorID(pago.getCargo());
+		return fallecido(cargo);
+	}
+
+	public static String codigoServicio(Pago pago) {
+		Cargo cargo = CargoManager.traerPorID(pago.getCargo());
+		Servicio servicio = ServicioManager.traerPorID(cargo.getID());
+		return servicio.getCodigo();
+	}
+
+	public static String fallecido(Cargo cargo) {
+		Fallecido fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
+		return fallecido(fallecido);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public static String ubicacion(Ubicacion ubicacion) {
 		String ret = "Sector "+ubicacion.getSubsector();
@@ -40,10 +80,6 @@ public class Formato {
 		return ubicacion(ubicacion);
 	}
 
-	public static String cliente(Pago pago) {
-		Cliente cliente = ClienteManager.traerPorID(pago.getCliente());
-		return cliente.getApellido()+", "+cliente.getNombre();
-	}
 
 
 	
@@ -55,11 +91,6 @@ public class Formato {
 	public static String servicioDesdeCargo(Pago pago) {
 		Servicio servicio = ServicioManager.traerActivoPorCodigo(String.valueOf(pago.getCargo()));
 		return servicio.getNombre();
-	}
-	
-	public static String fallecido(Cargo cargo) {
-		Fallecido fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
-		return fallecido.getApellido()+", "+fallecido.getNombre();
 	}
 	
 	public static String IDcliente(Integer dni) {
