@@ -136,7 +136,7 @@ public class Verificador {
 		// Seteo los que pudieron ser anulados
 		verificar.setCocheria(cocheria);
 		return verificar;
-		*/return null;
+		*/return pago;
 	}
 	
 	public static Ubicacion ubicacion(Ubicacion verificar) {

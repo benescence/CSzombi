@@ -17,13 +17,11 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorExterno;
-import com.revivir.cementerio.vista.reportes.FacturaPago;
 import com.revivir.cementerio.vista.seleccion.cargos.CargoSeleccionable;
 import com.revivir.cementerio.vista.seleccion.cargos.ControladorSeleccionCargo;
 import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
 import com.revivir.cementerio.vista.seleccion.clientes.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.util.AccionCerrarVentana;
-import com.revivir.cementerio.vista.util.Formato;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionable, CargoSeleccionable {
@@ -103,8 +101,8 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 		System.out.println( "cargo :" +codigo+ "cliente: "+ cliente +"monto : "+ importe+"observaciones: "+ observaciones +"fecha  :"+ Almanaque.hoy());
 		Pago pago = new Pago (1,codigo, cliente, importe, observaciones, Almanaque.hoy());
 		pagos.add(pago);
-		FacturaPago reporte = new FacturaPago(pagos);
-		reporte.mostrar();
+		//FacturaPago reporte = new FacturaPago(pagos);
+		//reporte.mostrar();
 	}
 	
 	private void cargarCliente() {
