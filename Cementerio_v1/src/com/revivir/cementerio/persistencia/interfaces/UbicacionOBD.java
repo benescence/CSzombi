@@ -6,6 +6,8 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 
 public interface UbicacionOBD {
+
+	// METODOS COMUNES
 	
 	public void insert(Ubicacion ubicacion);
 
@@ -18,6 +20,8 @@ public interface UbicacionOBD {
 	public Ubicacion ultimoInsertado();
 		
 	public List<Ubicacion> select();
+	
+	// METODOS ESPECIFICOS
 	
 	public Ubicacion selectByFallecido(Fallecido fallecido);
 	

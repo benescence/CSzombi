@@ -2,20 +2,16 @@ package com.revivir.cementerio.negocios.manager;
 
 import java.util.List;
 
+import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
-import com.revivir.cementerio.persistencia.definidos.SubSector;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
 public class UbicacionManager {
 
-	public static void guardar(SubSector subsector, String otroCementerio, Integer nicho, Integer fila, String seccion, Integer macizo, Integer unidad,
-			Integer bis, Integer bis_macizo, Integer numero, Integer sepultura, Integer parcela,
-			Integer mueble, Integer inhumacion, Integer circ) {
-		
-		Ubicacion nuevo = new Ubicacion(-1, subsector, otroCementerio, nicho, fila, seccion, macizo, unidad, bis, bis_macizo,
-				sepultura, parcela, mueble, inhumacion, circ);
+	public static void guardar(Ubicacion nuevo) {
+		nuevo = Verificador.ubicacion(nuevo);
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
 		obd.insert(nuevo);
 	}

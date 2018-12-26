@@ -10,7 +10,6 @@ import java.util.List;
 import com.revivir.cementerio.persistencia.Definido;
 import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
-import com.revivir.cementerio.persistencia.entidades.Movimiento;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.UbicacionOBD;
 
@@ -21,38 +20,8 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 	
 	@Override
 	public void insert(Ubicacion ubicacion) {
-		/*String Sub_sector = String.valueOf(Definido.subsector(ubicacion.getSubsector()));
 		String otroCementerio = (ubicacion.getOtroCementerio() != null) ? "'"+ubicacion.getOtroCementerio()+"'" : null;
 		String seccion = (ubicacion.getSeccion() != null) ? "'"+ubicacion.getSeccion()+"'" : null;
-		String macizo = (ubicacion.getMacizo() != null) ? "'"+ubicacion.getMacizo()+"'" : null;
-		String parcela = (ubicacion.getParcela() != null) ? "'"+ubicacion.getParcela()+"'" : null;
-		String mueble = (ubicacion.getMueble() != null) ? "'"+ubicacion.getMueble()+"'" : null;
-		String inhumacion = (ubicacion.getInhumacion()!= null) ? "'"+ubicacion.getInhumacion()+"'" : null;
-		String circ = (ubicacion.getCirc() != null) ? "'"+ubicacion.getCirc()+"'" : null;
-		String fila = (ubicacion.getFila()!= null) ? "'"+ubicacion.getFila()+"'" : null;
-		String unidad = (ubicacion.getUnidad() != null) ? "'"+ubicacion.getUnidad()+"'" : null;
-		String nicho = (ubicacion.getNicho() != null) ? "'"+ubicacion.getNicho()+"'" : null;
-		String bis = (ubicacion.getBis() != null) ? "'"+ubicacion.getBis()+"'" : null;
-		String bisMacizo = (ubicacion.getBis_macizo() != null) ? "'"+ubicacion.getBis_macizo()+"'" : null;
-		String sepultura = (ubicacion.getSepultura() != null) ? "'"+ubicacion.getSepultura()+"'" : null;*/
-		
-		String otroCementerio = (ubicacion.getOtroCementerio() != null) ? "'"+ubicacion.getOtroCementerio()+"'" : null;
-		String seccion = (ubicacion.getSeccion() != null) ? "'"+ubicacion.getSeccion()+"'" : null;
-		/*String valores = Sub_sector
-				+", "+otroCementerio
-				+", "+nicho
-				+", "+fila
-				+", "+seccion
-				+", "+macizo
-				+", "+unidad
-				+", "+bis
-				+", "+bisMacizo
-				+", "+sepultura
-				+", "+parcela
-				+", "+mueble
-				+", "+inhumacion
-				+", "+circ;*/
-		
 		
 		String valores = Definido.subsector(ubicacion.getSubsector())
 				+", "+otroCementerio
@@ -69,30 +38,29 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 				+", "+ubicacion.getInhumacion()
 				+", "+ubicacion.getCirc();
 		String sql = "insert into "+tabla+"("+campos+") values("+valores+");";
-		System.out.println(sql);
 		ejecutarSQL(sql);		
 	}
 
 	@Override
 	public void update(Ubicacion ubicacion) {
-		String bis = (ubicacion.getBis() != null) ? "'"+ubicacion.getBis()+"'" : null;
+		String otroCementerio = (ubicacion.getOtroCementerio() != null) ? "'"+ubicacion.getOtroCementerio()+"'" : null;
 		String seccion = (ubicacion.getSeccion() != null) ? "'"+ubicacion.getSeccion()+"'" : null;
 		
 		String condicion = "ID = "+ubicacion.getID();
-		String valores = " Subsector= "+Definido.subsector(ubicacion.getSubsector())
-				+", otro_cementerio = '"+ubicacion.getOtroCementerio()+"'"
-				+", Nicho = '"+ubicacion.getNicho()+"'"
-				+", Fila = '"+ubicacion.getFila()+"'"
+		String valores = " subsector = "+Definido.subsector(ubicacion.getSubsector())
+				+", otro_cementerio = "+otroCementerio
+				+", Nicho = "+ubicacion.getNicho()
+				+", Fila = "+ubicacion.getFila()
 				+", Seccion = "+seccion
-				+", Macizo = '"+ubicacion.getMacizo()+"'"
-				+", Unidad = '"+ubicacion.getUnidad()+"'"
-				+", bis = "+bis
-				+", bis_macizo = '"+ubicacion.getBis_macizo()+"'"
-				+", Sepultura = '"+ubicacion.getSepultura()+"'"
-				+", Parcela = '"+ubicacion.getParcela()+"'"
-				+", Mueble = '"+ubicacion.getMueble()+"'"
-				+", Inhumacion = '"+ubicacion.getInhumacion()+"'"
-				+", Circ = '"+ubicacion.getCirc()+"'";
+				+", Macizo = "+ubicacion.getMacizo()
+				+", Unidad = "+ubicacion.getUnidad()
+				+", bis = "+ubicacion.getBis()
+				+", bis_macizo = "+ubicacion.getBis_macizo()
+				+", Sepultura = "+ubicacion.getSepultura()
+				+", Parcela = "+ubicacion.getParcela()
+				+", Mueble = "+ubicacion.getMueble()
+				+", Inhumacion = "+ubicacion.getInhumacion()
+				+", Circ = "+ubicacion.getCirc();
 		String consulta = "update "+tabla+" set "+valores+"  where ("+condicion+");";
 		ejecutarSQL(consulta);
 	}
@@ -131,8 +99,6 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 		return null;
 	}
 	
-
-	
 	@Override
 	public List<Ubicacion> select() {
 		return selectByCondicion("true");
@@ -149,23 +115,33 @@ public class UbicacionOBDMySQL extends OBD implements UbicacionOBD{
 			ResultSet resultados = sentencia.executeQuery(comandoSQL);			
 
 			while (resultados.next()) {
+				
+				Integer fila = resultados.getInt("fila");
+				fila = (resultados.wasNull())? null: fila;
+				
+				Integer nicho = resultados.getInt("nicho");
+				nicho = (resultados.wasNull())? null: nicho;
+				
+				
+				
+				
 				ret.add(new Ubicacion(
 						resultados.getInt("ID"),
 						Definido.subsector(resultados.getInt("subsector")),
 						resultados.getString("otro_cementerio"),
-						resultados.getInt("nicho"),
-						resultados.getInt("fila"),
+						nicho,
+						fila,
 						resultados.getString("seccion"),
 						resultados.getInt("macizo"),
 						resultados.getInt("unidad"),
-						resultados.getInt("bis"),
-						resultados.getInt("bis_macizo"),
+						resultados.getBoolean("bis"),
+						resultados.getBoolean("bis_macizo"),
 						resultados.getInt("sepultura"),
 						resultados.getInt("parcela"),
 						resultados.getInt("mueble"),
 						resultados.getInt("inhumacion"),
 						resultados.getInt("circ")
-						));
+					));
 			}
 
 			resultados.close();
