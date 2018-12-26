@@ -1,23 +1,22 @@
 package com.revivir.cementerio.negocios.manager;
 
-import java.sql.Date;
 import java.util.List;
 
+import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
-import com.revivir.cementerio.persistencia.entidades.Cargo;
-import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.persistencia.interfaces.PagoOBD;
 
 public class PagoManager {
 
-	public static void guardar(Cargo cargo, Cliente cliente, String observaciones, Integer importe, Date fecha) {
-		Pago nuevo = new Pago(-1, cargo.getID(), cliente.getID(), importe, observaciones, fecha);
+	public static void guardar(Pago nuevo) throws Exception {
+		nuevo = Verificador.pago(nuevo);
 		PagoOBD obd = FactoryOBD.crearPagoOBD();
 		obd.insert(nuevo);
 	}
 
-	public static void modificar(Pago modificar) {
+	public static void modificar(Pago modificar) throws Exception {
+		modificar = Verificador.pago(modificar);
 		PagoOBD obd = FactoryOBD.crearPagoOBD();
 		obd.update(modificar);
 	}

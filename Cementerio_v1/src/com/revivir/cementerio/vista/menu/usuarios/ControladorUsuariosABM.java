@@ -58,7 +58,7 @@ public class ControladorUsuariosABM implements ControladorInterno, UsuarioInvoca
 			for (Usuario usuario : seleccion)
 				UsuarioManager.eliminar(usuario);
 			
-			actualizarTabla();
+			actualizarUsuarios();
 		}
 	}
 	
@@ -76,14 +76,9 @@ public class ControladorUsuariosABM implements ControladorInterno, UsuarioInvoca
 			
 		// TRAE TODOS
 		} else
-			actualizarTabla();
+			actualizarUsuarios();
 	}
 	
-	public void actualizarTabla() {
-		List<Usuario> lista = UsuarioManager.traerTodo();
-		ventana.getTabla().recargar(lista);
-	}
-
 	@Override
 	public boolean finalizar() {
 		return true;
@@ -101,8 +96,8 @@ public class ControladorUsuariosABM implements ControladorInterno, UsuarioInvoca
 
 	@Override
 	public void actualizarUsuarios() {
-		// TODO Auto-generated method stub
-		
+		List<Usuario> lista = UsuarioManager.traerTodo();
+		ventana.getTabla().recargar(lista);	
 	}
 	
 }

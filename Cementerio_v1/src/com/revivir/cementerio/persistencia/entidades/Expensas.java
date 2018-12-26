@@ -1,6 +1,6 @@
 package com.revivir.cementerio.persistencia.entidades;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Expensas {
 	private Integer ID, responsable, periodo, ubicacion, importe;

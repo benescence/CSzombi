@@ -1,6 +1,6 @@
 package com.revivir.cementerio.vista.menu.pagos;
 
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import com.revivir.cementerio.negocios.Almanaque;
@@ -8,6 +8,7 @@ import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.negocios.manager.ClienteManager;
 import com.revivir.cementerio.negocios.manager.FallecidoManager;
+import com.revivir.cementerio.negocios.manager.PagoManager;
 import com.revivir.cementerio.negocios.manager.ServicioManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
@@ -15,7 +16,6 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorExterno;
-import com.revivir.cementerio.vista.reportes.FacturaPago;
 import com.revivir.cementerio.vista.seleccion.cargos.CargoSeleccionable;
 import com.revivir.cementerio.vista.seleccion.cargos.ControladorSeleccionCargo;
 import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
@@ -30,7 +30,7 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 	private Cargo cargo;
 	private Cliente cliente;
 	private Pago pago;
-	private List<Pago> pagos;
+	//private List<Pago> pagos;
 	
 	public ControladorPagoAM(PagoInvocable invocador) {
 		this.invocador = invocador;
@@ -93,16 +93,16 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 	}
 	
 	private void verFactura() {
-		List <Pago> pagos = new ArrayList<Pago>();
+		//List <Pago> pagos = new ArrayList<Pago>();
 		Integer importe = new Integer(ventana.getImporte().getTextField().getText());
 		Integer cliente = new Integer(ventana.getDNICli().getTextField().getText());
 		Integer codigo = new Integer(ventana.getCodigo().getTextField().getText());
 		String observaciones = ventana.getObservaciones().getTextField().getText();
 		System.out.println( "cargo :" +codigo+ "cliente: "+ cliente +"monto : "+ importe+"observaciones: "+ observaciones +"fecha  :"+ Almanaque.hoy());
-		Pago pago = new Pago (1,codigo, cliente, importe, observaciones, Almanaque.hoy());
-		pagos.add(pago);
-		FacturaPago reporte = new FacturaPago(pagos);
-		reporte.mostrar();
+		//Pago pago = new Pago (1,codigo, cliente, importe, observaciones, Almanaque.hoy());
+		//pagos.add(pago);
+		//FacturaPago reporte = new FacturaPago(pagos);
+		//reporte.mostrar();
 	}
 	
 	private void cargarCliente() {
@@ -136,30 +136,36 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 	
 	private void aceptar() {
 		ventana.requestFocusInWindow();
-		/*
+		
 		try {
-			if (servicio == null || fallecido == null) {
-				Popup.mostrar("Debe seleccionar un servicio y un fallecido para poder crear un cargo.");
+			if (cliente == null || cargo == null) {
+				Popup.mostrar("Debe seleccionar un cargo y un cliente para poder hacer un pago.");
 				return;
 			}
 			
 			String observaciones = ventana.getObservaciones().getTextField().getText();
-			Cargo nuevo = new Cargo(-1, fallecido.getID(), servicio.getID(), observaciones, false);
+			Double importe = new Double(ventana.getImporte().getTextField().getText());
+			Date fecha = new Date(ventana.getFecha().getDataChooser().getDate().getTime());
+			Pago pagoNuevo = new Pago(-1, cargo.getID(), cliente.getID(), importe, observaciones, fecha);
 			
 			// Estoy dando el alta
-			if (cargo == null)
-				CargoManager.guardar(nuevo);
+			if (pago == null)
+				PagoManager.guardar(pagoNuevo);
 
 			// Estoy modificando
-			else
-				CargoManager.modificar(nuevo, cargo);
+			else {
+				pagoNuevo.setID(pago.getID());
+				PagoManager.modificar(pagoNuevo);
+			}
 			
 			ventana.dispose();
-			invocador.actualizarCargos();
+			invocador.actualizarPagos();
 			invocador.mostrar();
+			
 		} catch (Exception e) {
 			Popup.mostrar(e.getMessage());
-		}*/
+		}
+		
 	}
 	
 	private void cancelar() {
@@ -185,10 +191,12 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 	@Override
 	public void seleccionarCargo(Cargo cargo) {
 		this.cargo = cargo;
+		
 		Fallecido fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
 		ventana.getNombreFal().getTextField().setText(fallecido.getNombre());
 		ventana.getApellidoFal().getTextField().setText(fallecido.getApellido());
 		ventana.getDNIFal().getTextField().setText(fallecido.getDNI());
+		
 		Servicio servicio = ServicioManager.traerPorID(cargo.getServicio());
 		ventana.getNombreSer().getTextField().setText(servicio.getNombre());
 		ventana.getCodigo().getTextField().setText(servicio.getCodigo());
