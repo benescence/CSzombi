@@ -21,6 +21,7 @@ import com.revivir.cementerio.vista.seleccion.cargos.ControladorSeleccionCargo;
 import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
 import com.revivir.cementerio.vista.seleccion.clientes.ControladorSeleccionCliente;
 import com.revivir.cementerio.vista.util.AccionCerrarVentana;
+import com.revivir.cementerio.vista.util.Formato;
 import com.revivir.cementerio.vista.util.Popup;
 
 public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionable, CargoSeleccionable {

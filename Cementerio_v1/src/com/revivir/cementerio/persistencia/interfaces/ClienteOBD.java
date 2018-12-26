@@ -25,6 +25,8 @@ public interface ClienteOBD {
 
 	public Cliente selectByDNI(String DNI);
 
+	public Cliente selectByDNI(Integer DNI);
+	
 	public List<Cliente> selectByNombreApellidoDNI(String nombre, String apellido, String DNI);
 
 }

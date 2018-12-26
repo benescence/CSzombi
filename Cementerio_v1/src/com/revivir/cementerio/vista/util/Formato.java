@@ -52,12 +52,21 @@ public class Formato {
 		return servicio(cargo);
 	}
 
-
+	public static String servicioDesdeCargo(Pago pago) {
+		Servicio servicio = ServicioManager.traerActivoPorCodigo(String.valueOf(pago.getCargo()));
+		return servicio.getNombre();
+	}
 	
 	public static String fallecido(Cargo cargo) {
 		Fallecido fallecido = FallecidoManager.traerPorID(cargo.getFallecido());
 		return fallecido.getApellido()+", "+fallecido.getNombre();
 	}
+	
+	public static String IDcliente(Integer dni) {
+		Cliente cliente = ClienteManager.traerPorDNI2(dni);
+		return cliente.getApellido()+", "+cliente.getNombre();
+	}
+	
 	public static String fallecido(Movimiento movimiento) {
 		Fallecido fallecido = FallecidoManager.traerPorID(movimiento.getFallecido());
 		return fallecido.getApellido()+", "+fallecido.getNombre();

@@ -57,6 +57,9 @@ public class ServicioManager {
 		ServicioOBD obd = FactoryOBD.crearServicioOBD();	
 		return obd.selectActivoBycodigo(codigo);
 	}
+	
+
+	
 
 	public static List<Servicio> traer(String nombre, String codigo) throws Exception {
 		nombre = Verificador.anular(nombre);
