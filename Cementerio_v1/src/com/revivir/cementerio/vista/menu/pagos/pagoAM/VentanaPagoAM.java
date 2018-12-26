@@ -1,10 +1,11 @@
-package com.revivir.cementerio.vista.menu.pagos;
+package com.revivir.cementerio.vista.menu.pagos.pagoAM;
 
 import java.awt.Dimension;
 
 import javax.swing.border.EmptyBorder;
 
 import com.revivir.cementerio.negocios.Almanaque;
+import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.vista.util.Boton;
 import com.revivir.cementerio.vista.util.TextoCentrado;
 import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
@@ -21,10 +22,21 @@ public class VentanaPagoAM extends Ventana {
 	private EntradaTexto inCodigo, inNombreSer;
 	private EntradaTexto inImporte, inObservaciones;
 	private EntradaFecha inFecha;
-	
+
 	public VentanaPagoAM() {
 		super("Alta de pago");
-		
+		inicializar();
+	}
+
+	public VentanaPagoAM(Pago pago) {
+		super("Modificacion de pago");
+		inicializar();
+		inImporte.getTextField().setText(pago.getImporte().toString());
+		inObservaciones.getTextField().setText(pago.getObservaciones());
+		inFecha.getDataChooser().setDate(pago.getFecha());
+	}
+	
+	public void inicializar() {
 		Dimension dimTexto = new Dimension(100, 25);
 		Dimension dimEntrada = new Dimension(300, 25);
 		Dimension dimBoton = new Dimension(150, 25);

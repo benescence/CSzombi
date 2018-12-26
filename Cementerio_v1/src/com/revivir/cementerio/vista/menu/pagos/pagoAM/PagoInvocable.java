@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.menu.pagos;
+package com.revivir.cementerio.vista.menu.pagos.pagoAM;
 
 public interface PagoInvocable {
 	

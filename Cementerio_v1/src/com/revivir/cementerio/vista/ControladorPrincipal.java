@@ -12,8 +12,9 @@ import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.FallecidoInvocab
 import com.revivir.cementerio.vista.menu.movimientos.ControladorMovimiento;
 import com.revivir.cementerio.vista.menu.movimientos.ControladorTranslado;
 import com.revivir.cementerio.vista.menu.movimientos.translado.MovimientoInvocable;
-import com.revivir.cementerio.vista.menu.pagos.ControladorPagoAM;
-import com.revivir.cementerio.vista.menu.pagos.PagoInvocable;
+import com.revivir.cementerio.vista.menu.pagos.ControladorPagoABM;
+import com.revivir.cementerio.vista.menu.pagos.pagoAM.ControladorPagoAM;
+import com.revivir.cementerio.vista.menu.pagos.pagoAM.PagoInvocable;
 import com.revivir.cementerio.vista.menu.principal.ControladorAltaCompleta;
 import com.revivir.cementerio.vista.menu.responsables.ControladorVincular;
 import com.revivir.cementerio.vista.menu.servicios.ControladorServiciosABM;
@@ -54,6 +55,8 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		ventana.getServicioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorServiciosABM(this)));
 		ventana.getUsuarioConsulta().addActionListener(e -> colocarVentanaInterna(new ControladorUsuariosABM(this)));
 		ventana.getCargoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorCargoABM(this)));
+		ventana.getPagoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorPagoABM(this)));
+		
 		
 		ventana.getMovimientoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorMovimiento(this)));
 		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
@@ -140,8 +143,8 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 
 	@Override
 	public void actualizarPagos() {
-		if (controladorInterno instanceof FallecidoInvocable)
-			((FallecidoInvocable)controladorInterno).actualizarFallecidos();
+		if (controladorInterno instanceof PagoInvocable)
+			((PagoInvocable)controladorInterno).actualizarPagos();
 	}	
 
 }

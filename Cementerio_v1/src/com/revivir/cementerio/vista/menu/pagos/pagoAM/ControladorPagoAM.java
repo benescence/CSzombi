@@ -1,4 +1,4 @@
-package com.revivir.cementerio.vista.menu.pagos;
+package com.revivir.cementerio.vista.menu.pagos.pagoAM;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -36,6 +36,15 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 		this.invocador = invocador;
 		ventana = new VentanaPagoAM();
 		inicializar();
+	}
+	
+	public ControladorPagoAM(PagoInvocable invocador, Pago pago) {
+		this.invocador = invocador;
+		ventana = new VentanaPagoAM(pago);		
+		inicializar();
+		this.pago = pago;
+		seleccionarCargo(CargoManager.traerPorID(pago.getCargo()));
+		seleccionarCliente(ClienteManager.traerPorID(pago.getCliente()));
 	}
 
 	private void inicializar() {
