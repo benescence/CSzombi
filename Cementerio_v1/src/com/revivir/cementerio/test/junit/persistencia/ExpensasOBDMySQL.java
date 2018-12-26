@@ -1,11 +1,16 @@
 package com.revivir.cementerio.test.junit.persistencia;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.sql.Date;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import com.revivir.cementerio.negocios.Almanaque;
 import com.revivir.cementerio.persistencia.FactoryOBD;
+import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Expensas;
+import com.revivir.cementerio.persistencia.entidades.Ubicacion;
 import com.revivir.cementerio.persistencia.interfaces.ExpensasOBD;
 
 class ExpensasOBDMySQL {
@@ -13,8 +18,15 @@ class ExpensasOBDMySQL {
 	private ExpensasOBD obd = FactoryOBD.crearExpensasOBD();
 	
 	private Expensas crearObjeto() {
-		//new Expensas(iD, responsable, periodo, ubicacion, fechaVencimiento, importe, observacones)
-		return new Expensas(-1, 8, 1, 2,Almanaque.hoy(), 600, "obs");
+		Cliente cliente = FactoryOBD.crearClienteOBD().ultimoInsertado();
+		if (cliente == null)
+			fail("Debe existir al menos un cliente en la BD para correr este test");
+		
+		Ubicacion ubicacion = FactoryOBD.crearUbicacionOBD().ultimoInsertado();
+		if (ubicacion == null)
+			fail("Debe existir al menos una ubicacion en la BD para correr este test");
+		
+		return new Expensas(-1, cliente.getID(), 1, ubicacion.getID(), Almanaque.hoy(), 600, "obs");
 	}
 
 	@Test
@@ -78,9 +90,12 @@ class ExpensasOBDMySQL {
 		assertTrue(obj1.getUbicacion().equals(obj2.getUbicacion()));
 		assertTrue(obj1.getResponsable().equals(obj2.getResponsable()));
 		assertTrue(obj1.getPeriodo().equals(obj2.getPeriodo()));
-		assertTrue(obj1.getFechavencimiento().equals(obj2.getFechavencimiento()));
 		assertTrue(obj1.getImporte().equals(obj2.getImporte()));
 		assertTrue(obj1.getObservaciones().equals(obj2.getObservaciones()));
+		
+		Date fecha1 = Almanaque.normalizar(obj1.getFechavencimiento());
+		Date fecha2 = Almanaque.normalizar(obj2.getFechavencimiento());
+		assertTrue(fecha1.equals(fecha2));
 	}
 	
 	private void distintos(Expensas obj1, Expensas obj2) {

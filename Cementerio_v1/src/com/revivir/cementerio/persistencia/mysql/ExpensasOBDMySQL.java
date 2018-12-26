@@ -12,8 +12,6 @@ import com.revivir.cementerio.persistencia.OBD;
 import com.revivir.cementerio.persistencia.entidades.Expensas;
 import com.revivir.cementerio.persistencia.interfaces.ExpensasOBD;
 
-
-
 public class ExpensasOBDMySQL extends OBD implements ExpensasOBD{
 	private final String campos = "responsable, periodo, ubicacion, fecha_vencimiento, importe, observaciones";
 	private final String tabla = "rev_expensas";
@@ -49,7 +47,7 @@ public class ExpensasOBDMySQL extends OBD implements ExpensasOBD{
 		String condicion = "ID = "+expensas.getID();
 		String valores = "responsable = "+ responsable
 				+", periodo = "+ periodo
-				+", ubicaciones = "+ ubicaciones
+				+", ubicacion = "+ ubicaciones
 				+", fecha_vencimiento = "+ fecha
 				+", importe = "+ importe
 				+", observaciones = "+observ;

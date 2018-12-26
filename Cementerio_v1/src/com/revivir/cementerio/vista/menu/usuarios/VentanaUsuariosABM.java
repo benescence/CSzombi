@@ -42,8 +42,8 @@ public class VentanaUsuariosABM extends VentanaInterna {
 		panelBotones.add(btnAgregar);
 		panelBotones.add(btnModificar);
 		panelBotones.add(btnEliminar);
-		panelBotones.add(btnBuscar);
-		panelBotones.add(btnLimpiar);
+		//panelBotones.add(btnBuscar);
+		//panelBotones.add(btnLimpiar);
 		
 		List<Usuario> usuarios = UsuarioManager.traerTodo();
 		tabla = new TablaUsuarios(usuarios);
@@ -54,7 +54,7 @@ public class VentanaUsuariosABM extends VentanaInterna {
 		setContentPane(panelPrincipal);
 		
 		panelBotones.setBorder(new EmptyBorder(10, 10, 10, 10));
-		panelPrincipal.add(inUsuario);
+		//panelPrincipal.add(inUsuario);
 		panelPrincipal.add(panelTabla);
 		panelPrincipal.add(panelBotones);		
 	}

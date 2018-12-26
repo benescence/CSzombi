@@ -29,7 +29,7 @@ class PagoOBDTest {
 		if (cliente == null)
 			fail("Debe existir al menos un cliente en la BD para correr este TEST");
 		
-		return new Pago(-1, cargo.getID(), cliente.getID(), 999, "Observaciones", Almanaque.hoy());
+		return new Pago(-1, cargo.getID(), cliente.getID(), 999.0, "Observaciones", Almanaque.hoy());
 	}
 
 	@Test

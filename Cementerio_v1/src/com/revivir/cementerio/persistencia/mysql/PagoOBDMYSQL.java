@@ -73,7 +73,7 @@ public class PagoOBDMYSQL extends OBD implements PagoOBD{
 						resultados.getInt("ID"),
 						resultados.getInt("cargo"),
 						resultados.getInt("cliente"),
-						resultados.getInt("importe"),
+						resultados.getDouble("importe"),
 						resultados.getString("observaciones"),
 						resultados.getDate("fecha")
 						));
