@@ -14,7 +14,7 @@
 	<parameter name="Fecha" class="java.lang.String"/>
 	<parameter name="cliente" class="java.lang.String"/>
 	<parameter name="cargo" class="java.lang.String"/>
-	<parameter name="monto" class="java.lang.Integer"/>
+	<parameter name="monto" class="java.lang.Double"/>
 	<parameter name="observaciones" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[]]>

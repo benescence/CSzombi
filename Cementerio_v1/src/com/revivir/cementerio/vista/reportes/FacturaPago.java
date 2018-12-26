@@ -1,6 +1,6 @@
 package com.revivir.cementerio.vista.reportes;
 
-import java.io.File;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,6 @@ import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.vista.util.Formato;
 
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;

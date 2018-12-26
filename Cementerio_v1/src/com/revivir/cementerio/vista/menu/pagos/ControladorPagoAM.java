@@ -1,6 +1,7 @@
 package com.revivir.cementerio.vista.menu.pagos;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revivir.cementerio.negocios.Almanaque;
@@ -16,6 +17,7 @@ import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.vista.ControladorExterno;
+import com.revivir.cementerio.vista.reportes.FacturaPago;
 import com.revivir.cementerio.vista.seleccion.cargos.CargoSeleccionable;
 import com.revivir.cementerio.vista.seleccion.cargos.ControladorSeleccionCargo;
 import com.revivir.cementerio.vista.seleccion.clientes.ClienteSeleccionable;
@@ -93,16 +95,16 @@ public class ControladorPagoAM implements ControladorExterno, ClienteSeleccionab
 	}
 	
 	private void verFactura() {
-		//List <Pago> pagos = new ArrayList<Pago>();
-		Integer importe = new Integer(ventana.getImporte().getTextField().getText());
+		List <Pago> pagos = new ArrayList<Pago>();
+		Double importe = new Double(ventana.getImporte().getTextField().getText());
 		Integer cliente = new Integer(ventana.getDNICli().getTextField().getText());
 		Integer codigo = new Integer(ventana.getCodigo().getTextField().getText());
 		String observaciones = ventana.getObservaciones().getTextField().getText();
 		System.out.println( "cargo :" +codigo+ "cliente: "+ cliente +"monto : "+ importe+"observaciones: "+ observaciones +"fecha  :"+ Almanaque.hoy());
-		//Pago pago = new Pago (1,codigo, cliente, importe, observaciones, Almanaque.hoy());
-		//pagos.add(pago);
-		//FacturaPago reporte = new FacturaPago(pagos);
-		//reporte.mostrar();
+		Pago pago = new Pago (1,codigo, cliente, importe, observaciones, Almanaque.hoy());
+		pagos.add(pago);
+		FacturaPago reporte = new FacturaPago(pagos);
+		reporte.mostrar();
 	}
 	
 	private void cargarCliente() {
