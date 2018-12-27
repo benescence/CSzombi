@@ -4,9 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import com.revivir.cementerio.negocios.manager.CargoManager;
 import com.revivir.cementerio.negocios.manager.MovimientoManager;
-import com.revivir.cementerio.vista.tablas.TablaCargos;
 import com.revivir.cementerio.vista.tablas.TablaMovimientos;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 import com.revivir.cementerio.vista.util.contenedores.Ventana;
@@ -26,7 +24,7 @@ public class TablaMovimientoTest extends Ventana{
 		setContentPane(panel);
 		
 		panel.add(panelTabla);
-		pack();
+		compactar();
 	}
 	
 	public static void main(String[] args) {

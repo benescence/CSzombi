@@ -16,14 +16,6 @@ class SubSectorTest {
 		assertTrue(Definido.subsector(SubSector.ADULTOS)== 1);
 		assertTrue(Definido.subsector(SubSector.ADULTOS)== 1);
 		assertTrue(Definido.subsector(SubSector.ADULTOS)== 1);
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 }

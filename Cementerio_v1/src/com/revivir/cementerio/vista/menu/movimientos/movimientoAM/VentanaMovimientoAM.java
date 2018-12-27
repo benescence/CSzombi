@@ -1,148 +1,135 @@
-package com.revivir.cementerio.vista.menu.movimientos;
-
-
-
+package com.revivir.cementerio.vista.menu.movimientos.movimientoAM;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBox;
+import javax.swing.border.EmptyBorder;
+
+import com.revivir.cementerio.negocios.Almanaque;
 import com.revivir.cementerio.negocios.Localizador;
 import com.revivir.cementerio.persistencia.definidos.Sector;
 import com.revivir.cementerio.persistencia.definidos.SubSector;
-
 import com.revivir.cementerio.persistencia.entidades.Movimiento;
-import com.revivir.cementerio.persistencia.entidades.Ubicacion;
-import com.revivir.cementerio.vista.seleccion.fallecidos.ControladorSeleccionarFallecido;
 import com.revivir.cementerio.vista.util.Boton;
+import com.revivir.cementerio.vista.util.TextoCentrado;
 import com.revivir.cementerio.vista.util.contenedores.PanelHorizontal;
 import com.revivir.cementerio.vista.util.contenedores.PanelVertical;
 import com.revivir.cementerio.vista.util.contenedores.Ventana;
 import com.revivir.cementerio.vista.util.entradas.EntradaFecha;
 import com.revivir.cementerio.vista.util.entradas.EntradaLista;
 import com.revivir.cementerio.vista.util.entradas.EntradaTexto;
-import com.toedter.calendar.JDateChooser;
 
-import javax.swing.AbstractButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-public class VentanaTranslado extends Ventana {
-	
+public class VentanaMovimientoAM extends Ventana {
 	private static final long serialVersionUID = 1L;
-	EntradaTexto inCausa;
-	private EntradaTexto inObservaciones, inFallecido;
-	private EntradaFecha inFechaTranslado;
-	private EntradaTexto inUbicacion;
-	private Boton btnAceptar, btnCancelar, btnSelFallecido;;
+	private Boton btnAceptar, btnCancelar;
+	private EntradaTexto inObservaciones, inCausa;
+	private EntradaFecha inFecha;
+	private EntradaTexto inNombreFal, inApellidoFal, inDNIFal;
+	private Boton btnCargarFallecido, btnSelFallecido;
 	
-	public EntradaTexto getInFallecido() {
-		return inFallecido;
-	}
-
-		// DATOS DE UBICACION
-		private EntradaTexto inSeccion, inMacizo, inUnidad, inNumeroSepultura, inSepultura, inInhumacion,
-		inNicho, inFila, inCirc, inParcela, inMueble;
-		private JCheckBox inCheckMacizo, inCheckBis;
-		private EntradaLista<Sector> inSector;
-		private EntradaLista<SubSector> inSubSector;
+	// DATOS DE UBICACION
+	private EntradaTexto inSeccion, inMacizo, inUnidad, inNumeroSepultura, inSepultura, inInhumacion,
+	inNicho, inFila, inCirc, inParcela, inMueble;
+	private JCheckBox inCheckMacizo, inCheckBis;
+	private EntradaLista<Sector> inSector;
+	private EntradaLista<SubSector> inSubSector;
 	
-	
-	public VentanaTranslado() {
-		super("Translado", 200, 200);
+	public VentanaMovimientoAM() {
+		super("Alta de translado de un fallecido", 500, 500);
 		inicializar();
 	}
 	
-	public VentanaTranslado(Movimiento movimiento) {
-		super("realizar translados", 200, 200);
+	public VentanaMovimientoAM(Movimiento movimiento) {
+		super("Modificacion de translado de un fallecido", 200, 200);
 		inicializar();
 		inCausa.getTextField().setText(movimiento.getCausaTraslado());
 		inObservaciones.getTextField().setText(movimiento.getObservaciones());
-
+		inFecha.getDataChooser().setDate(movimiento.getFecha());
 	}
 
 	public void inicializar() {
-		
-		
-
-		
 		Dimension dimBoton = new Dimension(100, 25);
 		
 		btnAceptar = new Boton("Aceptar", dimBoton);
-		btnAceptar.setText("Guardar");
 		btnCancelar = new Boton("Cancelar", dimBoton);
 		PanelHorizontal panelBotones = new PanelHorizontal();
 		panelBotones.setBorder(new EmptyBorder(10, 0, 0, 0));
-		JLabel lblSeleccionarUbicacion = new JLabel("Nueva Ubicacion : ");
-		panelBotones.add(lblSeleccionarUbicacion);
 		panelBotones.add(btnAceptar);
 		panelBotones.add(btnCancelar);
+
 		PanelVertical panelPrincipal = new PanelVertical();
 		panelPrincipal.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(panelPrincipal);
 
+		panelPrincipal.add(panelFallecido());
+		panelPrincipal.add(new TextoCentrado("Datos de la ubicacion"));
+		panelPrincipal.add(panelUbicacion());
+		panelPrincipal.add(new TextoCentrado("Datos del traslado"));
+		panelPrincipal.add(panelMovimiento());
 		panelPrincipal.add(panelBotones);
-		
-		
-		
-		panelPrincipal.add(crearPanelMovimiento());
-		btnSelFallecido = new Boton("Seleccionar", dimBoton);
-		PanelHorizontal panelBotones_1 = new PanelHorizontal();
-		panelPrincipal.add(panelBotones_1);
-		panelBotones_1.setBorder(new EmptyBorder(10, 0, 0, 0));
-		JLabel lblSeleccionarFallecido = new JLabel("Seleccionar Fallecido : ");
-		panelBotones_1.add(lblSeleccionarFallecido);
-		panelBotones_1.add(btnSelFallecido);
-		JSeparator separator = new JSeparator();
-		separator.setToolTipText("");
-		panelPrincipal.add(separator);
-		panelPrincipal.add(crearPanelUbicacion());
-		panelPrincipal.add(panelBotones);
-		
 		compactar();
 	}
 
-
-
-	private PanelVertical crearPanelMovimiento() {
-
+	private PanelVertical panelMovimiento() {
 		Dimension dimTexto = new Dimension(100, 25);
 		Dimension dimEntrada = new Dimension(300, 25);
 		inCausa= new EntradaTexto("Causa Translado", dimTexto, dimEntrada);
-		inUbicacion = new EntradaTexto("Ubicacion Anterior", dimTexto, dimEntrada);
-		inFallecido = new EntradaTexto("Fallecido", dimTexto, dimEntrada);
-		inUbicacion.habilitado(false);
-		inFallecido.habilitado(false);
+		inObservaciones = new EntradaTexto("Observaciones", dimTexto, dimEntrada);
+		inFecha = new EntradaFecha(Almanaque.hoy(), "Fecha", dimTexto, dimEntrada);
 		
 		PanelVertical ret = new PanelVertical();
-		inObservaciones = new EntradaTexto("Observaciones", dimTexto, dimEntrada);
 		ret.add(inObservaciones);
 		ret.add(inCausa);
-		ret.add(inUbicacion);
-		ret.add(inFallecido);
-		return ret;
-		
+		ret.add(inFecha);
+		return ret;		
 	}
 
-	private PanelHorizontal crearPanelUbicacion() {
-		Dimension largoLabel1 = new Dimension(100, 25);
-		Dimension largoLabel2 = new Dimension(100, 25);
-		Dimension largoTextfield = new Dimension(150, 25);
+	private PanelVertical panelFallecido() {
+		Dimension dimTexto = new Dimension(100, 25);
+		Dimension dimEntrada = new Dimension(300, 25);
+		Dimension dimBoton = new Dimension(150, 25);
+		
+		inNombreFal = new EntradaTexto("Nombres", dimTexto, dimEntrada);
+		inApellidoFal = new EntradaTexto("Apellidos", dimTexto, dimEntrada);
+		inDNIFal = new EntradaTexto("DNI", dimTexto, dimEntrada);
+		inNombreFal.habilitado(false);
+		inApellidoFal.habilitado(false);
+		
+		btnCargarFallecido = new Boton("Cargar", dimBoton);
+		btnSelFallecido = new Boton("Seleccionar", dimBoton);
+		PanelHorizontal panelBotones = new PanelHorizontal();
+		panelBotones.setBorder(new EmptyBorder(10, 0, 0, 0));
+		panelBotones.add(btnCargarFallecido);
+		panelBotones.add(btnSelFallecido);
+		
+		PanelVertical ret = new PanelVertical();
+		ret.setBorder(new EmptyBorder(0, 0, 10, 10));
+		ret.add(new TextoCentrado("Datos del fallecido"));
+		ret.add(inNombreFal);
+		ret.add(inApellidoFal);
+		ret.add(inDNIFal);
+		ret.add(panelBotones);
+		return ret;
+	}
 
-		inSeccion = new EntradaTexto("Seccion", largoLabel1, largoTextfield);
-		inMacizo = new EntradaTexto("Macizo", largoLabel1, largoTextfield);
-		inUnidad = new EntradaTexto("Unidad", largoLabel1, largoTextfield);
-		inNumeroSepultura = new EntradaTexto("N° Sepultura", largoLabel1, largoTextfield);
-		inSepultura = new EntradaTexto("Sepultura", largoLabel1, largoTextfield);
-		inInhumacion = new EntradaTexto("Inhumacion", largoLabel1, largoTextfield);
-		inNicho = new EntradaTexto("Nicho", largoLabel2, largoTextfield);
-		inFila = new EntradaTexto("Fila", largoLabel2, largoTextfield);
-		inCirc = new EntradaTexto("Circ", largoLabel2, largoTextfield);
-		inParcela = new EntradaTexto("Parcela", largoLabel2, largoTextfield);
-		inMueble = new EntradaTexto("Mueble", largoLabel2, largoTextfield);
+	private PanelHorizontal panelUbicacion() {
+		Dimension dimTexto1 = new Dimension(100, 25);
+		Dimension dimTexto2 = new Dimension(100, 25);
+		Dimension dimEntrada = new Dimension(150, 25);
+
+		inSeccion = new EntradaTexto("Seccion", dimTexto1, dimEntrada);
+		inMacizo = new EntradaTexto("Macizo", dimTexto1, dimEntrada);
+		inUnidad = new EntradaTexto("Unidad", dimTexto1, dimEntrada);
+		inNumeroSepultura = new EntradaTexto("N° Sepultura", dimTexto1, dimEntrada);
+		inSepultura = new EntradaTexto("Sepultura", dimTexto1, dimEntrada);
+		inInhumacion = new EntradaTexto("Inhumacion", dimTexto1, dimEntrada);
+		inNicho = new EntradaTexto("Nicho", dimTexto2, dimEntrada);
+		inFila = new EntradaTexto("Fila", dimTexto2, dimEntrada);
+		inCirc = new EntradaTexto("Circ", dimTexto2, dimEntrada);
+		inParcela = new EntradaTexto("Parcela", dimTexto2, dimEntrada);
+		inMueble = new EntradaTexto("Mueble", dimTexto2, dimEntrada);
 
 		inCheckBis = new JCheckBox("Bis");
 		inCheckMacizo = new JCheckBox("Macizo1");
@@ -150,8 +137,8 @@ public class VentanaTranslado extends Ventana {
 		panelCheck.add(inCheckBis);
 		panelCheck.add(inCheckMacizo);
 		
-		inSector = new EntradaLista<>("Sector", largoLabel1, largoTextfield);
-		inSubSector = new EntradaLista<>("Sub Sector", largoLabel2, largoTextfield);
+		inSector = new EntradaLista<>("Sector", dimTexto1, dimEntrada);
+		inSubSector = new EntradaLista<>("Sub Sector", dimTexto2, dimEntrada);
 
 		for (Sector sector : Localizador.traerSectores())
 			inSector.getComboBox().addItem(sector);
@@ -290,35 +277,130 @@ public class VentanaTranslado extends Ventana {
 		for (SubSector elemento : Localizador.traerSubSectores(sector))
 			inSubSector.getComboBox().addItem(elemento);
 	}
+
 	
-
-
-	public JTextField getInCausa() {
-		return inCausa.getTextField();
-	}
-
-	public JTextField getInObservacions() {
-		return inObservaciones.getTextField();
-	}
-
-	public JDateChooser getInFechaTranslado() {
-		return inFechaTranslado.getDataChooser();
-	}
-
-	public EntradaTexto getInUbicacion() {
-		return inUbicacion;
-	}
-	public Boton botonSeleccionar() {
-	
-		return btnSelFallecido;
-	}
 	public Boton botonAceptar() {
 		return btnAceptar;
 	}
 
+	
 	public Boton botonCancelar() {
 		return btnCancelar;
 	}
 
+	
+	public EntradaTexto getObservaciones() {
+		return inObservaciones;
+	}
 
+	
+	public EntradaTexto getCausa() {
+		return inCausa;
+	}
+
+	
+	public EntradaFecha getFecha() {
+		return inFecha;
+	}
+
+	
+	public EntradaTexto getNombreFal() {
+		return inNombreFal;
+	}
+
+	
+	public EntradaTexto getApellidoFal() {
+		return inApellidoFal;
+	}
+
+	
+	public EntradaTexto getDNIFal() {
+		return inDNIFal;
+	}
+
+	
+	public Boton botonCargarFallecido() {
+		return btnCargarFallecido;
+	}
+
+	
+	public Boton botonSelFallecido() {
+		return btnSelFallecido;
+	}
+
+	
+	public EntradaTexto getSeccion() {
+		return inSeccion;
+	}
+
+	
+	public EntradaTexto getMacizo() {
+		return inMacizo;
+	}
+
+	
+	public EntradaTexto getUnidad() {
+		return inUnidad;
+	}
+
+	
+	public EntradaTexto getNumeroSepultura() {
+		return inNumeroSepultura;
+	}
+
+	
+	public EntradaTexto getSepultura() {
+		return inSepultura;
+	}
+
+	
+	public EntradaTexto getInhumacion() {
+		return inInhumacion;
+	}
+
+	
+	public EntradaTexto getNicho() {
+		return inNicho;
+	}
+
+	
+	public EntradaTexto getFila() {
+		return inFila;
+	}
+
+	
+	public EntradaTexto getCirc() {
+		return inCirc;
+	}
+
+	
+	public EntradaTexto getParcela() {
+		return inParcela;
+	}
+
+	
+	public EntradaTexto getMueble() {
+		return inMueble;
+	}
+
+	
+	public JCheckBox getCheckMacizo() {
+		return inCheckMacizo;
+	}
+
+	
+	public JCheckBox getCheckBis() {
+		return inCheckBis;
+	}
+
+	
+	public EntradaLista<Sector> getSector() {
+		return inSector;
+	}
+
+
+	public EntradaLista<SubSector> getSubSector() {
+		return inSubSector;
+	}
+	
 }

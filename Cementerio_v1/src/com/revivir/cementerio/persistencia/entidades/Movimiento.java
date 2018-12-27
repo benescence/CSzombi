@@ -5,24 +5,24 @@ import java.sql.Date;
 public class Movimiento {
 	private Integer ID, fallecido;
 	private String antiguaUbicacion, causaTraslado, observaciones;
-	private Date ferchaTranslado;
+	private Date fecha;
 	
 	public Movimiento(Integer ID, Integer fallecido, String antiguaUbicacion, String causaTraslado,
-			String observaciones, Date fechaTranslado) {
+			String observaciones, Date fecha) {
 		this.ID = ID;
 		this.fallecido = fallecido;
 		this.antiguaUbicacion = antiguaUbicacion;
 		this.causaTraslado = causaTraslado;
 		this.observaciones = observaciones;
-		this.ferchaTranslado = fechaTranslado;
+		this.fecha = fecha;
 	}
 
-	public Date getFerchaTranslado() {
-		return ferchaTranslado;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setFerchaTranslado(Date ferchaTranslado) {
-		this.ferchaTranslado = ferchaTranslado;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public Integer getID() {

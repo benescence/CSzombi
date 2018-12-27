@@ -34,9 +34,8 @@ public class TablaMovimientos extends JTable {
 					elemento.getAntiguaUbicacion(),
 					elemento.getCausaTraslado(),
 					elemento.getObservaciones(),
-					elemento.getFerchaTranslado()
-					
-				};
+					elemento.getFecha()
+					};
 			modelo.addRow(fila);
 		}
 	}

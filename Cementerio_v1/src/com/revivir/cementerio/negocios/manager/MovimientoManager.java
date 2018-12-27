@@ -1,25 +1,18 @@
 package com.revivir.cementerio.negocios.manager;
 
-import java.sql.Date;
 import java.util.List;
 
-import com.revivir.cementerio.negocios.Validador;
 import com.revivir.cementerio.negocios.Verificador;
 import com.revivir.cementerio.persistencia.FactoryOBD;
-import com.revivir.cementerio.persistencia.definidos.TipoFallecimiento;
-import com.revivir.cementerio.persistencia.entidades.Fallecido;
 import com.revivir.cementerio.persistencia.entidades.Movimiento;
-import com.revivir.cementerio.persistencia.entidades.Ubicacion;
-import com.revivir.cementerio.persistencia.interfaces.FallecidoOBD;
 import com.revivir.cementerio.persistencia.interfaces.MovimientoOBD;
 
 public class MovimientoManager {
-	public static void guardar(Integer fallecido, String ubicacion, String causa, String observaciones , Date fecha ) {
-		
-		Movimiento movimiento = new Movimiento(-1, fallecido,  ubicacion, causa, observaciones, fecha);
-		
+	
+	public static void guardar(Movimiento movimiento) throws Exception {
+		Movimiento verificado = Verificador.movimiento(movimiento);
 		MovimientoOBD obd = FactoryOBD.crearMovimientoOBD();
-		obd.insert(movimiento);	
+		obd.insert(verificado);	
 	}
 
 	public static void modificar(Movimiento movimiento) {

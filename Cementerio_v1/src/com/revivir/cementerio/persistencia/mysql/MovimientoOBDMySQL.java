@@ -21,7 +21,7 @@ public class MovimientoOBDMySQL extends OBD implements MovimientoOBD{
 		String antiguaUbicacion = (movimiento.getAntiguaUbicacion() == null) ? null : "'"+movimiento.getAntiguaUbicacion()+"'"; 
 		String causaTranslado = (movimiento.getCausaTraslado() == null) ? null : "'"+movimiento.getCausaTraslado()+"'"; 
 		String observciones = (movimiento.getObservaciones() == null) ? null : "'"+movimiento.getObservaciones()+"'"; 
-		String fecha = (movimiento.getFerchaTranslado() == null) ? null : "'"+movimiento.getFerchaTranslado()+"'"; 
+		String fecha = (movimiento.getFecha() == null) ? null : "'"+movimiento.getFecha()+"'"; 
 
 		String valores = fallecido 
 				+", " + antiguaUbicacion
@@ -37,7 +37,7 @@ public class MovimientoOBDMySQL extends OBD implements MovimientoOBD{
 		String antiguaUbicacion = (movimiento.getAntiguaUbicacion() == null) ? null : "'"+movimiento.getAntiguaUbicacion()+"'"; 
 		String causaTranslado = (movimiento.getCausaTraslado() == null) ? null : "'"+movimiento.getCausaTraslado()+"'"; 
 		String observciones = (movimiento.getObservaciones() == null) ? null : "'"+movimiento.getObservaciones()+"'"; 
-		String fecha = (movimiento.getFerchaTranslado() == null) ? null : "'"+movimiento.getFerchaTranslado()+"'"; 
+		String fecha = (movimiento.getFecha() == null) ? null : "'"+movimiento.getFecha()+"'"; 
 
 		String condicion = "ID = "+movimiento.getID();
 		String valores = "fallecido = "+ movimiento.getFallecido()

@@ -7,6 +7,7 @@ import com.revivir.cementerio.negocios.manager.UsuarioManager;
 import com.revivir.cementerio.persistencia.entidades.Cargo;
 import com.revivir.cementerio.persistencia.entidades.Cliente;
 import com.revivir.cementerio.persistencia.entidades.Fallecido;
+import com.revivir.cementerio.persistencia.entidades.Movimiento;
 import com.revivir.cementerio.persistencia.entidades.Pago;
 import com.revivir.cementerio.persistencia.entidades.Servicio;
 import com.revivir.cementerio.persistencia.entidades.Ubicacion;
@@ -100,6 +101,11 @@ public class Verificador {
 		verificar.setCocheria(cocheria);
 		return verificar;
 	}
+	
+	public static Movimiento movimiento(Movimiento movimiento) throws Exception {
+		return movimiento;
+	}
+	
 	
 	public static Pago pago(Pago pago) throws Exception {
 		/*

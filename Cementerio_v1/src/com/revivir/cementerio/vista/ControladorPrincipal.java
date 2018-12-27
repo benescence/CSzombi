@@ -9,9 +9,9 @@ import com.revivir.cementerio.vista.menu.clientes.clienteAM.ControladorClientesA
 import com.revivir.cementerio.vista.menu.fallecidos.ControladorFallecidosABM;
 import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.ControladorFallecidoAM;
 import com.revivir.cementerio.vista.menu.fallecidos.fallecidoAM.FallecidoInvocable;
-import com.revivir.cementerio.vista.menu.movimientos.ControladorMovimiento;
-import com.revivir.cementerio.vista.menu.movimientos.ControladorTranslado;
-import com.revivir.cementerio.vista.menu.movimientos.translado.MovimientoInvocable;
+import com.revivir.cementerio.vista.menu.movimientos.ControladorMovimientoABM;
+import com.revivir.cementerio.vista.menu.movimientos.movimientoAM.ControladorMovimientoAM;
+import com.revivir.cementerio.vista.menu.movimientos.movimientoAM.MovimientoInvocable;
 import com.revivir.cementerio.vista.menu.pagos.ControladorPagoABM;
 import com.revivir.cementerio.vista.menu.pagos.pagoAM.ControladorPagoAM;
 import com.revivir.cementerio.vista.menu.pagos.pagoAM.PagoInvocable;
@@ -58,7 +58,7 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 		ventana.getPagoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorPagoABM(this)));
 		
 		
-		ventana.getMovimientoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorMovimiento(this)));
+		ventana.getMovimientoConsultar().addActionListener(e -> colocarVentanaInterna(new ControladorMovimientoABM(this)));
 		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
 		ventana.getPrincipalAlta().addActionListener(e -> colocarVentanaInterna(new ControladorAltaCompleta(this)));
 	}
@@ -82,7 +82,7 @@ public class ControladorPrincipal implements ClienteInvocable, ServicioInvocable
 	}
 	private void transladar() {
 		ventana.deshabilitar();
-		new ControladorTranslado(this);
+		new ControladorMovimientoAM(this);
 	}
 
 	private void cerrarAplicacion() {

@@ -49,6 +49,10 @@ public class Formato {
 		return fallecido(fallecido);
 	}
 	
+	public static String fallecido(Movimiento movimiento) {
+		Fallecido fallecido = FallecidoManager.traerPorID(movimiento.getFallecido());
+		return fallecido(fallecido);
+	}
 	
 	
 	
@@ -96,11 +100,6 @@ public class Formato {
 	public static String IDcliente(Integer dni) {
 		Cliente cliente = ClienteManager.traerPorDNI2(dni);
 		return cliente.getApellido()+", "+cliente.getNombre();
-	}
-	
-	public static String fallecido(Movimiento movimiento) {
-		Fallecido fallecido = FallecidoManager.traerPorID(movimiento.getFallecido());
-		return fallecido.getApellido()+", "+fallecido.getNombre();
 	}
 	
 

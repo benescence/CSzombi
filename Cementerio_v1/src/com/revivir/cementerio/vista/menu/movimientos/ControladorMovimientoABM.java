@@ -8,25 +8,22 @@ import com.revivir.cementerio.vista.ControladorInterno;
 import com.revivir.cementerio.vista.ControladorPrincipal;
 import com.revivir.cementerio.vista.util.Popup;
 
-
-
-
-public class ControladorMovimiento  implements  ControladorInterno{
-	private VentanaConsultaMovimiento ventana;
+public class ControladorMovimientoABM implements  ControladorInterno{
+	private VentanaMovimientoABM ventana;
 	
-	public ControladorMovimiento(ControladorPrincipal invocador) {
-		ventana = new VentanaConsultaMovimiento();
-		ventana.botonBuscar().addActionListener(e -> buscar());
-		ventana.botonLimpiar().addActionListener(e -> limpiar());
+	public ControladorMovimientoABM(ControladorPrincipal invocador) {
+		ventana = new VentanaMovimientoABM();
+		//ventana.botonBuscar().addActionListener(e -> buscar());
+		//ventana.botonLimpiar().addActionListener(e -> limpiar());
 	}
 
 	private void limpiar() {
-		ventana.getInFallecidoNombre().setText("");
-		ventana.getInFallecidoApellido().setText("");
+		//ventana.getInFallecidoNombre().setText("");
+		//ventana.getInFallecidoApellido().setText("");
 	}
 
 	private void buscar() {
-		String nombreFallecido = ventana.getInFallecidoNombre().getText();
+		/*String nombreFallecido = ventana.getInFallecidoNombre().getText();
 		String apellidoFallecido = ventana.getInFallecidoApellido().getText();
 		if (nombreFallecido.equals("") && apellidoFallecido.equals("")) {
 			Popup.mostrar("Debe ingresar al menos un criterio de búsqueda.\n    -Nombres\n ");
@@ -36,7 +33,7 @@ public class ControladorMovimiento  implements  ControladorInterno{
 		List<Movimiento> lista = Busqueda.movimientos(nombreFallecido, apellidoFallecido);
 		ventana.getTabla().recargar(lista);
 		if (lista.size() == 0)
-			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");
+			Popup.mostrar("No se ha encontrado ningun resultado con los criterios ingresados.");*/
 	}
 	
 

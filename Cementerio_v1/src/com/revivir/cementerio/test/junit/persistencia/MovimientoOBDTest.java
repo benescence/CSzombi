@@ -23,7 +23,7 @@ class MovimientoOBDTest {
 		if (fallecido == null)
 			fail("Debe existir al menos un fallecido en la BD para correr este test");
 
-		return new Movimiento(-1,fallecido.getID(), "antiguaUbicacion", "Causa Translado", "observaciones",Almanaque.hoy());
+		return new Movimiento(-1, fallecido.getID(), "Antigua ubicacion", "Causa translado", "Observaciones", Almanaque.hoy());
 	}
 
 	@Test
@@ -38,10 +38,10 @@ class MovimientoOBDTest {
 	void testUpdate() {
 		obd.insert(objeto);
 		Movimiento objetoBD1 = obd.ultimoInsertado();
-		objetoBD1.setAntiguaUbicacion("antiguaUbicacion2");
-		objetoBD1.setCausaTraslado("causaTraslado2");
-		objetoBD1.setObservaciones("observaciones2");
-		objetoBD1.setFerchaTranslado(Almanaque.hoy());
+		objetoBD1.setAntiguaUbicacion("Antigua ubicacion 2");
+		objetoBD1.setCausaTraslado("Causa traslado 2");
+		objetoBD1.setObservaciones("Observaciones 2");
+		objetoBD1.setFecha(Almanaque.hoy());
 		obd.update(objetoBD1);
 		Movimiento objetoBD2 = obd.ultimoInsertado();
 		iguales(objetoBD1, objetoBD2);
@@ -89,20 +89,20 @@ class MovimientoOBDTest {
 		assertTrue(obj1.getAntiguaUbicacion().equals(obj2.getAntiguaUbicacion()));
 		assertTrue(obj1.getCausaTraslado().equals(obj2.getCausaTraslado()));
 		assertTrue(obj1.getObservaciones().equals(obj2.getObservaciones()));
-		Date normal1 = Almanaque.normalizar(obj1.getFerchaTranslado());
-		Date normal2 = Almanaque.normalizar(obj2.getFerchaTranslado());
-		assertTrue(normal1.equals(normal2));
-		
+		Date fecha1 = Almanaque.normalizar(obj1.getFecha());
+		Date fecha2 = Almanaque.normalizar(obj2.getFecha());
+		assertTrue(fecha1.equals(fecha2));
 	}
 	
 	private void distintos(Movimiento obj1, Movimiento obj2) {
 		boolean fallecido = obj1.getFallecido().equals(obj2.getFallecido());
-		boolean antiguaUbi = obj1.getAntiguaUbicacion().equals(obj2.getAntiguaUbicacion());
+		boolean antiguaUbicacion = obj1.getAntiguaUbicacion().equals(obj2.getAntiguaUbicacion());
 		boolean causaTranslado = obj1.getCausaTraslado().equals(obj2.getCausaTraslado());
-		boolean obs = obj1.getObservaciones().equals(obj2.getObservaciones());
-		boolean fecha = obj1.getFerchaTranslado().equals(obj2.getFerchaTranslado());
-
-		assertFalse(fallecido && antiguaUbi && causaTranslado && obs && fecha);
+		boolean observaciones = obj1.getObservaciones().equals(obj2.getObservaciones());
+		Date fecha1 = Almanaque.normalizar(obj1.getFecha());
+		Date fecha2 = Almanaque.normalizar(obj2.getFecha());
+		boolean fecha = fecha1.equals(fecha2);
+		assertFalse(fallecido && antiguaUbicacion && causaTranslado && observaciones && fecha);
 	}
 
 }
