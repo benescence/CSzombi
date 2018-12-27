@@ -17,6 +17,7 @@ public class UbicacionManager {
 	}
 
 	public static void modificar(Ubicacion modificar) {
+		modificar = Verificador.ubicacion(modificar);
 		UbicacionOBD obd = FactoryOBD.crearUbicacionOBD();
 		obd.update(modificar);
 	}

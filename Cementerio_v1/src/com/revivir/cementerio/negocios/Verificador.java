@@ -140,7 +140,12 @@ public class Verificador {
 	}
 	
 	public static Ubicacion ubicacion(Ubicacion verificar) {
-		// Completar verificaciones de ubicacion
+		String seccion = anular(verificar.getSeccion());
+		String otroCementerio = anular(verificar.getOtroCementerio());
+		
+		verificar.setSeccion(seccion);
+		verificar.setOtroCementerio(otroCementerio);
+
 		return verificar;
 	}
 	

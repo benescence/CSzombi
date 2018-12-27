@@ -68,6 +68,7 @@ public class ControladorFallecidoAM implements ControladorExterno{
 			invocador.mostrar();
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			Popup.mostrar(e.getMessage());
 		}
 		
@@ -76,24 +77,31 @@ public class ControladorFallecidoAM implements ControladorExterno{
 	private void guardarUbicacion() {
 		SubSector subsector = (SubSector) ventana.getInSubSector().getSelectedItem();
 		String otroCementerio = null;
-		String bis = null;
-		if (ventana.getInCheckBis().isEnabled()) 
-			bis = (ventana.getInCheckBis().isSelected())?"S":"N";
-		String bis_macizo = null;
-		if (ventana.getInCheckMacizo().isEnabled()) 
-			bis = (ventana.getInCheckMacizo().isSelected())?"S":"N";
-		String nicho = (ventana.getInNicho().isEnabled() ? ventana.getInNicho().getText() : null);
-		String fila = (ventana.getInFila().isEnabled() ? ventana.getInFila().getText() : null);
+		Integer nicho = new Integer((ventana.getInNicho().isEnabled() ? ventana.getInNicho().getText() : null));
+		Integer fila = new Integer((ventana.getInFila().isEnabled() ? ventana.getInFila().getText() : null));
 		String seccion = (ventana.getInSeccion().isEnabled() ? ventana.getInFila().getText() : null);
-		String macizo= (ventana.getInMacizo().isEnabled() ? ventana.getInMacizo().getText() : null);
-		String unidad = (ventana.getInUnidad().isEnabled() ? ventana.getInUnidad().getText() : null);
-		String numero= (ventana.getInNumeroSepultura().isEnabled() ? ventana.getInNumeroSepultura().getText() : null);
-		String sepultura = (ventana.getInSepultura().isEnabled() ? ventana.getInSepultura().getText() : null);
-		String parcela= (ventana.getInParcela().isEnabled() ? ventana.getInParcela().getText() : null);
-		String mueble= (ventana.getInMueble().isEnabled() ? ventana.getInMueble().getText() : null);
-		String inhumacion = (ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null);
-		String circ = (ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null);
-		//UbicacionManager.guardar(subsector, otroCementerio, nicho, fila, seccion, macizo, unidad, bis, bis_macizo, numero, sepultura, parcela, mueble, inhumacion, circ);
+		Integer macizo = new Integer((ventana.getInMacizo().isEnabled() ? ventana.getInMacizo().getText() : null));
+		Integer unidad = new Integer((ventana.getInUnidad().isEnabled() ? ventana.getInUnidad().getText() : null));
+		
+		Boolean bis = null;
+		if (ventana.getInCheckBis().isEnabled()) 
+			bis = ventana.getInCheckBis().isSelected();
+		
+		Boolean bis_macizo = null;
+		if (ventana.getInCheckMacizo().isEnabled())
+			bis_macizo = ventana.getInCheckMacizo().isSelected();
+
+		Integer sepultura = new Integer((ventana.getInSepultura().isEnabled() ? ventana.getInSepultura().getText() : null));
+		Integer parcela = new Integer((ventana.getInParcela().isEnabled() ? ventana.getInParcela().getText() : null));
+		Integer mueble = new Integer((ventana.getInMueble().isEnabled() ? ventana.getInMueble().getText() : null));
+		Integer inhumacion = new Integer((ventana.getInInhumacion().isEnabled() ? ventana.getInInhumacion().getText() : null));
+		Integer circ = new Integer((ventana.getInCirc().isEnabled() ? ventana.getInCirc().getText() : null));
+
+
+		Ubicacion ubicacion = new Ubicacion(-1, subsector, otroCementerio, nicho, fila, seccion,
+				macizo, unidad, bis, bis_macizo, sepultura, parcela, mueble, inhumacion, circ);
+		
+		UbicacionManager.guardar(ubicacion);
 	}	
 	
 	private void cancelar() {
